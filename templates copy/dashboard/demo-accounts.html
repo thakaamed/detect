@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="{% static 'css/datatable.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <title>{{specs.title}} - {% trans 'Demo Accounts' %}</title>
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+    <style>
+        body.dark [name="demoAccounts_length"], body.dark #demoAccounts_filter input{
+            color:white
+        }
+        body.dark [name="demoAccounts_length"] option {
+            background:black;
+        }
+        body.dark .fa-pencil:hover{
+            color: black;
+        }
+        .dataTables_length {
+            font-size: 12px;
+            margin-right: 10px;
+            width: 80%;
+        }
+    
+        .dataTables_length label {
+            display: inline-block;
+            margin-bottom: 0;
+        }
+    
+        .dataTables_length select {
+            height: 26px;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        </style>
+   
+{% endblock %}
+
+
+{% block content %}
+<main class="position-relative" style="height: calc(100vh - 110px);">
+    <!-- veri varsa d-none class kaldır, yoksa d-none kalsın -->
+    <div class="views container">
+        <div class="heading-and-items container-fluid d-flex justify-content-between align-items-center my-3">
+            <h1 class="m-0">{% trans 'Demo Accounts' %}</h1>
+            
+        </div>
+        <div class="heading-and-items container-fluid d-flex justify-content-between align-items-center my-3">
+            <h5 class="m-0">{% trans 'Demo Account Count: ' %} {{demo_acc_count}}</h5>
+        </div>
+        <div id="patients-table-view" class="patient-view-container container-fluid mt-3 mb-5">
+            <div class="contents">
+                <table id="demoAccounts" class="patients-table table table-borderless display" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'Company Name' %}</th>
+                            <th>{% trans 'Company Mail' %}</th>
+                            <th>{% trans 'Company Phone' %}</th>
+                            <th>{% trans 'Creation Date' %}</th>
+                            <th>{% trans 'Date Renewed' %}</th>
+                            <th>{% trans 'Given Token' %}</th>
+                            <th>{% trans 'Monthly Usage' %}</th>
+                            <th>{% trans 'Total Usage' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for info in demo_account_infos %}
+                            <tr>
+                                <td>{{ info.company }}</td>
+                                <td>{{ info.company_mail }}</td>
+                                <td>{{ info.company_phone }}</td>
+                                <td>{{ info.creation_date }}</td>
+                                <td>{{ info.date_renewed }}</td>
+                                <td>{{ info.given_token }}</td>
+                                <td>{{ info.monthly_usage }}</td>
+                                <td>{{ info.total_usage }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% csrf_token %}
+    
+</main>
+{% endblock %}
+
+{% block customJs %}
+
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <script src="{% static 'js/dropzone.js' %}"></script>
+    <script src="{% static 'js/sweatalert.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <!-- <script src="{% static 'js/practice-list.js' %}"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.11/sorting/datetime-moment.js"></script>
+
+
+    <script>
+       $(document).ready(function () {
+        if (window.location.href.includes("/en/")) {
+            var lang = "en"
+        }
+        else if (window.location.href.includes("/tr/")){
+            var lang = "tr"
+        }
+        else if (window.location.href.includes("/uz/")){
+            var lang = "uz"
+        }
+        else if (window.location.href.includes("/ru/")){
+            var lang = "ru"
+        }
+        else if (window.location.href.includes("/nl/")){
+            var lang = "nl"
+        }
+        else {
+            var lang = "tr"
+        }
+        var hepsiText = lang === 'en' ? 'All' : (lang === 'uz' ? 'Hamma' : (lang === "ru" ? "все" : (lang === "nl" ? "Alle" : 'Hepsi')));
+        $.fn.dataTable.moment('DD/MM/YYYY HH:mm');
+
+        var mydatatable = $('#demoAccounts').DataTable({
+            columnDefs: [
+            {
+                targets: 3, // 9. sütun (Transaction Date)
+                // type: 'date',
+                render: function (data, type, row) {
+                    return moment(data, 'DD/MM/YYYY HH:mm').format('DD/MM/YYYY HH:mm');
+                }
+            },
+            {
+                targets: 4, // 9. sütun (Transaction Date)
+                // type: 'date',
+                render: function (data, type, row) {
+                    return moment(data, 'DD/MM/YYYY HH:mm').format('DD/MM/YYYY HH:mm');
+                }
+            }
+            ],
+            language: {
+                lengthMenu: '_MENU_',
+                zeroRecords: lang === 'en' ? 'No records available' : (lang === 'uz' ? 'Topilgan ma`lumotlar mavjud emas' : (lang === "ru" ? "Данные отсутствуют в таблице" : (lang === "nl" ? "Geen gegevens beschikbaar" :  'Aranan kriterlere uygun veri bulunamadı.'))),
+                info: '_PAGE_ / _PAGES_ sayfa',
+                infoEmpty: 'No records available',
+                infoFiltered: '(filtered from _MAX_ total records)',
+                search: lang === 'en' ? 'Search' : (lang === 'uz' ? "Bo'shliq" : (lang === "ru" ? "Поиск" : (lang === "nl" ? "Zoekopdracht" : 'Ara'))),
+                "paginate": {
+                    "next": lang === 'en' ? "Next <i class='fa-solid fa-angle-right'></i>" : (lang === 'uz' ? "Keyingi <i class='fa-solid fa-angle-right'></i>" : (lang === 'ru' ? "Следующий <i class='fa-solid fa-angle-right'></i>" : (lang === 'nl' ? "Volgende <i class='fa-solid fa-angle-right'></i>" : "Sonraki <i class='fa-solid fa-angle-right'></i>"))),
+                    "previous": lang === 'en' ? "<i class='fa-solid fa-angle-left'></i> Previous" : (lang === 'uz' ? "<i class='fa-solid fa-angle-left'></i> Oldingi" : (lang === 'ru' ? "<i class='fa-solid fa-angle-left'></i> Предыдущий" : (lang === 'nl' ? "Volgende <i class='fa-solid fa-angle-right'></i>": "<i class='fa-solid fa-angle-left'></i> Önceki"))),
+                }
+    
+            },
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, hepsiText]],            
+            initComplete: function () {
+            }
+        });
+    });
+    </script>
+
+{% endblock %}

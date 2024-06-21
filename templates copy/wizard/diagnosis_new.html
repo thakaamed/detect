@@ -1,0 +1,1278 @@
+{% extends 'wizard/base_for_wizard.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+<link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+<link rel="stylesheet" href="{% static 'css/diagnosis.css' %}">
+<title>{{specs.title}} - Diagnosis</title>
+
+<link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+<link rel="stylesheet" href="{% static 'css/diagno-new.css' %}" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/dropzone.min.css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+{% endblock %}
+{% block headerButtons %}
+<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">
+    <img src="{% static 'img/upload-rg-icon.svg' %}" class="" height="12" alt="">
+    <span style="pointer-events: none;">{% trans 'Upload Radiography' %}</span>
+</button>
+<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-report">
+    <img src="{% static 'img/export-report-icon.svg' %}" class="" height="12" alt="">
+    <span style="pointer-events: none;">{% trans 'Export Report' %}</span>
+</button>
+<button class="custom transparent blue-hover text-light" data-open-modal-pk="modalReportForMail">
+    <img src="{% static 'img/send-mail-icon.svg' %}" class="" height="10" alt="">
+    <span style="pointer-events: none;">{% trans 'Send Mail' %}</span>
+</button>
+<button class="custom transparent blue-hover text-light" data-open-treatment>
+    <img src="{% static 'img/treatment-planning-icon.svg' %}" class="" height="14" alt="">
+    <span>{% trans 'Treatment Planning' %}</span>
+</button>
+{% endblock %}
+{% block content %}
+
+<!-- ANA BÖLME -->
+<section>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: rgba(26, 38, 78, 1); border-radius: 8px;">
+                <div class="modal-body mt-5">
+                    {% trans 'Are you sure want to delete?' %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="modalClose" class="btn btn-secondary">{% trans 'No' %}</button>
+                    <button type="button" id="modalYes" class="btn btn-primary">{% trans 'Yes' %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid"
+        style=" margin-top: 90px; margin-left: 55px; justify-content: center;">
+        <div style="display: flex; justify-content: center; margin-top: 15px; position: relative;">
+            <div class="diagnosis-responsive px-0 py-4 row"
+                style="display: flex; background-color: rgba(26, 38, 78, 1); width:90%; justify-content:space-evenly; ">
+                <div class="" style="width: fit-content">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <div class="d-flex gap-2">
+                                {% for tooth_number,tooth_detail in data.items %}
+                                {% if tooth_detail.jaw_area == "upper_jaw" %}
+                                {% if tooth_detail.is_missing %}
+                                <div data-missing ="true" class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1"
+                                    data-external="data-{{tooth_number}}" onclick="" style="position: relative;"><img
+                                        class="external-img-one" src="" alt=""><span class="d-flex justify-content-center align-items-center rounded" style="position: absolute; bottom: -25px; width: 100%; background-color:rgba(14, 24, 55, 1);">{{tooth_number}}</span></div>
+                                {% else %}
+                                <div class="external external-one diagnosis-new-file d-flex flex-column justify-content-center align-items-center justify-content-between py-1"
+                                    data-external="data-{{tooth_number}}" onclick="" style="position: relative;">
+                                </div>
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="d-flex gap-2 " style="margin-top: 63px;">
+                                {% for tooth_number,tooth_detail in data.items %}
+                                {% if tooth_detail.jaw_area == "lower_jaw" %}
+                                {% if tooth_detail.is_missing %}
+                                <div data-missing ="true" class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1"
+                                    data-external="data-{{tooth_number}}" onclick="" style="position: relative;"><img
+                                        class="external-img-one" src="" alt=""><span class="d-flex justify-content-center align-items-center rounded" style="position: absolute; top: -25px; width: 100%; background-color:rgba(14, 24, 55, 1);">{{tooth_number}}</span></div>
+                                {% else %}
+                                <div class="external external-one diagnosis-new-file-two d-flex flex-column justify-content-center align-items-center justify-content-between py-1"
+                                    data-external="data-{{tooth_number}}" onclick="" style="position: relative;">
+                                </div>
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div style="position: relative;">
+                         <img class="img-fluid x-ray-block-icon" style="margin-bottom: -10px; cursor: pointer;"
+                            src="{% static 'img/diagnosis-x-ray-dark-icon.png' %}" alt="" onclick="changeImageSource()">
+                            
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center" style="width: fit-content">
+                    <div class="" style="margin-top: 1px;">
+                        {% for key, value in labels.items %}
+                            {% if forloop.counter < 6 %}
+                                <div class="missing-part rounded my-2 {% if forloop.counter == 6 %}addIllnesses{% endif %}" onclick="toggleNestedDropdown(this)">{{ key }}<i class="fa-solid fa-chevron-down crown-icon"></i>
+                                    <div class="dropdown-content rounded">
+                                        <div>
+                                            {% for inner_value_key,inner_value_value in value.items %}
+                                                <a data-label-slug="{{inner_value_value.slug}}" class="addIllnesses">{{ inner_value_key }}</a>
+                                            {% endfor %}
+                                        </div>
+                                        <!-- <div class="d-flex justify-content-between px-3 pt-2" style="border-top: 1px solid rgba(255, 255, 255, 0.7);">
+                                            <p>close</p>
+                                            <p>Save</p>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="ms-3">
+                        {% for key, value in labels.items %}
+                            {% if forloop.counter > 5 %}
+                                {% if key == "Missing" %}
+                                    {% for inner_value_key,inner_value_value in value.items %}
+                                        <div value="Missing" data-label-slug="{{inner_value_value.slug}}" class="addIllnesses missing-part missing-active-img rounded {% if forloop.counter > 1 %} my-2 {% endif %}" onclick="changeUniqueSrcs()">{{inner_value_key}}</div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="missing-part rounded my-2 {% if forloop.counter == 12 %}addIllnesses{% endif %}" onclick="toggleNestedDropdown(this)">{{ key }}<i class="fa-solid fa-chevron-down crown-icon"></i>
+                                        <div class="dropdown-content rounded">
+                                            <div>
+                                                {% for inner_value_key,inner_value_value in value.items %}
+                                                    <a data-label-slug="{{inner_value_value.slug}}" class="addIllnesses" href="#">{{ inner_value_key }}</a>
+                                                {% endfor %}
+                                            </div>
+                                            <!-- <div class="d-flex justify-content-between px-3 pt-2" style="border-top: 1px solid rgba(255, 255, 255, 0.7);">
+                                                <p>close</p>
+                                                <p>Save</p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex my-3 gap-3" style="margin-left: 55px; justify-content: center; width: 100%; top: 456px;">
+            <div class="col-md-11" style="
+            overflow-y: auto;
+            max-height: 52vh;
+            width: 90%;">
+                <div class="dropzone-x-ray p-4 mb-4" style="display: none;">
+                    <h3>{% trans 'X-Ray' %}</h3>
+                    <p>{% trans 'Radiograph image of your patient' %}</p>
+                    <img src="{{radiography_image.url}}" class="w-100"  alt="">
+                    <!-- <div class="dropzone-dark-color p-4 rounded px-5" style="max-height: 315px;">
+                        <div class="row dropzone-border rounded-3 d-flex justify-content-center text-center p-4"
+                            style="max-height: 254px; align-items: center; overflow-x: auto; " id="myDropzone">
+                            <div class="col-md-6 d-flex justify-content-end zoom-div" style="pointer-events: none;">
+                                <div>
+                                    <img src="/static/img/x-ray-download.png" alt="">
+                                    <h3 class="mt-2">Drag & Drop files to upload </h3>
+                                    <p>or</p>
+                                    <button id="myDropzone" class="mb-2 px-3 py-2 rounded">Browse Files</button>
+                                    <p>Supported file types: JPG, PNG, DCM, or JPEG</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2 dropzone-click-jpeg rounded-2 px-2 zoom-div"
+                                style="align-items: center; pointer-events: none;">
+                                <div class="d-flex gap-2">
+                                    <img src="/static/img/diagnosisi-jpeg.svg" width="20" alt="">
+                                    <p>Customers_Q4_2022.jpg</p>
+                                </div>
+                                <div class="d-flex justify-content-center" style="margin-top: -13px;">
+                                    <i class="fa-solid fa-plus rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 20px; height: 20px; background-color: rgba(88, 253, 163, 1);"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="d-flex gap-2 justify-content-center">
+                        <div class="d-flex dropzone-icons px-3 mt-4 gap-2">
+                            <div class="px-3 py-2 zoom-block"><img src="/static/img/dropzone-plus-icon.png" alt="">
+                            </div>
+                            <div class="px-3 py-2 zoom-none"><img src="/static/img/dropzone-minus-icon.png" alt="">
+                            </div>
+                            <div class="px-3 py-2"><img src="/static/img/dropzone-sun-icon.png" alt="" id="icon"></div>
+                            <div class="px-3 py-2"><img src="/static/img/dropzone-moon-icon.png" alt="" id="iconTwo">
+                            </div>
+                            <div class="px-3 py-2"><img src="/static/img/dropzone-rotate-icon.png" alt=""
+                                    id="rotateDropzone"></div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="dropzone-x-ray  p-4">
+                    <h3>{% trans 'GENERAL' %}</h3>
+                    <p>{% trans 'You can add tags here' %}</p>
+                    <div class="diagnosis-general py-3 px-4 d-flex row d-flex rounded">
+                        <div class="general-append d-flex gap-2" style="width: 90%;">
+                            {% if tags %}
+                            {% for data in tags %}
+                            <div class="diagnosis-general-child append-div-textarea d-flex justify-content-between align-items-center px-2 rounded-2"
+                                style="background-color: rgb(80, 113, 200);">
+                                <input disabled value="{{data.tag_value}}" data-type="tag" id="{{data.slug}}"
+                                    class="append-textarea input-light-color"
+                                    style=" min-width: 80px; font-size: 14px; height: 20px; color: white; background: transparent; border: none; ">
+                                <i class="fa-solid fa-plus plus-icon-general" onclick="plusDiv(this)"
+                                    style="display: none;"></i>
+                                <i class="fa-solid fa-xmark general-none input-light-color"
+                                    onclick="removeDiv('{{data.slug}}')"></i>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="d-flex justify-content-end gap-3" style="font-size: 14px; width: 10%;">
+                            <div class="d-flex justify-content-center align-items-center gap-3 px-3 py-1 rounded table-add-general"
+                                style=" cursor: pointer; font-size: 19px;">
+                                <i class="fas fa-plus" style="font-size: 19px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tables d-flex" style="margin-bottom: 95px!important;">
+                    <div class="dropzone-x-ray mt-4 p-4 px-5" style="position: relative;width: 50%;">
+                        <h3>{% trans 'UPPER JAW' %}</h3>
+                        <p>{% trans 'Upper Jaw Diagnostics' %}</p>
+    
+                        <div>
+                            <div class="row p-3 rounded thakaa-treatments" style="background-color: rgba(11, 18, 43, 1); ">
+                                <div class="col-md-1" style="font-size: 14px;">Number</div>
+                                <div class="col-md-7 diagnosis-container-titile" style="font-size: 14px;">Diagnosis</div>
+                                <div class="col-md-3 d-flex justify-content-end" style="font-size: 14px;">Edit</div>
+                            </div>
+    
+                            {% for tooth_number, tooth_detail in data.items %}
+                            {% if tooth_detail.jaw_area == "upper_jaw" %}
+                            <div class="row p-3 rounded my-2 thakaa-treatments" style="background-color: rgba(13, 23, 53, 1);">
+                                <div class="col-md-1" style="font-size: 14px;">{{tooth_number}}</div>
+                                <div class="col-md-8 diagnosis-container d-flex gap-2 external-one-11"
+                                    data-tooth-slug="{{tooth_detail.slug}}" id="data-{{tooth_number}}"
+                                    style="font-size: 14px;">
+                                    {% if tooth_detail.illnesses or tooth_detail.is_missing %}
+                                    {% if tooth_detail.is_missing %}
+                                    {% for illness in tooth_detail.illnesses %}
+                                    <div class="diagnosis-general-child append-div-textarea d-flex justify-content-between align-items-center px-2 rounded-2"
+                                        style="background-color: rgb(80, 113, 200);">
+                                        <div class="dropdown" id="illnessDropdown">
+                                            <input disabled data-type="illness" id="{{illness.slug}}" value="{{illness.name}}"
+                                            placeholder="..." class="append-textarea input-light-color"
+                                            style=" min-width: 80px;  font-size: 14px; height: 20px; color: white; background: transparent; border: none; ">
+                                        </div>
+                                       
+                                        <i data-type="illness" class="fa-solid fa-xmark general-none input-light-color"
+                                            onclick="removeDiv('{{illness.slug}}')"></i>
+                                    </div>
+                                    {% endfor %}
+    
+                                    {% else %}
+    
+                                    {% for illness in tooth_detail.illnesses %}
+                                    <div class="diagnosis-general-child append-div-textarea d-flex justify-content-between align-items-center px-2 rounded-2"
+                                        style="background-color: rgb(80, 113, 200);">
+                                        <input disabled data-type="illness" id="{{illness.slug}}" value="{{illness.name}}"
+                                        placeholder="..." class="append-textarea input-light-color"
+                                        style="min-width: 80px; font-size: 14px; height: 20px; color: white; background: transparent; border: none; cursor: pointer;"
+                                        onclick="toggleDropdown(this)">
+                                    {% if illness.subs %}
+                                    <div class="dropdown-menu" aria-labelledby="illnessDropdownButton">
+                                        {% for sub_name,sub_value in illness.subs.items %}
+                                        <a onclick="replaceDiagnosis(this)" class="dropdown-item" data-type="illness" id="{{sub_value.slug}}">{{sub_value.en_name}}</a>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                    <i data-type="illness" class="fa-solid fa-xmark general-none input-light-color"
+                                        onclick="removeDiv('{{illness.slug}}')"></i>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3 d-flex justify-content-end gap-3" style="font-size: 14px;">
+                                    <div class="d-flex justify-content-center align-items-center gap-3 px-3 py-1 rounded table-add"
+                                        style="background-color: rgba(37, 49, 89, 1); cursor: pointer;">
+                                        <i class="fas fa-plus"></i>Add
+                                    </div>
+                                    <div class="trash-icon-container" data-row="data-{{tooth_number}}">
+                                        <i class="fas fa-trash p-2 rounded"
+                                            style="background-color: rgba(37, 49, 89, 1); cursor: pointer;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+    
+                    <div class="dropzone-x-ray mt-4 p-4 px-5" style="position: relative; width: 50%">
+                        <h3>{% trans 'LOWER JAW' %}</h3>
+                        <p>{% trans 'Lower Jaw Diagnostics' %}</p>
+                        <div>
+                            <div class="row p-3 rounded thakaa-treatments" style="background-color: rgba(11, 18, 43, 1); ">
+                                <div class="col-md-1" style="font-size: 14px;">Number</div>
+                                <div class="col-md-7 diagnosis-container-titile" style="font-size: 14px;">Diagnosis</div>
+                                <div class="col-md-3 d-flex justify-content-end" style="font-size: 14px;">Edit</div>
+                            </div>
+                            {% for tooth_number,tooth_detail in data.items %}
+                            {% if tooth_detail.jaw_area == "lower_jaw" %}
+                            <div class="row p-3 rounded mt-2 thakaa-treatments" style="background-color: rgba(13, 23, 53, 1) ; ">
+                                <div class="col-md-1" style="font-size: 14px;">{{tooth_number}}</div>
+                                <div class="col-md-8 diagnosis-container d-flex gap-2" id="data-{{tooth_number}}"
+                                    style="font-size: 14px;">
+                                    {% if tooth_detail.illnesses or tooth_detail.is_missing %}
+                                    {% if tooth_detail.is_missing %}
+                                    {% for illness in tooth_detail.illnesses %}
+    
+                                    <div class="diagnosis-general-child append-div-textarea d-flex justify-content-between align-items-center px-2 rounded-2"
+                                        style="background-color: rgb(80, 113, 200);">
+                                        <input disabled data-type="illness" id="{{illness.slug}}" value="Missing"
+                                            placeholder="..." class="append-textarea input-light-color"
+                                            style=" min-width: 80px;  font-size: 14px; height: 20px; color: white; background: transparent; border: none; cursor: pointer;">
+                                        <i data-type="illness" class="fa-solid fa-xmark general-none input-light-color"
+                                            onclick="removeDiv('{{illness.slug}}')"></i>
+                                    </div>
+                                    {% endfor %}
+    
+                                    {% else %}
+                                    {% for illness in tooth_detail.illnesses %}
+                                    <div class="diagnosis-general-child append-div-textarea d-flex justify-content-between align-items-center px-2 rounded-2"
+                                        style="background-color: rgb(80, 113, 200);">
+                                        <input disabled data-type="illness" id="{{illness.slug}}" value="{{illness.name}}"
+                                            placeholder="..." class="append-textarea input-light-color"
+                                            style=" min-width: 80px;  font-size: 14px; height: 20px; color: white; background: transparent; border: none; cursor: pointer;">
+                                        {% if illness.subs %}
+                                            <div class="dropdown-menu" aria-labelledby="illnessDropdownButton">
+                                                {% for sub_name,sub_value in illness.subs.items %}
+                                                <a onclick="replaceDiagnosis(this)" class="dropdown-item" data-type="illness" id="{{sub_value.slug}}">{{sub_value.en_name}}</a>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                        <i data-type="illness" class="fa-solid fa-xmark general-none input-light-color"
+                                            onclick="removeDiv('{{illness.slug}}')"></i>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3 d-flex justify-content-end gap-3" style="font-size: 14px;">
+                                    <div class="d-flex justify-content-center align-items-center gap-3 px-3 py-1 rounded table-add"
+                                        style="background-color: rgba(37, 49, 89, 1); cursor: pointer;">
+                                        <i class="fa-solid fa-plus"></i>Add
+                                    </div>
+                                    <div class="trash-icon-container" data-row="data-{{tooth_number}}">
+                                        <i class="fa-solid fa-trash p-2 rounded"
+                                            style="background-color: rgba(37, 49, 89, 1); cursor: pointer;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="d-flex justify-content-end">
+                    <button class="px-5 py-2 fs-4 rounded text-light"
+                        style="background-color: rgba(80, 113, 200, 1);">Next</button>
+                </div> -->
+            </div>
+            <!-- <div class="col-md-4 chosse-option mt-4">
+                <div class="d-flex justify-content-between">
+                    <div class="chosse-option-titile">
+                        <h3>CHOOSE OPTION</h3>
+                        <p>Contrary to popular belief.</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <div class="icon-border-light rounded" id="backButton"><i class="fas fa-arrow-left"></i></div>
+                        <div class="icon-border-light rounded"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="icon-border-light icon-reset rounded"><i class="fa-solid fa-arrow-rotate-left"></i>
+                        </div>
+                        <div class="icon-border-light rounded">
+                            <div class="icon-border-light rounded">
+                                <div class="dropdown">
+                                    <button class=" dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        style="color: white; background-color: rgba(17, 28, 67, 1); border: none;">
+                                        <i class="fa-solid fa-turkish-lira-sign"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#"><i
+                                                class="fa-solid fa-turkish-lira-sign"></i></a>
+                                        <a class="dropdown-item" href="#"><i class="fa-solid fa-dollar-sign"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon-border-light rounded">
+                            <div class="dropdown">
+                                <button class="  dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    style="color: white; background-color: rgba(17, 28, 67, 1); border: none;">
+                                    TR
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">TR</a>
+                                    <a class="dropdown-item" href="#">EN</a>
+                                    <a class="dropdown-item" href="#">ARABIC</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="justify-content-center intact-dropdown-chosse crown-icon-block d-none">
+                    <div>
+                        <input class="search-diagnosis-chosse" type="search" name="" id="" placeholder="Search">
+                        <div>
+                            <div class="solid-gray-color">CROWN</div>
+                            <div class="dropdown-cild">Decayed</div>
+                            <div class="dropdown-cild">Leaking</div>
+                            <div class="dropdown-cild">Worn</div>
+                        </div>
+                        <div class="d-flex justify-content-between search-close py-2 ">
+                            <span class="crown-close">Close</span>
+                            <span class="crown-save">Save</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="justify-content-center intact-dropdown-chosse other-icon-block d-none mt-3">
+                    <div>
+                        <input class="search-diagnosis-chosse" type="search" name="" id="" placeholder="Search">
+                        <div>
+                            <div class="solid-gray-color">OTHER</div>
+                            <div class="dropdown-cild">Decayed</div>
+                            <div class="dropdown-cild">Leaking</div>
+                            <div class="dropdown-cild">Worn</div>
+                        </div>
+                        <div class="d-flex justify-content-between search-close py-2 ">
+                            <span class="crown-close">Close</span>
+                            <span class="crown-save">Save</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="justify-content-center intact-dropdown-chosse mt-3 Implant-icon-block ">
+                    <div>
+                        <input class="search-diagnosis-chosse" type="search" name="" id="" placeholder="Search">
+                        <div>
+                            <div class="solid-gray-color">IMPLANT + ABUTMENT</div>
+                            <div class="dropdown-cild">Bone Loss</div>
+                            <div class="dropdown-cild">Gingival Reccesion</div>
+                            <div class="dropdown-cild">Malpositioned</div>
+                        </div>
+                        <div class="d-flex justify-content-between search-close py-2 ">
+                            <span class="implant-close">Close</span>
+                            <span class="implant-save">Save</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="justify-content-center intact-dropdown-chosse filled-icon-block mt-3 d-none">
+                    <div>
+                        <input class="search-diagnosis-chosse" type="search" name="" id="" placeholder="Search">
+                        <div>
+                            <div class="solid-gray-color">FILLED</div>
+                            <div class="dropdown-cild">M</div>
+                            <div class="dropdown-cild">O</div>
+                            <div class="dropdown-cild">D</div>
+                        </div>
+                        <div class="d-flex justify-content-between search-close py-2 ">
+                            <span class="filler-close">Close</span>
+                            <span class="filler-save">Save</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+
+    </div>
+    {% csrf_token %}
+</section>
+
+{% endblock %}
+{% block customJs %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/toastify.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/sweatalert.js' %}"></script>
+<script src="{% static 'js/dropzone.js' %}"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    var inputElement = document.getElementById('{{ illness.slug }}');
+    document.querySelectorAll('#illnessDropdown .dropdown-item').forEach(function (item) {
+      item.addEventListener('click', function () {
+        var selectedOption = item.textContent;
+        inputElement.value = selectedOption;
+        $('#illnessDropdown').removeClass('show');
+      });
+    });
+ 
+    function changeImageSource() {
+    // .dropzone-x-ray sınıfına sahip elementi seç ve toggle() fonksiyonu ile görünürlüğünü değiştir
+    $(".dropzone-x-ray").toggle();
+}
+
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val()
+    var image_report_id = "{{wizard_id}}"
+    $("#modalClose").click(function () {
+        $("#myModal").modal('hide')
+    })
+    $(document).ready(function () {
+        var clickedRowId;
+        $('.trash-icon-container').click(function () {
+            clickedRowId = $(this).attr('data-row');
+            $('#myModal').modal('show');
+        });
+        $("#modalYes").click(function () {
+            $('#myModal').modal('hide');
+            var toothNumber = clickedRowId.substring(5);
+            sendDeleteAllIllnessesFromToothRequest(toothNumber)
+            var disease_svg_element = $("#"+toothNumber)
+            var childSVGs = disease_svg_element.find('svg');
+            childSVGs.each(function() {
+                $(this).fadeOut(600, function() {
+                    $(this).remove();
+                });
+            });
+            
+        });
+    });
+
+    $('.trash-icon-container').click(function () {
+        var clickedRow = $(this).data('row');
+        $('#myModal').modal('show');
+    });
+
+    function appendToDiagnosisContainer(element) {
+        var value_at = $(element).text()
+        var selectedElement = [...$('.mising-active')];
+        selectedElement.map((item) => {
+            var id = $(item).attr("data-external");
+            $(`#${id}`).append(`
+            <div class="diagnosis-general-child d-flex gap-2 justify-content-between align-items-center px-2 rounded-2">
+                <p style="margin-top: 15px;">${value_at}</p>
+                <i class="fa-solid fa-xmark general-none"  onclick="removeDiv(this)"></i>
+            </div>
+        `)
+            $(".external").removeClass("mising-active")
+        })
+    }
+
+    function changeUniqueSrcs() {
+        var activeElements = $('.mising-active img');
+        activeElements.each(function (index) {
+            var newSrc = "/static/img/external-img-" + (index + 1) + "-filled.svg";
+            $(this).attr('src', newSrc);
+        });
+    }
+    changeUniqueSrcs();
+
+   var elements = $('.external-one, .external-two');
+elements.on('click', function () {
+    elements.removeClass('selected');
+    $(this).addClass('selected');
+});
+
+function handleMouseActions(element) {
+    var isMouseDown = false;
+
+    $(element).mousedown(function (e) {
+        e.preventDefault();
+        isMouseDown = true;
+        $(this).toggleClass("mising-active");
+    });
+
+    $(element).mouseover(function () {
+        if (isMouseDown) {
+            $(this).addClass("mising-active");
+        }
+    });
+
+    $(document).mouseup(function () {
+        isMouseDown = false;
+    });
+
+    $(element).click(function (e) {
+        if (!isMouseDown) {
+            $(this).toggleClass("mising-active");
+        }
+    });
+}
+
+$(".external-one, .external-two").click(function () {
+    $(this).toggleClass("mising-active");
+});
+handleMouseActions(".external-one, .external-two");
+
+    $(document).ready(function () {
+        $(".icon-reset").click(function () {
+            $(".resettable").each(function () {
+                var defaultValue = $(this).data("default-value");
+                if ($(this).is("input") || $(this).is("textarea")) {
+                    $(this).val(defaultValue);
+                } else if ($(this).is("div")) {
+                    $(this).text(defaultValue);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $('#icon').click(function () {
+            $('.dz-image img').addClass('brighten');
+        });
+    });
+    $(document).ready(function () {
+        var konstrant = 0;
+        $('#iconTwo').click(function () {
+            konstrant++;
+            $('.dz-image img').addClass('brightenK');
+        });
+    });
+    $("#rotateDropzone").click(function () {
+        $('.dz-image img').removeClass('brightenK');
+        $('.dz-image img').removeClass('brighten');
+    })
+
+    function toggleNestedDropdown(element) {
+        $(".dropdown-content").not($(element).find(".dropdown-content")).hide();
+        $(element).find(".dropdown-content").toggle();
+    }
+    function closeDropdown(element) {
+        $(element).closest(".dropdown-content").hide();
+    }
+    $(document).on("click", function (event) {
+        if (!$(event.target).closest('.missing-part').length) {
+            $(".dropdown-content").hide();
+        }
+    });
+
+    $(".filler-close").click(function () {
+        $(".filled-icon-block").addClass("d-none")
+    })
+    $(".implant-close").click(function () {
+        $(".Implant-icon-block").addClass("d-none")
+    })
+    $(".crown-close").click(function () {
+        $(".crown-icon-block").addClass("d-none")
+    })
+
+    $(".filled-icon").click(function () {
+        $(".filled-icon-block").toggleClass("d-none")
+    })
+    $(".crown-icon").click(function () {
+        $(".crown-icon-block").toggleClass("d-none")
+    })
+    $(".Implant-icon").click(function () {
+        $(".Implant-icon-block").toggleClass("d-none")
+    })
+    $(".other-icon").click(function () {
+        $(".other-icon-block").toggleClass("d-none")
+    })
+
+    
+
+    var clickCount = 0;
+    var maxClicks = 3;
+    var initialScale = 1.2;
+    var step = 0.2;
+    $(".zoom-block").click(function () {
+        if (clickCount < maxClicks) {
+            var scale = initialScale + (clickCount * step);
+            $(".dz-image").css("transform", "scale(" + scale + ")");
+        }
+    });
+    $(".zoom-none").click(function () {
+        if (clickCount < maxClicks && clickCount >= 0) {
+            var scale = initialScale + ((maxClicks - clickCount - 1) * step);
+            $(".dz-image").css("transform", "scale(" + scale + ")");
+            clickCount++;
+        } else {
+            clickCount = 0;
+            $(".dz-image").css("transform", "scale(1.2)");
+        }
+    });
+</script>
+
+<script>
+    $(".navbar-one-img").click(function () {
+        $(".navbar-two-img").removeClass("navbar-two-img-light")
+        $(".navbar-four-img").removeClass("navbar-four-img-light")
+        $(".navbar-tree-img").removeClass("navbar-tree-img-light")
+        $(".navbar-one-img").removeClass("navbar-one-img-light")
+    })
+    $(".navbar-two-img").click(function () {
+        $(".navbar-two-img").addClass("navbar-two-img-light")
+        $(".navbar-four-img").removeClass("navbar-four-img-light")
+        $(".navbar-tree-img").removeClass("navbar-tree-img-light")
+        $(".navbar-one-img").addClass("navbar-one-img-light")
+    })
+    $(".navbar-tree-img").click(function () {
+        $(".navbar-tree-img").addClass("navbar-tree-img-light")
+        $(".navbar-two-img").removeClass("navbar-two-img-light")
+        $(".navbar-four-img").removeClass("navbar-four-img-light")
+        $(".navbar-one-img").addClass("navbar-one-img-light")
+    })
+    $(".navbar-four-img").click(function () {
+        $(".navbar-four-img").addClass("navbar-four-img-light")
+        $(".navbar-tree-img").removeClass("navbar-tree-img-light")
+        $(".navbar-two-img").removeClass("navbar-two-img-light")
+        $(".navbar-one-img").addClass("navbar-one-img-light")
+    })
+</script>
+
+<script>
+    $(".missing-intact").click(function () {
+        $(".intact-dropdown").slideToggle("d-none")
+        $(".intact-dropdown").removeClass("d-none")
+    })
+    $(".intact-close").click(function () {
+        $(".intact-dropdown").addClass("d-none")
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        // diş SVG'sinin dosya URL'si
+        var dict_data = {{data_for_svg|safe}}; 
+        for (const [key, value] of Object.entries(dict_data)) {
+            var svgURL =  value.svg_path;
+            
+            $.ajax({
+                url: svgURL,
+                method: "GET",
+                dataType: "text",
+                success: function(svgContent) {
+                    var externalDataAttribute = "data-" + key;
+                    var element = $(`[data-external="${externalDataAttribute}"]`);
+                    {% comment %} $(element).find("img").remove() {% endcomment %}
+                    var svgElement = $(svgContent);
+                    //console.log("1: ",svgElement.children().eq(-2))
+                    var width = svgElement.attr('width');
+                    var height = svgElement.attr('height');
+                    var new_width = width * 3
+                    var new_heigth = height * 3
+                    svgElement.attr({
+                        'width': new_width,
+                        'height': new_heigth,
+                        'id': key,
+                    });
+                    if(!element.data("missing") === true){
+                        element.html(svgElement);
+                        element.append(`<span>${key}</span>`);
+                    }
+                    
+                },
+                error: function(xhr, status, error) {
+                    console.error("Hata oluştu:", error);
+                }
+            });
+        }
+        // START - APPEND DISEASE SVG FILES TO TOOTH //
+        for (const [key, value] of Object.entries(dict_data)) {
+            for (const [index, illness] of Object.entries(value.illnesses)) {
+                var is_it_last_element = false
+                if (illness.name === "Caries" || illness.name === "Filling" || illness.name === "Veneer" || illness.name === "Parapulpal pin" ){
+                    is_it_last_element = true
+                }
+                var svg_url = illness.svg_path
+                var svg_slug = illness.slug
+                if (svg_url){
+                    appendSvgToTooth(key, svg_url,svg_slug,is_it_last_element);
+                };
+            }
+            
+        }
+        // END - APPEND DISEASE SVG FILES TO TOOTH //
+        $('.x-ray-block-icon').on('click', function () {
+            var currentSrc = $(this).attr('src');
+            if (currentSrc === "{% static 'img/diagnosis-x-ray-dark-icon.png' %}") {
+                $(this).attr('src', "{% static 'img/diagnosis-x-ray-light-icon.png' %}");
+                $(".dropzone-x-ray").addClass("d-block")
+            } else {
+                $(this).attr('src', "{% static 'img/diagnosis-x-ray-dark-icon.png' %}");
+                $(".dropzone-x-ray").removeClass("d-block")
+            }
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $(".other-dropdown").click(function () {
+            $("#myDropdown").toggle();
+        });
+
+        $(document).on("click", function (event) {
+            if (!$(event.target).closest(".other-dropdown").length) {
+                $("#myDropdown").hide();
+            }
+        });
+    });
+</script>
+
+<script>
+    function toggleNestedDropdown(element) {
+        $(".dropdown-content").not($(element).find(".dropdown-content")).hide();
+        $(element).find(".dropdown-content").toggle();
+    }
+    $(document).on("click", function (event) {
+        if (!$(event.target).closest(".missing-part").length) {
+            $(".dropdown-content").hide();
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $(".table-add").click(function (e) {
+        var element = e.target;
+        var parentElement = $(element).parent().siblings("div.diagnosis-container")
+        var idValue = parentElement.attr("id");
+        idValue = idValue.replace("data-", "")
+        var currentRow = $(this).closest(".row");
+        var diagnosisContainer = currentRow.find(".diagnosis-container");
+        var lastInput = diagnosisContainer.children(".diagnosis-general-child").last().find("input");
+        if (lastInput.val().trim() === "") {
+            Toastify({
+                    text: "You can add a new disease after filling in the input..",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            return;
+        }
+        var newTextAreaId = "textarea-" + Date.now();
+        diagnosisContainer.append(`
+            <div class="diagnosis-general-child append-div-textarea d-flex justify-content-between align-items-center px-2 rounded-2">
+                <input data-tooth_number="${idValue}" data-type="illness" id="${newTextAreaId}" placeholder="..." class="append-textarea" style=" min-width: 80px;  font-size: 14px; height: 20px; color: white; background: transparent; border: none;">
+                <i class="fa-solid fa-plus plus-icon-general" onclick="plusDiv(this)"></i>
+                <i data-type="illness" class="fa-solid fa-xmark general-none d-none" onclick="removeDiv('${newTextAreaId}')"></i>
+            </div>
+        `);
+    });
+});
+
+
+$(document).ready(function () {
+    $(".table-add-general").click(function () {
+        var currentRow = $(this).closest(".row");
+        var diagnosisContainer = currentRow.find(".general-append");
+        var lastInput = diagnosisContainer.children(".diagnosis-general-child").last().find("input");
+        if (lastInput.length > 0 && lastInput.val().trim() === "") {
+            Toastify({
+                    text: "{% trans 'You can add a new tag after filling in the input' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            return; 
+        }
+        var newTextAreaId = "textarea-" + Date.now();
+        diagnosisContainer.append(`
+            <div class="diagnosis-general-child append-div-textarea d-flex justify-content-between align-items-center px-2 rounded-2">
+                <input data-type="tag" id="${newTextAreaId}" placeholder="..." class="append-textarea" style=" min-width: 80px; font-size: 14px; height: 20px; color: white; background: transparent; border: none; ">
+                <i class="fa-solid fa-plus plus-icon-general" onclick="plusDiv(this)"></i>
+                <i data-type="tag" class="fa-solid fa-xmark general-none d-none" onclick="removeDiv('${newTextAreaId}')"></i>
+            </div>
+        `);
+    });
+});
+
+    $(".addIllnesses").click(function(){
+        var clickedIllness = $(this);
+        sendIllnessRequest(clickedIllness)
+    })
+    function sendTagRequest(inputElement, noneIcon) {
+        if (!inputElement.value) {
+            Toastify({
+                text: "{% trans 'Please enter a tag.' %}",
+                duration: 3000,
+                backgroundColor: "#d9534f"
+            }).showToast();
+            return false
+        }
+        $.ajax({
+            url: "{% url 'register-tag' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+                tag_value: inputElement.value,
+                image_report_id: image_report_id,
+            },
+            success: function (response) {
+                inputElement.id = response.slug
+                noneIcon[0].setAttribute("onclick", "removeDiv('" + response.slug + "')");
+                Toastify({
+                    text: "Tag has been added successfully",
+                    duration: 3000,
+                    backgroundColor: "#28a745",
+                }).showToast();
+
+            },
+            error: function (error) {
+                Toastify({
+                    text: "An error occurred while adding tag.",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        });
+    }
+    function sendManualIllnessRequest(inputElement, noneIcon) {
+        if (!inputElement.value) {
+            Toastify({
+                text: "Please enter a illness.",
+                duration: 3000,
+                backgroundColor: "#d9534f"
+            }).showToast();
+            return false
+        }
+        let tooth_number = inputElement.dataset.tooth_number
+        $.ajax({
+            url: "{% url 'add-manual-illness' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+                tooth_number: tooth_number,
+                image_report_id: image_report_id,
+                value: inputElement.value,
+            },
+            success: function (response) {
+                inputElement.id = response.slug
+                noneIcon[0].setAttribute("onclick", "removeDiv('" + response.slug + "')");
+                Toastify({
+                    text: "Illness has been added successfully",
+                    duration: 3000,
+                    backgroundColor: "#28a745",
+                }).showToast();
+
+            },
+            error: function (error) {
+                Toastify({
+                    text: "An error occurred while adding tag.",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        });
+    }
+   
+    function plusDiv(clickedIcon) {
+        var currentRowIcons = $(clickedIcon).closest(".diagnosis-general-child");
+        var plusIcon = currentRowIcons.find(".plus-icon-general");
+        var noneIcon = currentRowIcons.find(".general-none");
+        var inputElement = clickedIcon.closest('.diagnosis-general-child').querySelector('.append-textarea');
+        var dataType = inputElement.dataset.type
+        noneIcon.removeClass("d-none");
+        plusIcon.hide();
+        var textareaValues = $(this).closest(".div-class").find(".append-textarea").map(function() {
+        return $(this).val();
+        console.log(textareaValues)
+    }).get();
+
+        {% comment %} $.ajax({
+            url: "{% url 'edit-tag' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+                // tag_slug: tag_slug,
+                wizard_id: image_report_id,
+                new_tag_value: textareaValues
+            },
+            success: function (response) {
+                Toastify({
+                    text: "Tag has been added successfully",
+                    duration: 3000,
+                    backgroundColor: "#28a745",
+                }).showToast();
+            },
+            error: function (error) {
+                Toastify({
+                    text: "An error occurred while deleting tag.",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        }) {% endcomment %}
+        if (dataType === "tag") {
+            sendTagRequest(inputElement, noneIcon)
+        }
+        if (dataType == "illness") {
+            sendManualIllnessRequest(inputElement, noneIcon)
+        }
+
+        if (!noneIcon.hasClass("d-none")) {
+            var inputField = currentRowIcons.find(".append-textarea");
+            inputField.prop('disabled', true);
+            currentRowIcons.css('background-color', 'rgba(80, 113, 200, 1)');
+            inputField.addClass("input-light-color");
+            noneIcon.addClass("input-light-color");
+        }
+    }
+    function delete_tag(tag_id, image_report_id) {
+        $.ajax({
+            url: "{% url 'delete-tag' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+                tag_id: tag_id,
+                image_report_id: image_report_id,
+            },
+            success: function (response) {
+                $("#" + tag_id).closest('.diagnosis-general-child').fadeOut(300, function () {
+                    $(this).remove();
+                });
+                Toastify({
+                    text: "Tag has been deleted successfully",
+                    duration: 3000,
+                    backgroundColor: "#28a745",
+                }).showToast();
+            },
+            error: function (error) {
+                Toastify({
+                    text: "An error occurred while deleting tag.",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+
+        })
+    }
+    function delete_manual_illness(illness_slug, tooth_number, image_report_id, cross_icon_element) {
+        $.ajax({
+            url: "{% url 'delete-manual-illness' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+                illness_slug: illness_slug,
+                image_report_id: image_report_id,
+                tooth_number: tooth_number,
+            },
+            success: function (response) {
+                cross_icon_element.parent().fadeOut(500, function () {
+                    $(this).remove();
+                });
+                var svg_element = $('svg[data-svg-slug="' + illness_slug + '"]');
+                svg_element.fadeOut(500, function () {
+                    $(this).remove();
+                });
+                if (response.tooth_svg_path){
+                    var svgURL =  response.tooth_svg_path;
+                    $.ajax({
+                        url: svgURL,
+                        method: "GET",
+                        dataType: "text",
+                        success: function(svgContent) {
+                            var externalDataAttribute = "data-" + tooth_number;
+                            var element = $(`[data-external="${externalDataAttribute}"]`);
+                            var svgElement = $(svgContent);
+                            //console.log("1: ",svgElement.children().eq(-2))
+                            var width = svgElement.attr('width');
+                            var height = svgElement.attr('height');
+                            var new_width = width * 3
+                            var new_heigth = height * 3
+                            svgElement.attr({
+                                'width': new_width,
+                                'height': new_heigth,
+                                'id': tooth_number,
+                            });
+                            element.html(svgElement);
+                            element.append(`<span style="display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute;
+                            top: -25px;
+                            width: 100%;
+                            background-color: rgba(14, 24, 55, 1);
+                            border-radius: 0.25rem !important;">${tooth_number}</span>`);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Hata oluştu:", error);
+                        }
+                    });
+                }
+                Toastify({
+                    text: "Illness has been deleted successfully",
+                    duration: 3000,
+                    backgroundColor: "#28a745",
+                }).showToast();
+            },
+            error: function (error) {
+                Toastify({
+                    text: "An error occurred while deleting illness.",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        })
+    }
+    function removeDiv(textAreaId) {
+        //$("#" + textAreaId).closest('.diagnosis-general-child').remove();
+        let dataType = $("#" + textAreaId).data("type")
+        if (dataType == "tag") {
+            delete_tag(textAreaId, image_report_id)
+        }
+        else if (dataType == "illness") {
+            cross_icon_element = $("#" + textAreaId)
+            tooth_element = cross_icon_element.closest(".diagnosis-container")
+            tooth_number = tooth_element[0].id.replace("data-", "")
+            illness_slug = cross_icon_element[0].id
+            delete_manual_illness(illness_slug, tooth_number, image_report_id, cross_icon_element)
+        }
+    }
+    function sendIllnessRequest(clickedIllness){
+        var activeTeeth = $('.mising-active svg');
+        var teethList = []
+        activeTeeth.each(function() {
+            var parentDiv = $(this).parent();
+            if (parentDiv.length && parentDiv.data('external')) {
+                teethList.push(parentDiv.data('external').replace('data-', '')); // Sadece "14" kısmını al
+            }
+        });
+        if (teethList.length==0){
+            Toastify({
+                text: "{% trans 'Please select a tooth first' %}",
+                duration: 3000,
+                backgroundColor: "#d9534f"
+            }).showToast();
+            return false;
+        }
+        $.ajax({
+            url: "{% url 'add-illness-to-teeth' %}",
+            method: "POST",
+            headers:{'X-CSRFToken':csrf_token},
+            data:{
+                image_report_id:image_report_id,
+                teeth_list:teethList,
+                label_slug:clickedIllness.attr("data-label-slug"),
+            },
+            success:function(response){
+                var returnedData = response.data
+                var new_element = ""
+                for (var key in returnedData) {
+                    if (returnedData.hasOwnProperty(key)) {
+                        var value = returnedData[key];
+                        var element = $("[id='data-" + key + "']");
+                        //burada da apiden subs döndüyse drodownlu eleman ekleneeck if (subs)
+                        new_element = $(`
+                        <div class="diagnosis-general-child append-div-textarea d-flex justify-content-between align-items-center px-2 rounded-2" style="background-color: rgb(80, 113, 200);">
+                            <input disabled="" data-type="illness" id="${value.slug}" value="${value.name}" placeholder="..." class="append-textarea input-light-color" style=" min-width: 80px;  font-size: 14px; height: 20px; color: white; background: transparent; border: none; cursor: pointer;">
+                            <i data-type="illness" class="fa-solid fa-xmark general-none input-light-color" onclick="removeDiv('${value.slug}')"></i>
+                        </div>
+                        `)
+                        element.append(new_element)
+                        new_element.hide().fadeIn(1000);
+                        if (value.name == "Missing"){
+                            removeSvgFromTooth(key)
+                        }else{
+                            var svg_path = value.svg_path
+                            appendSvgToTooth(key,svg_path,value.slug)
+                        }
+                    }
+                }
+                Toastify({
+                    text: "Illnesses has been added successfully",
+                    duration: 3000,
+                    backgroundColor: "#28a745",
+                }).showToast();
+
+            },
+            error:function(error){
+                Toastify({
+                    text: "An error occurred while deleting illness.",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+
+
+        })
+    }
+    function sendDeleteAllIllnessesFromToothRequest(tooth_number){
+        $.ajax({
+            url:"{% url 'delete-all-illness-from-tooth' %}",
+            method:"POST",
+            headers: {'X-CSRFToken': csrf_token},
+            data:{
+                "image_report_id":image_report_id,
+                "tooth_number":tooth_number
+            },
+            success:function(response){
+                var element = $("#data-" + tooth_number);
+                element.find(".diagnosis-general-child").fadeOut(700, function() {
+                    $(this).remove();
+                });
+            },
+            error:function(error){
+                console.log("err")
+            }
+
+        })
+    }
+
+    function appendSvgToTooth(key,svg_url,svg_slug,is_it_last_element=null){
+        var svgURL = "https://ai.thakaamed.com/" + svg_url;
+        $.ajax({
+            url: svgURL,
+            method: "GET",
+            dataType: "text",
+            success: function(svgContent) {
+                var svgElement = $(svgContent);
+                tooth_svg_element = $("#"+key)
+                svgElement.attr({
+                    'data-svg-slug': svg_slug,
+                });
+                if (is_it_last_element){
+                    tooth_svg_element.append(svgElement)
+                }else{
+                    svgElement.insertBefore(tooth_svg_element.children().last())
+
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Hata oluştu:", error);
+            }
+        });
+    }
+    function removeSvgFromTooth(key){
+        tooth_svg_element = $("#"+key)
+        tooth_svg_element.fadeOut(500, function () {
+            $(this).remove();
+        });
+    }
+
+    function replaceDiagnosis(element){
+        let slug = element.id //bu element ile değiştirilecek (yenisi bu)
+        let closestinput = $(element).parent().parent().find("input"); //değiştirilecek olan element bu, slugu ile backendde arama yapılacak (eskisi bu)
+        let old_illness_slug = closestinput.attr("id")
+        $.ajax({
+            url:"{% url 'replace-diagnosis' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data:{
+                "new_slug":slug,
+                "old_slug":old_illness_slug,
+                "wizard_id":image_report_id,
+            },
+            success:function(response){
+                console.log("success") //burada dinamik verileri gösterme yapılacak - değişecek inputun id'si buradan dönen slug olcak
+            },
+            error:function(err){
+                console.log("err")
+            }
+
+        })
+        console.log("slug",slug, "old_illness_slug",old_illness_slug)
+
+    }
+ 
+
+</script>
+
+{% endblock %}

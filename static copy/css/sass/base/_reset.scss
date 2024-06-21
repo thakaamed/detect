@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html * {
+    font-size: 12px;
+}
+
+html, body {
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    scroll-behavior: smooth!important;
+}
+
+a:hover {
+    color: rgba($color: #fff, $alpha: .5);
+}

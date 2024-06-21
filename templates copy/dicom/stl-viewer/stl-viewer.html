@@ -1,0 +1,618 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block pageTitle %}
+<!--<div id="topbar" style="font-size: 12px;">-->
+<!--    <h3 style="min-width: 170px;">Select .drc files to load</h3>-->
+<!--    <input style="height:auto !important; width:auto !important; text-indent:0px !important;background:none!important;"-->
+<!--           type="file" id="fileInput" multiple>-->
+<!--    <h3 style="min-width: 125px;">Wireframe mode: </h3>-->
+<!--    <input id="wireframeToggle" type="checkbox">-->
+<!--</div>-->
+{% endblock %}
+{% block content %}
+
+    <!--<div id="container">-->
+    <!--    <div id="contextMenu">-->
+    <!--        <div id="illnessesMenu">-->
+    <!--            <h3>Illnesses</h3>-->
+    <!--        </div>-->
+    <!--        <div id="anatomyMenu">-->
+    <!--            <h3>Anatomy</h3>-->
+    <!--        </div>-->
+    <!--        <div id="teethMenu">-->
+    <!--            <h3>Teeth</h3>-->
+    <!--        </div>-->
+    <!--        <h3>Other</h3>-->
+    <!--    </div>-->
+    <!--    <div id="renderer">-->
+    <!--    </div>-->
+    <!--</div>-->
+
+{% endblock %}
+
+
+{% block customJs %}
+
+<script src="https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js"></script>
+<script src="https://unpkg.com/camera-controls@1.37.4/dist/camera-controls.js"></script>
+<script src="/static/dicom/stl-viewer/DRACOLoader.js"></script>
+<script src="/static/dicom/stl-viewer/geometry_helper.js"></script>
+<script>
+    var renderOrders = {
+        "soft_tissue": 2,
+        "maxilla_polynomial": 1,
+        "mandibula_polynomial": 1,
+
+        "caries": 0,
+        "pontic": 1,
+        "filling": 0,
+        "jaw_lesion_(radiolucent)": 1,
+        "jaw_lesion_(radiopaque)": 1,
+        "periapical_lesion": 0,
+        "residual_root": 0,
+        "root_canal_filling": 0,
+
+        "mesiodens_dental_problems": 1,
+        "supernumerary_tooth_dental_problems": 1,
+
+        "11_permanent_tooth_numbering": 1,
+        "12_permanent_tooth_numbering": 1,
+        "13_permanent_tooth_numbering": 1,
+        "14_permanent_tooth_numbering": 1,
+        "15_permanent_tooth_numbering": 1,
+        "16_permanent_tooth_numbering": 1,
+        "17_permanent_tooth_numbering": 1,
+        "18_permanent_tooth_numbering": 1,
+
+        "21_permanent_tooth_numbering": 1,
+        "22_permanent_tooth_numbering": 1,
+        "23_permanent_tooth_numbering": 1,
+        "24_permanent_tooth_numbering": 1,
+        "25_permanent_tooth_numbering": 1,
+        "26_permanent_tooth_numbering": 1,
+        "27_permanent_tooth_numbering": 1,
+        "28_permanent_tooth_numbering": 1,
+
+        "31_permanent_tooth_numbering": 1,
+        "32_permanent_tooth_numbering": 1,
+        "33_permanent_tooth_numbering": 1,
+        "34_permanent_tooth_numbering": 1,
+        "35_permanent_tooth_numbering": 1,
+        "36_permanent_tooth_numbering": 1,
+        "37_permanent_tooth_numbering": 1,
+        "38_permanent_tooth_numbering": 1,
+
+        "41_permanent_tooth_numbering": 1,
+        "42_permanent_tooth_numbering": 1,
+        "43_permanent_tooth_numbering": 1,
+        "44_permanent_tooth_numbering": 1,
+        "45_permanent_tooth_numbering": 1,
+        "46_permanent_tooth_numbering": 1,
+        "47_permanent_tooth_numbering": 1,
+        "48_permanent_tooth_numbering": 1,
+    }
+    var presetColors = {
+        "soft_tissue": '#66ffb8',
+        "maxilla_polynomial": '#9d00ff',
+        "mandibula_polynomial": '#e354ff',
+
+        "caries": '#ff4a4a',
+        "pontic": '#7d1169',
+        "filling": '#ff00d0',
+        "jaw_lesion_(radiolucent)": '#c99da5',
+        "jaw_lesion_(radiopaque)": '#754d54',
+        "periapical_lesion": '#452127',
+        "residual_root": '#ff002b',
+        "root_canal_filling": '#660213',
+
+        "mesiodens_dental_problems": '#a2ff00',
+        "supernumerary_tooth_dental_problems": '#00fff7',
+
+        "11_permanent_tooth_numbering": '#ffcc85',
+        "12_permanent_tooth_numbering": '#e6ad5c',
+        "13_permanent_tooth_numbering": '#ebaa4d',
+        "14_permanent_tooth_numbering": '#d18f32',
+        "15_permanent_tooth_numbering": '#d68c22',
+        "16_permanent_tooth_numbering": '#d98918',
+        "17_permanent_tooth_numbering": '#e0880b',
+        "18_permanent_tooth_numbering": '#f59002',
+
+        "21_permanent_tooth_numbering": '#fab796',
+        "22_permanent_tooth_numbering": '#f5a57d',
+        "23_permanent_tooth_numbering": '#f29566',
+        "24_permanent_tooth_numbering": '#f08956',
+        "25_permanent_tooth_numbering": '#ed783e',
+        "26_permanent_tooth_numbering": '#e66d30',
+        "27_permanent_tooth_numbering": '#e85e1a',
+        "28_permanent_tooth_numbering": '#d94f0b',
+
+        "31_permanent_tooth_numbering": '#93fa99',
+        "32_permanent_tooth_numbering": '#84fa8a',
+        "33_permanent_tooth_numbering": '#72f778',
+        "34_permanent_tooth_numbering": '#61f268',
+        "35_permanent_tooth_numbering": '#4ff057',
+        "36_permanent_tooth_numbering": '#33e83c',
+        "37_permanent_tooth_numbering": '#19e623',
+        "38_permanent_tooth_numbering": '#00ff0d',
+
+        "41_permanent_tooth_numbering": "#98c2f5",
+        "42_permanent_tooth_numbering": "#86b9f7",
+        "43_permanent_tooth_numbering": "#72acf2",
+        "44_permanent_tooth_numbering": "#5c9eed",
+        "45_permanent_tooth_numbering": "#4992eb",
+        "46_permanent_tooth_numbering": "#3b8aeb",
+        "47_permanent_tooth_numbering": "#2880eb",
+        "48_permanent_tooth_numbering": "#1373e8",
+    }
+    var tagGroups = {
+        "soft_tissue": 'anatomyMenu',
+        "maxilla_polynomial": 'anatomyMenu',
+        "mandibula_polynomial": 'anatomyMenu',
+
+        "caries": 'illnessesMenu',
+        "pontic": 'illnessesMenu',
+        "filling": 'illnessesMenu',
+        "jaw_lesion_(radiolucent)": 'illnessesMenu',
+        "jaw_lesion_(radiopaque)": 'illnessesMenu',
+        "periapical_lesion": 'illnessesMenu',
+        "residual_root": 'illnessesMenu',
+        "root_canal_filling": 'illnessesMenu',
+
+        "mesiodens_dental_problems": 'illnessesMenu',
+        "supernumerary_tooth_dental_problems": 'illnessesMenu',
+
+        "11_permanent_tooth_numbering": 'teethMenu',
+        "12_permanent_tooth_numbering": 'teethMenu',
+        "13_permanent_tooth_numbering": 'teethMenu',
+        "14_permanent_tooth_numbering": 'teethMenu',
+        "15_permanent_tooth_numbering": 'teethMenu',
+        "16_permanent_tooth_numbering": 'teethMenu',
+        "17_permanent_tooth_numbering": 'teethMenu',
+        "18_permanent_tooth_numbering": 'teethMenu',
+        "21_permanent_tooth_numbering": 'teethMenu',
+        "22_permanent_tooth_numbering": 'teethMenu',
+        "23_permanent_tooth_numbering": 'teethMenu',
+        "24_permanent_tooth_numbering": 'teethMenu',
+        "25_permanent_tooth_numbering": 'teethMenu',
+        "26_permanent_tooth_numbering": 'teethMenu',
+        "27_permanent_tooth_numbering": 'teethMenu',
+        "28_permanent_tooth_numbering": 'teethMenu',
+        "31_permanent_tooth_numbering": 'teethMenu',
+        "32_permanent_tooth_numbering": 'teethMenu',
+        "33_permanent_tooth_numbering": 'teethMenu',
+        "34_permanent_tooth_numbering": 'teethMenu',
+        "35_permanent_tooth_numbering": 'teethMenu',
+        "36_permanent_tooth_numbering": 'teethMenu',
+        "37_permanent_tooth_numbering": 'teethMenu',
+        "38_permanent_tooth_numbering": 'teethMenu',
+        "41_permanent_tooth_numbering": "teethMenu",
+        "42_permanent_tooth_numbering": "teethMenu",
+        "43_permanent_tooth_numbering": "teethMenu",
+        "44_permanent_tooth_numbering": "teethMenu",
+        "45_permanent_tooth_numbering": "teethMenu",
+        "46_permanent_tooth_numbering": "teethMenu",
+        "47_permanent_tooth_numbering": "teethMenu",
+        "48_permanent_tooth_numbering": "teethMenu",
+    }
+
+    CameraControls.install({THREE: THREE});
+
+    var camera, scene, renderer;
+    var clock, cameraControls;
+    var spotLight;
+    var directionalLight;
+    var meshes = [];
+
+    // Configure decoder and create loader.
+    var dracoLoader = new THREE.DRACOLoader();
+
+    init();
+    animate();
+    render();
+
+    function init() {
+        //camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 2000 );
+        camera = new THREE.OrthographicCamera(
+            window.innerWidth / -2, window.innerWidth / 2,
+            window.innerHeight / 2, window.innerHeight / -2, 1, 2000);
+        camera.position.set(5, 1, 5);
+        camera.up = new THREE.Vector3(1, 0, 0);
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        //scene.fog = new THREE.Fog( 0x777777, 500, 1600 );
+
+        // Lights
+        var light = new THREE.HemisphereLight(0x443333, 0x111122);
+        scene.add(light);
+
+        directionalLight = new THREE.DirectionalLight(0xffffff, .5);
+        directionalLight.position = camera.position;
+        scene.add(directionalLight);
+
+        // renderer
+        renderer = new THREE.WebGLRenderer({antialias: true});
+        // renderer.sortObjects = false;
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth * .9, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        document.getElementById('renderer').appendChild(renderer.domElement);
+
+        window.addEventListener('resize', onWindowResize, false);
+
+        clock = new THREE.Clock();
+        cameraControls = new CameraControls(camera, renderer.domElement);
+        cameraControls.dampingFactor = 1;
+        cameraControls.draggingDampingFactor = 1;
+        cameraControls.mouseButtons.middle = CameraControls.ACTION.NONE;
+
+        camera.lookAt(0, 0, 0);
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        render();
+    }
+
+    function animate() {
+        const delta = clock.getDelta();
+        const hasControlsUpdated = cameraControls.update(delta);
+
+        requestAnimationFrame(animate);
+
+        // you can skip this condition to render though
+        if (hasControlsUpdated) {
+            render();
+        }
+    }
+
+    function render() {
+        directionalLight.position.copy(camera.position);
+        renderer.render(scene, camera);
+    }
+
+    $(window).on("load", function () {
+        var fileInput = document.getElementById('fileInput');
+
+        fileInput.onclick = function () {
+            this.value = '';
+        }
+
+        fileInput.addEventListener('change', function (_) {
+            var geometries = [];
+            var onEveryFileDecoded = function (geometries) {
+                //xyz eksenleri bunlar kapatılabilir
+                // const axesHelper = new THREE.AxesHelper( 100000 );
+                // scene.add( axesHelper );
+
+                // overall bounding box of the loaded geometries
+                var boundingX;
+                var boundingY;
+                var boundingZ;
+
+                var biggestGeometry;
+                var biggestDiagonalSize = 0;
+                for (var i = 0; i < geometries.length; i++) {
+                    meshes.push(geometries[i]["geometry"]);
+                    var bufferGeometry = geometries[i]["buffer"];
+                    bufferGeometry.computeBoundingBox();
+                    var sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+                    var sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+                    var sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+                    var diagonalSize = Math.sqrt(sizeX * sizeX + sizeY * sizeY + sizeZ * sizeZ);
+
+                    if (diagonalSize > biggestDiagonalSize) {
+                        biggestDiagonalSize = diagonalSize;
+                        biggestGeometry = geometries[i]["geometry"];
+                    }
+                }
+
+                // UPDATE CAMERA FAR POINT
+                var geometry = biggestGeometry.geometry;
+                geometry.computeBoundingBox();
+                var sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+                var sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+                var sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+
+                var midX = (bufferGeometry.boundingBox.min.x + bufferGeometry.boundingBox.max.x) / 2;
+                var midY = (bufferGeometry.boundingBox.min.y + bufferGeometry.boundingBox.max.y) / 2;
+                var midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
+                var start = new THREE.Vector3(bufferGeometry.boundingBox.min.x, bufferGeometry.boundingBox.min.y, bufferGeometry.boundingBox.min.z);
+
+                cameraControls.setOrbitPoint(0, 0, 0)
+                cameraControls.setPosition(0, -midY * 3, 0);
+                cameraControls.setTarget(0, 0, 0);
+                cameraControls.update();
+                cameraControls.zoom(1, false);
+
+                for (var i = 0; i < geometries.length; i++) {
+                    geometries[i]["geometry"].position.x -= midX;
+                    geometries[i]["geometry"].position.y -= midY;
+                    geometries[i]["geometry"].position.z -= midZ;
+                }
+
+                // UPDATE CAMERA FAR POINT
+                if (sizeX > sizeY && sizeX > sizeZ && sizeX > 2000)
+                    camera.far = sizeX * 2;
+                if (sizeY > sizeX && sizeY > sizeZ && sizeY > 2000)
+                    camera.far = sizeY * 2;
+                if (sizeZ > sizeY && sizeZ > sizeX && sizeZ > 2000)
+                    camera.far = sizeZ * 2;
+                camera.updateProjectionMatrix();
+                render();
+            }
+
+            var files = fileInput.files;
+            var readers = [];
+
+            for (var i = 0; i < files.length; i++) {
+                readers.push(new FileReader());
+                readers[i].fileName = files[i].name;
+                readers[i].onload = function (e) {
+                    var taskConfig = {
+                        attributeIDs: dracoLoader.defaultAttributeIDs,
+                        attributeTypes: dracoLoader.defaultAttributeTypes,
+                        useUniqueIDs: !!null
+                    };
+
+                    dracoLoader.decodeGeometry(this.result, taskConfig).then((bufferGeometry) => {
+                        if (dracoLoader.decode_time !== undefined) {
+                            fileDisplayArea.innerText = 'Decode time = ' + dracoLoader.decode_time + '\n' +
+                                'Import time = ' + dracoLoader.import_time;
+                        }
+
+                        bufferGeometry.computeVertexNormals();
+                        var material = new THREE.MeshStandardMaterial({vertexColors: THREE.VertexColors});
+                        material.side = THREE.DoubleSide;
+                        material.transparent = true;
+
+                        var geometry = new THREE.Mesh(bufferGeometry, material);
+                        geometry.castShadow = true;
+                        geometry.receiveShadow = true;
+
+                        var name = this.fileName.toLowerCase();
+                        name = name.replace(/\s/g, '_').replace('.drc', '');
+                        if (renderOrders[name] !== undefined) {
+                            var renderOrder = renderOrders[name];
+                            geometry.renderOrder = renderOrder;
+                        }
+
+                        if (presetColors[name] !== undefined) {
+                            var color = presetColors[name];
+                            geometry.material.color.set(color);
+                        }
+
+                        geometries.push({
+                            "geometry": geometry,
+                            "buffer": bufferGeometry,
+                        });
+                        geometry.name = this.fileName;
+                        scene.add(geometry);
+                        createButton(this.fileName);
+
+                        if (geometries.length == files.length) {
+                            console.log(`Every file loaded current file: ${this.fileName}`);
+                            onEveryFileDecoded(geometries);
+                        }
+                        render();
+                    });
+                }
+                readers[i].onerror = (error) => {
+                    console.log(error);
+                }
+                readers[i].readAsArrayBuffer(files[i]);
+            }
+        });
+
+        var wireframeToggle = document.getElementById('wireframeToggle');
+        wireframeToggle.onclick = function (e) {
+            toggleWireframeMode(wireframeToggle.checked);
+        };
+
+        render();
+    });
+
+    // window.onload = function () {
+    //
+    // }
+
+    function createButton(name) {
+        var tag = name.toLowerCase().replace(/\s/g, '_').replace('.drc', '');
+        var menus = {
+            'context': document.getElementById('contextMenu'),
+            'teethMenu': document.getElementById('teethMenu'),
+            'illnessesMenu': document.getElementById('illnessesMenu'),
+            'anatomyMenu': document.getElementById('anatomyMenu'),
+        }
+        var div = document.createElement('div');
+
+        var opacityInput = document.createElement('input');
+        opacityInput.type = "range";
+        opacityInput.min = "1";
+        opacityInput.max = "100";
+        opacityInput.value = "100";
+        opacityInput.oninput = function (e) {
+            var mesh = scene.getObjectByName(name);
+            mesh.material.opacity = opacityInput.value / 100;
+            render();
+        };
+
+        var input = document.createElement('input');
+        input.type = 'color';
+        input.value = presetColors[tag] === undefined ? '#333333' : presetColors[tag];
+        input.onchange = function (e) {
+            var mesh = scene.getObjectByName(name);
+            mesh.material.color.set(input.value);
+            render();
+        };
+
+        var checkbox = document.createElement('input');
+        checkbox.id = `${name}`;
+        checkbox.type = "checkbox";
+        checkbox.checked = true;
+        checkbox.onclick = function (e) {
+            var mesh = scene.getObjectByName(name);
+            mesh.visible = !mesh.visible;
+            render();
+        };
+
+        var characterThreshold = 20;
+        var label = document.createElement('label');
+        label.for = `${name}`;
+        if (name.length < characterThreshold)
+            label.innerHTML = `${name}`;
+        else
+            label.innerHTML = `${name.substring(0, characterThreshold)}`;
+
+        div.appendChild(checkbox);
+        div.appendChild(input);
+        div.appendChild(label);
+        div.appendChild(opacityInput);
+
+        if (tagGroups[tag] !== undefined && menus[tagGroups[tag]] !== undefined) {
+            menus[tagGroups[tag]].appendChild(div);
+        } else {
+            menus['context'].appendChild(div);
+        }
+    }
+
+    function toggleWireframeMode(value) {
+        for (var i = 0; i < meshes.length; i++) {
+            meshes[i].material.wireframe = value;
+        }
+        render();
+    }
+
+</script>
+{% endblock %}
+{% block customCss %}
+<style>
+    body {
+        font-family: Monospace;
+        background-color: #000;
+        color: #fff;
+        margin: 0px;
+        overflow: hidden;
+    }
+
+    #loading {
+        display: none !important;
+    }
+
+    #info {
+        color: #fff;
+        position: absolute;
+        top: 10px;
+        width: 100%;
+        text-align: center;
+        z-index: 100;
+        display: block;
+    }
+
+    #info a,
+    .button {
+        color: #f00;
+        font-weight: bold;
+        text-decoration: underline;
+        cursor: pointer
+    }
+
+    #fileInput {
+        margin-left: 1%;
+    }
+
+    #topbar {
+        display: flex;
+        align-items: center;
+    }
+
+    #container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        background: #051015;
+    }
+
+    #contextMenu {
+        display: inline-block;
+        width: 15%;
+        height: 820px;
+        overflow-y: scroll;
+        position: relative;
+    }
+
+    #renderer {
+        display: inline-block;
+        *display: inline;
+        width: 85%;
+    }
+</style>
+{% endblock %}
+{% block headerButtons %}
+<div class="tq-but-col mr-3" style="z-index:1;width: 25%;">
+    <div class="row align-items-center">
+        <div class="col-6">
+            <ul class="ul-fix-3" style="float: right; width: 280px;">
+                <!--                <li><a href="#" class="blue-tooltip" data-toggle="tooltip" data-placement="left"-->
+                <!--                       title="" data-original-title="" style="display: none;"><i class="icon59"></i></a></li>-->
+                <button style="background-color: rgb(62,139,196); margin-left: 12px; display:none"
+                        onclick="img_count()">
+                    <li style="color: white;"><span class="ul-fix-input">1</span><span class="ul-fix-of">/3</span></li>
+                </button>
+                <!--                <li><a href="#" class="blue-tooltip" data-toggle="tooltip" data-placement="right"-->
+                <!--                       title="" data-original-title="" style="display: none;"><i class="icon60"></i></a></li>-->
+            </ul>
+            <div class="s-click-img-dropdown tq-img-dropdown">
+                <div class="background-six border-one p-xl-3 p-2" style="height: 361px">
+                    <div class="tq-title mb-2">Images</div>
+                    <input type="text" class="sq-search background-six"
+                           placeholder="Search" id="search-img"/>
+                    <div class="tq-x-colors mt-4" id="img-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6" style="display: none">
+            <div class="tq-butx border-one background-five s-click"></div>
+            <div class="s-click-dropdown tq-x-dropdown">
+                <div class="background-six border-one p-xl-3 p-2" style="height: 523px">
+                    <div class="tq-title mb-2">Labels</div>
+                    <input type="text" class="sq-search background-six"
+                           placeholder="Select Type" id="search-inp"/>
+                    <div style="height: 414px !important;" class="tq-x-colors mt-4" id="label-list2">
+                    </div>
+                    <!--                    <div style="height: 30px;" class="mt-1">-->
+                    <!--                        <label>Favory Labels</label>-->
+                    <!--                    </div>-->
+                    <!--                    <div style="padding-right:8px; height: 138px;" class="mt-1" id="label-list2-fav">-->
+                    <!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block headerLeftButtons %}
+<div class="col-xl-auto pr-xl-0 ml-4">
+    {% if request.GET.split_mode %}
+
+    <a href="{% url 'searchProject' %}?split_mode=1&sl={% for sl in request.GET.sl %}{{sl}}{% endfor %}"
+       class="sbtn sbtn-block sbtn-border-blue background-seven sbtn-large icon66">Back</a>
+
+    {% else %}
+
+    {% if different_user %}
+    <a href="/listproject/{{ different_user }}"
+       class="sbtn sbtn-block sbtn-border-blue background-seven sbtn-large icon66">Back</a>
+    {% else %}
+    <a href="/" class="sbtn sbtn-block sbtn-border-blue background-seven sbtn-large icon66">Back</a>
+    {% endif %}
+
+    {% endif %}
+
+
+</div>
+{% endblock %}

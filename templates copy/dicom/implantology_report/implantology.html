@@ -1,0 +1,668 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/diagnosis.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <title>{{specs.title}} - Diagnosis</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="{% static 'css/exstra.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/exstra2.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/dicom.css' %}"/>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/ckeditor2.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/toastify.css' %}"/>
+    <style>
+        .process {
+            color: #125cc7;
+            transform: rotate(0deg);
+            animation: spin 1s infinite linear;
+        }
+        .completed-ok {
+            color: #1cf171;
+        }
+        .completed-no {
+            color: #ff2727;
+        }
+        .treatment-section {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            border-radius: 10px;
+        }
+        .treatment-section.chapter-1,
+        .treatment-section.chapter-2 {
+            transition: top ease-in-out 500ms;
+        }
+        .treatment-section.chapter-1 {
+            top: -200%;
+        }
+        .treatment-section.chapter-1 .half {
+            background-color: #1A264E;
+        }
+        .treatment-section.chapter-1 .half:not(:first-child) {
+            background-color: white;
+        }
+        .treatment-section.chapter-1.active {
+            top: 0;
+        }
+
+        .treatment-section.chapter-2 {
+            display: none !important;
+        }
+
+        .treatment-section.chapter-2.active {
+            display: flex!important;
+        }
+        #exam_questions {
+            padding: 27px;
+        }
+        .custom-hr {
+            width: 100%;
+            height: 1px;
+            background-color: #3B4978;
+            margin: 20px 0;
+        }
+    </style>
+{% endblock %}
+{% block headerButtons %}
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<div id="page-loading" class="position-fixed align-items-center justify-content-center" style="inset: 0; z-index: 9999999999;">
+    <i class="fa-solid fa-spinner fs-1"></i>
+</div>
+<div class="map-hover-popup__root"></div>
+<div id="modal-dicom-analysis-types" class="modal-container">
+    <div class="modal-box px-4 d-flex flex-column text-light" style="min-width: 350px; height: auto; max-height: 100vh; max-width: 100vw; background-color: #1A264E;">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <p class="my-2" style="font-size: 22px;">{% trans 'Choose Analysis Type' %}</p>
+        <select name="radiography_types" id="radiography_types">
+            <option value="" selected>{% trans 'Select Analysis Type...' %}</option>
+            {% for type_id, values in analysis_types_section.items %}
+                <option 
+                    id="analysis_type_id_{{type_id}}" 
+                    value="{{values.slug}}" 
+                    {% if type_id == 2 or type_id == 3 or type_id == 5 %} style="background-color: grey; color:white;" disabled {% endif %}> 
+                    {%if 'STL Report' in values.name %}{{values.name}} (BETA){%else%}{{values.name}}{%endif%}
+                </option>
+            {% endfor %}
+        </select>
+        <button id="start_analysis" class="save-treatment custom btn-blue mb-2">{% trans 'Start Analysis' %}</button>
+        <button class="save-treatment custom">{% trans 'Cancel' %}</button>
+    </div>
+</div>
+<main class="d-flex">
+    <div class="container-fluid">
+        <div class="adjustable-content py-1" style="overflow: auto;">
+            <div class="row h-100 g-0">
+                <div class="d-flex align-items-center pt-3">
+                    <div class="d-flex main-chart mt-2 me-0">
+                        <div class="chart-element mb-3">
+                            <h1>Order Implantology</h1>
+                            <h3>Please select the tooth pitch from the tooth chart below.</h3>
+                        </div>
+                        <div class="chart-element">
+                            <img src="{{radiography_section.path}}" alt="Main Image" style="width: 100%;">
+                        </div>
+                        <div class="tooth-chart-illnesses-by-tooth pb-3 mt-3" style="position: relative; opacity: 1;">
+                            <div class="position-relative overflow-hidden chart-element">
+                                <div class="teeth adult">
+                                    {% for tooth_number, value in tooth_chart_section.items %}
+                                        <div class="tooth" data-tooth="{{tooth_number}}" data-index="{{value.index}}">
+                                            <div class="item">
+                                                <img src="{{value.path}}" class="imgToChange" alt="" data-tooth-type="{{value.name}}">
+                                                <span class="tooth-cursor" onclick="toggleToothDiv({{value.index}})">{{tooth_number}}</span>
+                                                <div class="tooth-menu" data-tooth-menu="{{tooth_number}}">
+                                                    <div data-icon-type="None" onclick="changeToothType({{tooth_number}} ,`{% static 'img/Vector.png' %}`,this, 'auto-height')">
+                                                        <img src="{% static 'img/Vector.png' %}" class="auto-height" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="order_report" class="custom btn-blue mt-3">Order Report</button>
+                    </div>
+                    <div class="d-flex right-chart row h-100 mt-2 me-5 mb-0">
+                        <div class="h-100 teeth-and-treatment-section position-relative active" style="transition: width ease-in-out 500ms;">
+                            <div class="tooth-chart-illnesses-by-tooth px-2 py-3" style="position: relative; opacity: 1;">
+                                <h3 class="heading d-flex">
+                                    <span>{% trans 'Tooth Chart' %}</span>
+                                    <div class="ms-auto me-2 doctor-comment">
+                                        {% if not doctor_note %}
+                                            <i class="fa-regular fa-comment" style="cursor: pointer"></i>
+                                        {% else %}
+                                        <!-- NOTTTTTTT : eğerki içinde yorum varsa aşağıdaki ikon gözüksün yorum yoksa yukarıdaki -->
+                                            <i class="fa-solid fa-comment" style="cursor: pointer"></i>
+                                        {% endif %}
+                                    </div>
+                                    <i class="fa-solid fa-eye-slash see-all-teeth-detail" data-eye="open"></i>
+                                </h3>
+                                <div class="position-relative overflow-hidden py-2">
+                                    <div id="doctor-comment-area" class="position-absolute bg-light d-flex flex-column p-2" style="width: 100%; height: 100%; overflow-y: auto; z-index: 99; top: -100%">
+                                        <p class="text-dark mb-1">{% trans 'Doctor Comment' %}</p>
+                                        <textarea name="" id="doctorNoteArea" rows="4" class="form-control" style="overflow-y: auto!important; font-size: 12px!important; flex:1;">{% if doctor_note %}{{doctor_note}}{%else%} {%endif%}</textarea>
+                                        <div class="py-2 d-flex justify-content-end" style="gap: 7px;">
+                                            <button id="doctor-comment-save-btn" class="custom transparent blue-hover" style="color: #111;">
+                                                <i class="fa-solid fa-floppy-disk"></i>
+                                                {% trans 'Save' %}
+                                            </button>
+                                            <button id="doctor-comment-cancel-btn" class="custom transparent blue-hover" style="color: #111;">
+                                                <i class="fa-solid fa-xmark"></i>
+                                                {% trans 'Close' %}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="teeth child-1 {% if is_kid_status %}{% else %}d-none{% endif %}">
+                                        {% for tooth_number, value in tooth_chart_section.section_upper.items %}
+                                            <div class="tooth" data-tooth="{{tooth_number}}">
+                                                <div class="item">
+                                                    {% if value.current_icon == None %}
+                                                        <img src="" class="imgToChange" alt="">
+                                                    {% else %}
+                                                        <img src="{{value.current_icon.path}}" class="imgToChange" alt="" data-tooth-type="{{value.current_icon.name}}">
+                                                    {% endif %}
+                                                    <span class="tooth-cursor" onclick="toggleToothDiv({{tooth_number}})">{{tooth_number}}</span>
+                                                    <div class="pencil" onclick="toggleToothMenu({{tooth_number}})">
+                                                        <i style="font-size: 7px;" class="fa-solid fa-pencil tooth-edit"></i>
+                                                    </div>
+                                                    <div class="tooth-menu" data-tooth-menu="{{tooth_number}}">
+                                                        {% for other_icon in value.other_icons %}
+                                                            <div data-icon-type="{{other_icon.name}}" onclick="changeToothType({{tooth_number}} ,'{{other_icon.path}}',this, '', '{{other_icon.name}}')">
+                                                                <img src="{{other_icon.path}}" class="" alt="">
+                                                            </div>
+                                                        {% endfor %}
+                                                        <div data-icon-type="None" onclick="changeToothType({{tooth_number}} , `{% static 'img/Vector.png' %}`,this, 'auto-height')">
+                                                            <img src="{% static 'img/Vector.png' %}" class="auto-height" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+        
+                                    </div>
+                                    <div class="teeth adult">
+                                        {% for tooth_number, value in tooth_chart_section.section_adult.items %}
+                                            <div class="tooth" data-tooth="{{tooth_number}}">
+                                                <div class="item">
+                                                    {% if value.current_icon == None %}
+                                                        <img src="{% static 'img/Vector.png' %}" class="imgToChange auto-height" alt="">
+                                                    {% else %}
+                                                        <img src="{{value.current_icon.path}}" class="imgToChange" alt="" data-tooth-type="{{value.current_icon.name}}">
+                                                    {% endif %}
+                                                    <span class="tooth-cursor" onclick="toggleToothDiv({{tooth_number}})">{{tooth_number}}</span>
+                                                    <div class="pencil" onclick="toggleToothMenu({{tooth_number}})">
+                                                        <i style="font-size: 7px;" class="fa-solid fa-pencil tooth-edit"></i>
+                                                    </div>
+                                                    <div class="tooth-menu" data-tooth-menu="{{tooth_number}}">
+                                                        {% for other_icon in value.other_icons %}
+                                                            <div class="d-flex align-items-center" data-icon-type="{{other_icon.name}}" onclick="changeToothType( '{{tooth_number}}' ,'{{other_icon.path}}', this, '', '{{other_icon.name}}' )">
+                                                                <img src="{{other_icon.path}}" class="" alt="">
+                                                            </div>
+                                                        {% endfor %}
+                                                        <div data-icon-type="None" onclick="changeToothType({{tooth_number}} ,`{% static 'img/Vector.png' %}`,this, 'auto-height')">
+                                                            <img src="{% static 'img/Vector.png' %}" class="auto-height" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+        
+                                    </div>
+                                    <div class="teeth child-2 {% if is_kid_status %}{% else %}d-none{% endif %}">
+                                        {% for tooth_number, value in tooth_chart_section.section_lower.items %}
+                                            <div class="tooth" data-tooth="{{tooth_number}}">
+                                                <div class="item">
+                                                    {% if value.current_icon == None %}
+                                                        <img src="" class="imgToChange" alt="">
+                                                    {% else %}
+                                                        <img src="{{value.current_icon.path}}" class="imgToChange" alt=""  data-tooth-type="{{value.current_icon.name}}">
+                                                    {% endif %}
+                                                    <span class="tooth-cursor" onclick="toggleToothDiv({{tooth_number}})">{{tooth_number}}</span>
+                                                    <div class="pencil" onclick="toggleToothMenu({{tooth_number}})">
+                                                        <i style="font-size: 7px;" class="fa-solid fa-pencil tooth-edit"></i>
+                                                    </div>
+                                                    <div class="tooth-menu" data-tooth-menu="{{tooth_number}}">
+                                                        {% for other_icon in value.other_icons %}
+                                                            <div data-icon-type="{{other_icon.name}}" onclick="changeToothType({{tooth_number}} ,'{{other_icon.path}}',this, '', '{{other_icon.name}}')">
+                                                                <img src="{{other_icon.path}}" class="img-fluid" alt="">
+                                                            </div>
+                                                        {% endfor %}
+                                                        <div data-icon-type="None" onclick="changeToothType({{tooth_number}} ,`{% static 'img/Vector.png' %}`,this, 'auto-height')">
+                                                            <img src="{% static 'img/Vector.png' %}" class="auto-height" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                    <div class="tooth-details">
+                                        {% for tooth_number, tooth_detail in tooth_cards_section.items %}
+                                            <div class="tooth-detail" data-tooth-id="{{tooth_number}}" style="display: block">
+                                                <div class="d-flex">
+                                                    <div class="left-content">
+                                                        <div class="d-flex">
+                                                            <div class="tooth-img">
+                                                                <img width="80" src="{% if 'static/img/teeth' in tooth_detail.path %} {{tooth_detail.path}} {% else %} https://aiv2.craniocatch.com{{tooth_detail.path}}{% endif %}" class="" alt="">
+                                                            </div>
+                                                            <div class="tooth-text">
+                                                                <p  class="my-0">{% trans 'Tooth' %} {{tooth_number}}</p>
+                                                                <div class="diseases">
+                                                                    {% for illness in tooth_detail.illness %}
+                                                                        {% if '/en/' in request.path %}
+                                                                            <span class="delete-illness-parent">{{illness.name}} <span data-tooth-id="{{tooth_detail.id}}" data-open-modal-pk="delete-illness-from-tooth" data-delete-illness="{{illness.name}}" data-tooth-number-for-illness-delete="{{tooth_number}}" data-illness-slug="{{illness.slug}}" class="tooth-percent {% if illness.probability < 81 %}low{% elif illness.probability < 91 %}normal{% else %}high{% endif %}">{% if illness.probability == 101 %}(-){% else %} (%{{illness.probability}}) {% endif %}</span></span>
+                                                                        {% elif '/tr/' in request.path %}
+                                                                            <span class="delete-illness-parent">{{illness.tr_name}} <span data-tooth-id="{{tooth_detail.id}}" data-open-modal-pk="delete-illness-from-tooth" data-delete-illness="{{illness.name}}" data-tooth-number-for-illness-delete="{{tooth_number}}" data-illness-slug="{{illness.slug}}" class="tooth-percent {% if illness.probability < 81 %}low{% elif illness.probability < 91 %}normal{% else %}high{% endif %}">{% if illness.probability == 101 %}(-){% else %} (%{{illness.probability}}) {% endif %}</span></span>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+            
+                                                                </div>
+                                                                <hr>
+                                                                <div class="treatments treatmentForTooth">
+                                                                    {% for treatment_method in tooth_detail.treatment_methods %}
+                                                                        {% if '/tr/' in request.path %}
+                                                                        <span data-delete-treatment-id="treatmentDeleteForTooth" style="cursor:pointer" data-open-modal-pk="delete-treatment-from-tooth" data-tooth-number-for-treatment-delete="{{tooth_number}}" data-tooth-id="{{tooth_detail.id}}" data-method-slug="{{ treatment_method.slug }}">{{ treatment_method.tr_name }} {% if not forloop.last %},{% endif %}</span>
+                                                                        {% elif '/en/' in request.path %}
+                                                                        <span data-delete-treatment-id="treatmentDeleteForTooth" style="cursor:pointer" data-open-modal-pk="delete-treatment-from-tooth" data-tooth-number-for-treatment-delete="{{tooth_number}}" data-tooth-id="{{tooth_detail.id}}" data-method-slug="{{ treatment_method.slug }}">{{ treatment_method.en_name }} {% if not forloop.last %},{% endif %}</span>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                </div>
+            
+                                                            </div>
+                                                        </div>
+                                                        <div class="tw-btn">
+                                                            <button id="add-diagnosis-btn" class="add-diagnosis custom transparent blue-hover text-light" data-open-modal-pk="modal-add-diagnosis" onclick="setDiagnosisId({{tooth_number}})">
+                                                                <i class="fa-solid fa-plus" style="pointer-events: none"></i>
+                                                                <span style="pointer-events: none">{% trans 'Add Diagnosis' %}</span>
+                                                            </button>
+                                                            <button class="custom transparent blue-hover text-light"  data-open-modal-pk="modal-add-treatment" onclick="setTreatmentId({{tooth_number}})">
+                                                                <i style="pointer-events: none" class="fa-solid fa-plus"></i>
+                                                                <span style="pointer-events: none">{% trans 'Add Treatments' %}</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="right-content">
+                                                        <div>
+                                                            {% if tooth_detail.approved == "1" %}
+                                                            <img style="cursor: pointer;" src="{% static 'img/like-active.png' %}" class="img-fluid" alt="like butonu" data-id="{{tooth_number}}" data-icon-status="1" data-approve-status="{{tooth_detail.approved}}" onclick="approve_status_change(event)">
+                                                            <img style="cursor: pointer;" src="{% static 'img/dislike.png' %}" class="img-fluid" alt="dislike butonu" data-id="{{tooth_number}}" data-icon-status="2" data-approve-status="{{tooth_detail.approved}}" onclick="approve_status_change(event)">
+                                                            {% elif tooth_detail.approved == "2" %}
+                                                            <img style="cursor: pointer;" src="{% static 'img/like.png' %}" class="img-fluid" alt="like butonu" data-id="{{tooth_number}}" data-icon-status="1" data-approve-status="{{tooth_detail.approved}}" onclick="approve_status_change(event)">
+                                                            <img style="cursor: pointer;" src="{% static 'img/like-passive.png' %}" class="img-fluid" alt="dislike butonu" data-id="{{tooth_number}}" data-icon-status="2" data-approve-status="{{tooth_detail.approved}}" onclick="approve_status_change(event)">
+                                                            {% else %}
+                                                            <img style="cursor: pointer;" src="{% static 'img/like.png' %}" class="img-fluid" alt="like butonu" data-id="{{tooth_number}}" data-icon-status="1" data-approve-status="{{tooth_detail.approved}}" onclick="approve_status_change(event)">
+                                                            <img style="cursor: pointer;" src="{% static 'img/dislike.png' %}" class="img-fluid" alt="dislike butonu" data-id="{{tooth_number}}" data-icon-status="2" data-approve-status="{{tooth_detail.approved}}" onclick="approve_status_change(event)">
+                                                            {% endif %}
+                                                        </div>
+                                                        <i class="fa-regular fa-comments comment-icon" data-id="{{tooth_number}}"
+                                                           onclick="toggleCommentArea({{tooth_number}})"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="comment-area" data-id="{{tooth_number}}">
+                                                        <textarea name="" id="tooth_note_{{tooth_number}}" rows="3"
+                                                                  placeholder="{% trans 'You can enter a  description here...'%}">{% if tooth_detail.note == None %}{% else %}{{tooth_detail.note}}{% endif %}</textarea>
+                                                    <button onclick="save_tooth_note({{tooth_number}})" class="custom transparent blue-hover text-light">
+                                                        <i class="fa-solid fa-floppy-disk"></i>
+                                                        {% trans 'Save' %}
+                                                    </button>
+                                                    <button class="custom transparent blue-hover text-light"
+                                                            onclick="toggleCommentArea({{tooth_number}})">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                        {% trans 'Close' %}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% if not grouped_treatments %}
+                                    <div id="first-planning" class="treatment-section d-flex flex-column chapter-1 active">
+                                        <div class="half d-flex align-items-center justify-content-center py-4">
+                                            <img src="{% static 'img/panel-circle.png' %}" class="img-fluid" alt="">
+                                        </div>
+                                        <div id="emptyView" class="half d-flex flex-column align-items-center justify-content-center" style="gap: 10px; flex: 1;">
+                                            <p class="m-0 text-dark font-weight-bold fs-5">{% trans 'Treatment Planning' %}</p>
+                                            <p class="m-0 text-dark fs-6 text-muted text-center">{% trans 'Here you can add and view treatment planning' %}</p>
+                                            <button class="custom text-light" style="background: linear-gradient(90deg, #0E2D58 0%, #203F6C 100%);" data-pass-two-chapter>{% trans 'Start Planning' %}</button>
+                                        </div>
+                                        <div id="planning-item-container" class="px-3 w-100 bg-light" style="overflow-y: auto;">
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div id="other-plannings" class="treatment-section d-flex flex-column chapter-1">
+                                        <div class="half d-flex flex-column align-items-center justify-content-center py-4">
+                                            <img src="{% static 'img/panel-circle.png' %}" class="img-fluid" alt="">
+                                            <p class="m-0 font-weight-bold fs-5 text-light my-2">{% trans 'Treatment Planning' %}</p>
+                                            <p class="m-0 fs-6 text-muted text-center">{% trans 'Here you can add and view treatment planning' %}</p>
+                                        </div>
+                                        <div class="half d-flex flex-column align-items-center justify-content-center" style="gap: 10px; flex: 1;">
+                                            <div class="position-sticky d-flex justify-content-end w-100 top-0" style="background-color: white;">
+                                                <button class="custom text-light m-2" style="background: linear-gradient(90deg, #0E2D58 0%, #203F6C 100%);" data-pass-two-chapter>{% trans 'Start Planning' %}</button>
+                                            </div>
+        
+                                            <div id="planning-item-container" class="px-3 py-1 w-100" style="flex: 1; overflow-y: auto;">
+                                                {% if 'Today' in grouped_treatments %}
+                                                    <div class="planning-item">
+                                                        <p class="m-0 text-dark fs-6"><strong>Today</strong></p>
+                                                    </div>
+                                                    {% for item in grouped_treatments.Today %}
+                                                            <div class="planning-item">
+                                                                <div class="rounded p-3 text-dark my-3 d-flex planning-item-box" style="box-shadow: 0 0 30px rgba(0, 0, 0, .15);">
+                                                                    <span style="width: 12px; height: 12px; border-radius: 50%; background-color: lime;"></span>
+                                                                    <div class="mx-3">
+                                                                        <p data-treatment-id="{{ item.id }}" class="m-0 mb-1" data-pass-two-chapter=""><strong>Treatments Plan {{item.counter}} </strong></p>
+                                                                        <p class="m-0">{{ item.modified_date }}</p>
+                                                                    </div>
+                                                                    <span class="ms-auto d-flex align-items-end">
+                                                                        <i data-open-modal-pk="modal-delete-treatment"
+                                                                        data-modal-type="treatment-delete" class="fa-solid fa-trash fs-6" style="cursor: pointer;"></i>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% for date, items in grouped_treatments.items %}
+                                                    {% if date != 'Today' %}
+                                                        <div class="planning-item">
+                                                            <p class="m-0 text-dark fs-6"><strong>{{ date }}</strong></p>
+                                                        </div>
+                                                        {% for item in items %}
+                                                                <div class="planning-item">
+                                                                    <div class="rounded p-3 text-dark my-3 d-flex planning-item-box" style="box-shadow: 0 0 30px rgba(0, 0, 0, .15);">
+                                                                        <span style="width: 12px; height: 12px; border-radius: 50%; background-color: lightgray;"></span>
+                                                                        <div class="mx-3">
+                                                                            <p data-treatment-id="{{ item.id }}" class="m-0 mb-1" data-pass-two-chapter=""><strong>Treatments Plan {{ item.counter }}</strong></p>
+                                                                            <p class="m-0">{{ item.modified_date }}</p>
+                                                                        </div>
+                                                                        <span class="ms-auto d-flex align-items-end">
+                                                                            <i data-open-modal-pk="modal-delete-treatment"
+                                                                            data-modal-type="treatment-delete" class="fa-solid fa-trash fs-6" style="cursor: pointer;"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <div id="planning-items-list"></div>
+                                            </div>
+        
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="treatment-section bg-light chapter-2 p-3 d-flex flex-column">
+                                    <h3 class="text-dark fs-3">{% trans 'Treatment Planning' %}</h3>
+                                    <p class="text-muted">{% trans 'You can add or update treatment planning' %}</p>
+                                    <form id="treatment-planning">
+                                        <textarea name="ck-editor" id="editor"></textarea>
+                                        <div class="d-flex justify-content-end mt-2">
+                                            <button class="custom text-dark me-2" data-pass-one-chapter type="button">{% trans 'Cancel' %}</button>
+                                            <button type="submit" class="save-treatment-planning custom btn-blue" data-treatment-save>{% trans 'Save' %}</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block customJs %}
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/toastify.js' %}"></script>
+<script src="{% static 'js/wheelzoom.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+
+<script>
+    var image_report_id = "{{image_report_id}}"
+    let csrfToken = $('input[name=csrfmiddlewaretoken]').val()
+    var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#page-loading").hide()
+    })
+</script>
+
+<script>
+    function closeModal() {
+        var modal = document.querySelector(".modal-container.active");
+        modal.classList.remove("active");
+        var checkboxesForDiagnosis = document.querySelectorAll('.patient-item input[type="checkbox"]:checked');
+        checkboxesForDiagnosis.forEach(function(checkbox) {
+        checkbox.checked = false;
+        })
+    }
+
+    $('#order_report').on("click", function(){
+        var active_tooths = $('.item.active');
+        var fi = $(".item.active:first .tooth-menu").data("tooth-menu");
+        var li = $(".item.active:last .tooth-menu").data("tooth-menu");
+        var tooth_spacing = [fi, li];
+        $.ajax({
+            url:"{% url 'implant' %}",
+            type:"POST",
+            headers: { 'X-CSRFToken': csrfToken },
+            data:{
+                "tooth_spacing": tooth_spacing,
+                "image_report_id": image_report_id,
+                },
+            success:function(response){
+                if (response.status == true) {
+                    Toastify({
+                        gravity: "top",
+                        position: "left",
+                        duration: 1500,
+                        icon: "<i class='fa-solid fa-check'></i>",
+                        backgroundColor: "green",
+                        text: "İşlem başarıyla gerçekleştirildi!" // İstenilen metni buraya ekleyin
+                    }).showToast();
+
+                    // 1.5 saniye sonra başka bir sayfaya yönlendirme
+                    setTimeout(function () {
+                        window.location.href = "{% url 'cbct_page' image_report_id=image_report_id %}"
+                    }, 1500);
+                        
+                    
+                }else {
+                    alert("BAŞARISIZ")
+                }
+            },
+            error:function(xhr, status, error){
+                console.log(error)
+            }
+
+        })
+    })
+
+ var selectedTooth = [];
+
+function toggleToothDiv(toothNumber) {
+    if (isToothValid(toothNumber)) {
+        var index = selectedTooth.indexOf(toothNumber);
+
+        if (index === -1) {
+            // Eğer toothNumber seçili değilse, ekleyin
+            selectedTooth.push(toothNumber);
+        } else {
+            // Eğer toothNumber zaten seçiliyse, kaldırın
+            selectedTooth.splice(index, 1);
+        }
+
+        updateToothClasses();
+    }
+}
+
+function updateToothClasses() {
+    var toothDivs = document.querySelectorAll('.tooth');
+
+    toothDivs.forEach(function (toothDiv) {
+        var toothNumber = parseInt(toothDiv.getAttribute('data-index'));
+        var itemDiv = toothDiv.querySelector('.item');
+
+        // Eğer seçili dişler arasında ise 'active' class'ını ekleyin, değilse kaldırın
+        if (isToothInRange(toothNumber)) {
+            itemDiv.classList.add('active');
+        } else {
+            itemDiv.classList.remove('active');
+        }
+    });
+}
+
+function isToothInRange(toothNumber) {
+    if (selectedTooth.length === 0) {
+        return false;
+    }
+
+    var start = Math.min.apply(null, selectedTooth);
+    var end = Math.max.apply(null, selectedTooth);
+
+    return (toothNumber >= start && toothNumber <= end);
+}
+
+function isToothValid(toothNumber) {
+    if (selectedTooth.length === 1) {
+        var firstSelectedTooth = selectedTooth[0];
+
+        if ((firstSelectedTooth >= 11 && firstSelectedTooth <= 28 && toothNumber >= 11 && toothNumber <= 28) ||
+            (firstSelectedTooth >= 31 && firstSelectedTooth <= 48 && toothNumber >= 31 && toothNumber <= 48)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else if (selectedTooth.length > 1) {
+        // Eğer daha önce seçilmiş dişler varsa, yeni seçimle uyumlu olup olmadığını kontrol et
+        var isValid = selectedTooth.every(function (selectedToothNumber) {
+            return (
+                (selectedToothNumber >= 11 && selectedToothNumber <= 28 && toothNumber >= 11 && toothNumber <= 28) ||
+                (selectedToothNumber >= 31 && selectedToothNumber <= 48 && toothNumber >= 31 && toothNumber <= 48)
+            );
+        });
+
+        return isValid;
+    }
+
+    return true;
+}
+
+// Tüm seçimleri temizle
+function clearSelection() {
+    selectedTooth = [];
+    updateToothClasses();
+}
+
+
+</script>
+
+<script>
+    var checkboxes = document.querySelectorAll('.diagnosis-content .item:not(.empty) input[type="checkbox"]');
+    // var checkboxes = Array.from(document.querySelectorAll(".item:not(.empty) input[type='checkbox']"));
+    var selectAllCheckbox = document.querySelector('[data-select-all-diagnosis]');
+    var selectedItems = [];
+    var selectedItemsCount = 0
+    function initCkEditor(data = '') {
+    ClassicEditor
+        .create( document.querySelector( '#editor', {
+            toolbar: [
+            'heading', 'bold', 'italic', 'link', 'bulletedList', 'numberedList',
+            'blockQuote', 'imageUpload', 'insertTable', 'undo', 'redo'
+        ],
+        }))
+        .then( newEditor => {
+            myCkEditor = newEditor
+            $("[data-pass-two-chapter]").click(function() {
+                // newEditor.setData("<p style='color:red;'>2.<strong>adım</strong> a geçildi</p>")
+                let id = $(this).attr("data-treatment-id")
+                var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+                if(id !== undefined){
+                    console.log("SETTED")
+                    setCustomCkEditor(id, csrfToken, myCkEditor)
+                    // aslında bir id geldi
+                    // $("#editor").attr("data-editor-treatment-id",id)
+                    // $.ajax({
+                    //     url:"{% url 'get_content_of_treatment_planning' %}",
+                    //     type:"GET",
+                    //     headers: { 'X-CSRFToken': csrfToken },
+                    //     data:{'id':id},
+                    //     success:function(response){
+                    //         newEditor.setData(response.content)
+                    //     },
+                    //     error:function(xhr, status, error){
+                    //     }
+
+                    // })
+                } else {
+                    // start planning diyip yeni ekleme yapılcağı zaman
+                    if (selectedItemsCount > selectedItems.length){
+                        items_for_send = selectedItems
+                    }else{
+                        items_for_send = null
+                    }
+                    $.ajax({
+                        url:"{% url 'get_content_of_ai_treatment_planning' %}",
+                        type:"GET",
+                        headers: { 'X-CSRFToken': csrfToken },
+                        data:{"image_report_id":image_report_id, "selected_items": items_for_send
+                        },
+                        success:function(response){
+                            
+                            $("#editor").attr("data-editor-treatment-id", "null");
+
+                            // let treatment_recommendations_from_AI = {{treatment_planning_from_AI|safe}};
+                            let content = '';
+
+                            for (var key in response.treatment_planning_from_AI) {
+                                console.log("KEYYY", key)
+                                var treatmentMethods = response.treatment_planning_from_AI[key];
+                                content += `<p><strong>${key}</strong> - `;
+
+                                if (window.location.href.includes("/en/")) {
+                                    var treatmentMethod = treatmentMethods['en_treatment_method'];
+                                } else {
+                                    var treatmentMethod = treatmentMethods['tr_treatment_method'];
+                                }
+                                content += treatmentMethod;
+                                content += '</p>';
+                            }
+
+                            newEditor.setData(content);
+                            $(".treatment-section").toggleClass("active");
+                        },
+                        error:function(xhr, status, error){
+                            console.log(error)
+                        }
+
+                    })
+                    
+
+                }
+            })
+        })
+        .catch( error => {
+            console.error( error );
+        } );
+}
+initCkEditor()
+</script>
+
+{% endblock %}
+

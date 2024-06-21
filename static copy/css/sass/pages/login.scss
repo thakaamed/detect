@@ -1,0 +1,74 @@
+@import "../layout/form";
+@import "../abstracts/variables";
+@import "../abstracts/placeholder";
+@import "../layout/footer";
+@import "../base/reset";
+
+section#login {
+  height: 100vh;
+  min-height: 100vh;
+  user-select: none;
+  & p.handleError {
+    transition: opacity ease-in-out .5s;
+  }
+  & .form-container {
+    @extend %smoothShadow;
+    border-radius: 15px;
+    padding: 2rem;
+    background-color: white;
+  }
+  & h1 {
+    text-align: center;
+    font-weight: 300;
+    font-size: 26px;
+    margin: 10px 0;
+  }
+  & .left-area {
+    height: 100%;
+    & img.logo {
+      display: block;
+      margin: 0 auto;
+      width: 350px;
+      max-width: 100%;
+    }
+    & form {
+      width: 554px;
+      max-width: 100%;
+      margin: 0 auto;
+
+      & button:nth-of-type(1) {
+        background-color: $bg-dark-2;
+        &:hover {
+          background-color: rgba($color: $bg-dark-2, $alpha: 0.95);
+        }
+      }
+    }
+  }
+  & .right-area {
+    & img {
+      width: 100%;
+      height: 100vh;
+    }
+  }
+  & .higlight-text {
+    margin: 25px 0;
+    & a:hover {
+      color: gray;
+    }
+  }
+  & .accept-portal-term {
+    @extend %centerFlexVertical;
+    gap: 10px;
+    margin: 15px 0;
+    user-select: none;
+  }
+
+  & .forgot-password {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+    &:hover {
+      color: gray;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import "main";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: $inter-font;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  & a {
+    text-decoration: none!important;
+    color: inherit;
+    &:hover {
+      color: inherit;
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@for $i from 1 through 9 {
+  $weight: $i * 100;
+  .font-weight-#{$weight} {
+    font-weight: #{$weight};
+  }
+}
+
+@mixin center-both() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

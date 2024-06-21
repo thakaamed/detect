@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="{{lang}}">
+{% block head %}
+{% load static %}
+{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLKZ3GY59W%22%3E"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GLKZ3GY59W');
+    </script>
+    {% block customCss %}
+    {% endblock %}
+
+    <style>
+        section#pricing .container .steps .step-count .count-item:nth-child(1)::before {
+            content: "Account" !important;
+        }
+        section#pricing .container .steps .step-count .count-item:nth-child(2)::before {
+            content: "Payment" !important;
+        }
+        section#pricing .container .steps .step-count .count-item:nth-child(3)::before {
+            content: "Finish" !important;
+        }
+    </style>
+</head>
+
+    <body>
+    <section id="pricing" data-aos="zoom-in">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="steps">
+                        <div class="step-count d-flex justify-content-between" data-step="1">
+                            <div class="count-item cursor-pointer active" onclick="changeStep(1)">1</div>
+                            <div class="count-item cursor-pointer" onclick="changeStep(2)">2</div>
+                            <div class="count-item">3</div>
+                        </div>
+                        <div class="step step-1">
+                            <h3>Account</h3>
+                            <label for="isimsoyisim">Name Surname</label>
+                            <input type="text" id="isimsoyisim" placeholder="Name Surname" name="isimsoyisim">
+                            <label for="firmaismi">Company Name</label>
+                            <input type="text" id="firmaismi" placeholder="Company Name" name="firmaismi">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" placeholder="E-mail" name="eposta">
+                            <label for="telefon">Phone</label>
+                            <input type="text" id="telefon" placeholder="Phone" name="telefon">
+                            <!--<div class="d-flex align-items-center mb-2">-->
+                            <!--<input type="checkbox" id="fatura" name="fatura" value="1" class="m-0 w-auto me-2">-->
+                            <!--<label for="fatura">Fatura Bilgileri</label>-->
+                            <!--</div>-->
+                            <button onclick="changeStep(2)">Next</button>
+                        </div>
+                        <div class="step step-2">
+                            <h3>Card Infos</h3>
+                            <div class="card-container">
+                                <div class="the-card">
+                                    <div class="the-front">
+                                        <div class="chip">
+                                            <img src="{% static 'media/img/cardchip.png' %}' %}" class="img-fluid" alt="">
+                                        </div>
+                                        <span class="card-number-title">CARD NUMBER</span>
+                                        <div class="card-number">
+                                            **** **** **** ****
+                                        </div>
+                                        <div class="circles">
+                                            <img src="{% static 'media/img/cardcircles.png' %}" class="img-fluid" alt="">
+                                        </div>
+                                        <span class="holder">CARD HOLDER</span>
+                                        <span class="card-name">***** ****</span>
+                                        <span class="valid">VALID</span>
+                                        <span class="valid-value">**/**</span>
+                                    </div>
+                                    <div class="the-back">
+                                        <div class="black-line"></div>
+                                        <span class="top-text">
+                                            <span>Yetkili İmza/ Auhorized Signature</span>
+                                            <span>İmzalanmadığı takdirde geçersizdir</span>
+                                        </span>
+                                        <div class="gradient">
+                                            <img src="{% static 'media/img/card-gradient.png' %}" alt="">
+                                            <span class="cvvkod">***</span>
+                                        </div>
+                                        <span class="bottom-text">
+                                            Bu kartın mülkiyeyi Lorem Ipsum’a aittir
+                                        </span>
+                                        <img src="{% static 'media/img/card-frame.png' %}" class="card-frame" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <label for="kkkadi">NAME ON THE CARD</label>
+                            <input type="text" id="kkkadi" placeholder="NAME ON THE CARD"
+                                name="kredikartikullaniciadi" maxlength="25"
+                                onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.key == ' ' || (event.charCode > 191 && event.charCode < 256)">
+                            <label for="kartnumarasi">CARD NUMBER</label>
+                            <input type="text" id="kartnumarasi" placeholder="CARD NUMBER" name="kartnumarasi"
+                                maxlength="19" onkeypress="return event.charCode >= 48 && event.charCode <= 57 ">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="cvvkod">CVV Code</label>
+                                    <input type="text" id="cvvkod" name="cvvkodu" placeholder="CVV Code" maxlength="3"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="sonkullanimtarihi">Expiration date</label>
+                                    <input type="text" id="sonkullanimtarihi" name="sonkullanimtarihi"
+                                        placeholder="Expiration dat" maxlength="5"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                </div>
+                            </div>
+                            <button onclick="changeStep(3)">Do Payment</button>
+                        </div>
+                        <div class="step step-3">
+                            <h3 id="baslik"></h3>
+                            <p id="icerik"></p>
+                            <img src="{% static 'media/img/paymentcompleted.png' %}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="price-plan">
+                        <div class="price-plan-img position-relative p-0">
+                            <img src="{% static 'media/img/price-2d.png' %}" class="w-100 img-fluid" alt="">
+                            <h2 class="position-absolute">CranioCatch Clinic</h2>
+                            <div class="advenced-plans position-absolute d-flex align-items-center p-4">
+                                <div class="img">
+                                    <img src="{% static 'media/img/blue-shapes.png' %}" class="img-fluid pe-3" alt="">
+                                </div>
+                                <div class="text">
+                                    <p class="m-0">{{package.pack_name_en}}</p>
+                                    <p class="m-0">
+                                        <strong>${{package.global_price}}</strong>/year
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-plan-li">
+                            <ul>
+                                <li><span>Unlimited radiological</span> image upload</li>
+                                <li>Unlimited <span>add patients</span></li>
+                                <li>Unlimited <span>radiological</span> image analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% csrf_token %}
+    <section id="logos" data-aos="fade-left">
+    </section>
+
+</body>
+<link rel="stylesheet" href="{% static 'css/odeme.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/imask"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+        var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+        console.log("csrf", csrftoken)
+        var hash = '{{course_hash}}'
+        console.log("hash", hash)
+    </script>
+    <script>
+        IMask(document.getElementById("telefon"), {
+            mask: "+{00} (000) 000 - 00 - 00",
+        });
+        // telefon input için mask oluşturuldu
+    </script>
+    <script>
+        AOS.init();
+    </script>
+<script>
+    function satin_al() {
+        var tarih = $('#sonkullanimtarihi').val()
+        var ay = tarih.split("/")[0]
+        var yil = tarih.split("/")[1]
+        console.log("csrfaaaa", csrftoken)
+        console.log("hashaaaa", hash)
+        $('#baslik').text("Process continues...")
+        $.ajax({
+            method: "GET",
+            url: "/api/Buy/Product/",
+            data: {
+                csrfmiddlewaretoken: csrftoken,
+                course_hash: hash,
+                full_name: $('#isimsoyisim').val(),
+                email: $('#email').val(),
+                phone: $('#telefon').val(),
+                card_holder_name: $('#kkkadi').val(),
+                card_number: $('#kartnumarasi').val().replaceAll(" ", ""),
+                cvc_number: $('#cvvkod').val(),
+                exp_month: ay,
+                exp_year: yil,
+                is_company: "a",
+                company_name: $('#firmaismi').val(),
+                company_tax_number: "a",
+                company_tax_administration: "a",
+                company_address: "a",
+                active_language: "tr",
+            }
+        }).done(function (res) {
+            console.log(res)
+            if (res['success'] == true) {
+                if (res['response'].Data) {
+                    window.location.href = res['response'].Data
+                }
+            } else {
+                var result_code = res['response'].ResultCode
+                $('#icerik').text(result_code)
+                $('#baslik').text("ERROR")
+            }
+        });
+    }
+</script>
+<script>
+    let menuIcon = document.querySelector("div.menu-icon");
+
+    menuIcon.addEventListener("click", function () {
+        this.classList.toggle("open");
+    });
+</script>
+
+</html>
+
+
+
+

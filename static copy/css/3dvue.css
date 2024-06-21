@@ -1,0 +1,117 @@
+body {
+    background-color: #000!important;
+  }
+  header#header,
+  footer#footer,
+  #rightArea {
+    background-color: #272727!important;
+  }
+
+  aside#leftSidebar {
+    background-color: #111;
+  }
+
+  #rightAreaTools {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  #rightAreaTools,
+  #rightAreaTools .tool-item {
+   background-color: #454545; 
+  }
+
+  #rightAreaTools .tool-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 0!important;
+  }
+
+  #rightAreaTools .tool-item:is(:last-child) {
+    border-bottom: none!important;
+  }
+
+  #rightAreaTools .tool-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .tab-system__head {
+    background-color: #454545;
+  }
+
+  .tab-system__head .item.active {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .tab-system__head .item:hover {
+    background-color: rgba(255, 255, 255, 0.3)!important;
+  }
+
+  .search-area {
+    background-color: #111;
+    color: #eee;
+  }
+
+  .search-area input::placeholder {
+    color: #eee;
+  }
+
+  .tab-title {
+    border-bottom: 1px solid #111;
+  }
+
+  .diagnosis-list__item {
+    background-color: #454545;
+  }
+
+  .diagnosis-list__item,
+  .diagnosis-list .icon.main-caret {
+    color: #111;
+  }
+
+  .custom-check {
+    background-color: #111;
+  }
+
+  .diagnosis-list__item {
+    background-color: #555;
+    color: #eee;
+  }
+
+  .diagnosis-list__sub-item:before,
+  .diagnosis-list__sub-item:after {
+    background-color: #111;
+  }
+
+  .diagnosis-list__sub-item {
+    background-color: #555;
+  }
+
+  #header .logo a img {
+    width: 7% !important
+  }
+  
+  .el-button.btn-sweet-blue{
+    background-color: var(--draw-area-color) !important;
+    border-color: var(--draw-area-color) !important;
+  }
+  .el-button.order-report-btn{
+    background-color: var(--draw-area-color) !important;
+    border-color: var(--draw-area-color) !important;
+  }
+  .tooth-sorting-modal{
+    background-color: #111 !important;
+  }
+  .tooth-sorting-modal .tooth-chart-illnesses-by-tooth{
+    background-color: #111 !important;
+  }
+  /* .tooth-sorting-modal .tooth-chart-illnesses-by-tooth .teeth .tooth{
+    background-color: var(--draw-area-color) !important;
+    border-color: var(--draw-area-color) !important;
+  } */
+
+  .tooth-sorting-modal .tooth-chart-illnesses-by-tooth .teeth .tooth{
+    background-color: #1f2023;
+    border: 2px solid #1f2023;
+  }
+  .tooth-sorting-modal .tooth-chart-illnesses-by-tooth .teeth .tooth.active{
+    background-color: var(--el-text-color-regular);
+  }

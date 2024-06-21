@@ -1,0 +1,280 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Other Tags -->
+  <title>Moyasar payment form</title>
+  <meta charset="UTF-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/thakaa.css' %}">
+  <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+  <!-- Moyasar Styles -->
+  <link rel="stylesheet" href="https://cdn.moyasar.com/mpf/1.7.3/moyasar.css" />
+
+  <!-- Moyasar Scripts -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=fetch"></script>
+  <script src="https://cdn.moyasar.com/mpf/1.7.3/moyasar.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  <link rel="stylesheet" href="{% static 'css/moyasar_payment.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+  <!-- Download CSS and JS files in case you want to test it locally, but use CDN in production -->
+  </head>
+
+<body>
+  <header>
+    <div class="container">
+        <div class="logo">
+            <a href="/">
+                <img src="{% static specs.login_page_logo %}" alt="" class="logo">
+            </a>
+        </div>
+        <div class="sign-in">
+            <a href="{% url 'loginPage' %}">Sign In</a>
+        </div>
+    </div>
+</header>
+  <main>
+    
+      <section style="height:auto !important;">
+        {% comment %} <div class="pack_infos">
+          {{item.name}}
+        </div> {% endcomment %}
+        <div class="pack_infos" style="width: 360px; margin: 40px 0 0 0">
+          <div>
+            <div class="mysr-form-method">
+              <form>
+                <div class="mysr-form-inputGroup">          
+                  <div class="label-group">
+                    <label class="label_infos" for="company_name">Company Name</label>
+                    <span class="mysr-form-requiredAlert mysr-form-requiredAlertHidden">Required</span>
+                  </div>
+                  <div>
+                    <input id="company_name" type="text" class="special-input mysr-form-input" placeholder="Company Name">
+
+                    <div class="mysr-form-alertContainer">
+                      <span class="mysr-form-inputAlert mysr-form-alertDanger mysr-form-inputAlertHidden"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mysr-form-inputGroup">          
+                  <div class="label-group">
+                    <label class="label_infos" for="company_owner">Company Owner's Name</label>
+                    <span class="mysr-form-requiredAlert mysr-form-requiredAlertHidden">Required</span>
+                  </div>
+                  <div>
+                    <div class="password-group">
+                      <input id="company_owner_first" type="text" class="special-input mysr-form-input input_left" placeholder="First Name">
+                      <input id="company_owner_last" type="text" class="special-input mysr-form-input input_right" placeholder="Last Name">  
+                    </div>
+                    
+                    <div class="mysr-form-alertContainer">
+                      <span class="mysr-form-inputAlert mysr-form-alertDanger mysr-form-inputAlertHidden"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mysr-form-inputGroup">          
+                  <div class="label-group">
+                    <label class="label_infos" for="email">E-Mail</label>
+                    <span class="mysr-form-requiredAlert mysr-form-requiredAlertHidden">Required</span>
+                  </div>
+                  <div>
+                    <input id="email" type="email" class="special-input mysr-form-input" placeholder="E-Mail" autocomplete="email">
+
+                    <div class="mysr-form-alertContainer">
+                      <span class="mysr-form-inputAlert mysr-form-alertDanger mysr-form-inputAlertHidden"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mysr-form-inputGroup">          
+                  <div class="label-group">
+                    <label class="label_infos">Password</label>
+                    <span class="mysr-form-requiredAlert mysr-form-requiredAlertHidden">Required</span>
+                  </div>
+
+                  <div class="password-section">
+                    <div class="password-group">
+                      <input id="password" type="password" class="special-input mysr-form-input input_left" placeholder="Password" autocomplete="new-password">
+                      <input id="re-password" type="password" class="special-input mysr-form-input input_right" placeholder="Re-Password" autocomplete="new-password">
+                    </div>
+                    <div class="mysr-form-alertContainer">
+                      <span class="mysr-form-inputAlert mysr-form-alertDanger mysr-form-inputAlertHidden"></span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    
+    <section style="height:auto !important;">
+      <div class="mysr-form" style="width: 360px; margin: 40px 0 0 0"></div>
+      {% csrf_token %}
+    </section>
+<footer>
+  <div class="container">
+      <div class="copyright">{{ specs.brand }}</div>
+      <div class="links">
+          <a href="{% static specs.clarification_text %}" target="_blank">{% trans 'Clarification Text' %}</a>
+          <a href="{% static specs.cookie_policy %}" target="_blank">{% trans 'Cookie Policy' %}</a>
+          <a href="{% static specs.privacy_policy %}" target="_blank">{% trans 'Privacy Policy' %}</a>
+          {% if specs.terms_conditions_policy %}<a href="{% static specs.terms_conditions_policy %}">{% trans 'Terms & Conditions' %}</a> {% endif%}
+      </div>
+  </div>
+</footer>
+  </main>
+  <script>
+
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-center",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+    
+  </script>
+  <script>
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val()
+
+    Moyasar.init({
+      element: '.mysr-form',
+      // Amount in the smallest currency unit.
+      // For example:
+      // 10 SAR = 10 * 100 Halalas
+      // 10 KWD = 10 * 1000 Fils
+      // 10 JPY = 10 JPY (Japanese Yen does not have fractions)
+      language: "en",
+      amount: parseFloat("{{item.price}}") * 100,
+      currency: "{{item.currency}}",
+      description: "{{item.slug}} - ",
+      publishable_api_key: 'pk_test_EXyyFeymTaEsJsG3zMEg3BCX72e4XBxcc3VSnCHM',
+      callback_url: 'http://34.91.194.230:8007/returnPayment', // Geri çağrı URL'sini buraya ekleyin.
+      methods: ['creditcard'],
+      on_initiating: function () {
+        return new Promise(function (resolve, reject) {
+          var company_name = $('#company_name').val();
+          var company_owner_first = $('#company_owner_first').val();
+          var company_owner_last = $('#company_owner_last').val();
+          var email = $('#email').val();
+          var password = $('#password').val();
+          var re_password = $('#re-password').val();
+
+          var status;
+          var message;
+
+          if (company_name === '' || email === '' || password === '' || re_password === '' || company_owner_first === '' || company_owner_last === '') {
+            status = false;
+            message = "Please complete all fields.";
+            toastr.error(message)
+            reject(message);
+          } else {
+            $.ajax({
+              url: "{% url 'checkUserInfos' %}",
+              type: "POST",
+              headers: { 'X-CSRFToken': csrf_token },
+              data: {
+                'user_infos': JSON.stringify({
+                  "company_name": company_name,
+                  "company_owner_first": company_owner_first,
+                  "company_owner_last": company_owner_last,
+                  "email": email,
+                  "password": password,
+                  "re_password": re_password,
+                })
+              },
+              success: function (response) {
+                status = response.status;
+                message = response.message;
+                resolve(status);
+                if (status==true) {
+                  resolve(status)
+                }else{
+                  toastr.error(message)
+                  reject(message)
+                }
+              },
+              error: function (xhr, status, error) {
+                toastr.error("ERROR!!! Please Try Again Later")
+                reject(error);
+              }
+            });
+          }
+        });
+      },
+      on_completed: function (payment) {
+        return new Promise(function (resolve, reject) {
+          // Diğer değişkenleri tanımlayın, payment ve user_infos gibi.
+          var company_name = $('#company_name').val();
+          var company_owner_first = $('#company_owner_first').val();
+          var company_owner_last = $('#company_owner_last').val();
+          var email = $('#email').val();
+          var password = $('#password').val();
+          var re_password = $('#re-password').val();
+
+          var payment_status;
+          var payment_message;
+          $.ajax({
+            url: "{% url 'savePayment' %}",
+            type: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+              'payment': JSON.stringify(payment),
+              'user_infos': JSON.stringify({
+                "company_name": company_name,
+                "company_owner_first": company_owner_first,
+                "company_owner_last": company_owner_last,
+                "email": email,
+                "password": password,
+                "re_password": re_password,
+              })
+            },
+            success: function (response) {
+                payment_status = response.status;
+                payment_message = response.message;
+                if (payment_status==true){
+                  resolve(payment_status);
+                }else{
+                  toastr.error(payment_message)
+                  reject(payment_message)
+                }
+                
+            },
+            error: function (xhr, payment_status, error) {
+                toastr.error("ERROR!!! Please Try Again Later")
+                reject(error);
+            },
+            error: function (xhr, payment_status, error) {
+              toastr.error("An error occurred! Please Try Again Later...")
+              reject(error);
+            }
+          });
+        });
+      }
+
+    })
+  </script>
+  
+<script src="{% static 'js/moyasar_payment.js' %}"></script>
+
+</body>
+
+</html>

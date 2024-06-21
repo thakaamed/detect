@@ -1,0 +1,169 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/thakaa.css' %}">
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <title>Status: {% if status == "paid" %} Successful {% else %} Failed {% endif%}</title>
+    <!-- CSS dosyaları ve stil bilgileri burada eklenebilir -->
+    <style>
+        .demo1 {
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ui-success,.ui-error {
+            width: 100px; height: 100px;
+        }
+        
+        .ui-success{
+            &-circle {
+                stroke-dasharray: 260.75219024795285px, 260.75219024795285px;
+            stroke-dashoffset: 260.75219024795285px;
+            transform: rotate(220deg);
+            transform-origin: center center;
+                stroke-linecap: round;
+                animation: ani-success-circle 1s ease-in both;
+            }
+            &-path {
+                stroke-dasharray: 60px 64px;
+            stroke-dashoffset: 62px;
+                stroke-linecap: round;
+                animation: ani-success-path .4s 1s ease-in both;
+            }
+        }
+        
+        @keyframes ani-success-circle {
+            to{stroke-dashoffset: 782.2565707438586px;}
+        }
+        
+        @keyframes ani-success-path {
+            0% {stroke-dashoffset: 62px;}
+            65% {stroke-dashoffset: -5px;}
+            84%{stroke-dashoffset: 4px;}
+            100%{stroke-dashoffset: -2px;}
+        }
+        
+        .ui-error{
+            &-circle{
+                stroke-dasharray:260.75219024795285px, 260.75219024795285px;
+                stroke-dashoffset: 260.75219024795285px;
+                animation: ani-error-circle 1.2s linear;
+            }
+            &-line1{
+                stroke-dasharray: 54px 55px;
+                stroke-dashoffset: 55px;
+                stroke-linecap: round;
+                animation: ani-error-line .15s 1.2s linear both;
+            }
+            &-line2{
+                stroke-dasharray: 54px 55px;
+                stroke-dashoffset: 55px;
+                stroke-linecap: round;
+                animation: ani-error-line .2s .9s linear both;
+            }
+        }
+        
+        @keyframes ani-error-line{
+            to { stroke-dashoffset: 0; }
+        }
+        
+         @keyframes ani-error-circle {
+                0% {
+                        stroke-dasharray: 0, 260.75219024795285px;
+                        stroke-dashoffset: 0;
+                }
+                35% {
+                        stroke-dasharray: 120px, 120px;
+                        stroke-dashoffset: -120px;
+                }
+                70% {
+                        stroke-dasharray: 0, 260.75219024795285px;
+                        stroke-dashoffset: -260.75219024795285px;
+                }
+                100% {
+                        stroke-dasharray: 260.75219024795285px, 0;
+                        stroke-dashoffset: -260.75219024795285px;
+                }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="{% static specs.login_page_logo %}" alt="" class="logo">
+                </a>
+            </div>
+            <div class="sign-in">
+                <a href="{% url 'loginPage' %}">Sign In</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1 class="d-flex justify-content-center">Status: {% if status == "paid" %} Successful {% else %} Failed {% endif%}</h1>
+        <h5 class="d-flex justify-content-center">Message: {{message}}</h5>
+        
+        <div class="success-message" style="display: flex; height: 100%; width: 100%; justify-content: center; justify-items: center;">
+            <div>
+                <div class="demo1 mb-5 mt-5">
+                    {% if status == "paid" %}  
+                        <div class="ui-success">
+                            <svg viewBox="0 0 87 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Group-3" transform="translate(2.000000, 2.000000)">
+                                        <circle id="Oval-2" stroke="rgba(165, 220, 134, 0.2)" stroke-width="4" cx="41.5" cy="41.5" r="41.5"></circle>
+                                            <circle  class="ui-success-circle" id="Oval-2" stroke="#A5DC86" stroke-width="4" cx="41.5" cy="41.5" r="41.5"></circle>
+                                            <polyline class="ui-success-path" id="Path-2" stroke="#A5DC86" stroke-width="4" points="19 38.8036813 31.1020744 54.8046875 63.299221 28"></polyline>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    {% else %} 
+                        <div class="ui-error">
+                            <svg  viewBox="0 0 87 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Group-2" transform="translate(2.000000, 2.000000)">
+                                        <circle id="Oval-2" stroke="rgba(252, 191, 191, .5)" stroke-width="4" cx="41.5" cy="41.5" r="41.5"></circle>
+                                        <circle  class="ui-error-circle" stroke="#F74444" stroke-width="4" cx="41.5" cy="41.5" r="41.5"></circle>
+                                            <path class="ui-error-line1" d="M22.244224,22 L60.4279902,60.1837662" id="Line" stroke="#F74444" stroke-width="3" stroke-linecap="square"></path>
+                                            <path class="ui-error-line2" d="M60.755776,21 L23.244224,59.8443492" id="Line" stroke="#F74444" stroke-width="3" stroke-linecap="square"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    {% endif%}
+                </div>                
+                <p style="display:flex; justify-content: center;">The purchase was made with the following information:</p>
+                <ul>
+                    <li>Package Name: {{product.name}}</li>
+                    <li>Price: {{product.price}}</li>
+                    <!-- Diğer satın alma bilgileri buraya ekleyin -->
+                </ul>
+                </div>
+                
+            </div>
+        <div class="additional-actions" style="display: flex; justify-content: center; justofy-items: center;">
+            <!-- Diğer ürünlerin listesi veya bağlantıları buraya ekleyin -->
+            <a href="{% url 'loginPage' %}">Sign In</a>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="copyright">{{ specs.brand }}</div>
+            <div class="links">
+                <a href="{% static specs.clarification_text %}" target="_blank">{% trans 'Clarification Text' %}</a>
+                <a href="{% static specs.cookie_policy %}" target="_blank">{% trans 'Cookie Policy' %}</a>
+                <a href="{% static specs.privacy_policy %}" target="_blank">{% trans 'Privacy Policy' %}</a>
+                {% if specs.terms_conditions_policy %}<a href="{% static specs.terms_conditions_policy %}">{% trans 'Terms & Conditions' %}</a> {% endif%}
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

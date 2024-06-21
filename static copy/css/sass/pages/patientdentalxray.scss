@@ -1,0 +1,151 @@
+@import "../layout/form";
+@import "../abstracts/variables";
+@import "../abstracts/placeholder";
+@import "../abstracts/typography";
+@import "../layout/header";
+@import "../layout/footer";
+@import "../layout/sidebar";
+@import "../base/reset";
+@import "../main";
+@import "../components/button";
+@import "../components/userbar";
+@import "../base/reset";
+
+$radius: 10px;
+
+.minibar,
+.main-slider {
+  background-color: $bg-dark-3;
+  border-radius: $radius;
+  @extend %centerFlexVertical;
+  padding: 20px 40px;
+  margin: 15px 0;
+  color: #fff;
+}
+
+.minibar {
+  @extend %centerFlexVertical;
+  gap: 30px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  & p {
+    margin: 0;
+    font-weight: 300;
+    & span {
+      font-weight: 600;
+    }
+  }
+}
+
+.main-slider {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  background-color: transparent;
+  align-items: stretch;
+  & .left-slider {
+    flex: 4.37;
+    aspect-ratio: 3.82;
+    background-color: $bg-dark-3;
+    border-radius: $radius;
+    overflow: hidden;
+  }
+  & .right-slider {
+    flex: 1.23;
+    aspect-ratio: 0.46;
+    border-radius: $radius;
+  }
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper {
+    width: 100%;
+  }
+
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .dentalxrayslider-big {
+    width: 100%;
+  }
+
+  .dentalxrayslider-small {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
+  }
+
+  .dentalxrayslider-small .swiper-slide {
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+  }
+
+  .dentalxrayslider-small .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: $radius;
+  }
+}
+
+.info {
+  padding-bottom: 10px;
+  & .info-item {
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    @extend %centerFlexVertical;
+    gap: 20px;
+    background-color: $bg-dark-3;
+    border-radius: $radius;
+    margin-bottom: 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: lighten($bg-dark-3, 5%);
+    }
+    & .status {
+      & i {
+        font-size: 18px;
+        animation: spinning 1s linear infinite;
+      }
+      & .result-bar {
+        width: 18px;
+        height: 18px;
+        border-radius: 3px;
+        &.green {
+          background-color: $green;
+        }
+      }
+    }
+    & button {
+      margin-left: auto;
+      border-radius: 60px;
+    }
+    @keyframes spinning {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

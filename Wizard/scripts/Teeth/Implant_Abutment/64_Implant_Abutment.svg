@@ -1,0 +1,17 @@
+<svg width="6" height="17" viewBox="0 0 6 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.89015 0.629883H3.23015C3.77015 0.629883 4.25015 0.919882 4.28015 1.30988L5.20015 12.6599H0.910156L1.83015 1.30988C1.87015 0.929882 2.34016 0.629883 2.88016 0.629883H2.89015Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<mask id="mask0_226_1045" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="6" height="13">
+<path d="M2.89015 0.629883H3.23015C3.77015 0.629883 4.25015 0.919882 4.28015 1.30988L5.20015 12.6599H0.910156L1.83015 1.30988C1.87015 0.929882 2.34016 0.629883 2.88016 0.629883H2.89015Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_226_1045)">
+<path d="M0.238281 9.75977L5.87828 11.8998" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M0.367188 8.19043L6.00719 10.3304" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M0.5 6.61035L6.14 8.75035" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M0.628906 5.03027L6.26891 7.17027" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M0.757812 3.4502L6.40782 5.59019" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M0.898438 1.87012L6.53844 4.01012" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M1.02734 0.290039L6.66734 2.43004" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+</g>
+<path d="M1.98155 16.4798H4.13156C4.30156 16.4798 4.45156 16.3198 4.47156 16.1198C4.50156 15.8198 4.55156 15.3498 4.61156 14.8298C4.74156 13.7898 5.02156 12.5898 5.02156 12.5898H1.10156C1.10156 12.5898 1.37155 13.7898 1.51155 14.8298C1.57155 15.3498 1.62155 15.8098 1.65155 16.1198C1.67155 16.3198 1.82156 16.4798 1.99156 16.4798H1.98155Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<path d="M0.841895 12.7599H5.2719C5.3619 12.7599 5.3819 12.3799 5.3419 11.9399C5.2919 11.5099 5.19189 11.1699 5.12189 11.1699H1.0019C0.921899 11.1699 0.821897 11.5099 0.781897 11.9399C0.731897 12.3899 0.761905 12.7599 0.851905 12.7599H0.841895Z" fill="#757577" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+</svg>

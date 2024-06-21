@@ -1,0 +1,1458 @@
+{% extends 'wizard/base_for_wizard.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+<link rel="stylesheet" href="{% static 'css/diagnosis.css' %}">
+<link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+<link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+<title>{{specs.title}} - treatments</title>
+<link rel="stylesheet" href="{% static 'css/diagno-new.css' %}" />
+<link rel="stylesheet" href="{% static 'css/treatments.css' %}" />
+
+
+{% endblock %}
+{% block headerButtons %}
+
+{% endblock %}
+{% block content %}
+
+<!-- ANA BÖLME -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: rgba(26, 38, 78, 1); border-radius: 8px;">
+            <div class="modal-body mt-5">
+                {% trans 'Are you sure you want to delete?' %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modalClose" class="btn btn-secondary">{% trans 'No' %}</button>
+                <button type="button" id="modalYes" class="btn btn-primary">{% trans 'Yes' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteTreatmentModal" tabindex="-1" role="dialog" aria-labelledby="deleteTreatment"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: rgba(26, 38, 78, 1); border-radius: 8px;">
+            <div class="modal-body mt-5">
+                {% trans 'Are you sure to delete treatment?' %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="deleteTreatmentClose" class="btn btn-secondary">{% trans 'No' %}</button>
+                <button type="button" id="deleteTreatmentButton" class="btn btn-primary">{% trans 'Yes' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="resetTreatmentModal" tabindex="-1" role="dialog" aria-labelledby="resetTreatment"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: rgba(26, 38, 78, 1); border-radius: 8px;">
+            <div class="modal-body mt-5">
+                {% trans 'Are you sure to reset?' %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="resetTreatmentClose" class="btn btn-secondary">{% trans 'No' %}</button>
+                <button onclick="resetYes()" type="button" id="resetTreatmentYes" class="btn btn-primary">{% trans 'Yes' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModalTwo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: rgba(26, 38, 78, 1); border-radius: 8px;">
+            <div class="modal-body mt-2">
+                <div class="d-flex justify-content-end">
+                    <i class="fa-solid fa-xmark p-2 rounded bg-light text-dark" style="cursor: pointer;"
+                        id="modalXTwo"></i>
+                </div>
+
+                <h4>TEMPLATES AND SUGGESTIONS</h4>
+                <span class="templetes-modal-span">Contrary to popular belief, Lorem Ipsum is not simply random
+                    text.</span>
+                <div class="d-flex gap-2 mt-3">
+                    {% for tooth_number,tooth_detail in data.items %}
+                    {% if tooth_detail.jaw_area == "upper_jaw" %}
+                    {% if tooth_detail.is_missing %}
+                    <div class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1 modal-external"
+                        data-external="data-{{tooth_number}}"><img class="external-img-one" src=""
+                            alt=""><span>{{tooth_number}}</span>
+                    </div>
+                    {% else %}
+                    <div class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1 modal-external"
+                        data-external="data-{{tooth_number}}">
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="d-flex gap-2 mt-3">
+                    {% for tooth_number,tooth_detail in data.items %}
+                    {% if tooth_detail.jaw_area == "lower_jaw" %}
+                    {% if tooth_detail.is_missing %}
+                    <div class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1 modal-external"
+                        data-external="data-{{tooth_number}}"><img class="external-img-one" src=""
+                            alt=""><span>{{tooth_number}}</span>
+                    </div>
+                    {% else %}
+                    <div class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1 modal-external"
+                        data-external="data-{{tooth_number}}"><span>{{tooth_number}}</span>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <br>
+
+                <h4>1. Choose SELECT BOX</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                <div class="d-flex my-3">
+                    <div class="modal-box rounded"></div>
+                    <div class="modal-box rounded mx-3"></div>
+                    <div class="modal-box rounded"></div>
+                </div>
+                <br>
+                <h4>2. COOSE TEMPLATES</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="form-check form-check-inline d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                value="option1">
+                            <label class="form-check-label" for="inlineRadio1">Full upper bridge</label>
+                        </div>
+                        <div class="form-check form-check-inline d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                value="option2">
+                            <label class="form-check-label" for="inlineRadio2">Full lower bridge</label>
+                        </div>
+                        <div class="form-check form-check-inline d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
+                                value="option2">
+                            <label class="form-check-label" for="inlineRadio3">All-on-4 upper and lower</label>
+                        </div>
+                        <div class="form-check form-check-inline d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4"
+                                value="option2">
+                            <label class="form-check-label" for="inlineRadio4">All-on-4 upper</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check form-check-inline d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5"
+                                value="option1">
+                            <label class="form-check-label" for="inlineRadio5">All-on-4 lower</label>
+                        </div>
+                        <div class="form-check form-check-inline d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6"
+                                value="option2">
+                            <label class="form-check-label" for="inlineRadio6">All-on-6 upper and lower</label>
+                        </div>
+                        <div class="form-check form-check-inline d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio7"
+                                value="option2">
+                            <label class="form-check-label" for="inlineRadio7">All-on-6 upper</label>
+                        </div>
+                        <div class="form-check form-check-inline d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio8"
+                                value="option2">
+                            <label class="form-check-label" for="inlineRadio8">All-on-6 lower</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modalCloseTwo" class="modal-two-button-no">CANCEL</button>
+                <button type="button" id="modalYesTwo" class="modal-two-button">ADD TO PLAN</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class=" px-0 py-4 d-flex row"
+    style="min-width: 89%; margin-left: 156px;  position: fixed; top: 205px; z-index: 99;">
+    <div class="treatment-tabs d-flex align-items-center  gap-1"
+        style="margin-top: -127px; position: absolute; padding: 0px!important;">
+        {% for key,value in treatment_tabs.items %}
+        <div class="treatments-tab treatments-tab-one d-flex gap-2 align-items-center justify-content-center py-2 treatments-tab-menu-active"
+            style="{% if plan_id == key %}background-color: rgba(44, 57, 99, 1) {% endif %}"><a
+                style="min-width: 9%; cursor:pointer" href="{% url 'TreatmentPage' wizard_id key %}">Treatment Plan
+                <span>{{forloop.counter}}</span></a> <i id="{{key}}" class="fa-solid fa-xmark delete-treatment"
+                style="font-size: 14px; cursor: pointer;"></i></div>
+        {% endfor %}
+        <div class="treatments-tab-append d-flex gap-1" style="width: 1%;"></div>
+        <i onclick="addNewTreatmentPlan()" class="fa-solid fa-plus treatments-tab-plus"
+            style="cursor: pointer; font-size: 14px;"></i>
+    </div>
+</div>
+
+<div class="ms-4 container-fluid none-body none-ulti-div"
+    style=" margin-top: 90px; margin-bottom: 200px!important;  justify-content: center;">
+
+    <div style="display: flex; justify-content: center; margin-top: 15px; position: relative;">
+
+        <div class="diagnosis-responsive px-0 py-4 row"
+            style="min-width: 89%; display: flex; margin-left: 41px; background-color: rgba(26, 38, 78, 1); position: fixed; top: 143px; z-index: 99;">
+            <div class="col-md-8 m-auto">
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <div class="d-flex" style="gap: 10px;">
+                            {% for tooth_number,tooth_detail in data.items %}
+                            {% if tooth_detail.jaw_area == "upper_jaw" %}
+                            {% if tooth_detail.is_missing %}
+                            <div data-missing = "true" class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1 rounded"
+                                id="{{tooth_number}}" data-external="data-{{tooth_number}}"
+                                data-tooth="data-{{tooth_number}}" style="position:relative;"><span
+                                    class="d-flex justify-content-center align-items-center rounded"
+                                    style="position: absolute; bottom: -25px; width: 48px; background-color:rgba(14, 24, 55, 1);">{{tooth_number}}</span>
+                            </div>
+                            {% else %}
+                            <div class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1 rounded"
+                                id="{{tooth_number}}" data-external="data-{{tooth_number}}"
+                                data-tooth="data-{{tooth_number}}" style="position: relative;"><span
+                                    class="d-flex justify-content-center align-items-center rounded"
+                                    style="position: absolute; bottom: -25px; width: 48px; background-color:rgba(14, 24, 55, 1);">{{tooth_number}}</span>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="d-flex" style="gap: 10px; margin-top: 70px;">
+                            {% for tooth_number,tooth_detail in data.items %}
+                            {% if tooth_detail.jaw_area == "lower_jaw" %}
+                            {% if tooth_detail.is_missing %}
+                            <div data-missing = "true" id="{{tooth_number}}"
+                                class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1"
+                                data-external="data-{{tooth_number}}" data-tooth="data-{{tooth_number}}"
+                                style="position: relative;"><img class="external-img-one" src="" alt=""
+                                    style="height: 80px;"><span
+                                    class="d-flex justify-content-center align-items-center rounded"
+                                    style="position: absolute; top: -25px; width: 48px; background-color:rgba(14, 24, 55, 1);">{{tooth_number}}</span>
+                            </div>
+                            {% else %}
+                            <div id="{{tooth_number}}"
+                                class="external external-one d-flex flex-column justify-content-center align-items-center justify-content-between py-1"
+                                data-external="data-{{tooth_number}}" data-tooth="data-{{tooth_number}}"
+                                style="position: relative;"><span
+                                    class="d-flex justify-content-center align-items-center rounded"
+                                    style="position: absolute; top: -25px; width: 48px; background-color:rgba(14, 24, 55, 1);">{{tooth_number}}</span>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- <div style="position: relative;">
+                    <img class="img-fluid x-ray-block-icon" style="margin-bottom: -55px; cursor: pointer;"
+                        src="{% static 'img/diagnosis-x-ray-dark-icon.png' %}" alt="" onclick="changeImageSource()">
+                </div> -->
+            </div>
+            <div class="treatments-top col-md-4 m-auto d-flex justify-content-center gap-2">
+                <div class="dropdown">
+                    {% for treatment_name, treatment_detail in treatments_from_db.items %}
+                    {% if forloop.counter < 6 %} {# Sadece bir kez oluşturulacak div #} 
+                    <div class="missing-part missing-active-img rounded mb-2" onclick="toggleNestedDropdown(this)" data-toggle="dropdown"
+                        style="height: 45px;">
+                        {{ treatment_name }}<i class="fa-solid fa-chevron-down"></i>
+                        <div class="dropdown-content rounded">
+                            <div>
+                                {% for inner_value_key,inner_value_value in treatment_detail.items %}
+                                <a onclick="changeUniqueSrcs(this)" data-treatmentSlug="{{inner_value_value.slug}}" aria-labelledby="dropdownMenuButton" class="addTreatment dropdown-item">{{inner_value_key }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="dropdown">
+                    {% for treatment_name, treatment_detail in treatments_from_db.items %}
+                    {% if forloop.counter > 5 %} {# Sadece bir kez oluşturulacak div #} 
+                    <div class="missing-part missing-active-img rounded mb-2" onclick="toggleNestedDropdown(this)" data-toggle="dropdown" style="height: 45px;">
+                        {{ treatment_name }} <i class="fa-solid fa-chevron-down"></i>
+                        <div class="dropdown-content rounded">
+                            <div>
+                                {% for inner_value_key, inner_value_value in treatment_detail.items %}
+                                <a onclick="changeUniqueSrcs(this)" data-treatmentSlug="{{ inner_value_value.slug }}" aria-labelledby="dropdownMenuButton" class="addTreatment dropdown-item">{{ inner_value_key }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                
+            <!-- <div class="ms-3 mb-1">
+                {% for treatment_name, treatment_detail in treatments_from_db.items %}
+                {% if forloop.counter0 > 4 and forloop.counter0 < 11 %} {# Sadece bir kez oluşturulacak div #} <div
+                    data-treatmentSlug="{{treatment_detail.slug}}" class="missing-part rounded mb-1"
+                    onclick="changeUniqueSrcs(this)" onclick="toggleNestedDropdown(this)" style="height: 45px;">
+                    {{ treatment_name }} <i class="fa-solid fa-chevron-down crown-icon"></i>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div> -->
+    </div>
+</div>
+
+<div class="row d-flex my-3 gap-3" style="max-width: 98%; margin-left: 32px; justify-content: center;     position: fixed;
+        width: 100%;
+        top: 486px;">
+    <div class="col-md-11" style="
+            overflow-y: auto;
+            max-height: 43vh;">
+        <div class="dropzone-x-ray mt-4 p-4 px-5" style="position: relative;">
+            <h3>Your suggested treatment</h3>
+            <div class="d-flex justify-content-between">
+                <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
+                <div class="d-flex align-items-center gap-2">
+                    <input type="search" placeholder="Search" class="rounded treatments-payment-button p-2" id="searchInput">
+                    <div class="treatments-payment-button p-2 rounded" style="cursor: pointer;">Payment Plan
+                    </div>
+                </div>
+            </div>
+            <div class="all-treatments">
+                <div class="row p-3 rounded mt-3 thakaa-treatments" style="background-color: rgba(11, 18, 43, 1); ">
+                    <div class="col-md-5" style="font-size: 14px;">Treatment</div>
+                    <div class="col-md-2" style="font-size: 14px;">Amount</div>
+                    <div class="col-md-2" style="font-size: 14px;">Unit Price</div>
+                    <div class="col-md-1 diagnosis-container-titile" style="font-size: 14px;">Price</div>
+                    <div class="col-md-2 d-flex justify-content-end" style="font-size: 14px;">Edit</div>
+                </div>
+                {% for treatment_slug, treatment_detail in treatments.items %}
+                <div data-treatmentSlug="{{treatment_slug}}"
+                    class="row p-3 rounded my-2 d-flex transparents-Extraction treatment-container" draggable="true"
+                    style="background-color: rgba(13, 23, 53, 1); ">
+                    <div class="col-md-5 d-flex align-items-center gap-3 diagnosis-container"
+                        style="font-size: 24px;">
+                        <img src="/static/img/treatments-table-datrted-icon.svg" class="draggableImg" alt="">
+                        <div class="form-check">
+                            <!-- <input class="form-check-input d-flex gap-2" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault2" style="margin-top: 10px;"> -->
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                {{treatment_detail.treatment_method}}
+                            </label>
+                        </div>
+                        {% for item in treatment_detail.teeth %}
+                        <div
+                            class="gap-2 treatments-new-span rounded d-flex px-2 justify-content-between align-items-center">
+                            {{item.tooth_id}} <i style="cursor:pointer"
+                                onclick="deleteTreatmentFromTooth(this,'{{item.tooth_id}}','{{treatment_slug}}')"
+                                data-toothNumber="{{item.tooth_id}}" class="fa-solid fa-xmark treatments-x"
+                                style="font-size: 14px; cursor: pointer;"></i>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 transparents-amount-text" style="font-size: 14px;">
+                        <span class="amount">{{treatment_detail.amount}}x</span>
+                    </div>
+                    <div class="col-md-2 treatments-unit-price d-flex" style="font-size: 14px;">
+                        <!-- <span>{{treatment_detail.unit_price}}</span> <i class="fa-solid fa-turkish-lira-sign"></i> -->
+                        {% comment %} {% if pricing_types %}
+                        {% for key, value in pricing_types.items %}
+                        {% if key == treatment_slug and value.type == 'free' or value.type == 'inpackage' %}
+                        <input type="text" class="price-input" value="{{ value.type }}"
+                            oninput="treatment_detail_input(this)" disabled>
+                        {% else %}
+                        <input type="text" class="price-input" value="{{ treatment_detail.unit_price }}"
+                            oninput="treatment_detail_input(this)">
+                        {% endif %}
+                        {% endfor %}
+                        {% else %} {% endcomment %}
+                        <input type="text" class="price-input" value="{{ treatment_detail.unit_price }}"
+                            oninput="treatment_detail_input(this)">
+                        {% comment %} {% endif %} {% endcomment %}
+                        <div class="d-flex gap-2" style="margin-top: 9px;">
+                            <i class="fa-solid fa-dollar-sign ms-2"></i>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle button-dropdown" type="button" id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    style="border: none!important; background-color: transparent!important; padding: 0px!important; margin-top: -8px; font-size: 20px; color: white;">
+                                    <!-- <i class="fa-solid fa-chevron-down"></i> -->
+                                </button>
+                                <div class="dropdown-menu p-0 rounded" aria-labelledby="dropdownMenuButton"
+                                    style="background-color: rgb(37, 49, 89);">
+                                    <div class="d-flex justify-content-between px-3 align-items-center"
+                                        style="border-bottom: 1px solid rgba(11, 18, 43, 1);">
+                                        <p style="font-size: 10px; margin-top: 13px;">{% trans 'Set Price' %}</p>
+                                        <i class="fa-solid fa-xmark"
+                                            style="color: white; font-size: 13px; margin-top: -3px; cursor: pointer;"
+                                            onclick="closeDropdown()"></i>
+                                    </div>
+                                    <div class="dropdown-item" href="#">
+                                        <input data-pricing-type="unit" type="radio" name="pricingType"
+                                            id="unitPriceCheckbox" data-treatment-slug-for-price="{{treatment_slug}}"
+                                            onclick="changePricingType(this)">
+                                        <label for="unitPriceCheckbox">{% trans 'Unit Price' %}</label>
+                                    </div>
+                                    <div class="dropdown-item" href="#">
+                                        <input data-pricing-type="package" type="radio" name="pricingType"
+                                            id="packagePriceCheckbox" data-treatment-slug-for-price="{{treatment_slug}}"
+                                            onclick="changePricingType(this)">
+                                        <label for="packagePriceCheckbox">{% trans 'Package Price' %}</label>
+                                    </div>
+                                    <div class="dropdown-item" href="#">
+                                        <input data-pricing-type="free" type="radio" name="pricingType"
+                                            id="FreeCheckbox" data-treatment-slug-for-price="{{treatment_slug}}"
+                                            onclick="changePricingType(this)">
+                                        <label for="FreeCheckbox">{% trans 'Free' %}</label>
+                                    </div>
+                                    <div class="dropdown-item" href="#">
+                                        <input data-pricing-type="inpackage" type="radio" name="pricingType"
+                                            id="inPackageCheckbox" data-treatment-slug-for-price="{{treatment_slug}}"
+                                            onclick="changePricingType(this)">
+                                        <label for="inPackageCheckbox">{% trans 'In Package' %}</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2  d-flex gap-1 external-one-11 treatments-price-table" style="font-size: 14px;">
+                        <span class="treatments-price-total">
+
+                        </span><i class="fa-solid fa-dollar-sign" style="margin-top: 3px;"></i>
+                    </div>
+                    <div class="col-md-1 d-flex justify-content-end gap-3" style="font-size: 14px;">
+                        <div class="d-flex justify-content-center align-items-center gap-3 px-3 py-1 rounded table-add"
+                            style="background-color: rgba(37, 49, 89, 1); cursor: pointer;">
+                            <img data-treatmentslug="{{treatment_slug}}"
+                                src="/static/img/treatments-chosse-table-file-icon.svg" alt=""
+                                onclick="table_add_notes_treatments(this)">
+                        </div>
+                        <div data-treatmentslug="{{treatment_slug}}" class="trash-icon-container" data-row="data-11">
+                            <i class="fas fa-trash p-2 rounded"
+                                style="background-color: rgba(37, 49, 89, 1); cursor: pointer;"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-2 treatment-note-container" data-treatmentslug="">
+                        {% if notes %}
+                        {% for key,value in notes.items %}
+                        {% if key == treatment_slug %}
+                        <textarea class="treatment-comment treatment-note" oninput="treatment_note_input(this)"
+                            placeholder="{% trans 'Write your notes...' %}"> {{value}}</textarea>
+                        {% else %}
+                        <textarea class="treatment-comment d-none treatment-note" oninput="treatment_note_input(this)"
+                            placeholder="{% trans 'Write your notes...' %}"></textarea>
+                        {% endif %}
+                        {% endfor %}
+                        {% else %}
+                        <textarea class="treatment-comment d-none treatment-note" oninput="treatment_note_input(this)"
+                            placeholder="{% trans 'Write your notes...' %}"></textarea>
+                        {% endif %}
+
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="row p-3 rounded my-2 d-flex d-none" style="background-color: rgba(13, 23, 53, 1); ">
+                    <div class="col-md-5 d-flex align-items-center gap-3  diagnosis-container" style="font-size: 24px;">
+                        <img src="/static/img/treatments-table-datrted-icon.svg" alt="">
+                        <div class="form-check">
+                            <!-- <input class="form-check-input d-flex gap-2" type="radio" name="flexRadioDefaultTree"
+                                id="flexRadioDefaultTree" style="margin-top: 10px;"> -->
+                            <label class="form-check-label" for="flexRadioDefaultTree">
+                                Discount
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2" id="data-13" style="font-size: 14px;"></div>
+                    <div class="col-md-2 " style="font-size: 14px;"></div>
+                    <div class="col-md-2  d-flex gap-2 external-one-11" style="font-size: 14px;"></div>
+                    <div class="col-md-1 d-flex justify-content-end gap-3" style="font-size: 14px;">
+                        <div class="d-flex justify-content-center align-items-center gap-3 px-3 py-1 rounded table-add"
+                            style="background-color: rgba(37, 49, 89, 1); cursor: pointer;">
+                            <img src="/static/img/treatments-chosse-table-file-icon.svg" alt="" onclick="">
+                        </div>
+                        <div data-treatmentslug="{{treatment_slug}}" class="trash-icon-container" data-row="data-11">
+                            <i class="fas fa-trash p-2 rounded"
+                                style="background-color: rgba(37, 49, 89, 1); cursor: pointer;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3 mb-5">
+            <div class="treatments-price px-3 py-4">
+                <h4>{% trans 'PRICE' %}</h4>
+                <p>{% trans 'Total price of planned treatments for teeth' %}</p>
+            </div>
+            <div class="transparents-total-price px-3 pt-4 pb-1">
+                <h4>{% trans 'Total Price' %}</h4>
+                <span class="transparents-total-price-span"></span> <span>$</span>
+            </div>
+            <div class="treatments-discound px-3 py-4">
+                <h4>{% trans 'Discount' %}</h4>
+                <div class="d-flex">
+                    <input value="{% if discount %}{{discount}}{% endif %}" type="text" oninput="discount_input(this)"
+                        id="discountInput" ><span style="margin-top: 5px; margin-left: 5px;">$</span>
+                </div>
+            </div>
+            <div class="row transparents-notes px-3 py-4">
+                <div class="col-md-8 transparents-notes-one" style="padding: 0px!important;">
+                    <h4>{% trans 'NOTES' %}</h4>
+                    <div class="col-md-8 mt-2 treatment-container">
+                        <textarea oninput="general_note_input(this)" class="treatment-comment "
+                            placeholder="{% trans 'Write your notes..' %}">{% if general_note and general_note != "None" %}{{general_note}}{% endif %}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex justify-content-end transparents-discount-price">
+                    <div>
+                        <h4>{% trans 'Discounted Price' %}</h4>
+                        <span class="discounted-price" style="margin-top: 6px; font-size: 24px;"></span><span style="margin-left: 5px;">$</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- <div class="col-md-4 chosse-option mt-4">
+        <div class="d-flex justify-content-between">
+            <div class="chosse-option-titile">
+                <h3>CHOOSE OPTION</h3>
+                <p>Contrary to popular belief.</p>
+            </div>
+            <div class="d-flex gap-2">
+                <div onclick="reset()" class="icon-border-light icon-reset rounded" id="myTooltipFive"><i
+                        class="fa-solid fa-arrow-rotate-left"></i>
+                </div>
+                <div class="icon-border-light rounded transparents-discount" id="myTooltip">
+                    <img src="/static/img/treatments-chosse-two-icon.svg" alt="">
+                </div>
+                <div class="icon-border-light rounded" id="myTooltipTwo"><img
+                        src="/static/img/treatments-chosse-tree-icon.svg" alt="">
+                </div>
+                <div class="icon-border-light rounded " id="myTooltipTree"><img
+                        src="/static/img/treatments-chosse-four-icon.svg" alt="">
+                </div>
+                <div class="icon-border-light rounded" id="myTooltipFour"><img
+                        src="/static/img/treatments-chosse-five-icon.svg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="justify-content-center intact-dropdown-chosse crown-icon-block d-none">
+            <div>
+                <input class="search-diagnosis-chosse" type="search" name="" id="" placeholder="Search">
+                <div>
+                    <div class="solid-gray-color">CROWN</div>
+                    <div class="dropdown-cild">Decayed</div>
+                    <div class="dropdown-cild">Leaking</div>
+                    <div class="dropdown-cild">Worn</div>
+                </div>
+                <div class="d-flex justify-content-between search-close py-2 ">
+                    <span class="crown-close">Close</span>
+                    <span class="crown-save">Save</span>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center intact-dropdown-chosse other-icon-block d-none mt-3">
+            <div>
+                <input class="search-diagnosis-chosse" type="search" name="" id="" placeholder="Search">
+                <div>
+                    <div class="solid-gray-color">OTHER</div>
+                    <div class="dropdown-cild">Decayed</div>
+                    <div class="dropdown-cild">Leaking</div>
+                    <div class="dropdown-cild">Worn</div>
+                </div>
+                <div class="d-flex justify-content-between search-close py-2 ">
+                    <span class="crown-close">Close</span>
+                    <span class="crown-save">Save</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="justify-content-center intact-dropdown-chosse mt-3 Implant-icon-block ">
+            <div>
+                <input class="search-diagnosis-chosse" type="search" name="" id="" placeholder="Search">
+                <div>
+                    <div class="solid-gray-color">IMPLANT + ABUTMENT</div>
+                    <div class="dropdown-cild">Bone Loss</div>
+                    <div class="dropdown-cild">Gingival Reccesion</div>
+                    <div class="dropdown-cild">Malpositioned</div>
+                </div>
+                <div class="d-flex justify-content-between search-close py-2 ">
+                    <span class="implant-close">Close</span>
+                    <span class="implant-save">Save</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="justify-content-center intact-dropdown-chosse filled-icon-block mt-3 d-none">
+            <div>
+                <input class="search-diagnosis-chosse" type="search" name="" id="" placeholder="Search">
+                <div>
+                    <div class="solid-gray-color">FILLED</div>
+                    <div class="dropdown-cild">M</div>
+                    <div class="dropdown-cild">O</div>
+                    <div class="dropdown-cild">D</div>
+                </div>
+                <div class="d-flex justify-content-between search-close py-2 ">
+                    <span class="filler-close">Close</span>
+                    <span class="filler-save">Save</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+{% csrf_token %}
+
+</div>
+
+{% endblock %}
+{% block customJs %}
+<script>
+    var image_report_id = "{{wizard_id}}"
+    var plan_id = "{{plan_id}}"
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val()
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/treatments.js' %}"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/toastify.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/sweatalert.js' %}"></script>
+<script src="{% static 'js/dropzone.js' %}"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+
+    $('#searchInput').on('input', function() {
+        var searchText = $(this).val().toLowerCase().trim(); 
+        console.log("Arama Metni: " + searchText);
+        $('.treatment-container').each(function() {
+            var container = $(this);
+            var label = container.find('.form-check-label'); 
+            var treatmentMethod = label.text().toLowerCase().trim(); 
+            if (treatmentMethod.includes(searchText)) {
+                container.show(); 
+            } else {
+                container.hide(); 
+            }
+        });
+        var treatmentContainer = $('.treatment-container');
+        treatmentContainer.sort(function(a, b) {
+            var labelA = $(a).find('.form-check-label').text().toLowerCase();
+            var labelB = $(b).find('.form-check-label').text().toLowerCase();
+            return labelA.localeCompare(labelB); 
+        });
+        $('#treatmentList').empty().append(treatmentContainer);
+    });
+
+
+
+
+
+
+function toggleNestedDropdown(element) {
+        var dropdownContent = element.querySelector('.dropdown-content');
+        if (dropdownContent.classList.contains('d-block')) {
+            dropdownContent.classList.remove('d-block');
+        } else {
+            // Tüm dropdown içeriklerini kapat
+            var allDropdowns = document.querySelectorAll('.dropdown-content');
+            allDropdowns.forEach(function(item) {
+                item.classList.remove('d-block');
+            });
+            // Tıklanan öğenin dropdown içeriğini aç
+            dropdownContent.classList.add('d-block');
+        }
+    }
+
+    $('.dropdown-item').each(function(index) {
+    var input = $(this).find('input');
+    var label = $(this).find('label');
+    var newId = 'pricingTypeCheckbox' + index;
+    input.attr('id', newId);
+    label.attr('for', newId);
+});
+const allTreatments = document.querySelector('.all-treatments');
+const divs = Array.from(allTreatments.querySelectorAll('.transparents-Extraction'));
+let draggedItem = null;
+divs.forEach((div, index) => {
+    const treatmentSlug = div.dataset.treatmentslug;
+    div.addEventListener('dragstart', () => {
+        draggedItem = div;
+        setTimeout(() => {
+            div.style.display = 'none';
+        }, 0);
+    });
+
+    div.addEventListener('dragend', () => {
+        setTimeout(() => {
+            draggedItem.style.display = 'block';
+            draggedItem = null;
+        }, 0);
+    });
+
+    div.addEventListener('dragover', e => {
+        e.preventDefault();
+    });
+
+    div.addEventListener('drop', () => {
+        if (draggedItem !== null) {
+            const parent = div.parentNode;
+            const nextSibling = div.nextSibling === draggedItem ? div : div.nextSibling;
+            parent.insertBefore(draggedItem, nextSibling);
+            // Yer değiştirilen öğelerin indekslerini alarak konsola yazdır
+            const newIndex = divs.indexOf(div);
+            const oldIndex = divs.indexOf(draggedItem);
+            // Hangi ana div içinde hangi sıradaki div olduğunu belirlemek için sayacı kullan
+            let counter = 0;
+            let parentDiv = div.parentNode;
+            while (parentDiv && parentDiv !== allTreatments) {
+                parentDiv = parentDiv.parentNode;
+                counter++;
+            }
+            console.log(`Öğe ${oldIndex + 1}. sıradan , ${newIndex + 1}. Sıraya taşındı`);
+             console.log(`Taşınan öğenin treatmentslug değeri: ${treatmentSlug}`);
+        }
+        $.ajax({
+            url: "",
+            method: "POST",
+            headers: { "X-CSRFToken": csrf_token },
+            data: {
+                treatment_slug: inputSlug,
+                oldIndex : oldIndex,
+                newIndex: newIndex,
+                plan_id: plan_id,
+            },
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (error) {
+                Toastify({
+                    text: "{% trans 'An error occurred while saving treatment note' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        })
+    });
+});
+
+
+
+
+    function toggleNestedDropdown(element) {
+        $(".dropdown-content").not($(element).find(".dropdown-content")).hide();
+        $(element).find(".dropdown-content").toggle();
+    }
+    function closeDropdown(element) {
+        $(element).closest(".dropdown-content").hide();
+    }
+    $(document).on("click", function (event) {
+        if (!$(event.target).closest('.missing-part').length) {
+            $(".dropdown-content").hide();
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        var redirect_status = "{{redirect_status}}"
+        if (redirect_status == "True") {
+            window.location.href = "{{plan_id}}"
+        }
+        var dict_data = {{ data_for_svg| safe}};
+    var treatment_svg_dict = {{ treatment_svgs| safe}};
+    for (const [key, value] of Object.entries(dict_data)) {
+        var svgURL = value.svg_path;
+
+        $.ajax({
+            url: svgURL,
+            method: "GET",
+            dataType: "text",
+            success: function (svgContent) {
+                var externalDataAttribute = "data-" + key;
+                var element = $(`[data-tooth="${externalDataAttribute}"]`);
+                // $(element).find("img").remove() 
+                var svgElement = $(svgContent);
+                var width = svgElement.attr('width');
+                var height = svgElement.attr('height');
+                var new_width = (width * 270) / 100
+                var new_heigth = (height * 270) / 100
+                svgElement.attr({
+                    'width': new_width,
+                    'height': new_heigth,
+                    'id': key,
+                    'data-tooth-number': key
+                });
+                if (!element.data("missing") === true) {
+                    element.html(svgElement);
+                    if (parseInt(key) > 30) {
+                        element.append(`
+                            <span class="d-flex justify-content-center align-items-center rounded"  style="position: absolute; top: -25px; width: 48px; background-color:rgba(14, 24, 55, 1);">${key}</span>
+                            `);
+                    } else {
+                        element.append(`
+                                <span class="d-flex justify-content-center align-items-center rounded"  style="position: absolute; bottom: -25px; width: 48px; background-color:rgba(14, 24, 55, 1);">${key}</span>
+                            `);
+                    }
+
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Hata oluştu:", error);
+            }
+        });
+    }
+    // START - APPEND DISEASE SVG FILES TO TOOTH //
+    for (const [key, value] of Object.entries(treatment_svg_dict)) {
+        for (const index in value.teeth) {
+            if (value.teeth.hasOwnProperty(index)) {
+                const treatment = value.teeth[index];
+                var svg_url = treatment.svg_path;
+                var svg_slug = treatment.tooth_id;
+                if (svg_url) {
+                    appendSvgToTooth(svg_slug, svg_url, svg_slug, key);
+                }
+            }
+        }
+
+    }
+    // END - APPEND DISEASE SVG FILES TO TOOTH //
+    var treatment_data = {{ treatments_for_js| safe}}
+    var pricing_data = {{ pricing_types| safe}}
+    for (const [key, value] of Object.entries(treatment_data)) {
+        var total_price = treatment_data[key]["total_price"]
+        var containerElement = $('.treatment-container[data-treatmentslug="' + key + '"]');
+        var totalPriceElement = containerElement.find(".treatments-price-total")
+        if (Object.keys(pricing_data).length === 0) {
+            totalPriceElement.text(total_price)
+        }
+        if (key in pricing_data) {
+            var type = pricing_data[key]["type"]
+            var unit_price = treatment_data[key]["unit_price"]
+            var amount = treatment_data[key]["amount"]
+            console.log("type", type)
+            console.log("container", containerElement)
+            var amountElement = containerElement.find(".amount")
+            var priceInput = containerElement.find(".price-input")
+            var inputs = containerElement.find(".dropdown-menu input");
+            var matchedInput = inputs.filter(function () {
+                return $(this).data("pricing-type") === type;
+            });
+            matchedInput.prop('checked', true)
+            if (type === "inpackage" || type === "free") {
+                priceInput.val(type)
+                priceInput.prop('disabled', false)
+                totalPriceElement.text("-")
+            }
+            else if (type === "package") {
+                priceInput.text(unit_price)
+                totalPriceElement.text(unit_price)
+                amountElement.text("1x")
+            } else {
+                priceInput.text(unit_price)
+                totalPriceElement.text(total_price)
+            }
+        } else {
+            totalPriceElement.text(total_price)
+        }
+    }
+    updateTotalValue()
+    updateDiscountAndTotalDifference()
+    })
+    
+    function deleteTreatmentFromTooth(clickedIcon, tooth_id, treatment_slug) {
+        $.ajax({
+            url: "{% url 'wizard-delete-treatment-from-tooth' %}",
+            method: "POST",
+            headers: { "X-CSRFToken": csrf_token },
+            data: {
+                treatment_slug: treatment_slug,
+                tooth_id: tooth_id,
+                image_report_id: image_report_id,
+                plan_id: plan_id,
+            },
+            success: function (response) {
+                var price = response.price
+                let parent_div = $(clickedIcon).parent()
+                let treatment_div = $(parent_div).parent().parent()
+                parent_div.fadeOut(300, function () {
+                    parent_div.remove();
+                    if (treatment_div.find('.gap-2.treatments-new-span.rounded.d-flex.px-2.justify-content-between.align-items-center').length === 0) {
+                        treatment_div.fadeOut(300, function () {
+                            treatment_div.remove();
+                        });
+                    }
+                });
+                var svg_element = $('svg[data-svg-slug="' + tooth_id + '"]');
+                svg_element.fadeOut(500, function () {
+                    $(this).remove();
+                });
+                var amount_element = treatment_div.find(".transparents-amount-text")
+                var price_element = treatment_div.find(".treatments-price-table")
+                var spanInPriceElement = price_element.find("span");
+                var old_price = spanInPriceElement.text()
+                var new_price = Number(old_price) - price
+                price_element.fadeOut(300, function () {
+                    spanInPriceElement.text(new_price);  // Metni değiştir
+                    price_element.fadeIn(300);
+                });
+                newAmount = parseInt(treatment_div.find(".transparents-amount-text").text().split("x")[0]) - 1
+                amount_element.fadeOut(300, function () {
+                    amount_element.text(newAmount + "x").fadeIn(300);
+                });
+                Toastify({
+                    text: "{% trans 'Treatment has been deleted from tooth successfully' %}",
+                    duration: 3000,
+                    backgroundColor: "#28a745",
+                }).showToast();
+                setTimeout(function () {
+                    updateTotalValue();
+                }, 1000);
+
+            },
+            error: function (error) {
+                Toastify({
+                    text: "{% trans 'An error occurred while deleting treatment from tooth' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        })
+    }
+    function sendRequestForAddingTreatment(treatment_slug, activeToothNumbersList) {
+        $.ajax({
+            url: "{% url 'add-treatment-to-teeth' %}",
+            method: "POST",
+            headers: { "X-CSRFToken": csrf_token },
+            data: {
+                treatment_slug: treatment_slug,
+                activeToothNumbersList: activeToothNumbersList,
+                plan_id: plan_id,
+            },
+            success: function (response) {
+                var targetSlug = response.treatment_slug;
+                var targetDiv = $(".transparents-Extraction.treatment-container[data-treatmentslug='" + targetSlug + "']");
+                var teeth = response.teeth
+                var toothNumber = response.teeth; // response nesnesinden tooth_number değerini alın
+                var selectedElement = $('.external.external-one#' + toothNumber); // tooth_number değeriyle uyumlu olan elementi seçin
+                console.log("toothNumber",toothNumber)
+
+                var price = response.price
+                var unit_price = response.unit_price
+                var currency = response.currency
+                if (targetDiv.length > 0) {
+                    var diagnosisContainer = targetDiv.find('.diagnosis-container');
+                    var amount_element = targetDiv.find(".transparents-amount-text")
+                    var price_element = targetDiv.find(".treatments-price-table")
+                    var spanInPriceElement = price_element.find("span");
+                    var old_price = spanInPriceElement.text()
+                    amount = parseInt(targetDiv.find(".transparents-amount-text").text().split("x")[0])
+                    for (var i = 0; i < teeth.length; i++) {
+                        var new_price = parseInt(old_price) + price
+                        amount += 1
+                        var toothNumber = teeth[i];
+                        var newElement = `<div class="gap-2 treatments-new-span rounded d-flex px-2 justify-content-between align-items-center">${toothNumber} <i class="fa-solid fa-xmark treatments-x" style="font-size: 14px; cursor: pointer;" onclick="deleteTreatmentFromTooth(this, '${toothNumber}', '${targetSlug}')"></i></div>`;
+                        diagnosisContainer.append(newElement);
+                        if (response.svg_paths.hasOwnProperty(toothNumber)) {
+                            var treatment_svg_path = response.svg_paths[toothNumber]
+                            appendSvgToTooth(toothNumber, treatment_svg_path, toothNumber, targetSlug)
+
+                        }
+                    }
+                    price_element.fadeOut(300, function () {
+                        spanInPriceElement.text(new_price);  // Metni değiştir
+                        price_element.fadeIn(300);
+                    });
+                    amount_element.fadeOut(300, function () {
+                        amount_element.text(amount + "x").fadeIn(900);
+                    });
+
+                }
+                else {
+                    targetDiv = $(".all-treatments")
+                    let treatment_name = response.treatment_name
+                    var newElement = `
+                        <div data-treatmentslug="${targetSlug}" class="row p-3 rounded my-2 d-flex transparents-Extraction treatment-container" style="background-color: rgba(13, 23, 53, 1); ">
+                            <div class="col-md-5 d-flex align-items-center  gap-3  diagnosis-container" style="font-size: 24px;">
+                                <img src="/static/img/treatments-table-datrted-icon.svg" alt="">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        ${treatment_name}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-2 transparents-amount-text" style="font-size: 14px;">${teeth.length}x</div>
+                            <div class="col-md-2 treatments-unit-price d-flex" style="font-size: 14px;">
+                                <input class="price-input" type="text" value="${unit_price}" oninput="treatment_detail_input(this)"> 
+                                <div class="d-flex gap-2"  style="margin-top: 9px;">
+                                    <i class="fa-solid fa-dollar-sign ms-2"></i>
+                                    <div class="dropdown">
+                                        <button class="dropdown-toggle button-dropdown" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none!important; background-color: transparent!important; padding: 0px!important; margin-top: -8px; font-size: 20px; color: white;">
+                                          <!-- <i class="fa-solid fa-chevron-down"></i> -->
+                                        </button>
+                                        <div class="dropdown-menu p-0 rounded" aria-labelledby="dropdownMenuButton" style="background-color: rgb(37, 49, 89);">
+                                          <div class="d-flex justify-content-between px-3 align-items-center" style="border-bottom: 1px solid rgba(11, 18, 43, 1);">
+                                            <p style="font-size: 10px; margin-top: 13px;">Fiyat modunu belirle</p>
+                                            <i class="fa-solid fa-xmark" style="color: white; font-size: 13px; margin-top: -3px; cursor: pointer;" onclick="closeDropdown()"></i>
+                                          </div>
+                                          
+                                          <div class="dropdown-item" href="#">
+                                            <input data-pricing-type="unit" type="checkbox" id="unitPriceCheckbox" data-treatment-slug-for-price="${targetSlug}" onclick="changePricingType(this)" checked>
+                                            <label for="unitPriceCheckbox">{% trans 'Unit Price' %}</label>
+                                          </div>
+                                          <div class="dropdown-item" href="#">
+                                            <input data-pricing-type="package" type="checkbox" id="packagePriceCheckbox" data-treatment-slug-for-price="${targetSlug}" onclick="changePricingType(this)">
+                                            <label for="packagePriceCheckbox">{% trans 'Package Price' %}</label> 
+                                          </div>
+                                          <div class="dropdown-item" href="#">
+                                            <input data-pricing-type="free" type="checkbox" id="FreeCheckbox" data-treatment-slug-for-price="${targetSlug}" onclick="changePricingType(this)">
+                                            <label for="FreeCheckbox">{% trans 'Free' %}</label> 
+                                          </div>
+                                          <div class="dropdown-item" href="#">
+                                            <input data-pricing-type="inpackage" type="checkbox" id="inPackageCheckbox" data-treatment-slug-for-price="${targetSlug}" onclick="changePricingType(this)">
+                                            <label for="inPackageCheckbox">{% trans 'In Package' %}</label> 
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2  d-flex gap-2 external-one-11 treatments-price-table" style="font-size: 14px;">
+                                <span class="treatments-price-total">${price}</span></div>
+                            <div class="col-md-1 d-flex justify-content-end gap-3" style="font-size: 14px;">
+                                <div class="d-flex justify-content-center align-items-center gap-3 px-3 py-1 rounded table-add" style="background-color: rgba(37, 49, 89, 1); cursor: pointer;">
+                                    <img src="/static/img/treatments-chosse-table-file-icon.svg" alt="">
+                                </div>
+                                <div data-treatmentslug="${targetSlug}" class="trash-icon-container" data-row="data-11">
+                                    <i class="fas fa-trash p-2 rounded" style="background-color: rgba(37, 49, 89, 1); cursor: pointer;"></i>
+                                </div>
+                            </div>
+                        </div>`
+                    targetDiv.append(newElement);
+                    var container = $(targetDiv).find(`div[data-treatmentslug="${targetSlug}"]`).first()
+                    var diagnosisContainer = $(container).find('.diagnosis-container')
+                    var added_elements = ""
+                    for (var i = 0; i < teeth.length; i++) {
+                        var toothNumber = teeth[i];
+                        var newlyAddedElement = targetDiv.children().last();  // En son eklenen elementi seç
+                        newlyAddedElement.hide().fadeIn(300);
+                        if (response.svg_paths.hasOwnProperty(toothNumber)) {
+                            var treatment_svg_path = response.svg_paths[toothNumber]
+                            appendSvgToTooth(toothNumber, treatment_svg_path, toothNumber, targetSlug)
+                        }
+                        added_elements += `<div class="gap-2 treatments-new-span rounded d-flex px-2 justify-content-between align-items-center">${toothNumber} <i class="fa-solid fa-xmark treatments-x" style="font-size: 14px; cursor: pointer;" onclick="deleteTreatmentFromTooth(this, '${toothNumber}', '${targetSlug}')"></i></div>`;
+                    }
+                    diagnosisContainer.append($(added_elements));
+                };
+                setTimeout(function () {
+                    updateTotalValue();
+                    updateDiscountAndTotalDifference();
+                }, 1000);
+            },
+            error: function (error) {
+                Toastify({
+                    text: "{% trans 'An error occurred while adding treatment to tooth' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        })
+    }
+    //fiyat belirleme
+    function treatment_detail_input(inputElement) {
+        var inputValue = $(inputElement).val().trim();
+        var parentofinput = $(inputElement).parent()
+        var amountSpan = parentofinput.prev().find(".amount");
+        var totalSpan = parentofinput.next().find(".treatments-price-total");
+        var amountText = amountSpan.text();
+        var amount = amountText.split("x")[0]
+        var total_price = parseInt(amount)*parseInt(inputValue)
+        totalSpan.text(total_price) 
+        var inputSlug = $(inputElement).closest('.transparents-Extraction').data('treatmentslug');
+        $.ajax({
+            url: "{% url 'update-treatment-price' %}",
+            method: "POST",
+            headers: { "X-CSRFToken": csrf_token },
+            data: {
+                treatment_slug: inputSlug,
+                price: inputValue,
+
+            },
+            success: function (response) {
+            },
+            error: function (error) {
+                Toastify({
+                    text: "{% trans 'An error occurred while updating price of treatment' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        })
+    }
+    function treatment_note_input(inputElement) {
+        var inputValue = $(inputElement).val().trim();
+        var inputSlug = $(inputElement).closest('.transparents-Extraction').data('treatmentslug');
+        $.ajax({
+            url: "{% url 'add-note-to-treatment' %}",
+            method: "POST",
+            headers: { "X-CSRFToken": csrf_token },
+            data: {
+                treatment_slug: inputSlug,
+                plan_id: plan_id,
+                note: inputValue
+
+            },
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (error) {
+                Toastify({
+                    text: "{% trans 'An error occurred while saving treatment note' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        })
+    }
+    function general_note_input(inputElement) {
+        var inputValue = $(inputElement).val().trim();
+        $.ajax({
+            url: "{% url 'add-general-note' %}",
+            method: "POST",
+            headers: { "X-CSRFToken": csrf_token },
+            data: {
+                plan_id: plan_id,
+                note: inputValue
+            },
+            success: function (response) {
+            },
+            error: function (error) {
+                Toastify({
+                    text: "{% trans 'An error occurred while saving note' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        })
+    }
+    function discount_input(inputElement) {
+        var inputValue = $(inputElement).val().trim();
+        $.ajax({
+            url: "{% url 'apply-discount' %}",
+            method: "POST",
+            headers: { "X-CSRFToken": csrf_token },
+            data: {
+                plan_id: plan_id,
+                discount: inputValue
+            },
+            success: function (response) {
+            },
+            error: function (error) {
+                Toastify({
+                    text: "{% trans 'An error occurred while applying discount' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        })
+    }
+
+    function table_add_notes_treatments(clickedElement) {
+        var clickedContainer = $(clickedElement).parent().parent()
+        var textareaSlug = clickedContainer.data("treatmentslug");
+        var textareaElement = $(clickedContainer).closest('.row').find('.treatment-note-container .treatment-comment');
+        textareaElement.removeClass("d-none");
+    }
+
+    $('.table-add').on('click', function () {
+        table_add_notes_treatments(this);
+    });
+    function addNewTreatmentPlan() {
+    $.ajax({
+        url: "{% url 'create-new-treatment-plan' %}",
+        headers: { "X-CSRFToken": csrf_token },
+        method: "GET",
+        data: {
+            image_report_id: image_report_id
+        },
+        success: function (response) {
+            Toastify({
+                text: "{% trans 'New treatment plan has been created successfully' %}",
+                duration: 2000,
+                backgroundColor: "#28a745",
+            }).showToast()
+            var wizard_id = "{{wizard_id}}"
+            var new_plan_id = response.plan_id
+            var newElement = `
+                <div class="treatments-tab treatments-tab-one d-flex gap-2 align-items-center justify-content-center py-2"
+                    style="background-color: rgba(26, 38, 78, 1); cursor: pointer;">
+                    <a style="min-width: 9%;" href="/treatment-wizard/treatments/${wizard_id}/${new_plan_id}">
+                        Treatment Plan <span>${response.counter}</span>
+                    </a> 
+                    <i id="${response.plan_id}" class="delete-treatment fa-solid fa-xmark" 
+                        style="font-size: 14px; cursor: pointer;"></i>
+                </div>
+            `;
+            var targetDiv = $(".treatment-tabs");
+            var appendDiv = targetDiv.find('.treatments-tab-append'); // "treatments-tab-append" sınıfına sahip div öğesini bulun
+            var appendedElement = $(newElement).insertBefore(appendDiv);
+            appendedElement.hide().fadeIn(1000);
+            appendedElement.find('.delete-treatment').on('click', function() {
+                var treatmentId = $(this).attr('id');
+                deleteTreatment(treatmentId);
+            });
+        },
+        error: function(error) {
+            Toastify({
+                text: "{% trans 'An error occurred while creating treatment plan' %}",
+                duration: 3000,
+                backgroundColor: "#d9534f"
+            }).showToast();
+        }
+    });
+}
+// Silme işlemi için modalı açan işlevi tanımlayın
+
+function deleteTreatment(treatment_id) {
+    var current_plan_id = "{{plan_id}}";
+    $.ajax({
+        url: "{% url 'delete-treatment-plan' %}",
+        method: "POST",
+        headers: { 'X-CSRFToken': csrf_token },
+        data: { "treatment_plan_id": treatment_id, "image_report_id": image_report_id },
+        success: function (response) {
+            if (response.is_last) {
+                Toastify({
+                    text: "{% trans 'The last treatment plan cannot be deleted' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+                return false;
+            }
+            var first_treatment_plan_id = response.first_treatment_plan_id;
+            Toastify({
+                text: "{% trans 'Treatment plan has been deleted' %}",
+                duration: 2000,
+                backgroundColor: "#28a745",
+            }).showToast();
+            $('#deleteTreatmentModal').modal('hide');
+            $("#" + treatment_id).parent().fadeOut(1000, function () {
+                $(this).remove();
+            });
+            if (current_plan_id === treatment_id) {
+                window.location.href = first_treatment_plan_id;
+            }
+        },
+        error: function (error) {
+            Toastify({
+                text: "{% trans 'An error occurred while deleting treatment plan' %}",
+                duration: 3000,
+                backgroundColor: "#d9534f"
+            }).showToast();
+        }
+    });
+}
+
+
+    function changeUniqueSrcs(clickedTreatment) {
+    let treatment_slug = $(clickedTreatment).data("treatmentslug");
+    var activeElements = $('.external-one.mising-active'); 
+    var activeToothNumbersList = [];
+    activeElements.each(function () {
+        var toothNumber = $(this).find('span').text(); 
+        activeToothNumbersList.push(toothNumber);
+    });
+    sendRequestForAddingTreatment(treatment_slug, activeToothNumbersList);
+    $('.external-one.mising-active').removeClass('mising-active');
+    console.log("Seçili diş numaraları:", activeToothNumbersList);
+}
+
+
+
+
+
+    function appendSvgToTooth(key, svg_url, svg_slug, targetSlug) {
+        var svgURL = window.location.origin + "/" + svg_url;
+        $.ajax({
+            url: svgURL,
+            method: "GET",
+            dataType: "text",
+            success: function (svgContent) {
+                var svgElement = $(svgContent);
+                tooth_svg_element = $('svg[data-tooth-number="' + key + '"]');
+                //tooth_svg_element = $("#"+key)
+                tooth_svg_element.append(svgElement)
+                svgElement.attr({
+                    'data-svg-slug': svg_slug,
+                });
+                if (targetSlug) {
+                    svgElement.attr({
+                        'data-treatment-slug': targetSlug,
+                    });
+                }
+                tooth_svg_element.append(svgElement)
+            },
+            error: function (xhr, status, error) {
+                console.error("Hata oluştu:", error);
+            }
+        });
+    }
+    $('.delete-treatment').click(function () {
+        var treatment_id = $(this).attr('id')
+        $('#deleteTreatmentButton').attr('data-treatment-id', treatment_id)
+        $('#deleteTreatmentModal').modal('show');
+    });
+    $('#deleteTreatmentButton').click(function () {
+        var treatment_id = $(this).attr('data-treatment-id')
+        deleteTreatment(treatment_id)
+    })
+    $("#deleteTreatmentClose").click(function () {
+        $("#deleteTreatmentModal").modal('hide')
+    })
+    $("#deleteTreatmentButton").click(function () {
+        $("#deleteTreatmentModal").modal('hide')
+    })
+    $("#resetTreatmentYes").click(function () {
+        $("#resetTreatmentModal").modal('hide')
+    })
+    $("#resetTreatmentClose").click(function () {
+        $("#resetTreatmentModal").modal('hide')
+    })
+    function sendDeleteAllTreatmentsRequest(treatmentSlug) {
+        $.ajax({
+            url: "{% url 'delete-specific-treatment' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+                "plan_id": plan_id,
+                "treatment_slug": treatmentSlug,
+            },
+            success: function (response) {
+                $(`div[data-treatmentslug="${treatmentSlug}"]`).fadeOut(600, function () {
+                    $(this).remove(); // fadeOut tamamlandığında div'i kaldır
+                });
+            },
+            error: function (error) {
+                console.log("err")
+            }
+
+        })
+    }
+    $(document).ready(function () {
+        var clickedRowId;
+        $('.trash-icon-container').click(function () {
+            clickedRowId = $(this).attr('data-treatmentslug');
+            $('#myModal').modal('show');
+        });
+        $("#modalYes").click(function () {
+            $('#myModal').modal('hide');
+            var treatmentSlug = clickedRowId
+            sendDeleteAllTreatmentsRequest(treatmentSlug)
+            var treatment_svg_element = $(`svg[data-treatment-slug="${treatmentSlug}"]`)
+            treatment_svg_element.each(function () {
+                $(this).fadeOut(600, function () {
+                    $(this).remove();
+                });
+            });
+
+        });
+    });
+    function reset() {
+        $('#resetTreatmentModal').modal('show');
+
+    }
+    function resetYes() {
+        $.ajax({
+            url: "{% url 'reset-treatment' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+                "plan_id": plan_id
+            },
+            success: function (response) {
+                $('.all-treatments .treatment-container').fadeOut(300, function () {
+                    $(this).remove();
+                });
+                var svgTreatmentElements = $('svg[data-svg-slug]')
+                svgTreatmentElements.fadeOut(300, function () {
+                    $(this).remove
+                })
+
+                console.log("00", svgTreatmentElements)
+            },
+            error: function (error) {
+
+            }
+        })
+    }
+    function changePricingType(pricing_type) {
+        var chosen_element = $(pricing_type)
+        var treatment_slug = chosen_element.data("treatment-slug-for-price")
+        var type = chosen_element.attr("data-pricing-type")
+        var containerElement = $('div.treatment-container[data-treatmentslug="' + treatment_slug + '"]');
+        var amountElement = containerElement.find(".transparents-amount-text .amount")
+        var priceElement = containerElement.find(".treatments-price-total")
+        var priceInput = containerElement.find(".treatments-unit-price .price-input")
+        var teethElements = containerElement.find(".treatments-new-span")
+        var amount = teethElements.length
+        console.log("data attr", treatment_slug, " -- type", type)
+        $.ajax({
+            url: "{% url 'change-pricing-type' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+                "treatment_slug": treatment_slug,
+                "pricing_type": type,
+                "plan_id": plan_id,
+            }, success: function (response) {
+                console.log("response", response)
+                if (type === "package") {
+                    amountElement.text("1x")
+                    var price = response.price
+                    priceInput.val(price)
+                    priceElement.text(`${price}`)
+                    priceInput.prop('disabled', false)
+                }
+                else if (type === "unit") {
+                    amountElement.text(`${amount}x`)
+                    var unit_price = response.price
+                    var total_price = response.price * amount
+                    priceInput.val(unit_price)
+                    priceElement.text(`${total_price}`)
+                    priceInput.prop('disabled', false)
+                }
+                else if (type === "free") {
+                    priceElement.text('-')
+                    priceInput.prop('disabled', true)
+                    priceInput.val("{% trans 'Free' %}")
+                    amountElement.text(`${amount}x`)
+                } else {
+                    priceElement.text("{% trans '-' %}")
+                    priceInput.prop('disabled', true)
+                    priceInput.val("{% trans 'In Package' %}")
+                    amountElement.text(`${amount}x`)
+                }
+                updateTotalValue()
+                updateDiscountAndTotalDifference()
+
+            }, error: function (error) {
+
+            }
+        })
+
+    }
+</script>
+<!-- AJAX REQUESTS & DYNAMIC PROCESSES -->
+
+
+
+
+{% endblock %}

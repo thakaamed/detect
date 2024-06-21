@@ -1,0 +1,335 @@
+@import "../layout/form";
+@import "../abstracts/variables";
+@import "../abstracts/placeholder";
+@import "../abstracts/typography";
+@import "../layout/header";
+@import "../layout/footer";
+@import "../layout/sidebar";
+@import "../base/reset";
+@import "../main";
+@import "../components/button";
+
+$starColor: rgb(190, 190, 190);
+$activeStarColor: #f6b445;
+
+body:not(.dark) {
+  & table.patients-table tbody {
+    & tr td {
+      background-color: $bg-dark-3 !important;
+      color: white !important;
+    }
+    & td .operations-buttons i {
+      color: white !important;
+    }
+  }
+}
+
+.heading-and-items_right {
+  gap: 10px;
+  align-items: center;
+  & .view-icon {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 3px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    &:hover {
+      background-color: rgba($blue-2, 0.7);
+      color: white;
+    }
+    &.active {
+      background-color: $blue-2;
+      color: white;
+    }
+  }
+  & select {
+    background-color: rgba(#fff, 0.25);
+    color: gray;
+  }
+}
+
+.dataTables_length {
+  width: 100%;
+  & label {
+    margin: 0;
+  }
+  & select[name='example_length'] {
+    width: 100px;
+    margin: 0 0 0 auto;
+  }
+}
+
+.dataTables_info {
+  display: none;
+}
+
+body.dark .dataTables_length select[name='example_length'] {
+  color: white;
+}
+
+#patients-table-view {
+  & .contents {
+    & table.patients-table {
+      margin: 20px 0;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+
+      & thead {
+        color: white;
+        & th:first-child {
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+        & th:last-child {
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+        & th {
+          background-color: $bg-dark-2;
+        }
+      }
+      & tbody {
+        & td {
+          color: $bg-dark-1;
+          background-color: white;
+          vertical-align: middle;
+          text-align: center;
+          & .star-icon {
+            color: $starColor;
+            cursor: pointer;
+            &.active {
+              color: $activeStarColor;
+            }
+            & + span {
+              display: none;
+            }
+          }
+        }
+        & td:first-child {
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          text-align: center;
+        }
+        & td:nth-child(4) {
+          text-align: center;
+        }
+        & td:nth-child(8) span {
+          background-color: $blue-2;
+          color: white;
+          padding: 3px;
+          border-radius: 3px 5px;
+          display: inline-block;
+          margin: 2px;
+        }
+        & td:nth-child(9) {
+          & div.operations-buttons {
+            gap: 8px;
+            & i {
+              font-size: 16px;
+              cursor: pointer;
+              color: $blue-2;
+            }
+          }
+        }
+        & td:last-child {
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
+#patients-card-view {
+  & .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px 20px;
+    & .card-item {
+      background-color: white;
+      width: calc((100% - 80px) / 5);
+      border-radius: 10px;
+      padding: 10px 10px 0 10px;
+      @extend %smoothShadow;
+      & .img-container {
+        aspect-ratio: 1.69;
+        border-radius: 10px;
+        overflow: hidden;
+        & img.card-item-img {
+          max-width: 400px;
+          position: absolute;
+          @extend %centerAbsoluteBoth;
+        }
+        & .number {
+          background-color: $blue-2;
+          top: 10px;
+          left: 10px;
+          width: 30px;
+          height: 30px;
+          border-radius: 5px;
+          font-size: 14px;
+          color: white;
+          @extend %smoothShadow;
+          @extend %centerFlexBoth;
+        }
+      }
+      & .content-container {
+        & p:first-child {
+          @extend %centerFlexVertical;
+          gap: 7px;
+          margin: 10px 0;
+          & i {
+            color: $starColor;
+            cursor: pointer;
+            &.active {
+              color: $activeStarColor;
+            }
+          }
+          & span {
+            color: $bg-dark-1;
+            font-weight: 500;
+            font-size: 18px;
+          }
+        }
+        & p:nth-child(2) {
+          color: rgb(30, 30, 30);
+          padding: 0 5px;
+          margin: 5px 0;
+        }
+      }
+      & .tags {
+        @extend %centerFlexBoth;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin: 10px 0;
+        & span {
+          padding: 3px 5px;
+          border-radius: 5px;
+          color: white;
+        }
+      }
+      & .action-btn-container {
+        color: white;
+        width: auto;
+        background-color: $blue-2;
+        border-radius: 7px;
+        padding: 10px 20px;
+        gap: 15px;
+        font-size: 16px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.no-data-container {
+  #no-data {
+    min-width: 800px;
+    max-width: 95%;
+    border-radius: 13px;
+    background-color: white;
+    & h3 {
+      font-size: 24px;
+      margin: 20px 0;
+      color: $bg-dark-1;
+    }
+    & h4 {
+      font-size: 18px;
+      font-weight: 400;
+      color: #636363;
+      margin: 0;
+      & strong {
+        font-size: 16px;
+        font-weight: 500;
+        display: block;
+      }
+    }
+    & button {
+      background-color: $bg-dark-1;
+      color: white;
+      font-size: 16px;
+      padding: 10px 50px;
+      display: block;
+      margin: 50px auto 0 auto;
+    }
+  }
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  float: none!important;
+  text-align: center!important;
+}
+.dataTables_paginate.paging_simple_numbers {
+  & * {
+    color: white !important;
+    border: none !important;
+  }
+  & a {
+    background-color: $bg-dark-2 !important;
+    color: white !important;
+    border-radius: 7px !important;
+    margin: 3px;
+    &.paginate_button {
+      box-shadow: none !important;
+      &.current {
+        background-color: $blue-2 !important;
+        border: 0 !important;
+        &:hover {
+          background-color: $blue-2!important;
+        }
+      }
+      &:hover {
+        background: none !important;
+        background-color: $bg-dark-3 !important;
+      }
+      &.previous,
+      &.next {
+        color: white !important;
+      }
+
+      &.previous.disabled,
+      &.next.disabled {
+        cursor: no-drop;
+        background: none !important;
+        color: rgb(147, 147, 147) !important;
+        &,
+        & i {
+          color: rgb(147, 147, 147) !important;
+        }
+      }
+    }
+  }
+}
+
+table.dataTable.no-footer {
+  border-bottom: 0!important;
+}
+
+.table>:not(:last-child)>:last-child>* {
+  border-bottom-color: transparent!important;
+}
+
+#example_filter {
+  display: none;
+}
+
+.patients-pagination {
+  gap: 5px;
+  font-size: 12px;
+  & button {
+    background-color: $bg-dark-2;
+    color: white !important;
+    &:hover {
+      background-color: $bg-dark-3;
+    }
+    &.active {
+      background-color: $blue-2;
+    }
+  }
+}

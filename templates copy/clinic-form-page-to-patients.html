@@ -1,0 +1,407 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/patients.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>{{specs.title}}</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css" integrity="sha512-7uSoC3grlnRktCWoO4LjHMjotq8gf9XDFQerPuaph+cqR7JC9XKGdvN+UwZMC14aAaBDItdRj3DcSDs4kMWUgg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body.dark #example_length option{
+            background-color: #333!important;
+            color: #fff!important;
+            
+        }
+        .dropzone.dz-started .dz-message {
+            display: block !important;
+        }
+
+        #dropZone {
+            padding: 10px;
+            width: 100%;
+            border-radius: 10px;
+            background-color: transparent;
+        }
+
+        .dropzone {
+            border: 2px dashed #526092!important;
+            background-color: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .dropzone .dz-preview:not(.dz-processing) .dz-progress {
+            display: none;
+        }
+        .dropzone .dz-preview.dz-image-preview {
+            background-color: transparent;
+            margin: 5px 0;
+        }
+
+        .was-validated input:invalid {
+            border-color: red;
+        }
+
+        .was-validated textarea:invalid {
+            border-color: red;
+        }
+
+        .was-validated select:invalid {
+            border-color: red;
+        }
+    </style>
+{% endblock %}
+{% block headerButtons %}
+
+{% endblock %}
+
+{% block content %}
+
+    <main class="position-relative" style="left: 0; height: calc(100vh - 110px);">
+        <div id="thanksDiv" class="container p-5 bg-light rounded shadow-lg my-5">
+            <p class="text-muted fs-6 my-3"><span class="my-3 d-block fs-6">{% trans 'Dear Patient,' %}</span>{% trans 'To enhance your personalized care, we request you to upload your dental X-rays and fill out this short questionnaire. This information, kept confidential, allows us to accurately assess your oral health and tailor your dental care based on your health history, lifestyle, and financial situation. Your cooperation aids in early disease detection, prevention, and improves your overall wellbeing.' %}</p>
+            <form id="myForm" action="" enctype="multipart/form-data">
+                <div class="row">
+                    {% for question in questions %}
+                            {% if question.id == 38 %}
+                                <div class="col-md-6">
+                                    <label for="{{question.slug}}" class="fs-6">{% if '/en/' in request.path %}{{question.question}}{% else %}{{question.question_tr}}{%endif%}</label>
+                                    <textarea {% if question.required %}required{% endif %} name="{{question.slug}}" id="{{question.slug}}" class="form-control shadow" placeholder="{% if '/en/' in request.path %}{{question.question}}{% else %}{{question.question_tr}}{%endif%}"></textarea>
+                                </div>
+                            {% endif %}
+                            {% if question.id == 37 %}
+                                <div class="col-md-6">
+                                    <label for="{{question.slug}}" class="fs-6">{% if '/en/' in request.path %}{{question.question}}{% else %}{{question.question_tr}}{%endif%}</label>
+                                    <select name="{{question.slug}}" id="{{question.slug}}" class="form-control" multiple data-is-required-specify-chronic required style="height: 70px;">
+                                        {% if '/en/' in request.path %}
+                                            {% for key, value in question.answers.items %}
+                                                <option value="{{key}}">{{value}}</option>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for key, value in question.answers_tr.items %}
+                                                <option value="{{key}}">{{value}}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                    <input type="text" id="chronicDiseasesSpecify" name="chronicDiseasesSpecify" class="bg-light" placeholder="{% trans 'If so, please specify.' %}" data-operation="specify">
+                                </div>
+                            {% endif %}
+                            {% if question.id == 77 %}
+                            <div class="col-md-6">
+                                <label for="{{question.slug}}" class="fs-6">{% if '/en/' in request.path %}{{question.question}}{% else %}{{question.question_tr}}{%endif%}</label>
+                                <select name="{{question.slug}}" id="{{question.slug}}" class="form-control" required data-is-required-specify>
+                                    {% if '/en/' in request.path %}
+                                        {% for key, value in question.answers.items %}
+                                            <option value="{{key}}">{{value}}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for key, value in question.answers_tr.items %}
+                                            <option value="{{key}}">{{value}}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                                <input type="text" id="dietaryPreferenceSpecify" name="dietaryPreferenceSpecify" class="bg-light d-none" placeholder="{% trans 'Please specify.' %}" data-operation="specify">
+                            </div>
+                            {% endif %}
+                            {% if question.id == 43 %}
+                            <div class="col-md-6">
+                                <label for="{{question.slug}}" class="fs-6">{% if '/en/' in request.path %}{{question.question}}{% else %}{{question.question_tr}}{%endif%}</label>
+                                <select name="{{question.slug}}" id="{{question.slug}}" class="form-control" required data-is-required-specify>
+                                    {% if '/en/' in request.path %}
+                                        <option value="0" disabled selected>Choose your answer</option>
+                                        {% for key, value in question.answers.items %}
+                                            <option value="{{key}}">{{value}}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        <option value="0" disabled selected>Cevabınızı seçiniz</option>
+                                        {% for key, value in question.answers_tr.items %}
+                                            <option value="{{key}}">{{value}}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                                <input type="text" id="allergicSpecify" name="allergicSpecify" class="bg-light d-none" placeholder="{% trans 'Please specify.' %}" data-operation="specify">
+                            </div>
+                            {% endif %}
+                            {% if question.id == 44 %}
+                            <div class="col-md-6">
+                                <label for="{{question.slug}}" class="fs-6">{% if '/en/' in request.path %}{{question.question}}{% else %}{{question.question_tr}}{%endif%}</label>
+                                <select name="{{question.slug}}" id="{{question.slug}}" class="form-control" required data-is-required-specify>
+                                    {% if '/en/' in request.path %}
+                                        <option value="0" disabled selected>Choose your answer</option>
+                                        {% for key, value in question.answers.items %}
+                                            <option value="{{key}}">{{value}}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        <option value="0" disabled selected>Cevabınızı seçiniz</option>
+                                        {% for key, value in question.answers_tr.items %}
+                                            <option value="{{key}}">{{value}}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                                <input type="text" id="dentalIssueSpecify" name="dentalIssueSpecify" class="bg-light d-none" placeholder="{% trans 'Please specify.' %}" data-operation="specify">
+                            </div>
+                            {% endif %}
+                        {% if not question.answers and not question.id == 38 and not question.id == 37 and not question.id == 74 and not question.id == 77 and not question.id == 43 and not question.id == 44 %}
+                            <div class="col-md-6">
+                                <label for="{{ question.slug }}" class="fs-6">
+                                    {% if question.required %}<span class="text-danger me-2">*</span>{% endif %}
+                                    {% if '/en/' in request.path %}{{question.question}}{% else %}{{question.question_tr}}{%endif%}
+                                </label>
+                                <input  id="{{ question.slug }}" type="text" class="form-control" name="{{ question.slug }}" {% if question.required %}required{% endif %} placeholder="{% if '/en/' in request.path %}{{question.question}}{% else %}{{question.question_tr}}{%endif%}">
+                            </div>
+                        {% endif %}
+                        {% if question.answers and not question.id == 38 and not question.id == 37 and not question.id == 74 and not question.id == 77 and not question.id == 43 and not question.id == 44 %}
+                            <div class="col-md-6">
+                                <label for="{{ question.slug }}" class="fs-6">
+                                    {% if question.required %}<span class="text-danger me-2">*</span>{% endif %}
+                                    {% if '/en/' in request.path %}{{question.question}}{% else %}{{question.question_tr}}{%endif%}
+                                </label>
+                                <select name="{{ question.slug }}" id="{{ question.slug }}" class="form-control" {% if question.required %}required{% endif %}>
+                                    <option value="">{% trans 'Choose your answer' %}</option>
+                                    {% if '/en/' in request.path %}
+                                        {% for key, value in question.answers.items %}
+                                            <option value="{{key}}">{{value}}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for key, value in question.answers_tr.items %}
+                                            <option value="{{key}}">{{value}}</option>
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        {% endif %}
+                        {% if question.id == 74 %}
+
+                        <p style="padding-bottom: 10px;" class="fs-6 m-0 mt-4">{% if question.required %}<span class="text-danger me-2">*</span>{% endif %}{% trans 'Radiography Upload' %}</p>
+
+                        <div {% if question.required %} data-required="required" {% else %} {%endif %} class="dropzone" id="myDropzone"></div>
+                        {% endif %}
+                        
+                    {% endfor %}
+                    {% csrf_token %}
+
+                </div>
+                <button type="submit" class="custom btn-blue py-2 w-50 d-block my-3 mx-auto">{% trans 'Send' %}</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}
+
+{% block customJs %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.js" integrity="sha512-9e9rr82F9BPzG81+6UrwWLFj8ZLf59jnuIA/tIf8dEGoQVu7l5qvr02G/BiAabsFOYrIUTMslVN+iDYuszftVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+    <script>
+        $("select[data-is-required-specify]").change(function() {
+        var selectedValue = $(this).val();
+        console.log(selectedValue);
+        
+        // Gelen değer "specify" ise işlem yapabilirsiniz
+        if (selectedValue === "specifyOption") {
+        $(this).next("input[data-operation='specify']").removeClass("d-none");
+        } else {
+        $(this).next("input[data-operation='specify']").addClass("d-none");
+        }
+    });
+    </script>
+    
+    <script>
+        var form = document.getElementById('myForm');
+        var button = document.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', function(){
+            button.disabled = true; // Butonu devre dışı bırak
+            button.style.backgroundColor = 'gray';
+            // İsteği sunucuya gönder
+            // ...
+
+            // İsteğin tamamlanmasını beklerken butonu etkinleştir
+            setTimeout(function(){
+                button.disabled = false;
+                button.style.backgroundColor = ""
+            }, 3000); // 3 saniye bekletme süresi (isteğin tamamlanma süresine göre ayarlayabilirsiniz)
+        });
+    </script>
+
+ <script>
+        var language
+            function select_language(language) {
+                language = language
+            if (language == "tr") {
+                if (window.location.href.includes("/en/")) {
+                    $.ajax({
+                         url: "{% url 'changelanguageApi' %}",
+                         method: "GET",
+                         data:{
+                            language:language
+                         },
+                         success:function(response){
+                            
+                         },
+                         error:function(xhr, status, error){
+    
+                         }
+                     });
+                    window.location.assign("http://" + window.location.hostname + ":" + window.location.port + (window.location.pathname).replace("/en", "/tr"))
+                } else {
+                    window.location.assign("http://" + window.location.hostname + ":" + window.location.port +  window.location.pathname)
+                }
+            } else {
+                if (window.location.href.includes("/tr/")) {
+                    $.ajax({
+                         url: "{% url 'changelanguageApi' %}",
+                         method: "GET",
+                         data:{
+                            language:language
+                         },
+                         success:function(response){
+    
+                         },
+                         error:function(xhr, status, error){
+                            
+                         }
+                     });
+                    window.location.assign("http://" + window.location.hostname + ":" + window.location.port + (window.location.pathname).replace("/tr", "/en"))
+                } else {
+                    window.location.assign("http://" + window.location.hostname + ":" + window.location.port + (window.location.pathname))
+                }
+            }
+        }
+</script>
+
+<script>
+    Dropzone.autoDiscover = false;
+    $(document).ready(function() {
+      if($("#myDropzone").length > 0) {
+        // dropzone varsa 
+        // Dropzone yapılandırması
+        var myDropzone = new Dropzone("#myDropzone", {
+        url: "verigonder.php", // Dosya yükleme işlemi için AJAX isteği gönderilecek URL'yi buraya yazın
+        autoProcessQueue: false,
+        paramName: "file", // Yüklenen dosyanın parametre adı
+        maxFilesize: 10, // Maksimum dosya boyutu (MB cinsinden)
+        acceptedFiles: ".jpg, .jpeg, .png", // Kabul edilen dosya türleri
+        addRemoveLinks: true, // Dosya kaldırma bağlantısını ekle
+        dictRemoveFile: "Dosyayı Kaldır", // Dosya kaldırma metni
+        init: function() {
+          this.on("success", function(file, response) {
+            console.log(response); // Başarılı olursa konsola yanıtı yazdır
+          });
+          this.on("error", function(file, errorMessage) {
+            console.log(errorMessage); // Hata durumunda konsola hata mesajını yazdır
+          });
+        }
+      });
+      }
+
+      function convertArrayToObject(arr) {
+        var result = {};
+        arr.forEach(function(item) {
+          result[item.name] = item.value;
+        });
+        return result;
+      }
+
+      // Form submit edildiğinde
+      $("#myForm").submit(function(event) {
+    event.preventDefault(); // Sayfanın yeniden yüklenmesini engelle
+
+    // FormData nesnesini oluştur
+    var formDataObj = new FormData(this);
+
+    formDataObj.append('slug', '{{slug}}');
+    
+    var selectElement = document.getElementById("fe91012bb2a140059985b10f774d5de4");
+    if (selectElement) {
+        var selectedOptions = selectElement.selectedOptions;
+        var selected_sorular_list = []
+        for (var j = 0; j < selectedOptions.length; j++) {
+            var selectedOption = selectedOptions[j];
+            var value = selectedOption.value;
+            selected_sorular_list.push(value)
+        }
+        formDataObj.append('fe91012bb2a140059985b10f774d5de4', JSON.stringify(selected_sorular_list));
+    }
+
+
+    if ($("#myDropzone").length > 0) {
+        // Dropzone'da yüklenen dosyaların adlarını FormData'ya ekle
+        var dropzoneElement = $("#myDropzone")
+        var isRequired = dropzoneElement.data("required")
+        console.log("is req",isRequired)
+        if (isRequired){
+            if (myDropzone.getQueuedFiles().length > 0) {
+            myDropzone.files.forEach(function (file) {
+                console.log("file", file)
+                formDataObj.append('file', file); // Dosyayı FormData'ya ekle
+            });
+            } else {
+                swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: "{% trans 'Please upload a radiography' %}",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                return false
+            }
+        }
+        else {
+            myDropzone.files.forEach(function (file) {
+                console.log("file", file)
+                formDataObj.append('file', file); // Dosyayı FormData'ya ekle
+            });
+        }
+        }
+        
+    
+
+    console.log("form data", formDataObj)
+
+    $.ajax({
+        type: "POST",
+        url: "{% url 'save_patient_form' %}",
+        data: formDataObj,
+        processData: false, // FormData'nın otomatik işlenmesini devre dışı bırak
+        contentType: false, // FormData'nın otomatik içerik türünü ayarlamasını engelle
+        success: function(response) {
+            // İstek başarılı olduğunda yapılacak işlemler
+            swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: "{% trans 'Your form has been sent' %}",
+            showConfirmButton: false,
+            timer: 2000
+        }).then(function(){
+            // window.location.reload()
+        });
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            // İstek hata verdiğinde yapılacak işlemler
+            console.log(textStatus);
+        }
+    });
+});
+
+
+    });
+  </script>
+
+{% endblock %}

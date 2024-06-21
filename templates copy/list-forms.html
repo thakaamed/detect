@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="{% static 'css/datatable.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <title>{{specs.title}} - {% trans 'Kullanıcılar' %}</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+    <style>
+        body.dark select[name="patients_length"], body.dark #patients_filter input {
+            color:white
+        }
+        body.dark .fa-pencil:hover{
+            color:black!important
+        }
+
+        .dataTables_length {
+            font-size: 12px;
+            margin-right: 10px;
+            width: 80%;
+        }
+
+        .dataTables_length label {
+            display: inline-block;
+            margin-bottom: 0;
+        }
+
+        .dataTables_length select {
+            height: 26px;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        select[name="patients_length"] {
+            margin-bottom: 2px;
+        }
+        #patients_length label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            max-width:150px;
+        }
+        #patients_length select {
+            order: 13;
+        }
+    </style>
+
+{% endblock %}
+{% block headerButtons %}
+<!--<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">-->
+<!--    <i class="fa-solid fa-upload" style="pointer-events: none;"></i>-->
+<!--    <span style="pointer-events: none;">Upload Radiograpfy</span>-->
+<!--</button>-->
+{% endblock %}
+
+{% block content %}
+    
+    <main class="position-relative" style="height: calc(100vh - 110px);">
+        <!-- veri varsa d-none class kaldır, yoksa d-none kalsın -->
+        <div class="views container">
+            <div class="heading-and-items container-fluid d-flex justify-content-between align-items-center my-3">
+                <h1 class="m-0">{% trans 'Patients' %}</h1>
+                <div class="heading-and-items_right d-flex">
+                </div>
+            </div>
+            <div id="patients-table-view" class="patient-view-container container-fluid mt-3 mb-5" style="display: block;">
+                <div class="contents">
+                    <table id="patients" class="patients-table table table-borderless display" style="width: 100%;">
+                        <thead>
+                            <tr style="text-align-last: center;">
+                                <th>{% trans 'Patient Full Name' %}</th>
+                                <th>{% trans 'E-Mail' %}</th>
+                                <th>{% trans 'Gender' %}</th>
+                                <th>{% trans 'Date' %}</th>
+                                <th>{% trans 'Detail' %}</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+        {% csrf_token %}
+        <!-- burada hiç veri yoksa d-none classını kaldır, veri varsa d-none kalacak -->
+    </main>
+{% endblock %}
+
+{% block customJs %}
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <script src="{% static 'js/dropzone.js' %}"></script>
+    <script src="{% static 'js/sweatalert.js' %}"></script>
+    <script src="{% static 'js/patients.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script>
+        var newDict = {{ new_dict|safe }};
+        $(document).ready(function() {
+            // DataTables'in etkinleştirilmesi
+            if (window.location.href.includes("/en/")) {
+                var lang = "en"
+            }
+            else if (window.location.href.includes("/uz/")){
+                var lang = "uz"
+            }
+            else if (window.location.href.includes("/ru/")){
+                var lang = "ru"
+            }
+            else{
+                var lang = "tr"
+            }
+            // td'lerin oluşturulması
+            for (var groupSlug in newDict) {
+                var answers = newDict[groupSlug];
+                var row = $('<tr>');
+                var patientName = '';
+                var email = '';
+                var gender = '';
+                
+                for (var i = 0; i < answers.length; i++) {
+                    var answer = answers[i];
+                    if (answer.date) {
+                            date = answer.date;
+                    }
+                    if (answer.question === 'Patient Full Name') {
+                        patientName = answer.answer;
+                    }
+                    if (answer.question === 'E-Mail') {
+                        email = answer.answer;
+                    }
+                    if (answer.question === 'What is your gender?') {
+                        if (window.location.href.includes("/en/")) {
+                            gender = answer.answer;
+                            console.log("if", gender)
+                        }
+                        else if (window.location.href.includes("/uz/")){
+                            if (gender === "Male"){
+                                gender = "Erkak"
+                            }
+                            else if (gender === "Female"){
+                                gender = "Ayol"
+                            }
+                            else if (gender === "Prefer Not To Say"){
+                                gender = "Aytmaslikni afzal ko'ring"
+                            }
+                        }
+                        else if (window.location.href.includes("/ru/")){
+                            if (gender === "Male"){
+                                gender = "Мужской"
+                            }
+                            else if (gender === "Female"){
+                                gender = "Женский"
+                            }
+                            else if (gender === "Prefer Not To Say"){
+                                gender = "Предпочитаю не говорить"
+                            }
+                        }
+                        else{
+                            gender = answer.answer
+                            if (gender === "Male"){
+                                gender = "Erkek"
+                            }
+                            else if (gender === "Female"){
+                                gender = "Kadın"
+                            }
+                            else if (gender === "Prefer Not To Say"){
+                                gender = "Söylememeyi Tercih Ediyorum"
+                            }
+
+                        }
+                        
+                    }
+                }
+                
+                var nameTd = $('<td>').text(patientName);
+                var emailTd = $('<td>').text(email);
+                var genderTd = $('<td>').text(gender);
+                var dateTd = $('<td>').text(date);
+                row.append(nameTd);
+                row.append(emailTd);
+                row.append(genderTd);
+                row.append(dateTd);
+                var slug = groupSlug
+                var actionsTd = $('<td>').html(`<div class="operations-buttons d-block"><a href="/patient-form-detail/${slug}"><i class="fa-solid fa-pencil" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'View Detail' %}"></i></a></div>`);
+                row.append(actionsTd);
+                $('#patients tbody').append(row);
+            }
+            if (window.location.href.includes("/en/")) {
+                var lang = "en"
+                var search_text = "Search";
+                var filter_amount = "Show Entries";
+                var nothing_text = "No data available in table";
+
+            } else if(window.location.href.includes("/uz/")) {
+                var lang = "uz"
+                var filter_amount = "Yozuvlarni Ko'rsatish";
+                var search_text = "Qidirish";
+                var nothing_text = "Jadvalda ma'lumotlar mavjud emas";
+            }
+            else if(window.location.href.includes("/ru/")) {
+                var lang = "ru"
+                var filter_amount = "Показать записи";
+                var search_text = "Поиск";
+                var nothing_text = "Данные отсутствуют в таблице";
+            }
+            else if(window.location.href.includes("/nl/")) {
+                var lang = "nl"
+                var filter_amount = "Toon inzendingen";
+                var search_text = "Zoekopdracht";
+                var nothing_text = "Geen data beschikbaar in de tabel";
+            }
+            else{
+                var lang = "tr"
+                var filter_amount = "Listeleme Adeti";
+                var search_text = "Ara";
+                var nothing_text = "Veri bulunamadı";
+            }
+            // DataTables'in boş tabloyu kontrol etmesini engellemek
+            var table = $('#patients').DataTable({
+                columnDefs: [
+                    {orderable: false, targets: [4]},
+                ],
+                "language": {
+                    "search": search_text,
+                    "paginate": {
+                        "next": lang == "en" ? "Next <i class='fa-solid fa-angle-right'></i>" : (lang == "uz" ? "Keyingi <i class='fa-solid fa-angle-right'></i>" : (lang === "ru" ? "Следующий <i class='fa-solid fa-angle-right'></i>" : (lang === "nl" ? "Volgende <i class='fa-solid fa-angle-right'></i>" : "Sonraki <i class='fa-solid fa-angle-right'></i>"))),
+                        "previous": lang == "en" ? "Previous <i class='fa-solid fa-angle-right'></i>" : (lang == "uz" ? "Oldingi <i class='fa-solid fa-angle-right'></i>" : (lang === "ru" ? "Предыдущий <i class='fa-solid fa-angle-right'></i>" : (lang === "nl" ? "Vorig <i class='fa-solid fa-angle-right'></i>" : "Önceki <i class='fa-solid fa-angle-right'></i>"))),
+                    },
+                    "lengthMenu": filter_amount + "_MENU_",
+                    "emptyTable": lang === "en" ? "No data available in table" : (lang === "uz" ? "Jadvalda ma'lumot mavjud emas" : (lang === "ru" ? "Данные отсутствуют в таблице" : (lang === "nl" ? "Geen data beschikbaar in de tabel" : "Tabloda mevcut veri yok"))),
+                },
+                
+            });
+            table.on('draw', function() {
+                var emptyTd = $('.dataTables_empty');
+                emptyTd.hide();
+            });
+        });
+    </script>
+    
+    <script>
+        var lang;
+        if (window.location.href.includes("/en/")) {
+            lang = "en";
+        }
+        else if (window.location.href.includes("/uz/")) {
+            lang = "uz";
+        }
+        else if (window.location.href.includes("/ru/")) {
+            lang = "ru";
+        }
+        else if (window.location.href.includes("/nl/")) {
+            lang = "nl";
+        }
+        else {
+            lang = "tr";
+        }
+        var entriesLabel;
+        if (lang === "en") {
+            entriesLabel = "Show Entries:";
+        }
+        else if (lang === "uz"){
+            entriesLabel = "Listing MOQ:";
+        }else if (lang === "ru"){
+            entriesLabel = "Показать записи:";
+        }
+        else if (lang === "nl"){
+            entriesLabel = "Toon inzendingen:";
+        }
+        else {
+            entriesLabel = "Listeleme Adedi:";
+        }
+        $("#patients_length label").text(entriesLabel);
+
+    </script>
+{% endblock %}

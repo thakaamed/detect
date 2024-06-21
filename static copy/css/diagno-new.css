@@ -1,0 +1,730 @@
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova:ital@0;1&family=Inter:wght@100;200;300;400;500&display=swap');
+section#header {
+    height: 75px!important;
+}
+.navbar-diagno{
+    width: 18%;
+    /* min-height: 57px!important; */
+    padding:9px 40px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-one-img{
+    background-image: url(../img/navbar-two-img-dark.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-size: 100%;
+}
+.navbar-two-img{
+    background-image: url(../img/navbar-two-img-dark.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-size: 100%;
+}
+.navbar-tree-img{
+    background-image: url(../img/navbar-two-img-dark.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-size: 100%;
+}
+.navbar-four-img{
+    background-image: url(../img/navbar-two-img-dark.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-size: 100%;
+}
+ .navbar-diagno.active{
+    background-image: url(../img/navbar-two-img-dark-selected.svg)!important;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: 0.7s;
+    background-size: 100%;
+}
+/*
+.navbar-two-img-light{
+    background-image: url(../img/navbar-two-img-light.svg)!important;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: 0.7s;
+    background-size: 100%;
+}
+.navbar-tree-img-light{
+    background-image: url(../img/navbar-two-img-light.svg)!important;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: 0.7s;
+    background-size: 100%;
+}
+
+.navbar-four-img-light{
+    background-image: url(../img/navbar-four-img-light.svg)!important;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    transition: 0.7s;
+    background-size: 100%;
+} */
+
+.navbar-diagno span{
+    font-size: 13px;
+    font-weight: 500;
+}
+.navbar-diagno p{
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+}
+.external{
+    cursor: pointer;
+    /* padding: 40px 20px; */
+    width: 50px;
+    height: 110px;
+    align-items: end;
+    justify-content: center;
+    display: flex;
+    background-color: rgba(14, 24, 55, 1);
+
+    svg{
+        width: 75%;
+    }
+}
+.missing-part{
+    cursor: pointer;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background-color: rgba(14, 24, 55, 1);
+    color: rgba(255, 255, 255, 1);
+}
+.intact-dropdown{
+    background-color: rgba(14, 24, 55, 1);
+    cursor: pointer;
+}
+.intact-dropdown-chosse{
+    background-color: rgba(14, 24, 55, 1);
+    
+}
+.solid-gray-color{
+    color: rgba(255, 255, 255, 0.7);
+    padding: 8px 20px;
+}
+.dropdown-cild{
+    padding: 8px 20px;
+    cursor: pointer;
+}
+.search-diagnosis-chosse{
+    margin: 0px;
+    width: 100%;
+    height: 40px;
+    background: none!important;
+    border: none;
+    border-bottom: 1px solid rgba(37, 49, 89, 1);
+    padding: 0px 10px;
+    color: rgba(255, 255, 255, 0.8);
+}
+.search-diagnosis{
+    margin: 0px;
+    /* width: 235px; */
+    height: 40px;
+    background: none!important;
+    border: none;
+    border-bottom: 1px solid rgba(37, 49, 89, 1);
+    padding: 0px 10px;
+    color: rgba(255, 255, 255, 0.8);
+}
+.dropdown-cild:hover{
+    background-color: rgba(80, 113, 200, 1);
+}
+.search-close{
+    padding: 0px 20px;
+}
+.external.mising-active{
+    background-color: rgba(80, 113, 200, 1);
+}
+.search-close span{
+    cursor: pointer;
+}
+.search-close span:hover{
+    color: white;
+}
+
+.chosse-option{
+    max-height: 358px;
+    overflow-y: auto;
+    position: relative;
+    z-index: -99;
+    background-color: rgba(26, 38, 78, 1);
+    padding: 30px 30px;
+}
+.icon-border-light{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(72, 83, 120, 1);
+    background-color: rgba(17, 28, 67, 1);
+    width: 41px;
+    height: 38px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.icon-border-light i{
+    font-size: 14px;
+}
+
+.chosse-option-titile h3{
+    font-size: 15px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 600;
+}
+.chosse-option-titile p{
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 1);
+    line-height: 14px;
+}
+.dropzone-x-ray h3{
+    font-size: 15px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 600;
+}
+
+.dropzone-x-ray p{
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 1);
+    line-height: 14px;
+}
+.dropzone-x-ray{
+    background-color: rgba(26, 38, 78, 1);
+}
+
+.dropzone-dark-color{
+    background-color: rgba(13, 23, 53, 1);
+}
+
+.dropzone-border{
+    border: 1px dashed rgba(255, 255, 255, 0.6);
+    background-color: rgba(26, 38, 78, 1)    ;
+}
+
+.dropzone-click-jpeg{
+    max-height: 32px;
+    background-color: rgba(80, 113, 200, 1);
+}
+
+
+.dropzone-click-jpeg p{
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+.dropzone-icons{
+    background-color: rgba(13, 23, 53, 1);
+}
+
+.dropzone-icons div{
+    cursor: pointer;
+}
+
+.diagnosis-general{
+    background-color: rgba(13, 23, 53, 1);
+}
+.diagnosis-general-child{
+    background-color: rgba(80, 113, 200, 1);
+    /* width: 90px; */
+    height: 30px;
+}
+
+.append-div-textarea{
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(87, 98, 117, 1);
+}
+.append-div-textarea i{
+    color: rgba(87, 98, 117, 1);
+}
+
+.diagnosis-general-child i{
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.dropzone-border button{
+    background-color: rgba(13, 23, 53, 1);
+    border: none;
+    color: white;
+}
+.diagnosis-table-tr{
+    background-color: rgba(13, 23, 53, 1)!important;
+}
+#myTable{
+    width: 100%;
+}
+
+.dataTables_wrapper .dataTables_length {
+    float: right!important;
+}
+.dataTables_length {
+    color: white!important;
+}
+.dataTables_filter{
+    margin: 20px;
+    color: white!important;
+}
+.dataTables_length option{
+    background-color: rgba(13, 23, 53, 1)!important;
+    color: white!important;
+}
+.dataTables_length select{
+    color: white!important;
+}
+table.dataTable tbody td{
+    width: 418px;
+}
+
+table.dataTable thead th{
+    background-color: rgba(13, 23, 53, 1)!important;
+    margin-bottom: 100px;
+}
+
+.diagnosis-table-td{
+    width: 100px!important;
+}
+
+/* .dz-image img{
+    width: 500px;
+    height: 500px;
+} */
+.dz-details,
+.dz-size,
+.dz-filename,
+.dz-success-mark,
+.dz-error-mark{
+    display: none!important;
+}
+
+
+.dropdown-content {
+    margin-left: -20px;
+    display: none;
+    position: absolute;
+    background-color: rgba(13, 23, 53, 1);
+    min-width: 232px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-top: 87px;
+}
+
+.dropdown-content a {
+    color: rgba(255, 255, 255, 1);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 225px;
+}
+
+.dropdown-content a:hover ,
+.missing-part:hover{
+    background-color: rgba(80, 113, 200, 1);
+}
+
+.dz-image img {
+    margin-top: -182px;
+    margin-left: -35px;
+    transition: filter 0.3s ease; /* Geçiş efekti eklemek için */
+}
+
+.brighten {
+    filter: brightness(150%); /* Parlaklığı artırmak için */
+}
+
+.brightenK{
+    filter: grayscale();
+}
+
+.append-textarea:focus{
+    outline: none;
+}
+
+.append-textarea{
+    resize: none;
+    height: 20px; 
+    color: rgba(87, 98, 117, 1)!important; 
+    background: transparent; 
+    border: none;
+}
+
+.append-textarea::placeholder{
+    font-size: 20px;
+}
+
+.external-one img,
+.external-two img{
+    max-height: 82px;
+}
+
+.dropdown-menu{
+    transform: translate3d(-6px, 30px, 0px)!important;
+    min-width: 43px!important;
+    background-color: rgba(14, 24, 55, 1);
+}
+
+.dropdown-item{
+    color: white!important;
+}
+.dropdown-item:hover{
+    background-color: rgba(80, 113, 200, 0.3);
+}
+
+.modal-footer{
+    border-top: none;
+}
+
+.modal-body{
+    font-size: 16px;
+    color: white;
+}
+
+.input-light-color{
+    color: rgba(255, 255, 255, 1)!important;
+}
+
+.table-add{
+    max-height: 28px;
+}
+.diagnosis-container,
+.general-append{
+    flex-wrap: wrap;
+}
+
+body::-webkit-scrollbar,
+.dropzone-border::-webkit-scrollbar{
+    display: none!important;
+}
+
+body{
+    background: #0B1536;
+    color: #eee;
+}
+
+.dataTables_length,
+.dataTables_filter,
+.dataTables_info,
+.dataTables_paginate {
+    display: none!important;
+}
+
+.treatments-payment-button{
+    background-color: rgba(11, 18, 43, 1);
+    color: rgba(255, 255, 255, 0.75);
+    border: none;
+}
+
+.treatments-payment-button:focus{
+    border: none;
+}
+.treatments-tab{
+    min-width:9%;
+    height: 41px;
+}
+
+.treatments-tab-menu-active{
+    background-color: rgba(26, 38, 78, 1);
+}
+.treatments-price,
+.transparents-notes{
+    background-color: rgba(20, 31, 67, 1);
+}
+.transparents-total-price,
+.treatments-discound{
+    background-color: rgba(26, 38, 78, 1);
+}
+.transparents-notes{
+    width: 100%!important;
+    margin-left: 0px!important;
+}
+.treatments-discound span,
+.transparents-total-price span,
+.transparents-discount-price span{
+    font-weight: 700;
+    font-size: 19px;
+}
+.treatments-discound h4,
+.transparents-total-price h4,
+.transparents-discount-price h4{
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.treatments-price h4,
+.transparents-notes-one h4{
+    font-size: 15px;
+    font-weight: 600;
+}
+.treatments-discound h4{
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+.treatments-price p{
+    font-size: 13px!important;
+    font-weight: 300;
+}
+.transparents-notes-one p{
+    font-size: 13px;
+    font-weight: 300;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    width: 43%;
+    font-family: 'Inter', sans-serif;
+    transform: skew(-21deg);
+}
+
+.treatment-comment{
+    background: transparent;
+    font-size: 13px!important;
+    font-weight: 500!important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    transform: skew(-9deg);
+    border: none;
+    color: white;
+    resize: none;
+}
+.treatment-comment:focus{
+    border: none;
+    outline: none;
+}
+
+.tratmens-textarea{
+    width: 56px!important;
+}
+
+.treatments-new-span{
+    min-width: 50px;
+    min-height: 30px;
+    background-color: rgba(80, 113, 200, 1);
+    color: rgba(255, 255, 255, 1);
+}
+#discountInput{
+    font-size: 19px;
+    font-weight: 700;
+    width: 110px;
+    background-color: transparent;
+    box-shadow: none;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: white;
+}
+#discountInput:focus{
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-box{
+    width: 80px;
+    height: 80px;
+    background-color: rgba(14, 24, 55, 1);
+}
+
+.modal-external{
+    width: 40px;
+    height: 80px;
+}
+
+.modal-external img{
+    height: 50px;
+    width: 32px;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 780px!important;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    /* left: -156px!important; */
+    z-index: 1060;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+}
+
+#myModalTwo h4{
+    font-size: 17px;
+    line-height: 20px;
+}
+.templetes-modal-span{
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+#myModalTwo p{
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    margin-left: 20px;
+}
+#myModalTwo label{
+    color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+}
+
+.modal-two-button{
+    border: none;
+    padding: 10px 22px;
+    color: white;
+    background-color: rgba(80, 113, 200, 1);
+}
+
+.modal-two-button-no:hover{
+    color: white;
+    background-color: rgba(80, 113, 200, 1);
+}
+
+.modal-two-button-no{
+    border: none;
+    padding: 10px 22px;
+    color: white;
+    background-color: transparent;
+}
+
+.treatments-unit-price input{
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    width: 62px;
+    height: 30px;
+    color: white;
+    font-size: 12px;
+}
+.treatments-unit-price input:focus{
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+.diagnosis-new-file span{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    position: absolute; 
+    bottom: -25px; 
+    width: 100%; 
+    background-color:rgba(14, 24, 55, 1);
+    border-radius: 0.25rem!important;
+}
+.diagnosis-new-file-two span{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    position: absolute; 
+    top: -25px; 
+    width: 100%; 
+    background-color:rgba(14, 24, 55, 1); 
+    border-radius: 0.25rem!important;
+}
+.dropdown-content div{
+    max-height: 100px;
+    overflow-y: auto;
+}
+@media screen and (max-width: 1505px) {
+    .diagnosis-responsive{
+      /* display: block!important;
+      overflow-y: auto;
+    max-height: 44vh; */
+    }
+    .external{
+        width: 45px;
+    }
+    .treatments-top{
+        margin-top: 20px;
+    }
+    .navbar-diagno p{
+        font-size: 8px;
+    }
+    .navbar-diagno span{
+        font-size: 10px;
+    }
+  }
+/* .form-check-input:checked{
+    background-color: rgba(133, 136, 146, 1)!important;
+}
+.form-check-input {
+    width: 17px!important;
+    height: 17px!important;
+    margin-top: 0.25em;
+    vertical-align: top;
+    background-color: transparent!important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 3px solid rgba(133, 136, 146, 1)!important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+} */
+@media screen and (max-width: 1770px) {
+    .treatment-tabs{
+        margin-left: -9px;
+    }
+  }
+  @media screen and (max-width: 1578px) {
+    .treatment-tabs{
+        margin-left: -24px;
+    }
+  }
+  @media screen and (max-width: 1300px) {
+    .treatment-tabs{
+        margin-left: -34px;
+    }
+  }
+
+  @media screen and (max-width: 1418px) {
+    .external{
+        width: 40px;
+    }
+  }
+
+  @media screen and (max-width: 1330px) {
+    .external{
+        width: 35px;
+    }
+  }
+
+
+  @media screen and (max-width: 1240px) {
+    .external{
+        width: 30px;
+    }
+  }
+
+  @media screen and (max-width: 1150px) {
+    .external{
+        width: 25px;
+    }
+  }
+
+  @media screen and (max-width: 1061px) {
+    .missing-part{
+        font-size: 10px;
+    }
+  }
+
+
+
+
+
+
+
+
+
+

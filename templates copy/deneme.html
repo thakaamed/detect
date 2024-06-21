@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/patients.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>{{specs.title}}</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css" integrity="sha512-7uSoC3grlnRktCWoO4LjHMjotq8gf9XDFQerPuaph+cqR7JC9XKGdvN+UwZMC14aAaBDItdRj3DcSDs4kMWUgg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body.dark #example_length option{
+            background-color: #333!important;
+            color: #fff!important;
+            
+        }
+        .dropzone.dz-started .dz-message {
+            display: block !important;
+        }
+
+        #dropZone {
+            padding: 10px;
+            width: 100%;
+            border-radius: 10px;
+            background-color: transparent;
+        }
+
+        .dropzone {
+            border: 2px dashed #526092!important;
+            background-color: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .dropzone .dz-preview:not(.dz-processing) .dz-progress {
+            display: none;
+        }
+        .dropzone .dz-preview.dz-image-preview {
+            background-color: transparent;
+            margin: 5px 0;
+        }
+    </style>
+{% endblock %}
+{% block headerButtons %}
+<!--<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">-->
+<!--    <i class="fa-solid fa-upload" style="pointer-events: none;"></i>-->
+<!--    <span style="pointer-events: none;">Upload Radiograpfy</span>-->
+<!--</button>-->
+{% endblock %}
+
+{% block content %}
+
+    
+
+    <main class="position-relative">
+        <div id="thanksDiv" class="container p-5 bg-light rounded shadow-lg my-5">
+            <h1>{% trans 'Dear' %} {{patient_dict.full_name}}</h1>
+            <p class="text-muted w-75 fs-6">{% trans 'You can start the analysis by uploading the Radiography image, view the images you have uploaded and add multiple images' %}</p>
+            <p class="fs-6 m-0 mt-4">{% trans 'Radiology Upload' %}</p>
+            <select name="radiography_types" id="radiography_types" class="w-50 m-0 mt-2">
+                <option value="" selected>{% trans 'Select Radiography Type...' %}</option>
+                {% for type_id, type_name in image_type_dict.items %}
+                    
+                    <option {% if type_name == "CBCT" %} style="background-color: grey; color:white;" disabled {% endif %} value="{{type_id}}">{{type_name}}</option>
+                {% endfor %}
+            </select>
+            <div id="fileUploadContainer" class="mb-4">
+                <div class="row p-1">
+                    <div class="col-md-6 p-3">
+                        <div id="dropZone">
+                            {% csrf_token %}
+                            <form action="{% url 'upload_radyografi' %}" class="dropzone" id="my-great-dropzone"></form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 p-3">
+                    </div>
+                </div>
+            </div>
+            
+            <p id="clarificationText">{% trans 'I have read and understood the' %}  <a href="{% static specs.clarification_text %}" class="text-decoration-underline text-primary">{% trans 'Clarification text' %}</a> {% trans 'on the Processing of Personal Data and the' %} <a href="{% static specs.privacy_policy %}" class="text-decoration-underline text-primary">{% trans 'Personal Data Protection' %}</a> {{specs.login_page_content}}</p>
+            <div class="d-flex align-items-center" style="gap: 5px;">
+                <input type="checkbox" name="" id="portalTerms">
+                <label for="portalTerms">{% trans 'I have read and accept the Portal Terms of Use.' %}</label>
+            </div>
+            <div class="d-flex justify-content-center my-2">
+                <button id="upload-form" type="submit" form="my-great-dropzone" class="custom btn-blue py-2 w-50">{% trans 'Send' %}</button>
+            </div> 
+        </div>
+        
+        
+    </main>
+{% endblock %}
+
+{% block customJs %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.js" integrity="sha512-9e9rr82F9BPzG81+6UrwWLFj8ZLf59jnuIA/tIf8dEGoQVu7l5qvr02G/BiAabsFOYrIUTMslVN+iDYuszftVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- 
+    <script src="{% static 'js/app.js' %}"></script> -->
+    <script>
+        // base html den zaten çekiliyor
+        // var userThemeChoices = JSON.parse('{{ user_theme_choices_json|escapejs }}');
+    </script>
+    <!-- <script src="{% static 'js/patients.js' %}"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+<script>
+    var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()
+    // dosya yükleme ayarları
+    var myDropzone = Dropzone.options.myGreatDropzone = {
+        autoProcessQueue: false,
+        paramName: "file",
+        maxFilesize: 2,
+        clickable: "#dropZone", // the ID of our parent wrapper div
+        maxFiles: 1 // Sadece 1 dosya seçimine izin ver
+    };
+    setTimeout(function () {
+        $(".dz-default.dz-message").html(`
+        <i class="fa-solid fa-upload border" style="border-radius: 50%; padding: 10px;"></i>
+        <p class="m-0 my-2">Drag & Drop or Choose file upload</p>
+        <p class="m-0">JPG, PNG, DCM or JPEG</p>
+    `)
+        $("form.dropzone").addClass("d-flex flex-column align-items-center")
+    }, 1000)
+
+    // Form submit olayını engelleyin ve dosyaları AJAX ile gönderin
+    document.querySelector("#upload-form").addEventListener("click", function (event) {
+        event.preventDefault();
+        patientDict = {{patient_dict|safe}}
+        console.log("patientDict",patientDict)
+        console.log("patient_slug",patientDict.slug)
+        var myDropzone = Dropzone.forElement("#my-great-dropzone");
+        var radiographyTypesSelect = document.querySelector("#radiography_types");
+        var selectedRadiographyTypeId = radiographyTypesSelect.value;
+        console.log("selectedRadiographyTypeId",selectedRadiographyTypeId)
+        patient_slug = patientDict.slug
+        doctor_id = patientDict.doctor_id 
+        if(!selectedRadiographyTypeId){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: "{% trans 'Please select radiography type' %}",
+                showConfirmButton: false,
+                timer: 3000
+            });
+            return false;
+        }
+        if (!document.querySelector("#portalTerms").checked) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: "{% trans 'Accept the Terms of Use!' %}",
+                showConfirmButton: false,
+                timer: 3000
+            });
+            return false;
+        }
+        if (myDropzone.files.length > 0) {
+            // Dosyaları AJAX ile göndermek için FormData oluşturun
+            
+            var formData = new FormData();
+            for (var i = 0; i < myDropzone.files.length; i++) {
+                formData.append("file", myDropzone.files[i]);
+            }
+            formData.append("radiography_type", selectedRadiographyTypeId);
+            formData.append('image_report_id', "{{image_report_id}}");
+            formData.append('patient_slug', patient_slug);
+            formData.append('doctor_id', doctor_id);
+            // AJAX isteği gönder
+            fetch("{% url 'upload_radyografi' %}", {
+                method: "POST",
+                body: formData,
+                headers: { 'X-CSRFToken': csrfmiddlewaretoken },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data["code"] === "image_limit_exceeded"){
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: data['message'],
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        return false
+                    }
+                    if (data["code"] === "analyse_limit_exceeded"){
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: data['message'],
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        return false
+                    }
+                    if (data["success"]=== false){
+                        alert(data['message'])
+                    } else if (patient_slug){
+                        myDropzone.removeAllFiles();
+                        // $('#modal-radyografy-upload').removeClass("active")
+                        document.getElementById('bildirim').click()
+                    }
+                    // İşlem tamamlandığında yapılacak işlemleri buraya ekleyebilirsiniz
+                })
+                .catch(error => {
+                    console.error("Hata oluştu:", error);
+                    // Hata durumunda yapılacak işlemleri buraya ekleyebilirsiniz
+                });
+                $('#thanksDiv').html("")
+                $('#thanksDiv').append(`
+                <h2 class="text-center">{% trans 'Thanks!' %}</h2>
+                <p class="text-center">{% trans 'Your radiography image has been uploaded to our system.' %}</p>
+                `)
+
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: "{% trans 'Please upload a radiography' %}",
+                showConfirmButton: false,
+                timer: 3000
+            });
+            return false;
+        }
+        // İşlem tamamlandığında yapılacak işlemleri buraya ekleyebilirsiniz
+        // Dropzone içeriğini temizlem
+        // Select'i güncelleme
+        radiographyTypesSelect.value = '';
+        $('#radiography_types option:first').prop('selected', true);
+    });
+</script>
+{% endblock %}

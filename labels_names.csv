@@ -1,0 +1,1450 @@
+id,name
+78,48
+24,14
+25,15
+26,16
+77,47
+76,46
+30,22
+31,23
+32,24
+72,38
+71,37
+66,28
+65,27
+63,25
+40,34
+60,18
+56,14
+44,38
+45,41
+47,43
+48,44
+49,45
+50,46
+51,47
+52,48
+36,28
+21,11
+34,26
+68,34
+69,35
+70,36
+33,25
+29,21
+73,43
+74,44
+27,17
+23,13
+43,37
+55,13
+42,36
+57,15
+58,16
+59,17
+39,33
+123,Alveolar Bone Loss
+84,Caries
+85,Point
+3503,Foreign Body
+96,Osteosclerosis
+98,52
+82,Pontic
+118,Caries
+92,Caries
+99,53
+101,55
+102,61
+103,62
+104,63
+105,64
+106,65
+108,72
+109,73
+110,74
+111,75
+112,81
+113,82
+115,84
+116,85
+86,Osteosclerosis
+121,Dental Calculus
+127,13
+128,14
+129,15
+130,16
+131,17
+132,18
+133,23
+134,24
+135,25
+136,26
+137,27
+138,28
+139,33
+140,34
+141,35
+142,36
+143,37
+144,38
+145,43
+146,44
+147,45
+148,46
+149,47
+150,48
+3504,Combined Periodontal Bone Loss
+194,Nasion (N)
+61,23
+37,31
+22,12
+4500,Crown
+156,Basion (Ba)
+4503,Filling
+535,Unerupted Tooth
+119,Caries
+1,51
+2,52
+3,53
+4,54
+5,55
+7,62
+8,63
+10,65
+11,71
+13,73
+14,74
+15,75
+16,81
+17,82
+18,83
+19,84
+62,24
+155,Nasion (N)
+160,Porion (Po)
+171,Mx1r
+168,Pogonion (Pg)
+157,Gnathion (Gn)
+161,Gonion (Go)
+172,Md1c
+170,Mx1c
+189,Labiale inferior (Li)
+165,Articulare (Ar)
+173,Md1r
+4323,Condyle L
+4333,"Lower central incisor mesial , L"
+164,Menton (Me)
+222,Columella (Cm)
+3186,Gemination
+196,Gnathion (Gn)
+221,Soft Tissue Nasion (N’))
+225,Soft Tissue A point (A’))
+229,Soft Tissue B point (B’))
+97,51
+100,54
+107,71
+114,83
+200,Gonion (Go)
+208,Hinge Axis (HA)
+214,L6o
+228,Labiale inferior (Li)
+211,Md1c
+212,Md1r
+218,Md6d
+217,Md6m
+209,Mx1c
+210,Mx1r
+216,Mx6d
+215,Mx6m
+207,Pogonion (Pg)
+199,Porion (Po)
+206,Posterior Nasal Spina (PNS)
+220,Pronasale (Pn)
+198,Pterygoid (Pt)
+193,Sella (S)
+230,Soft tissue Pogonion (Pg’)
+227,Stomion inferius (Si)
+226,Stomion superius (Ss)
+223,Subnasale (Sn)
+213,U6o
+201,A point
+3231,Anterior Nasal Spine (ANS)
+202,B point
+162,A point
+3185,Fusion
+231,Soft tissue Menton (Me’)
+183,Columella (Cm)
+282,Dentine
+285,Dentine
+288,Dentine
+287,Enamel
+263,Pulp Stone
+163,B point
+278,Enamel
+289,15
+290,16
+291,17
+292,18
+293,37
+294,38
+295,41
+296,42
+297,43
+298,44
+299,45
+300,46
+301,47
+302,48
+303,21
+304,22
+305,23
+4300,Crown-Buccal
+4301,Root-Buccal
+4302,Root-Palatinal (Lingual)
+4303,Impacted canine (Vertical position)
+307,25
+308,26
+309,27
+310,28
+180,Glabella (G’)
+169,Hinge Axis (HA)
+175,L6o
+179,Md6d
+178,Md6m
+177,Mx6d
+182,Pronasale (Pn)
+159,Pterygoid (Pt)
+190,Soft Tissue B point (B’)
+185,Soft Tissue A point (A’)
+181,Soft Tissue Nasion (N’)
+188,Stomion inferius (Si)
+184,Subnasale (Sn)
+174,U6o
+311,31
+312,32
+313,33
+314,34
+315,35
+316,36
+317,11
+318,12
+319,13
+320,14
+321,15
+322,16
+323,17
+324,18
+153,Caries
+325,37
+326,38
+327,41
+328,42
+329,43
+330,44
+331,45
+332,46
+333,47
+334,48
+335,21
+336,22
+337,23
+338,24
+339,25
+340,26
+341,27
+342,28
+343,31
+344,32
+345,33
+346,34
+347,35
+348,36
+349,11
+350,12
+351,13
+352,14
+281,Enamel
+3406,Unerupted tooth
+235,Nasal
+244,Nasal
+236,Orbital
+245,Orbital
+257,Post
+3505,Endo-Perio Lesion
+3192,Taurodontism
+284,Enamel
+3188,Enamel pearl
+204,Articulare (Ar)
+253,Implant Supported Crown
+6,61
+4501,Maxillary sinus
+279,Dentine
+264,Overhanging Filling
+4506,Gnathion Soft Tissue (Gn’)
+4508,Mid Md1c-Mx1c
+234,Mandible
+243,Mandible
+233,Maxilla
+353,15
+354,16
+355,17
+356,18
+357,37
+358,38
+359,41
+360,42
+361,43
+362,44
+363,45
+364,46
+365,47
+366,48
+367,21
+368,22
+369,23
+370,24
+371,25
+372,26
+373,27
+374,28
+375,31
+376,32
+377,33
+378,34
+379,35
+380,36
+381,11
+382,12
+383,13
+384,14
+385,15
+386,16
+38,32
+484,48
+423,Alveolar Bone Loss
+252,Dental Implant
+388,18
+389,37
+390,38
+391,41
+392,42
+393,43
+394,44
+395,45
+396,46
+397,47
+398,48
+399,21
+400,22
+401,23
+402,24
+403,25
+404,26
+405,27
+406,28
+407,31
+408,32
+409,33
+410,34
+411,35
+412,36
+413,11
+414,12
+415,13
+416,14
+271,Vertical Bone Loss
+265,Dental Ankylosis
+442,Cortical Erosion
+439,Enamel
+443,Focal Sclerosis
+441,Osteolysis
+444,Diffuse Sclerosis
+418,Caries
+421,Osteosclerosis
+437,Post
+449,Persistent Alveolar Socket
+436,Pontic
+486,Filling
+440,Dentine
+3506,Impacted canine
+450,Fracture
+4504,Mandibular Canal
+9,64
+192,Soft tissue Menton (Me’)
+446,Lamina Dura Thickening
+420,Periapical Lesion
+539,External Resorption
+262,Periodontal Ligament Space Widening
+4509,Mid L6o-U6o
+544,Hypersementosis
+499,Sequestrum
+538,Dense in Dente
+3472,Abrasion
+506,Advanced-Stage MRONJ
+522,Arch-Wire
+527,Arch-Wire
+532,Arch-Wire
+520,Bracket
+525,Bracket
+530,Bracket
+494,Dentine
+4325,Crista galli (CG)
+41,35
+28,18
+4338,"Lower central incisor tip , L"
+546,Dilaceration
+3201,Dilaceration
+493,Enamel
+3200,Enamel pearl
+545,Enamel pearl
+504,Fracture
+455,13
+456,14
+457,15
+458,16
+459,17
+460,18
+461,21
+463,23
+464,24
+465,25
+466,26
+467,27
+470,32
+471,33
+472,34
+473,35
+474,36
+476,38
+477,41
+479,43
+480,44
+481,45
+482,46
+424,Vertical bone loss
+512,Alveolar Bone Loss
+542,Fusion
+3197,Fusion
+3199,Hypersementosis
+541,Supernumerary Tooth
+510,Osteosclerosis
+491,Post
+3253,Pterygoid process
+521,Mini-Screw
+3507,Mesiodens
+451,Early-Stage MRONJ
+505,Early-Stage MRONJ
+3521,Residual Root
+4505,Foramen Mentale
+540,Internal Resorption
+187,Stomion superius (Ss)
+543,Gemination
+3198,Gemination
+4510,A processed point
+3306,Laryngeal cartilage calcification
+523,Orthodontic Appliance
+524,Orthodontic Button
+448,Enhancement Oblique Ridge
+495,Osteolysis
+490,Pontic
+537,Taurodontism
+536,Dental Fracture
+3519,Unerupted Tooth
+3508,Distomolar
+3586,Dental Pulp
+3520,Dental Fracture
+3473,Abfraction
+3202,Leukoplakia
+251,Stainless Steel Crown (SSC)
+3304,Styloid ligament ossification
+3523,Dental Calculus
+3532,Dense in Dente
+3533,External Resorption
+3534,Internal Resorption
+3535,Supernumerary Tooth
+3536,A noktası
+3537,B noktası
+3541,Impacted Tooth
+3544,A noktası
+3546,Soft Tissue Facial Profile
+3549,Mandibula
+158,Orbitale (Or)
+4326,Gonion L
+4339,"Lower central incisor tip , R"
+4343,"Lower molar buccal cusp , R"
+4345,"Lower molar buccal root , R"
+3552,Lower Incisor
+3553,Lower Molar
+3554,Upper Incisor
+3557,Mandibula
+3559,Upper Molar
+3560,Lower Incisor
+3561,Lower Molar
+3562,Upper Incisor
+3566,Unerupted Tooth
+3574,Overhanging Filling
+3575,Pulp Stone
+3576,Periodontal Ligament Space Widening
+3578,Horizontal Bone Loss
+3580,Dental Ankylosis
+3581,Dental Fracture
+3582,Root-Canal Filling
+3583,Root-Canal Filling
+3589,Dental Pulp
+3592,Dental Pulp
+3596,Dense in Dente
+3597,External Resorption
+3614,Dental Pulp
+3494,Mucous Retention Cyst
+3509,Paramolar
+3598,Internal Resorption
+3599,Residual Root
+3600,Impacted Tooth
+3603,Dental Calculus
+3608,Periodontal Ligament Space Widening
+3609,Pulp Stone
+3610,Overhanging Filling
+3611,Dental Ankylosis
+3612,Dental Implant
+3613,Implant Supported Crown
+3606,Horizontal Bone Loss
+3607,Furcation Defect
+3629,Persistant Deciduous Tooth
+3630,Dental Implant
+3631,Implant Supported Crown
+3635,Cortical Erosion
+3636,Focal Sclerosis
+3651,Pulp Stone
+3639,Lamina Dura Thickening
+3640,Enhancement (IAC)
+3641,Enhancement Oblique Ridge
+3642,Persistent Alveolar Socket
+3646,Residual Root
+3647,Impacted Tooth
+3648,Periapical Lesion
+3650,Periodontal Ligament Space Widening
+3652,Overhanging Filling
+3653,Dental Ankylosis
+3660,Mini-Screw
+3662,Orthodontic Appliance
+3663,Orthodontic Button
+3665,Mini-Screw
+3667,Orthodontic Appliance
+3668,Orthodontic Button
+3674,Dental Calculus
+3682,Supernumerary Tooth
+3686,Persistent Deciduous Teeth
+4507,Jaw Pathology
+3688,Dilated Odontoma
+3689,Dilated Odontoma
+3690,Dilated Odontoma
+3691,Dilated Odontoma
+3475,Abrasion
+4511,B processed point
+3495,Microdontia
+3693,Mucous Retention Cyst
+3694,Dental Attrition
+3696,Lichen Planus
+4304,Impacted canine (Horizontal position)
+4305,Impacted canine (Oblique position)
+3720,Dilated Odontoma
+3733,Nutrient Canal
+3985,Root-Canal Filling
+4512,Li processed point
+3756,Maxillary Sinus Septum
+3760,Zygomatic Process of The Maxilla
+3952,15
+3764,Hamular Process
+3511,Impacted third molar
+3476,Abfraction
+3496,Microdontia
+3205,Squamous cell carcinoma (SCC)
+3792,Mylohyoid (Internal Oblique) Ridge
+3801,Hyoid Bone
+3824,Buccalbifurcation cyst
+3834,Nasopalatine ductcyst
+3842,Stafne bonecyst
+3843,Calcifying epithelialodontogenic tumor (Pindborg tumor)
+3512,Seconder caries
+4307,Crown-Palatinal (Lingual)
+4340,"Lower cuspid tip , L"
+3477,Abfraction
+3206,Leukoplakia
+3497,Microdontia
+3863,Periapicalcemento-osseous dysplasia
+3901,12
+3902,13
+3919,Buccalbifurcation cyst
+3924,Nasopalatine ductcyst
+3928,Stafne bonecyst
+3929,Calcifying epithelialodontogenic tumor (Pindborg tumor)
+3513,Dilated Odontoma
+3934,Central odontogenicfibroma
+3478,Abrasion
+3207,Lichen planus
+3498,Macrodontia
+3939,Periapicalcemento-osseous dysplasia
+3990,Periapical Lesion
+3951,14
+3953,16
+3954,17
+3956,18
+3957,21
+3958,22
+3959,23
+3962,24
+3963,25
+3964,26
+3965,27
+3966,28
+3967,31
+3968,32
+3969,33
+3970,34
+3971,35
+3972,36
+3973,37
+3974,38
+3975,41
+3976,42
+3977,43
+3978,44
+3979,45
+3980,46
+3981,47
+3982,48
+3983,11
+3984,Masseter Muscle
+3987,Dental Implant
+3992,Inflamed erythematous area
+3993,Dental plaque
+3994,Dental calculus
+3995,Gingival hyperplasia
+3996,Gingival recession
+3997,Insufficient attached gingiva
+3998,Frenulum
+3999,Abnormal frenulum
+4000,Muco-gingival junction
+4001,Interdental papilla loss
+4002,Gingival pigmentation
+4004,Stillmans clefts
+4003,McCalls festoons
+3961,Gnathion Soft Tissue (Gn)
+4006,Crown-Buccal
+4308,Laryngeal cartilage calcification
+3479,Dental attrition
+3499,Macrodontia
+4008,Root-Buccal
+3208,Squamous cell carcinoma (SCC)
+4009,Root-Palatinal (Lingual)
+4010,Impacted canine (Vertical position)
+4011,Impacted canine (Horizontal position)
+4012,Impacted canine (Oblique position)
+4014,Vertical 
+4015,Mesioangular
+4016,Horizontal
+4017,Distoangular
+4018,Buccolingual
+4019,Others
+4020,Position A
+4021,Position B
+4022,Position C
+4096,B noktası
+4024,Biohorizon Tapered Internal  LASERLOK 4.6 X 9 mm
+4513,Ls processed point
+4026,Class III
+4028,PP1
+4029,PP2
+4030,MP2
+4031,DP2
+4032,PP3
+4033,DP1
+4034,MP3
+4035,DP3
+4036,PP4
+4037,MP4
+4038,DP4
+4039,PP5
+4040,DP5
+4041,MP5
+4042,Radius
+4043,Sesamoid
+4044,Hamatum
+4045,Pisiform
+4046,Ulna
+4047,Metacarpal 1
+4048,Metacarpal 2
+4049,Metacarpal 3
+4050,Metacarpal 4
+4051,Metacarpal 5
+4052,Capitatum
+4053,Triquetrum
+4054,Trapezium
+4055,Trapezoideum
+4056,Scaphoideum
+4057,Lunatum
+4058,PP1
+4059,DP1
+4060,PP2
+4061,MP2
+4062,DP2
+4063,PP3
+4064,MP3
+4065,DP3
+4066,PP4
+4067,MP4
+4068,DP4
+4069,PP5
+4070,MP5
+4071,DP5
+4072,Radius
+4073,Ulna
+4075,Hamatum
+4076,Pisiform
+4077,Metacarpal 1
+4078,Metacarpal 2
+4079,Metacarpal 3
+4080,Metacarpal 4
+4081,Metacarpal 5
+4082,Capitatum
+4083,Triquetrum
+4084,Trapezium
+4085,Trapezoideum
+4086,Scaphoideum
+4087,Lunatum
+4095,Haller cells
+4098,Biohorizon Tapered Internal  LASERLOK 3.4 X 10.5 mm
+4099,Biohorizon Tapered Internal  LASERLOK 3.4 X 12 mm
+4100,Biohorizon Tapered Internal  LASERLOK 3.4 X 15 mm
+4101,Biohorizon Tapered Internal  LASERLOK 3.8 X 9 mm
+4514,Mx1c processed point
+4074,Sesamoid
+3515,Cleft palate
+4102,Biohorizon Tapered Internal  LASERLOK 3.8 X 10.5 mm
+4103,Biohorizon Tapered Internal  LASERLOK 3.8 X 12 mm
+4104,Biohorizon Tapered Internal  LASERLOK 3.8 X 15 mm
+4105,Biohorizon Tapered Internal  LASERLOK 4.6 X 7.5 mm
+4106,Biohorizon Tapered Internal  LASERLOK 4.6 X 10.5 mm
+4107,Biohorizon Tapered Internal  LASERLOK 4.6 X 12 mm
+3310,Osteomyelitis
+4309,Styloid ligament ossification
+4310,Rhinolith
+4311,Sialolithiasis
+4109,Biohorizon Tapered Internal  LASERLOK 5.8 X 7.5 mm
+4110,Biohorizon Tapered Internal  LASERLOK 5.8 X 9 mm
+4111,Biohorizon Tapered Internal  LASERLOK 5.8 X 10.5 mm
+3500,Macrodontia
+3209,Splint
+3480,Splint
+4112,Dens in dente
+4113,Hypercementosis
+4114,Concrescence
+4115,Biohorizon Tapered Internal  LASERLOK 5.8 X 12 mm
+4116,Biohorizon Tapered Internal  LASERLOK 5.8 X 15 mm
+4117,Biohorizon Tapered Internal  RBT 3.4 X 9.0 mm
+4118,Biohorizon Tapered Internal  RBT 3.4 X 10.5 mm
+4119,Biohorizon Tapered Internal  RBT 3.4 X 12 mm
+4120,Biohorizon Tapered Internal  RBT 3.4 X 15 mm
+4121,Biohorizon Tapered Internal  RBT 3.8 X 7.5 mm
+4122,Biohorizon Tapered Internal  RBT 3.8 X 9 mm
+4123,Biohorizon Tapered Internal  RBT 3.8 X 10.5 mm
+4124,Biohorizon Tapered Internal  RBT 3.8 X 12 mm
+4125,Biohorizon Tapered Internal  RBT 3.8 X 15 mm
+4126,Biohorizon Tapered Internal  RBT 4.6 X 7.5 mm
+4127,Biohorizon Tapered Internal  RBT 4.6 X 9 mm
+4128,Biohorizon Tapered Internal  RBT 4.6 X 10.5 mm
+4129,Biohorizon Tapered Internal  RBT 4.6 X 12 mm
+4130,Biohorizon Tapered Internal  RBT 4.6 X 15 mm
+4131,Biohorizon Tapered Internal  RBT 5.8 X 7.5 mm
+4132,Biohorizon Tapered Internal  RBT 5.8 X 9 mm
+4133,Biohorizon Tapered Internal  RBT 5.8 X 10.5 mm
+4134,Biohorizon Tapered Internal  RBT 5.8 X 12 mm
+4135,Biohorizon Tapered Internal  RBT 5.8 X 15 mm
+4136,Biohorizon Tapered Internal  LASERLOK 3.4 X 9.0 mm
+4137,Sella Turcica- Round
+4138,Sella Turcica- Oval
+4139,Sella Turcica- Flattened
+4140,Nobel Replace 4.3 x 10 mm
+4141,Nobel Replace 3.5 x 11.5 mm
+4142,Nobel Replace 3.5 x 13 mm
+4143,Nobel Replace 5 x 10 mm
+4144,Nobel Replace 4.3 x 11.5 mm
+4145,Nobel Replace 3.5 x 10 mm
+4146,Nobel Replace 4.3 x 13 mm
+4147,Nobel Replace 5 x 13 mm
+4148,Nobel Parallel 4.3 x 13 mm
+4149,Nobel Parallel 4.3 x 11.5 mm 
+4150,Nobel Parallel 3.75 x 10 mm 
+4151,Nobel Parallel 4.3 x 10 mm 
+4152,Nobel Parallel 4.3 x 15 mm 
+4153,Nobel Parallel 3.75 x 13 mm 
+4154,Nobel Parallel 3.75 x 15 mm 
+4155,Nobel Parallel 3.75 x 11.5 mm 
+4156,Nobel Parallel 5 x 10 mm 
+4157,Nobel Parallel 4.3 x 8.5 mm 
+4158,Nobel Parallel 5 x 11.5 mm 
+4159,Nobel Parallel 5 x 15 mm 
+4160,Nobel Parallel 5 x 13 mm 
+4213,Dyna Helix DC 5 x 11.5 mm
+4214,Dyna Helix DC 5 x 13 mm
+4215,Dyna Helix DC 4.1 x 10 mm
+3210,Orthodontic Wire
+3481,Miniplate and Screw System
+3516,Buccalbifurcation cyst
+4161,Nobel Active 4.3 x 11.5 mm
+4162,Nobel Active 5 x 11.5 mm
+4163,Nobel Active 4.3 x 13 mm
+4164,Nobel Active 4.3 x 10 mm
+4165,Nobel Active 4.3 x 8 mm
+4312,Antrolith
+4313,Calcified lymph node
+4314,Arterial calcification
+4167,Nobel Active 3.5 x 10 mm
+4168,Nobel Active 4.3 x 15 mm
+4169,Nobel Active 3.5 x 15 mm
+4170,Nobel Active 3.5 x 13 mm
+4171,Nobel Active 3.5 x 11.5 mm
+4172,Nobel Active 4.3 x 8.5 mm
+4173,Straumann Bone Level 4.1 x 10 mm
+4174,Straumann Bone Level 4.1 x 8 mm
+4175,Straumann Bone Level 3.3 x 12 mm
+4176,Straumann Bone Level 4.8 x 8 mm
+4177,Straumann Bone Level 3.3 x 10 mm
+4178,Straumann Bone Level 4.2 x 12 mm
+4179,Straumann Bone Level 4.1 x 12 mm
+4180,Straumann Bone Level 4.8 x 10 mm
+4181,Straumann Bone Level 4.1 x 14 mm
+4182,Straumann Bone Level 4.8 x 12 mm
+4183,Straumann Roxolid Bone Level Tapered 4.1 x 12 mm
+4184,Straumann Roxolid Bone Level Tapered 3.3 x 12 mm
+4185,Straumann Roxolid Bone Level Tapered 4.1 x 10 mm
+4186,Straumann Roxolid Bone Level Tapered 4.1 x 14 mm
+4187,Straumann Roxolid Bone Level Tapered 4.8 x 10 mm
+4188,Straumann Roxolid Bone Level Tapered 4.8 x 12 mm
+4189,Straumann Roxolid Bone Level Tapered 4.8 x 14 mm
+4190,Straumann Roxolid Bone Level Tapered 4.1 x 8 mm
+4191,Straumann Roxolid Bone Level Tapered 3.3 x 10 mm
+4192,Straumann Roxolid Bone Level Tapered 4.2 x 10 mm
+4193,Straumann Roxolid Bone Level Tapered 4.1 x 16 mm
+4194,Straumann Roxolid Bone Level Tapered 4.8 x 8 mm
+4195,Straumann Roxolid Bone Level 4.1 x 10 mm
+4196,Straumann Roxolid Bone Level 3.3 x 12 mm
+4197,Straumann Roxolid Bone Level 4.1 x 12 mm
+4198,Straumann Roxolid Bone Level 4.8 x 10 mm
+4199,Straumann Roxolid Bone Level 4.8 x 12 mm
+4200,Straumann Roxolid Bone Level 4.1 x 8 mm
+4201,Straumann Roxolid Bone Level 3.3 x 10 mm
+4202,Dyna Helix DC 3.2 x 13 mm
+4203,Dyna Helix DC 4.2 x 10 mm
+4204,Dyna Helix DC 3.2 x 10 mm
+4205,Dyna Helix DC 3.2 x 8 mm
+4206,Dyna Helix DC 3.6 x 11.5 mm
+4207,Dyna Helix DC 3.6 x 10 mm
+4208,Dyna Helix DC 3.6 x 13 mm
+4209,Dyna Helix DC 4.2 x 8 mm
+4210,Dyna Helix DC 4.2 x 13 mm
+4211,Dyna Helix DC 4.2 x 11.5 mm
+4212,Dyna Helix DC 5 x 10 mm
+4216,Dyna Helix DC 3.2 x 11.5 mm
+4217,Dyna Helix DC 3.6 x 8 mm
+4218,Dyna Helix DC 4.2 x 14 mm
+4219,Dyna Helix DC 4.3 x 11.5 mm
+3377,Cherubism
+4220,Dyna Helix DC 4.1 x 12 mm
+4221,Dyna Helix DC 4.2 x 12 mm
+4222,NucleOSS T6 3.5 x 10 mm
+3211,Orthodontic Band
+447,Enhancement (IAC)
+4223,NucleOSS T6 4.1 x 10 mm
+4224,NucleOSS T6 4.8 x 10 mm
+3482,Pericoronitis
+125,Root-Canal Filling
+4225,NucleOSS T6 4.1 x 12 mm
+4226,NucleOSS T6 4.8 x 12 mm
+4227,NucleOSS T6 3.5 x 12 mm
+4228,NucleOSS T6 4.1 x 8 mm
+4229, NucleOSS T6 3.5 x 8 mm
+4230,NucleOSS T6 4.8 x 8 mm
+4231,Combined Periodontal Bone Loss
+35,27
+64,26
+67,33
+46,42
+4315,Myositis ossificans
+4316,Osteoma cutis
+4317,Phlebolith
+4318,Tonsillolith
+75,45
+4233,11
+4234,12
+4235,13
+4236,14
+4237,15
+4238,16
+4239,17
+4240,18
+4241,21
+4242,22
+4243,23
+4244,24
+4245,25
+4246,26
+4247,27
+4248,28
+4249,31
+4250,32
+4251,33
+4252,34
+4253,35
+4254,36
+4255,37
+4256,38
+4257,41
+4258,42
+4259,43
+4260,44
+4261,45
+4262,46
+4263,47
+4264,48
+4265,Dental fracture (Crown)
+4266,Dental fracture (Root)
+4267,Dental fracture (Crown-Root)
+4269,Caries
+4271,Impacted tooth
+4272, Supernumerary Tooth
+4273,Residual root
+4274,Alveolar bone loss
+4275,Taurodontism
+4276,Dilaceration
+4277,Fusion
+4278,Gemination
+4279,Dental fracture 
+4281,Root canal filling
+4282,Dental implant
+468,28
+4283,Implant supported crown
+4285,Pontic
+4286,Post
+12,72
+20,85
+431,Root-canal filling
+152,Filling
+4287,Osteosclerosis
+4288,Periodontal ligament space widening
+4289,Periapical lesion
+4292,Jaw lesion (Mixt)
+4293,Jaw fracture
+4294,Dentin pin
+4296,Jaw pathology (Radiopaque)
+4297,Jaw pathology (Mixt)
+126,Caries
+3483,Pericoronitis
+3212,Splint
+3213,Orthodontic wire
+3484,Peri-implantitis
+3214,Orthodontic band
+3485,Peri-implantitis
+3510,Parapremolar
+80,Implant Supported Crown
+3517,Root Canal Filling Tooth
+3215,Orthodontic band
+3486,Peri-Implantitis
+3216,Orthodontic wire
+3263,Angulus Mandible
+3297,Epiglottis
+3286,External oblique ridge
+3239,Incisive Foramen
+3261,Incisura Mandible
+3228,Inferior concha
+3240,Lateral fossa
+3309,Osteomyelitis
+124,Root-canal filling
+4346,Nasal Septum
+3312,Osteonecrosis
+3218,Periodontal space
+3302,Rhinolith
+3303,Sialolithiasis
+3248,Tuber maxilla
+3251,Zygomatic process of the maxilla
+3301,Antrolith
+3230,Anterior Nasal Spine (ANS)
+3299,Calcified lymph node
+3305,Arterial calcification
+3259,Coronoid process
+3296,Epiglottis
+3287,External oblique ridge
+3278,Foramen mandible
+3279,Foramen mandible
+3289,Foramen mentale
+3274,Genial tubercle
+3275,Genial tubercle
+3255,Hamular process
+3265,Hard palate
+3238,Incisive Foramen
+3229,Inferior concha
+3220,Lamina dura
+3221,Lamina dura
+3241,Lateral fossa
+3290,Lingual foramen
+3291,Lingual foramen
+3281,Mandibular canal
+3257,Mandibular condyle
+4291,Jaw lesion (Radiopaque)
+3247,Maxillary sinus septum
+3232,Median palatal suture
+3233,Median palatal suture
+3272,Mental fossa
+3273,Mental fossa
+3270,Mental ridge
+3271,Mental ridge
+3285,Mylohyoid (Internal oblique) ridge
+3308,Myositis ossificans
+4290,Jaw lesion (Radiolucent)
+3236,Nasal fossa floor
+3237,Nasal fossa floor
+3225,Nasal septum
+3222,Nutrient canal
+3307,Osteoma cutis
+3288,Foramen Mentale
+3224,Nasal Septum
+3264,Hard Palate
+3266,Soft Palate
+3219,Periodontal space
+3294,Pharyngeal airway
+3295,Pharyngeal airway
+3298,Phlebolith
+3242,Pterygomaxillary fissure
+3243,Pterygomaxillary fissure
+83,Periapical Lesion
+3280,Mandibular canal
+3256,Mandibular condyle
+4295,Jaw pathology (Radiolucent)
+3314,Radicular cyst
+3267,Soft palate
+3282,Submandibular gland fossa
+3283,Submandibular gland fossa
+3234,Superior foramen of the nasopalatine canal
+3235,Superior foramen of the nasopalatine canal
+3300,Tonsillolith
+3249,Tuber maxilla
+3276,Vertebra
+3348,Adenomatoid odontogenic tumor
+3365,Ameloblastic fibro-odontoma
+3364,Ameloblastic fibroma
+3343,Ameloblastoma
+3336,Aneurysmal bone cyst
+3327,Calcifying odontogenic cyst
+3380,Central giant cell granuloma
+3378,Cherubism
+3371,Periapicalcemento-osseous dysplasia
+3347,Adenomatoid odontogenic tumor
+3350,Complex odontoma
+3351,Compound odontoma
+3352,Compound odontoma
+3381,Paget
+3318,Dentigerous cyst
+3369,Fibrous dysplasia
+4319,A point (A)
+4324,Condyle R
+4361,Menton (Me)
+4347,Supraorbitale  L
+4367,Chellion
+3373,Florid cemento-osseous dysplasia
+3374,Florid cemento-osseous dysplasia
+3375,Focal cemento-osseous dysplasia
+3376,Focal cemento-osseous dysplasia
+3325,Glandular odontogenic cyst
+3326,Glandular odontogenic cyst
+3367,Hemangioma
+3368,Hemangioma
+3383,Langerhans cell histiocytosis
+3384,Langerhans cell histiocytosis
+3323,Lateral periodontal cyst
+3324,Lateral periodontal cyst
+3331,Nasolabial cyst
+3332,Nasolabial cyst
+3337,Stafne bonecyst
+3322,Odontogenic keratocyst
+3353,Odontogenic myxoma
+3354,Odontogenic myxoma
+3361,Ossifying fibroma
+3362,Ossifying fibroma
+3357,Osteoma
+3358,Osteoma
+3387,Osteosarcoma
+3388,Osteosarcoma
+3316,Residual cyst
+3359,Sementoblastoma
+3360,Sementoblastoma
+3385,Squamous cell carcinoma (SCC)
+3386,Squamous cell carcinoma (SCC)
+3355,Central odontogenicfibroma
+3342,Torus mandibularis
+3339,Torus palatinus
+3340,Torus palatinus
+3333,Traumatic bone cyst
+3334,Traumatic bone cyst
+3329,Nasopalatine ductcyst
+3366,Ameloblastic fibro-odontoma
+3363,Ameloblastic fibroma
+3344,Ameloblastoma
+3335,Aneurysmal bone cyst
+3328,Calcifying odontogenic cyst
+3319,Buccal bifurcation cyst
+3320,Buccal bifurcation cyst
+3345,Calcifying epithelial odontogenic tumor (Pindborg tumor)
+3346,Calcifying epithelial odontogenic tumor (Pindborg tumor)
+3379,Central giant cell granuloma
+3356,Central odontogenic fibroma
+3349,Complex odontoma
+3390,Condensing osteitis
+3317,Dentigerous cyst
+3330,Nasopalatine duct cyst
+3321,Odontogenic keratocyst
+3269,Articuler eminence
+254,Crown
+3632,Dental Pulp
+154,Sella (S)
+3382,Paget disease
+3389,Condensing Osteitis
+3372,Periapical cemento-osseous dysplasia 
+3315,Residual cyst
+3338,Stafne bone cyst
+3341,Torus mandibularis
+3391,Space Maintainer
+452,Advanced-Stage MRONJ
+3262,Angulus Mandible
+3189,Dilaceration
+219,Glabella (G’)
+3187,Hypersementosis
+224,Labrale superior (Ls)
+242,Maxilla
+203,Menton (Me)
+197,Orbitale (Or)
+250,Post
+3313,Radicular cyst
+445,Sequestrum
+258,Stainless Steel Crown (SSC)
+3277,Vertebra
+3487,Gnathion (Gn)
+205,Anterior Nasal Spina (ANS)
+4331,Latero-orbitale L
+4341,"Lower cuspid tip , R"
+3398,Alveolar Bone Loss
+3409,Dense in dente
+3405,Dental ankylosis
+3397,Dental calculus
+3407,Dental fracture
+3417,Dilaceration
+3416,Enamel pearl
+3410,External resorption
+3401,Furcation defect
+3413,Fusion
+3414,Gemination
+3400,Horizontal bone loss
+3415,Hypersementosis
+3394,Impacted tooth
+3411,Internal resorption
+3396,Osteosclerosis
+3404,Overhanging filling
+3395,Periapical lesion
+3402,Periodontal ligament space widening
+3403,Pulp stone
+3393,Residual root
+3412,Supernumerary tooth
+3408,Taurodontism
+3399,Vertical bone loss
+3425,Arch-Wire
+3423,Bracket
+3418,Dental implant
+3419,Implant supported crown
+3424,Mini-screw
+3426,Orthodontic appliance
+3429,Orthodontic band
+3427,Orthodontic button
+3428,Orthodontic wire
+3421,Pontic
+3422,Post
+3456,Ossifying fibroma
+3454,Osteoma
+3430,Osteomyelitis
+3435,Buccal bifurcation cyst
+3448,Calcifying epithelial odontogenic tumor (Pindborg tumor)
+3431,Osteonecrosis
+3469,Osteosarcoma
+3453,Central odontogenic fibroma
+3466,Paget disease
+3449,Adenomatoid odontogenic tumor
+3458,Ameloblastic fibro-odontoma
+3457,Ameloblastic fibroma
+3447,Ameloblastoma
+3443,Aneurysmal bone cyst
+3439,Calcifying odontogenic cyst
+3465,Central giant cell granuloma
+3464,Cherubism
+3450,Complex odontoma
+3451,Compound odontoma
+3470,Condensing osteitis
+3434,Dentigerous cyst
+3460,Fibrous dysplasia
+3462,Florid cemento-osseous dysplasia
+3463,Focal cemento-osseous dysplasia
+3438,Glandular odontogenic cyst
+3459,Hemangioma
+489,Crown
+87,Caries
+280,Dental Pulp
+176,Mx6m
+3488,Nasal dorsum
+3489,Ramus (Ra)
+3467,Langerhans cell histiocytosis
+3437,Lateral periodontal cyst
+3441,Nasolabial cyst
+3440,Nasopalatine duct cyst
+3436,Odontogenic keratocyst
+3461,Periapical cemento-osseous dysplasia 
+3432,Radicular cyst
+3433,Residual cyst
+3455,Sementoblastoma
+3468,Squamous cell carcinoma (SCC)
+3444,Stafne bone cyst
+3446,Torus mandibularis
+3445,Torus palatinus
+3442,Traumatic bone cyst
+3490,Persistent Deciduous Teeth
+3452,Odontogenic myxoma
+3491,Persistent deciduous teeth
+3471,Dental Attrition
+4320,"Antegonial notch , L (AG)"
+3986,Root Canal Filling
+4321,"Antegonial notch , R (GA)"
+4322,Anterior Nasal Spine (ANS)
+3180,Taurodontism
+195,Basion (Ba)
+306,24
+387,17
+498,Diffuse sclerosis
+501,Enhancement inferior alveolar canal (IAC)
+3551,Upper Molar
+3555,Soft Tissue Facial Profile
+3853,Central odontogenicfibroma
+4007,Crown-Palatinal (Lingual)
+4108,Biohorizon Tapered Internal  LASERLOK 4.6 X 15 mm
+4166,Nobel Active 3 x 11.5 mm
+4232,Combined Periodontal Bone Loss
+3311,Osteonecrosis
+3252,Pterygoid process
+3370,Fibrous dysplasia
+3392,Space maintainer
+269,Furcation defect
+4327,Gonion R
+4328,"Jugal process , L (J)"
+3601,Periapical Lesion
+186,Labrale superior (Ls)
+191,Soft tissue Pogonion (Pg’)
+167,Posterior Nasal Spina (PNS)
+166,Anterior Nasal Spina (ANS)
+4329,"Lateral wall of nasal cavity , L"
+4330,"Lateral wall of nasal cavity , R"
+4332,Latero-orbitale R
+4335,"Lower central incisor mesial , R"
+4337,"Lower central incisor root , R"
+4336,"Lower central incisor root , L"
+4342,"Lower molar buccal cusp , L"
+4344,"Lower molar buccal root , L"
+4348,Supraorbitale  R
+4349,"Upper central incisor mesial , L"
+4362,"Upper central incisor mesial , R"
+4350,"Upper central incisor root , L"
+4363,"Upper central incisor root , R"
+4352,"Upper central incisor tip , R"
+4351,"Upper central incisor tip , L"
+4353,"Upper cuspid tip, L"
+4355,"Upper molar buccal cusp , L"
+4364,"Upper molar buccal cusp , R"
+4357,"Upper molar buccal root , R"
+4356,"Upper molar buccal root , L"
+4358,"Z point frontozygomatic suture , L"
+88,Impacted Tooth
+432,Filling
+4360,"Zygomatic arch , R (ZA)"
+4359,"Zygomatic arch , L (ZA)"
+4354,"Upper cuspid tip, R"
+4365,Ala nasi
+4366,Cervicomental point
+4368,Columella
+4369,Dorsum nasale
+4370,Exocantion
+4371,Glabella
+4372,Gnation
+4373,Gonion
+4375,Labium inferius
+4376,Labium superius
+4378,Nasion
+4379,Orbitale
+492,Dental pulp
+4380,Pronasale
+4381,Soft tissue A point
+4382,Soft tissue B point
+4383,Soft tissue pogonion
+4384,Stomion inferior
+4385,Stomion superior
+4386,Subnasale
+4387,Tragus
+4388,Trichion
+4389,Vertex
+4377,Menton
+4390,Ruler point 1
+4391,Ruler point 2
+4392,Ala nasi left
+4393,Ala nasi right
+4394,Chelion left
+4395,Chelion right
+4396,Cubid’s bow
+4397,Endocantion left
+4398,Endocantion right
+4399,Exocantion left 
+4400,Exocantion right
+4401,Eye measurement point 1 Right
+4402,Eye measurement point 2 Right
+4403,Frontotemporale left
+4404,Frontotemporale right
+4405,Glabella
+4406,Gonion left
+4407,Gonion right
+4408,Inferior Lip bottom middle point
+4409,Inferior Lip top middle point
+4410,Mentale left
+4411,Mentale right
+4412,Menton
+4413,Nasal bottom point
+4414,Nasal dorsum
+4415,Nasion
+4416,Orbitale left 
+4417,Orbitale right
+4418,Outest ear point left
+4419,Outest ear point right
+4420,Pogonion
+4421,Pronasale
+4422,Pupil left
+4423,Pupil right
+4424,Superior Lip Tubercul 1 point
+4425,Superior Lip Tubercul 2 point
+4426,Superior Lip bottom point
+4427,Trichion
+4428,Vertex
+4429,Zygion left
+4430,Zygion right
+4447,Eye measurement point 2 Right
+4431,Ala nasi left
+4432,Ala nasi right
+4433,Bottom gingival point left
+4434,Bottom gingival point right
+4435,Buccal coridor point left
+4436,Buccal coridor point right
+255,Pontic
+4437,Chelion externa left
+4438,Chelion externa right
+4439,Chelion interna left
+4440,Chelion interna right
+4441,Cubid’s bow 
+4442,Endocantion left
+4443,Endocantion right
+4444,Exocantion left 
+4445,Exocantion right
+4446,Eye measurement point 1 Right
+4448,Glabella
+4449,Incisiv point
+4450,Inferior Lip bottom left point
+4451,Inferior Lip bottom middle point
+4452,Inferior Lip bottom right point
+4453,Inferior Lip top left point
+4454,Inferior Lip top middle point
+4455,Inferior Lip top right point
+4456,Left canine point
+4457,Maxillar dental midline
+4458,Menton
+4459,Nasal bottom point
+4460,Nasal dorsum
+4461,Nasion
+4462,Pogonion
+4463,Pronasale
+4464,Pupil left
+4465,Pupil right
+4466,Right Canine Point 
+4467,Superior Lip Tubercul 1 point
+4468,Superior Lip Tubercul 2 point
+4469,Superior Lip bottom point
+4470,Superior Lip left point
+4471,Superior Lip right point
+3778,Articuler eminence
+4472,Orbita
+4476,Maxillary sinus
+4479,Mandibular foramen
+4485,Nasal Septum
+4487,Mastoid process
+4488,External acoustic opening
+4489,Styloid process
+4490,Soft tissues of the ear
+4491,Sphenoid bone
+4483,Articular eminence
+4475,Faringeal Airway
+4494,Zygomatic arch
+4495,Cortical bone of mandible
+4496,Tongue
+4497,Mental spine
+4498,Soft tissue of the nose
+4499,Infraorbital canal
+4473,Hard Palate
+4486,Nasal cavity
+4484,Coronoid Process
+4482,Hyoid bone
+4474,Incisura Mandible
+4477,Soft Palate
+4478,Mandibular Foramen
+4481,Mandibular Condyle
+91,Residual Root
+3292,Hyoid Bone
+3258,Coronoid Process
+3260,Incisura Mandible
+453,11
+454,12
+462,22
+469,31
+475,37
+478,42
+483,47
+259,Vertical Bone Loss
+260,Horizontal Bone Loss
+261,Furcation Defect
+122,Alveolar Bone Loss
+513,Vertical bone loss
+3672,Horizontal Bone Loss
+3676,Furcation Defect
+4515,Variation of Mandibular Canal
+4516,Coronoid Proces
+4517,Anterior superior alveolar nerve
+4520,Maxillary Sinus Septa
+4522,Concha Nasalis Inferior
+4523,Vertebra Super Position
+4518,Nutrition Channel
+4524,Anterior Superior Posterior Nervus
+4525,Mandibular Canal
+4526,Nasopalatin Canal
+4527,Maxillary sinus
+4528,Mucous retantion cyst
+4529,Mucosal thickening
+4530,Benign Jaw lesion (Mixt)
+4531,Malign Jaw Lesion (Radiopaque)
+4532,Malign Jaw Lesion (Radiolucent)
+4533,Cystic Jaw Lesion (Mixt)
+4534,Cystic Jaw Lesion (Radiopaque)
+4535,Cystic Jaw Lesion (Radiolusent)
+4536,Metastatic Jaw Lesion
+4537,Malign Jaw Lesion (Mixt)
+4538,Benign Jaw lesion (Radiopaque)
+4539,Benign Jaw Lesion (Radiolucent)
+4521,Nasopalatin Canal
+4540,Sinus Septum
+4541,Palatin Canal

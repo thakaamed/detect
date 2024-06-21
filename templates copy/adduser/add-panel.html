@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/addpatient.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>{{specs.title}} - {{card_message}}</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <style>
+        .swal2-title {
+            font-size: 16px;
+            font-weight: 300;
+        }
+        .black-border {
+            border: 2px solid black !important;
+        }
+        
+        .passive_class{
+            
+        }
+    </style>
+
+{% endblock %}
+{% block headerButtons %}
+{% endblock %}
+
+{% block content %} 
+   <main class="d-flex align-items-center">
+        <div class="container p-5 bg-light rounded shadow-lg">
+
+            <div id="button-group" class="d-none">
+                <a id="addDoctorOwnCompany" href="{% url 'addDoctorOwnCompany' %}"><button class="custom btn-blue">Add Doctor to Your Company</button></a>
+                {% if user_type.is_admin %}
+                    <a id="addDoctorDifferentCompany" href="{% url 'addDoctorDifferentCompany' %}"><button class="custom btn-blue">Add Doctor to Different Company</button></a>
+                    <a id="AddDistributor" href="{% url 'addDistributor' %}"><button class="custom btn-blue">Add Distributor</button></a>
+                    <a id="addCompanyDoctor" href="{% url 'addCompanyDoctor' %}"><button class="custom btn-blue">Add Company and Doctor</button></a>
+                    <a id="addDemoUser" href="{% url 'addDemoUser' %}"><button class="custom btn-blue">Add Demo User</button></a>
+                     <!-- Eksik kısımlar: 1-) Distributorun kullanıcı eklemesi, 2-) Distributorun distributor eklemesi-->
+                {% endif %}
+                {% if user_type.is_distributor %}
+                    <a id="DistributorAddsUser" href="{% url 'DistributorAddsUser' %}"><button class="custom btn-blue">Distributor Adds User</button></a>
+                    <a id="DistributorAddsUserToCompany" href="{% url 'DistributorAddsUserToCompany' %}"><button class="custom btn-blue">Distributor Adds User To Different Company</button></a>
+                {% endif %}
+            </div>
+            <div id="main-content">
+                {% block panel %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+    </main>
+
+{% endblock %}
+{% block customJs %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+crossorigin="anonymous"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#button-group').removeClass("d-none")
+            active_page_name = "{{active_page_name}}"
+            if (active_page_name == "addDoctorOwnCompany"){
+                $('#addDoctorOwnCompany').hide()
+            } else if (active_page_name == "addDoctorDifferentCompany"){
+                $('#addDoctorOwnCompany').removeClass("d-none")
+                $('#addDoctorDifferentCompany').hide()
+                $('#AddDistributor').show()
+                $('#addCompanyDoctor').show()
+                $('#addDemoUser').show()
+            } else if (active_page_name == "AddDistributor"){
+                $('#addDoctorOwnCompany').removeClass("d-none")
+                $('#addDoctorDifferentCompany').show()
+                $('#AddDistributor').hide()
+                $('#addCompanyDoctor').show()
+                $('#addDemoUser').show()
+            } else if (active_page_name == "addCompanyDoctor"){
+                $('#addDoctorOwnCompany').removeClass("d-none")
+                $('#addDoctorDifferentCompany').show()
+                $('#AddDistributor').show()
+                $('#addCompanyDoctor').hide()
+                $('#addDemoUser').show()
+            } else if (active_page_name == "addDemoUser"){
+                $('#addDoctorOwnCompany').removeClass("d-none")
+                $('#addDoctorDifferentCompany').show()
+                $('#AddDistributor').show()
+                $('#addCompanyDoctor').show()
+                $('#addDemoUser').hide()
+            } else if (active_page_name == "DistributorAddsUser"){
+                $('#addDoctorOwnCompany').removeClass("d-none")
+                $('#addDoctorDifferentCompany').show()
+                $('#AddDistributor').show()
+                $('#addCompanyDoctor').show()
+                $('#addDemoUser').show()
+                $('#DistributorAddsUser').hide()
+            }else if (active_page_name == "DistributorAddsUserToCompany"){
+                $('#addDoctorOwnCompany').removeClass("d-none")
+                $('#addDoctorDifferentCompany').show()
+                $('#AddDistributor').show()
+                $('#addCompanyDoctor').show()
+                $('#addDemoUser').show()
+                $('#DistributorAddsUser').show()
+                $('#DistributorAddsUserToCompany').hide()
+            }
+        });
+    </script>
+    
+{% endblock %}
+
+

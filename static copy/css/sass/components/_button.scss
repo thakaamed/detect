@@ -1,0 +1,20 @@
+button.custom {
+    border: none;
+    outline: none;
+    padding: 7px 15px;
+    border-radius: 7px;
+    &.btn-blue {
+        background-color: #5071C8;
+        color: white;
+    }
+    &.transparent {
+        background-color: transparent;
+    }
+    &.blue-hover:hover {
+        background-color: #5071C8;
+        color: white;
+    }
+    &:hover {
+        opacity: .9;
+    }
+}

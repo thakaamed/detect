@@ -1,0 +1,369 @@
+:root{
+    --little-dark: #353535;
+    --dark: #111;
+    --dark-little-smooth: #1e1d1d; /* bu renk --dark dan bir tık açık olmalıdır */
+    --body-dark: #000;
+    --icon-bar-bg: #454545;
+    --icon-bar-border: #646363;
+    --checbox-bg: rgb(73, 70, 70);
+    --opacity-black: rgba(0, 0, 0, .3); /* bunların değişmesine gerenk yok */
+    --opacity-white: rgba(255, 255, 255, .3); /* bunların değişmesine gerenk yok */
+    --opacity-white-07: rgba(255, 255, 255, .7); /* bunların değişmesine gerenk yok */
+}
+
+
+body.dark, .report-list {
+    background-color: var(--body-dark)!important;
+}
+body{
+    background-color: #fff !important;
+
+}
+/* wizard color */
+.external.mising-active,
+.external.mising-active{
+    background-color: var(--opacity-white-07)!important;
+}
+.documents-edit-active{
+    border: 2px solid var(--dark)!important;
+}
+.missing-part:hover,
+.addIllnesses:hover{
+    background-color: var(--opacity-white-07)!important;
+}
+.diagnosis-responsive ,
+.dropzone-x-ray ,
+.treatments-discound ,
+.transparents-total-price,
+.diagnosis-general-child,
+.table-add,
+.thakaa-theme-tree i,
+.treatments-new-span ,
+.trash-icon-container i,
+.treatments-tab-menu-active,
+.dropdown-content a:hover,
+.thakaa-pdf,
+.select-documents-tab,
+.edit-documents-tab,
+.next-button,
+.append-html,
+.thakaa-button{
+    background-color: var(--little-dark)!important;
+}
+.pdf-append div,
+.thakaa-pdf div{
+    background-color: var(--dark)!important;
+    color: #fff!important;
+}
+.thaka-theme,
+.missing-part,
+.addIllnesses,
+.external,
+.external span,
+.diagnosis-general,
+.thakaa-theme-two,
+.treatment-container,
+.treatments-price,
+.transparents-notes,
+.thakaa-treatments,
+#searchInput,
+.treatments-payment-button,
+.treatments-tab,
+.dropdown-content a {
+    background-color: var(--dark)!important;
+}
+
+
+.report-search-input, #calibrationWarning {
+    background: var(--bs-gray-dark)!important;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, .3); 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--icon-bar-bg)!important; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--icon-bar-bg)!important; 
+}
+
+section#header,
+section#footer,
+.diagnosis-content,
+.open-section-icon,
+section#bottom-drop-section,
+.adjustable-content .tooth-chart-illnesses-by-tooth,
+.adjustable-content .diagnosis-content .teeth .tooth .item, .adjustable-content .patient-radiography .teeth .tooth .item, .adjustable-content .tooth-chart-illnesses-by-tooth .teeth .tooth .item,
+#patients-table-view .contents table.patients-table thead th,
+#patients-table-view .contents table.patients-table tbody td:nth-child(8) span,
+body:not(.dark) table.patients-table tbody tr td,
+.heading-and-items_right .view-icon.active,
+.dataTables_paginate.paging_simple_numbers a.paginate_button.current,
+#patients-card-view .cards .card-item .img-container .number,
+#patients-card-view .cards .card-item .action-btn-container,
+.patients-pagination button.active,
+section#login .left-area form button:nth-of-type(1) {
+    background-color: var(--little-dark)!important;
+}
+
+body:not(.dark) #patients-table-view .contents table.patients-table tbody td:nth-child(9) div.operations-buttons i {
+    color: white!important;
+}
+
+#patients-table-view .contents table.patients-table tbody td:nth-child(9) div.operations-buttons i {
+    color: var(--little-dark)!important;
+}
+
+#patients-table-view .contents table.patients-table.patient-card-view tbody td:nth-child(9) div.operations-buttons i {
+    color: #ffff !important;
+}
+
+.dropzone {
+    border: 2px dashed var(--dark)!important;
+}
+
+.adjustable-content .tooth-chart-illnesses-by-tooth .teeth .tooth .item.active {
+    background-color: var(--opacity-white)!important;
+}
+
+.adjustable-content .items .item,
+#drawTeethContainer {
+    background-color: var(--dark-little-smooth)!important;
+}
+
+aside#main-aside,
+.adjustable-content .diagnosis-content input.search-input,
+.adjustable-content .tooth-chart-illnesses-by-tooth .teeth .tooth .item .pencil,
+.treatment-section.chapter-1 .half,
+[data-treatment-save],
+button.custom.btn-blue,
+.modal-container .modal-box .modal-container__buttons button.yes {
+    background-color: var(--dark)!important;
+}
+
+button[data-pass-two-chapter] {
+    background: var(--dark)!important;
+}
+
+.treatment-section.chapter-1 .half:not(:first-child) {
+    background-color: white!important;
+}
+
+.adjustable-content .border-bottom-smooth {
+    border-bottom-color: var(--dark)!important;
+}
+
+#mini-icon-bar,
+.adjustable-content .diagnosis-content input.search-input:focus,
+#mini-icon-bar .icon .dropdown-section {
+    background-color: var(--icon-bar-bg)!important;
+    border: 1px solid var(--icon-bar-border)!important;
+}
+
+#mini-icon-bar .icon:not(:last-child) {
+    border-bottom: 1px solid var(--icon-bar-border)!important;
+}
+
+.adjustable-content .checkbox {
+    background-color: var(--checbox-bg)!important;
+}
+
+.adjustable-content .items .item .color {
+    border-color: var(--little-dark)!important;
+}
+
+#modal-radyografy-upload .modal-box {
+    background-color: var(--icon-bar-bg)!important;
+}
+
+.adjustable-content .diagnosis-content .teeth .tooth .item, .adjustable-content .patient-radiography .teeth .tooth .item, .adjustable-content .tooth-chart-illnesses-by-tooth .teeth .tooth .item {
+    border-color: var(--icon-bar-border)!important;
+}
+
+.adjustable-content h3.heading,
+.adjustable-content .tooth-chart-illnesses-by-tooth .tooth-details .tooth-detail {
+    border-color: var(--opacity-white)!important;
+}
+
+#mini-icon-bar .icon .dropdown-section .dropdown-section-item.range-container .range-bg,
+#background-base {
+    background-color: var(--opacity-black)!important;
+}
+
+#mini-icon-bar .icon .dropdown-section .dropdown-section-item.range-container .range-value,
+#back-value {
+    background-color: var(--opacity-white-07)!important;
+}
+
+button.custom.blue-hover:hover {
+    background-color: var(--opacity-white)!important;
+}
+
+.adjustable-content .tooth-chart-illnesses-by-tooth .teeth .tooth .item .tooth-menu {
+    background-color: var(--icon-bar-bg)!important;
+}
+
+.adjustable-content .tooth-chart-illnesses-by-tooth .teeth .tooth .item .tooth-menu::before {
+    border-right-color: var(--icon-bar-bg)!important;
+}
+
+.adjustable-content .diagnosis-content .teeth .tooth .item .tooth-menu div, .adjustable-content .patient-radiography .teeth .tooth .item .tooth-menu div, .adjustable-content .tooth-chart-illnesses-by-tooth .teeth .tooth .item .tooth-menu div {
+    border-color: var(--icon-bar-border)!important;
+}
+
+.adjustable-content .tooth-chart-illnesses-by-tooth .teeth .tooth .item .tooth-menu div:hover {
+    background-color: var(--opacity-white)!important;
+}
+
+#mini-icon-bar .icon .dropdown-section .dropdown-section-item.range-container .range-marker,
+#back-marked {
+    background-color: white!important;
+}
+
+#triangele-back,
+.adjustable-content .tooth-chart-illnesses-by-tooth .tooth-details .tooth-detail .comment-area textarea {
+    background-color: var(--opacity-black)!important;
+}
+
+#triangele-back::before {
+    border-top-color: var(--opacity-black)!important;
+}
+
+#doctor-comment-save-btn:hover,
+#doctor-comment-cancel-btn:hover {
+    background-color: var(--opacity-black)!important;
+}
+.dataTables_paginate.paging_simple_numbers a.paginate_button:hover {
+    background: none !important;
+    background-color: #646363 !important;
+}
+
+.dataTables_paginate.paging_simple_numbers a.paginate_button.current:hover {
+    background-color: #646363 !important;
+}
+
+.dataTables_paginate.paging_simple_numbers a {
+    background-color: #1d1d1e !important;
+    color: white !important;
+    border-radius: 7px !important;
+    margin: 3px;
+}
+
+section#header > .container-fluid img.header-logo {
+    max-height: 50px !important; 
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+aside a.sidebar-link.active, aside a.sidebar-link:hover {
+    background-color: #353535 !important;
+    color: inherit !important;
+}
+
+div.switch-checkbox input[type=checkbox]:checked + span + span {
+    background-color: #000000 !important;
+    transition: background-color ease-in-out 0.2s;
+}
+
+.button-active {
+    color: #4b4b4b !important;
+    border-bottom: 2px solid #4b4b4b !important;
+}
+#tokenAnalyse,
+#tokenPackage{
+    color: #979797;
+}
+
+.modal-box.px-4.d-flex.flex-column.text-light {
+    background-color: var(--little-dark) !important;
+}
+
+.patient-item{
+    background-color: var(--dark-little-smooth) !important;
+}
+
+.modal-container .checkbox {
+    background-color: var(--checbox-bg) !important;
+}
+
+.send-form-patient svg path {
+    stroke: #ffff !important;
+}
+
+body.dark .send-form-patient svg path {
+    stroke: var(--little-dark) !important;
+}
+
+body.dark .patient-card-view .send-form-patient svg path {
+    stroke: #ffff !important;
+}
+table.dataTable.stripe>tbody>tr.odd>*,table.dataTable.display>tbody>tr.odd>* {
+    box-shadow: none
+}
+
+:not(body.dark) table.patient-card-view tr td:nth-child(9) {
+    background-color: #353535!important;
+}
+
+.heading-and-items_right .view-icon:hover {
+    background-color: rgb(53 53 53);
+    color: #ffff;
+}
+
+.report-list .report-items .report-item.active {
+    background-color: var(--bs-gray-dark);
+}
+
+.report-list input {
+    background-color: var(--little-dark);
+}
+
+#view-analysis {
+    background-color: var(--little-dark);
+}
+
+.blue-selectbox {
+    background-color: var(--body-dark);
+}
+
+#report-table::before {
+    background-color: var(--body-dark);
+}
+
+#report-table thead {
+    background-color: var(--body-dark);
+}
+
+#report-table tr:not(thead tr) {
+    background-color: var(--body-dark);
+}
+
+table.patient-card-view tr td:nth-child(2){
+    background-color: var(--little-dark) !important;
+}
+
+#patients_length select option {
+    background: var(--little-dark)
+}
+.grouped-diagnoses-dark, 
+.grouped-diagnoses-child-elements-dark{
+    background-color:dimgrey!important
+}
+.tree-view .parent-view > .child-view:last-child::before{
+    background-color:dimgrey!important
+
+}
+.tree-view .parent-view .title::before{
+    background-color:dimgrey!important
+
+}
+.tree-view .parent-view .child-view .child-view:last-child::after{
+    background-color:dimgrey!important
+}
+.tree-view .parent-view .child-view::before{
+    background-color:dimgrey!important
+}

@@ -1,0 +1,17 @@
+<svg width="5" height="16" viewBox="0 0 5 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.41048 15.2699H2.09047C1.58047 15.2699 1.13048 14.9899 1.10048 14.6299L0.230469 3.91992H4.28047L3.41048 14.6299C3.37048 14.9899 2.93047 15.2699 2.42047 15.2699H2.41048Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<mask id="mask0_226_948" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="3" width="5" height="13">
+<path d="M2.41048 15.2699H2.09047C1.58047 15.2699 1.13048 14.9899 1.10048 14.6299L0.230469 3.91992H4.28047L3.41048 14.6299C3.37048 14.9899 2.93047 15.2699 2.42047 15.2699H2.41048Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_226_948)">
+<path d="M4.91985 6.65965L-0.410156 4.63965" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.79265 8.13988L-0.527344 6.12988" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.66985 9.62937L-0.660156 7.60938" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.54265 11.1196L-0.777344 9.09961" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.41985 12.6098L-0.910156 10.5898" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.29265 14.1001L-1.02734 12.0801" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.17155 15.5893L-1.14844 13.5693" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+</g>
+<path d="M3.27016 0.320312H1.24016C1.08016 0.320312 0.940151 0.470313 0.920151 0.660313C0.890151 0.940313 0.850146 1.39031 0.790146 1.87031C0.660146 2.85031 0.410156 3.98032 0.410156 3.98032H4.11015C4.11015 3.98032 3.85015 2.85031 3.73015 1.87031C3.67015 1.38031 3.62016 0.940313 3.60016 0.660313C3.58016 0.470313 3.44015 0.320312 3.28015 0.320312H3.27016Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<path d="M4.35039 3.83008H0.17038C0.0903801 3.83008 0.0603826 4.19008 0.110383 4.61008C0.150383 5.02008 0.250389 5.33008 0.320389 5.33008H4.21039C4.28039 5.33008 4.38038 5.01008 4.42038 4.61008C4.46038 4.19008 4.44038 3.83008 4.36038 3.83008H4.35039Z" fill="#757577" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+</svg>

@@ -1,0 +1,1918 @@
+{
+    "Panaromic": {
+        "Maxillary Sinus": {
+            "tr_name": "Maksiller sin\u00fcs",
+            "color": "#398864",
+            "id": 4501,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Foramen Mentale": {
+            "tr_name": "Foramen Mentale",
+            "color": "#711631",
+            "id": 4505,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Horizontal Bone Loss": {
+            "tr_name": "Horizontal kemik kayb\u0131",
+            "color": "#ECFB44",
+            "id": 260,
+            "label_type": "Periodontal Conditions",
+            "label_type_tr": "Periodontal Ko\u015fullar",
+            "area": "Tooth"
+        },
+        "Caries": {
+            "tr_name": "\u00c7\u00fcr\u00fck",
+            "color": "#800000",
+            "id": 87,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Jaw pathology (Radiolucent)": {
+            "tr_name": "\u00c7ene patolojisi (Radyol\u00fcsent)",
+            "color": "#16E278",
+            "id": 4295,
+            "label_type": "Pathologies",
+            "label_type_tr": "Patolojiler",
+            "area": "Palate"
+        },
+        "Pontic": {
+            "tr_name": "Pontik",
+            "color": "#00ffff",
+            "id": 255,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Palate"
+        },
+        "Jaw Pathology": {
+            "tr_name": "\u00c7ene Patolojisi",
+            "color": "#13EBA6",
+            "id": 4507,
+            "label_type": "Pathologies",
+            "label_type_tr": "Patolojiler",
+            "area": "Palate"
+        },
+        "Hyoid Bone": {
+            "tr_name": "Hiyoid Kemik",
+            "color": "#14FA77",
+            "id": 3292,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Hyoid bone": {
+            "tr_name": "Hiyoid kemik",
+            "color": "#A54A30",
+            "id": 4482,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Hard Palate": {
+            "tr_name": "Sert Damak",
+            "color": "#5F8C1F",
+            "id": 3264,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Unerupted Tooth": {
+            "tr_name": "S\u00fcrmemi\u015f di\u015f",
+            "color": "#D73E6B",
+            "id": 3406,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Root-Canal Filling": {
+            "tr_name": "K\u00f6k-kanal dolgusu",
+            "color": "#2bdd1c",
+            "id": 125,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Coronoid Process": {
+            "tr_name": "Coronoid Process",
+            "color": "#647656",
+            "id": 3258,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Mandibular Canal": {
+            "tr_name": "Mandibular kanal",
+            "color": "#ff2e00",
+            "id": 3280,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Soft palate": {
+            "tr_name": "Yumu\u015fak damak",
+            "color": "#BFC5F4",
+            "id": 4477,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Implant Supported Crown": {
+            "tr_name": "\u0130mplant \u00fcst\u00fc kuron",
+            "color": "#ff0000",
+            "id": 253,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Mandibular foramen": {
+            "tr_name": "Mandibular Foramen",
+            "color": "#2F5AC7",
+            "id": 4478,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Soft Palate": {
+            "tr_name": "Yumu\u015fak Damak",
+            "color": "#A85AE2",
+            "id": 3266,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Nasal cavity": {
+            "tr_name": "Nasal cavity",
+            "color": "#C1990D",
+            "id": 4486,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Coronoid process": {
+            "tr_name": "Koronoid \u00e7\u0131k\u0131nt\u0131",
+            "color": "#0ACE32",
+            "id": 4484,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Alveolar Bone Loss": {
+            "tr_name": "Alveolar kemik kayb\u0131",
+            "color": "#82CDCD",
+            "id": 122,
+            "label_type": "Periodontal Conditions",
+            "label_type_tr": "Periodontal Ko\u015fullar",
+            "area": "Multiple Teeth"
+        },
+        "Incisura mandible": {
+            "tr_name": "Incisura Mandible",
+            "color": "#0C76A3",
+            "id": 4474,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Hard palate": {
+            "tr_name": "Sert damak",
+            "color": "#A3806E",
+            "id": 4473,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Mandibular canal": {
+            "tr_name": "Mandibular Canal",
+            "color": "#ff2e00",
+            "id": 4504,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Orbita": {
+            "tr_name": "Orbita",
+            "color": "#482B60",
+            "id": 4472,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Periapical Lesion": {
+            "tr_name": "Periapikal Lezyon",
+            "color": "#382BE5",
+            "id": 83,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Nasal Septum": {
+            "tr_name": "Nazal Septum",
+            "color": "#441385",
+            "id": 4485,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Mandibular Condyle": {
+            "tr_name": "Mandibular kondil",
+            "color": "#14F7D7",
+            "id": 3256,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Maxillary sinus": {
+            "tr_name": "Maxillary sinus",
+            "color": "#7F1473",
+            "id": 4476,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Impacted Tooth": {
+            "tr_name": "G\u00f6m\u00fcl\u00fc di\u015f",
+            "color": "#A3F337",
+            "id": 88,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Dental Implant": {
+            "tr_name": "Dental \u0130mplant",
+            "color": "#8c005f",
+            "id": 252,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Palate"
+        },
+        "Mandible": {
+            "tr_name": "Incisura mandibula",
+            "color": "#B55D78",
+            "id": 3260,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Vertical Bone Loss": {
+            "tr_name": "Vertikal kemik kayb\u0131",
+            "color": "#DF0E64",
+            "id": 259,
+            "label_type": "Periodontal Conditions",
+            "label_type_tr": "Periodontal Ko\u015fullar",
+            "area": "Tooth"
+        },
+        "Furcation Defect": {
+            "tr_name": "Furkasyon defekti",
+            "color": "#660066",
+            "id": 261,
+            "label_type": "Periodontal Conditions",
+            "label_type_tr": "Periodontal Ko\u015fullar",
+            "area": "Tooth"
+        },
+        "Articular eminence": {
+            "tr_name": "Artik\u00fcler eminens",
+            "color": "#B841E6",
+            "id": 4483,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Overhanging Filling": {
+            "tr_name": "Ta\u015fk\u0131n dolgu",
+            "color": "#ED6606",
+            "id": 264,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Mandibular condyle": {
+            "tr_name": "Mandibular kondil",
+            "color": "#109FC1",
+            "id": 4481,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Residual Root": {
+            "tr_name": "Rezid\u00fcel k\u00f6k",
+            "color": "#F40471",
+            "id": 91,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Faringeal airway": {
+            "tr_name": "Faringeal Airway",
+            "color": "#41E79A",
+            "id": 4475,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Palate"
+        },
+        "Filling": {
+            "tr_name": "Dolgu",
+            "color": "#220485",
+            "id": 152,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Crown": {
+            "tr_name": "Kuron",
+            "color": "#8701b0",
+            "id": 254,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Dental Pulp": {
+            "tr_name": "Di\u015f Pulpas\u0131",
+            "color": "#19D486",
+            "id": 280,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Tooth"
+        }
+    },
+    "Bitewing": {
+        "Pulp Stone": {
+            "tr_name": "Pulpa Ta\u015f\u0131",
+            "color": "#545CAE",
+            "id": 3651,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Filling": {
+            "tr_name": "Dolgu",
+            "color": "#220485",
+            "id": 486,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Crown": {
+            "tr_name": "Kuron",
+            "color": "#90a700",
+            "id": 489,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Dental Pulp": {
+            "tr_name": "Di\u015f Pulpas\u0131",
+            "color": "#FE162E",
+            "id": 3632,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Tooth"
+        },
+        "Root-Canal Filling": {
+            "tr_name": "K\u00f6k-Kanal Dolgusu",
+            "color": "#04F55F",
+            "id": 3985,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Horizontal Bone Loss": {
+            "tr_name": "Horizontal Kemik Kayb\u0131",
+            "color": "#B690C4",
+            "id": 3672,
+            "label_type": "Periodontal Conditions",
+            "label_type_tr": "Periodontal Ko\u015fullar",
+            "area": "Tooth"
+        },
+        "Caries": {
+            "tr_name": "\u00c7\u00fcr\u00fck",
+            "color": "#6B0805",
+            "id": 84,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Alveolar Bone Loss": {
+            "tr_name": "Alveolar kemik kayb\u0131",
+            "color": "#c8d1e0",
+            "id": 512,
+            "label_type": "Periodontal Conditions",
+            "label_type_tr": "Periodontal Ko\u015fullar",
+            "area": "Tooth"
+        }
+    },
+    "Periapical": {
+        "Pontic": {
+            "tr_name": "Pontik",
+            "color": "#00ffff",
+            "id": 436,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Palate"
+        },
+        "Periapical Lesion": {
+            "tr_name": "Periapikal Lezyon",
+            "color": "#D2A035",
+            "id": 420,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Caries": {
+            "tr_name": "\u00c7\u00fcr\u00fck",
+            "color": "#0158EC",
+            "id": 418,
+            "label_type": "Dental Problems",
+            "label_type_tr": "Dental Problemler",
+            "area": "Tooth"
+        },
+        "Vertical Bone Loss": {
+            "tr_name": "Vertikal kemik kayb\u0131",
+            "color": "#BC157E",
+            "id": 424,
+            "label_type": "Periodontal Conditions",
+            "label_type_tr": "Periodontal Ko\u015fullar",
+            "area": "Tooth"
+        },
+        "Crown": {
+            "tr_name": "Kuron",
+            "color": "#B4610E",
+            "id": 4500,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Root-Canal Filling": {
+            "tr_name": "K\u00f6k-kanal dolgusu",
+            "color": "#2BDD1C",
+            "id": 431,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Filling": {
+            "tr_name": "Dolgu",
+            "color": "#F117E5",
+            "id": 432,
+            "label_type": "Dental Restorations",
+            "label_type_tr": "Dental Restorasyonlar",
+            "area": "Tooth"
+        },
+        "Dental Pulp": {
+            "tr_name": "Di\u015f Pulpas\u0131",
+            "color": "#FADC84",
+            "id": 3614,
+            "label_type": "Anatomy",
+            "label_type_tr": "Anatomi",
+            "area": "Tooth"
+        },
+        "Alveolar Bone Loss": {
+            "tr_name": "Alveolar kemik kayb\u0131",
+            "color": "#AFC1A6",
+            "id": 423,
+            "label_type": "Periodontal Conditions",
+            "label_type_tr": "Periodontal Ko\u015fullar",
+            "area": "Tooth"
+        }
+    },
+    "Occlusal": {},
+    "Lateral Cephalometric": {
+        "Menton (Me)": {
+            "tr_name": "Menton (Me)",
+            "color": "#78AAAB",
+            "id": 4361,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Mid L6o-U6o": {
+            "tr_name": "Mid L6o-U6o",
+            "color": "#DA0970",
+            "id": 4509,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Gnathion Soft Tissue (Gn\u2019)": {
+            "tr_name": "Gnathion Yumu\u015fak Doku (Gn\u2019)",
+            "color": "#9F07EB",
+            "id": 4506,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Labiale inferior (Li)": {
+            "tr_name": "Labiale inferior (Li)",
+            "color": "#57EE92",
+            "id": 189,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "B point": {
+            "tr_name": "B noktas\u0131",
+            "color": "#01A4BC",
+            "id": 163,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Li processed point": {
+            "tr_name": "Li processed point",
+            "color": "#00A2D6",
+            "id": 4512,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Md1r": {
+            "tr_name": "Md1r",
+            "color": "#67501E",
+            "id": 173,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Soft tissue Pogonion (Pg\u2019)": {
+            "tr_name": "Yumu\u015fak doku Pogonion (Pg\u2019)",
+            "color": "#3B2798",
+            "id": 191,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Mid Md1c-Mx1c": {
+            "tr_name": "Mid Md1c-Mx1c",
+            "color": "#79D365",
+            "id": 4508,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Orbitale (Or)": {
+            "tr_name": "Orbitale (Or)",
+            "color": "#B7A55E",
+            "id": 158,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Mx6m": {
+            "tr_name": "Mx6m",
+            "color": "#9A7BAD",
+            "id": 176,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Pogonion (Pg)": {
+            "tr_name": "Pogonion (Pg)",
+            "color": "#A2EC41",
+            "id": 168,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Md1c": {
+            "tr_name": "Md1c",
+            "color": "#CF82CC",
+            "id": 172,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Labrale superior (Ls)": {
+            "tr_name": "Labrale superior (Ls)",
+            "color": "#C97FFB",
+            "id": 186,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "U6o": {
+            "tr_name": "U6o",
+            "color": "#6A045A",
+            "id": 174,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Porion (Po)": {
+            "tr_name": "Porion (Po)",
+            "color": "#636D42",
+            "id": 160,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Mx1r": {
+            "tr_name": "Mx1r",
+            "color": "#EF849C",
+            "id": 171,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Mx1c processed point": {
+            "tr_name": "Mx1c processed point",
+            "color": "#2C016A",
+            "id": 4514,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Gnathion (Gn)": {
+            "tr_name": "Gnathion (Gn)",
+            "color": "#46ABB5",
+            "id": 157,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Gonion (Go)": {
+            "tr_name": "Gonion (Go)",
+            "color": "#32A03A",
+            "id": 161,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Columella (Cm)": {
+            "tr_name": "Columella (Cm)",
+            "color": "#0DACD9",
+            "id": 183,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Basion (Ba)": {
+            "tr_name": "Basion (Ba)",
+            "color": "#31518D",
+            "id": 156,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Stomion inferius (Si)": {
+            "tr_name": "Stomion inferius (Si)",
+            "color": "#A5D7EE",
+            "id": 188,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Pterygoid (Pt)": {
+            "tr_name": "Pterygoid (Pt)",
+            "color": "#994FE7",
+            "id": 159,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "L6o": {
+            "tr_name": "L6o",
+            "color": "#E988B8",
+            "id": 175,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Soft Tissue A point (A\u2019)": {
+            "tr_name": "Yumu\u015fak Doku A noktas\u0131 (A\u2019)",
+            "color": "#61E9A7",
+            "id": 185,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Glabella (G\u2019)": {
+            "tr_name": "Glabella (G\u2019)",
+            "color": "#0D0D95",
+            "id": 180,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Md6d": {
+            "tr_name": "Md6d",
+            "color": "#0A4367",
+            "id": 179,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Subnasale (Sn)": {
+            "tr_name": "Subnasale (Sn)",
+            "color": "#8B8353",
+            "id": 184,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Soft Tissue Nasion (N\u2019)": {
+            "tr_name": "Yumu\u015fak Doku Nasion (N\u2019)",
+            "color": "#460B1F",
+            "id": 181,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Ls processed point": {
+            "tr_name": "Ls processed point",
+            "color": "#016CE4",
+            "id": 4513,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Md6m": {
+            "tr_name": "Md6m",
+            "color": "#3ACF1E",
+            "id": 178,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Nasal Dorsum": {
+            "tr_name": "Nazal dorsum",
+            "color": "#B56373",
+            "id": 3488,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Mx1c": {
+            "tr_name": "Mx1c",
+            "color": "#69B4F7",
+            "id": 170,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "A point": {
+            "tr_name": "A noktas\u0131",
+            "color": "#4B94EE",
+            "id": 162,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Posterior Nasal Spina (PNS)": {
+            "tr_name": "Posterior nazal \u00e7\u0131k\u0131nt\u0131 (PNS)",
+            "color": "#885D06",
+            "id": 167,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Soft Tissue B point (B\u2019)": {
+            "tr_name": "Yumu\u015fak Doku B noktas\u0131 (B\u2019)",
+            "color": "#0F915C",
+            "id": 190,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Pronasale (Pn)": {
+            "tr_name": "Pronasale (Pn)",
+            "color": "#7290EC",
+            "id": 182,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Soft tissue Menton (Me\u2019)": {
+            "tr_name": "Yumu\u015fak doku Menton (Me\u2019)",
+            "color": "#056F9A",
+            "id": 192,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Hinge Axis (HA)": {
+            "tr_name": "Hinge Axis (HA)",
+            "color": "#D5461D",
+            "id": 169,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Stomion superius (Ss)": {
+            "tr_name": "Stomion superius (Ss)",
+            "color": "#144354",
+            "id": 187,
+            "label_type": "Soft Tissue Points",
+            "label_type_tr": "Yumu\u015fak Doku Noktalar\u0131",
+            "area": "Skull"
+        },
+        "Sella (S)": {
+            "tr_name": "Sella (S)",
+            "color": "#98A8B8",
+            "id": 154,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "A processed point": {
+            "tr_name": "A processed point",
+            "color": "#199E73",
+            "id": 4510,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "Nasion (N)": {
+            "tr_name": "Nasion (N)",
+            "color": "#5DCAA1",
+            "id": 155,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Anterior Nasal Spina (ANS)": {
+            "tr_name": "Anterior nazal \u00e7\u0131k\u0131nt\u0131 (ANS)",
+            "color": "#22EB09",
+            "id": 166,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Articulare (Ar)": {
+            "tr_name": "Articulare (Ar)",
+            "color": "#FDEBF4",
+            "id": 165,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Ramus (Ra)": {
+            "tr_name": "Ramus (Ra)",
+            "color": "#C3AF31",
+            "id": 3489,
+            "label_type": "Skeletal  Points",
+            "label_type_tr": "\u0130skeletsel Noktalar",
+            "area": "Skull"
+        },
+        "Mx6d": {
+            "tr_name": "Mx6d",
+            "color": "#D4369E",
+            "id": 177,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        },
+        "B processed point": {
+            "tr_name": "B processed point",
+            "color": "#ACC486",
+            "id": 4511,
+            "label_type": "Dental Points",
+            "label_type_tr": "Di\u015fsel Noktalar",
+            "area": "Skull"
+        }
+    },
+    "Intra-Oral Photo": {},
+    "Posterio Anterior": {
+        "Lower molar buccal cusp , L": {
+            "tr_name": "Lower molar buccal cusp , L",
+            "color": "#5853A7",
+            "id": 4342,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower central incisor root , R": {
+            "tr_name": "Lower central incisor root , R",
+            "color": "#418CA1",
+            "id": 4337,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper central incisor mesial , R": {
+            "tr_name": "Upper central incisor mesial , R",
+            "color": "#D3AFAF",
+            "id": 4362,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Z point frontozygomatic suture , L": {
+            "tr_name": "Z point frontozygomatic suture , L",
+            "color": "#81D660",
+            "id": 4358,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper central incisor tip , L": {
+            "tr_name": "Upper central incisor tip , L",
+            "color": "#EC2B69",
+            "id": 4351,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper central incisor mesial , L": {
+            "tr_name": "Upper central incisor mesial , L",
+            "color": "#2244EC",
+            "id": 4349,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Zygomatic arch , L (ZA)": {
+            "tr_name": "Zygomatic arch , L (ZA)",
+            "color": "#8AFFAB",
+            "id": 4359,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Jugal process , L (J)": {
+            "tr_name": "Jugal process , L (J)",
+            "color": "#7ED4F9",
+            "id": 4328,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper cuspid tip, R": {
+            "tr_name": "Upper cuspid tip, R",
+            "color": "#32AA23",
+            "id": 4354,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Supraorbitale  R": {
+            "tr_name": "Supraorbitale  R",
+            "color": "#2F5B74",
+            "id": 4348,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper central incisor root , L": {
+            "tr_name": "Upper central incisor root , L",
+            "color": "#910F5E",
+            "id": 4350,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Antegonial notch , L (AG)": {
+            "tr_name": "Antegonial notch , L (AG)",
+            "color": "#D7F667",
+            "id": 4320,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Condyle L": {
+            "tr_name": "Condyle L",
+            "color": "#BE34C7",
+            "id": 4323,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper cuspid tip, L": {
+            "tr_name": "Upper cuspid tip, L",
+            "color": "#ABB4A6",
+            "id": 4353,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Gonion R": {
+            "tr_name": "Gonion R",
+            "color": "#F7DFB0",
+            "id": 4327,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper central incisor root , R": {
+            "tr_name": "Upper central incisor root , R",
+            "color": "#F4A9B1",
+            "id": 4363,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper molar buccal root , L": {
+            "tr_name": "Upper molar buccal root , L",
+            "color": "#9225F8",
+            "id": 4356,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower central incisor root , L": {
+            "tr_name": "Lower central incisor root , L",
+            "color": "#6ECC8F",
+            "id": 4336,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower central incisor mesial , R": {
+            "tr_name": "Lower central incisor mesial , R",
+            "color": "#C4615B",
+            "id": 4335,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "A point (A)": {
+            "tr_name": "A point (A)",
+            "color": "#5CC2FB",
+            "id": 4319,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower central incisor tip , L": {
+            "tr_name": "Lower central incisor tip , L",
+            "color": "#CF3F03",
+            "id": 4338,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Gonion L": {
+            "tr_name": "Gonion L",
+            "color": "#E7D1D9",
+            "id": 4326,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower central incisor mesial , L": {
+            "tr_name": "Lower central incisor mesial , L",
+            "color": "#78A012",
+            "id": 4333,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Latero-orbitale R": {
+            "tr_name": "Latero-orbitale R",
+            "color": "#6A3C01",
+            "id": 4332,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Anterior Nasal Spine (ANS)": {
+            "tr_name": "Anterior Nasal Spine (ANS)",
+            "color": "#79EF1A",
+            "id": 4322,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Menton (Me)": {
+            "tr_name": "Menton (Me)",
+            "color": "#41BF1E",
+            "id": 164,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper molar buccal cusp , R": {
+            "tr_name": "Upper molar buccal cusp , R",
+            "color": "#B1A44B",
+            "id": 4364,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower molar buccal cusp , R": {
+            "tr_name": "Lower molar buccal cusp , R",
+            "color": "#85C999",
+            "id": 4343,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Latero-orbitale L": {
+            "tr_name": "Latero-orbitale L",
+            "color": "#EF94B1",
+            "id": 4331,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper molar buccal root , R": {
+            "tr_name": "Upper molar buccal root , R",
+            "color": "#0B4694",
+            "id": 4357,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper molar buccal cusp , L": {
+            "tr_name": "Upper molar buccal cusp , L",
+            "color": "#DE9954",
+            "id": 4355,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Zygomatic arch , R (ZA)": {
+            "tr_name": "Zygomatic arch , R (ZA)",
+            "color": "#8F26A1",
+            "id": 4360,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower cuspid tip , R": {
+            "tr_name": "Lower cuspid tip , R",
+            "color": "#07D0B0",
+            "id": 4341,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower molar buccal root , L": {
+            "tr_name": "Lower molar buccal root , L",
+            "color": "#BCDB1D",
+            "id": 4344,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Antegonial notch , R (GA)": {
+            "tr_name": "Antegonial notch , R (GA)",
+            "color": "#99E5E3",
+            "id": 4321,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Crista galli (CG)": {
+            "tr_name": "Crista galli (CG)",
+            "color": "#091480",
+            "id": 4325,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower central incisor tip , R": {
+            "tr_name": "Lower central incisor tip , R",
+            "color": "#07FE7A",
+            "id": 4339,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower cuspid tip , L": {
+            "tr_name": "Lower cuspid tip , L",
+            "color": "#2850FE",
+            "id": 4340,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Upper central incisor tip , R": {
+            "tr_name": "Upper central incisor tip , R",
+            "color": "#B09B71",
+            "id": 4352,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Nasal Septum": {
+            "tr_name": "Nasal Septum",
+            "color": "#A1965E",
+            "id": 4346,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Supraorbitale  L": {
+            "tr_name": "Supraorbitale  L",
+            "color": "#FEB9D9",
+            "id": 4347,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lateral wall of nasal cavity , L": {
+            "tr_name": "Lateral wall of nasal cavity , L",
+            "color": "#7F8A49",
+            "id": 4329,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lower molar buccal root , R": {
+            "tr_name": "Lower molar buccal root , R",
+            "color": "#2BBD77",
+            "id": 4345,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Lateral wall of nasal cavity , R": {
+            "tr_name": "Lateral wall of nasal cavity , R",
+            "color": "#B4CA69",
+            "id": 4330,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        },
+        "Condyle R": {
+            "tr_name": "Condyle R",
+            "color": "#B89742",
+            "id": 4324,
+            "label_type": "Skeletal points",
+            "label_type_tr": "\u0130skeletsel noktalar",
+            "area": "None"
+        }
+    },
+    "Orthodontic frontal photo": {
+        "Nasal dorsum": {
+            "tr_name": "Nasal dorsum",
+            "color": "#7C6FFE",
+            "id": 4414,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Outest ear point right": {
+            "tr_name": "Outest ear point right",
+            "color": "#79BD96",
+            "id": 4419,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Chelion externa left": {
+            "tr_name": "Chelion externa left",
+            "color": "#DB6A57",
+            "id": 4437,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Mentale right": {
+            "tr_name": "Mentale right",
+            "color": "#413F64",
+            "id": 4411,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Superior Lip Tubercul 1 point": {
+            "tr_name": "Superior Lip Tubercul 1 point",
+            "color": "#325E89",
+            "id": 4467,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Pronasale": {
+            "tr_name": "Pronasale",
+            "color": "#44B704",
+            "id": 4463,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Inferior Lip bottom middle point": {
+            "tr_name": "Inferior Lip bottom middle point",
+            "color": "#E0783D",
+            "id": 4408,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Buccal coridor point left": {
+            "tr_name": "Buccal coridor point left",
+            "color": "#495A8B",
+            "id": 4435,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Glabella": {
+            "tr_name": "Glabella",
+            "color": "#B9993B",
+            "id": 4405,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Nasal bottom point": {
+            "tr_name": "Nasal bottom point",
+            "color": "#EF9FBF",
+            "id": 4459,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Left canine point": {
+            "tr_name": "Left canine point",
+            "color": "#2EADCD",
+            "id": 4456,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Superior Lip Tubercul 2 point": {
+            "tr_name": "Superior Lip Tubercul 2 point",
+            "color": "#120528",
+            "id": 4468,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Gonion right": {
+            "tr_name": "Gonion right",
+            "color": "#A09358",
+            "id": 4407,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Pogonion": {
+            "tr_name": "Pogonion",
+            "color": "#A08AE0",
+            "id": 4462,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Gonion left": {
+            "tr_name": "Gonion left",
+            "color": "#477970",
+            "id": 4406,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Orbitale left ": {
+            "tr_name": "Orbitale left ",
+            "color": "#ECDA57",
+            "id": 4416,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Chelion interna right": {
+            "tr_name": "Chelion interna right",
+            "color": "#BFF435",
+            "id": 4440,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Mentale left": {
+            "tr_name": "Mentale left",
+            "color": "#8EC9DB",
+            "id": 4410,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Endocantion left": {
+            "tr_name": "Endocantion left",
+            "color": "#3262CC",
+            "id": 4442,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Orbitale right": {
+            "tr_name": "Orbitale right",
+            "color": "#455C0A",
+            "id": 4417,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Frontotemporale right": {
+            "tr_name": "Frontotemporale right",
+            "color": "#C25EEF",
+            "id": 4404,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Superior Lip bottom point": {
+            "tr_name": "Superior Lip bottom point",
+            "color": "#A3F449",
+            "id": 4469,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Ala nasi left": {
+            "tr_name": "Ala nasi left",
+            "color": "#A39D49",
+            "id": 4431,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Endocantion right": {
+            "tr_name": "Endocantion right",
+            "color": "#55FA09",
+            "id": 4398,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Chelion right": {
+            "tr_name": "Chelion right",
+            "color": "#2D5943",
+            "id": 4395,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Pupil right": {
+            "tr_name": "Pupil right",
+            "color": "#28F74D",
+            "id": 4423,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Superior Lip left point": {
+            "tr_name": "Superior Lip left point",
+            "color": "#95BA83",
+            "id": 4470,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Inferior Lip bottom right point": {
+            "tr_name": "Inferior Lip bottom right point",
+            "color": "#3E2A42",
+            "id": 4452,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Eye measurement point 2 Right": {
+            "tr_name": "Eye measurement point 2 Right",
+            "color": "#A8F8DD",
+            "id": 4402,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Nasion": {
+            "tr_name": "Nasion",
+            "color": "#C9718C",
+            "id": 4461,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Inferior Lip bottom left point": {
+            "tr_name": "Inferior Lip bottom left point",
+            "color": "#FF97DF",
+            "id": 4450,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Exocantion left ": {
+            "tr_name": "Exocantion left ",
+            "color": "#DACFA0",
+            "id": 4444,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Zygion left": {
+            "tr_name": "Zygion left",
+            "color": "#187A7F",
+            "id": 4429,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Menton": {
+            "tr_name": "Menton",
+            "color": "#921A96",
+            "id": 4412,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Exocantion right": {
+            "tr_name": "Exocantion right",
+            "color": "#32856A",
+            "id": 4400,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Eye measurement point 1 Right": {
+            "tr_name": "Eye measurement point 1 Right",
+            "color": "#843139",
+            "id": 4446,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Inferior Lip top middle point": {
+            "tr_name": "Inferior Lip top middle point",
+            "color": "#6B94B0",
+            "id": 4454,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Maxillar dental midline": {
+            "tr_name": "Maxillar dental midline",
+            "color": "#155408",
+            "id": 4457,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Superior Lip right point": {
+            "tr_name": "Superior Lip right point",
+            "color": "#6BDBA9",
+            "id": 4471,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Outest ear point left": {
+            "tr_name": "Outest ear point left",
+            "color": "#23F5C8",
+            "id": 4418,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Ala nasi right": {
+            "tr_name": "Ala nasi right",
+            "color": "#738E45",
+            "id": 4432,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Buccal coridor point right": {
+            "tr_name": "Buccal coridor point right",
+            "color": "#41AA6A",
+            "id": 4436,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Pupil left": {
+            "tr_name": "Pupil left",
+            "color": "#640D65",
+            "id": 4464,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Inferior Lip top right point": {
+            "tr_name": "Inferior Lip top right point",
+            "color": "#1B9291",
+            "id": 4455,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Bottom gingival point right": {
+            "tr_name": "Bottom gingival point right",
+            "color": "#452416",
+            "id": 4434,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Incisiv point": {
+            "tr_name": "Incisiv point",
+            "color": "#6C941A",
+            "id": 4449,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Bottom gingival point left": {
+            "tr_name": "Bottom gingival point left",
+            "color": "#1C6C46",
+            "id": 4433,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Frontotemporale left": {
+            "tr_name": "Frontotemporale left",
+            "color": "#BAB5B7",
+            "id": 4403,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Vertex": {
+            "tr_name": "Vertex",
+            "color": "#919552",
+            "id": 4428,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Trichion": {
+            "tr_name": "Trichion",
+            "color": "#5B6BC1",
+            "id": 4427,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Chelion externa right": {
+            "tr_name": "Chelion externa right",
+            "color": "#DFD4F7",
+            "id": 4438,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Inferior Lip top left point": {
+            "tr_name": "Inferior Lip top left point",
+            "color": "#E67F43",
+            "id": 4453,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Right Canine Point ": {
+            "tr_name": "Right Canine Point ",
+            "color": "#10D48D",
+            "id": 4466,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Zygion right": {
+            "tr_name": "Zygion right",
+            "color": "#899D02",
+            "id": 4430,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Cubid\u2019s bow ": {
+            "tr_name": "Cubid\u2019s bow ",
+            "color": "#00EFCA",
+            "id": 4441,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Chelion interna left": {
+            "tr_name": "Chelion interna left",
+            "color": "#C1BE1D",
+            "id": 4439,
+            "label_type": "Smiling",
+            "label_type_tr": "Smiling",
+            "area": "None"
+        },
+        "Cubid\u2019s bow": {
+            "tr_name": "Cubid\u2019s bow",
+            "color": "#3E5B72",
+            "id": 4396,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        },
+        "Chelion left": {
+            "tr_name": "Chelion left",
+            "color": "#E1F821",
+            "id": 4394,
+            "label_type": "Rest",
+            "label_type_tr": "Rest",
+            "area": "None"
+        }
+    },
+    "Orthodontic profile photo": {
+        "Stomion superior": {
+            "tr_name": "Stomion superior",
+            "color": "#E0DE8C",
+            "id": 4385,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Cervicomental point": {
+            "tr_name": "Cervicomental point",
+            "color": "#0A80EC",
+            "id": 4366,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Pronasale": {
+            "tr_name": "Pronasale",
+            "color": "#FB595D",
+            "id": 4380,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Exocantion": {
+            "tr_name": "Exocantion",
+            "color": "#E59ED3",
+            "id": 4370,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Soft tissue B point": {
+            "tr_name": "Soft tissue B point",
+            "color": "#4758D0",
+            "id": 4382,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Columella": {
+            "tr_name": "Columella",
+            "color": "#B1A6A7",
+            "id": 4368,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Chellion": {
+            "tr_name": "Chellion",
+            "color": "#B46912",
+            "id": 4367,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Nasion": {
+            "tr_name": "Nasion",
+            "color": "#DE8245",
+            "id": 4378,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Gonion": {
+            "tr_name": "Gonion",
+            "color": "#B7F300",
+            "id": 4373,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Tragus": {
+            "tr_name": "Tragus",
+            "color": "#911184",
+            "id": 4387,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Stomion inferior": {
+            "tr_name": "Stomion inferior",
+            "color": "#6C749D",
+            "id": 4384,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Soft tissue pogonion": {
+            "tr_name": "Soft tissue pogonion",
+            "color": "#67E606",
+            "id": 4383,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Trichion": {
+            "tr_name": "Trichion",
+            "color": "#DF719F",
+            "id": 4388,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Ruler point 2": {
+            "tr_name": "Ruler point 2",
+            "color": "#43CE2D",
+            "id": 4391,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Subnasale": {
+            "tr_name": "Subnasale",
+            "color": "#02E2CF",
+            "id": 4386,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Ala nasi": {
+            "tr_name": "Ala nasi",
+            "color": "#DF7986",
+            "id": 4365,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Soft tissue A point": {
+            "tr_name": "Soft tissue A point",
+            "color": "#69D8AC",
+            "id": 4381,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Ruler point 1": {
+            "tr_name": "Ruler point 1",
+            "color": "#51EA2A",
+            "id": 4390,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Vertex": {
+            "tr_name": "Vertex",
+            "color": "#E85BEB",
+            "id": 4389,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Menton": {
+            "tr_name": "Menton",
+            "color": "#7DEF55",
+            "id": 4377,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Gnation": {
+            "tr_name": "Gnation",
+            "color": "#6FEEF4",
+            "id": 4372,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Labium superius": {
+            "tr_name": "Labium superius",
+            "color": "#B312A8",
+            "id": 4376,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Labium inferius": {
+            "tr_name": "Labium inferius",
+            "color": "#0B6C72",
+            "id": 4375,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Glabella": {
+            "tr_name": "Glabella",
+            "color": "#4183C9",
+            "id": 4371,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Orbitale": {
+            "tr_name": "Orbitale",
+            "color": "#398328",
+            "id": 4379,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        },
+        "Dorsum nasale": {
+            "tr_name": "Dorsum nasale",
+            "color": "#EC3F0A",
+            "id": 4369,
+            "label_type": "Soft tissue points",
+            "label_type_tr": "Yumu\u015fak doku noktalar\u0131",
+            "area": "None"
+        }
+    },
+    "Cone Beam Computed Tomography": {},
+    "Ultrasonography": {},
+    "Hand Wrist": {},
+    "Computed Tomography": {}
+}

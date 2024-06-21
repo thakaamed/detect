@@ -1,0 +1,38 @@
+%centerAbsoluteHorizontal {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+%centerAbsoluteVertical {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+%centerAbsoluteBoth {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+%centerFlexVertical {
+    display: flex;
+    align-items: center;
+}
+
+%centerFlexHorizontal {
+    display: flex;
+    justify-content: center;
+}
+
+%centerFlexBoth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+%smoothShadow {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}

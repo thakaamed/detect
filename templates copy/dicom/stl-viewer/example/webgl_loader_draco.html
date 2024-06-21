@@ -1,0 +1,1060 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>{{specs.title}} - {{card_message}}</title>
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/addpatient.css' %}">
+<link rel="stylesheet" href="{% static 'css/diagnosis.css' %}">
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      background-color: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 300;
+    }
+
+    #topbar {
+      width: 100%;
+      height: 6vh;
+      background-color: #12232B;
+    }
+
+    label {
+      margin: 0;
+    }
+
+    /* #container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+    } */
+
+    #contextMenu {
+      display: inline-block;
+      width: 100%;
+      overflow-x: visible;
+      position: relative;
+      background-color: #212C51;
+      transition: width ease-in-out .5s;
+    }
+
+    #contextMenuContainer {
+      /* width: 20%; */
+      position: relative;
+    }
+
+    #renderer {
+      display: inline-block;
+      width: 23vw;
+    }
+
+    label {
+      font-size: 13px;
+    }
+
+    footer {
+      height: 6vh;
+      width: 100%;
+      background-color: #212C51;
+      position: fixed;
+      bottom: 0;
+      font-size: 14px;
+    }
+
+    .open-button {
+      cursor: pointer;
+      left: calc(23% + 10px);
+      top: calc(6vh + 10px);
+      z-index: 9;
+      transition: opacity ease-in-out .5s, left ease-in-out .5s;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .open-button.active {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity ease-in-out .5s, left ease-in-out .5s;
+    }
+
+    .parent-header {
+      border: 1.5px solid rgba(255, 255, 255, .1);
+    }
+
+    .main-header {
+      font-weight: 800;
+    }
+
+    .checkboxContainer {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
+    }
+
+    .checkboxContainer * {
+      position: absolute;
+      cursor: pointer;
+    }
+
+    .checkboxContainer input[type="checkbox"] {
+      z-index: 5;
+      width: 100%;
+      opacity: 0;
+    }
+
+    .passive-eye {
+      display: none;
+    }
+
+    .my-container {
+      margin: 7px 0;
+      padding: 7px;
+      align-items: center;
+      position: relative;
+      display: flex;
+      background-color: #27345f;
+      border-radius: 5px;
+    }
+
+    div .my-container:first-of-type::after {
+      content: '';
+      height: 15px;
+    }
+
+    .checkboxContainer input[type=checkbox]:not(:checked)~img.active-eye {
+      display: none;
+    }
+
+    .checkboxContainer input[type=checkbox]:not(:checked)~img.passive-eye {
+      display: block;
+    }
+
+    .toggle-icon {
+      transform: rotate(180deg);
+      transition: transform ease-in-out .2s;
+      cursor: pointer;
+    }
+
+    .toggle-icon.active {
+      transform: rotate(0deg);
+      transition: transform ease-in-out .2s;
+    }
+
+    input[type="color"] {
+      width: 16px;
+      height: 16px;
+      border: none;
+      position: relative;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    input[type="color"]::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 3px!important;
+      border: 1px solid #374a87;
+    }
+
+    .color-container {
+      position: absolute;
+      width: 300px;
+      height: 30px;
+      left: 5px;
+      background-color: lime;
+    }
+
+    label {
+      font-size: 10px;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: white;
+    }
+
+    footer a:hover {
+      color: #ccc;
+    }
+
+    .switch-container {
+      background-color: #9B9B9B;
+      width: 36px;
+      height: 14px;
+      border-radius: 14px;
+      transition: all ease-in-out .3s;
+    }
+
+    .switch-container__ball {
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border-radius: 50%;
+      transition: all ease-in-out .3s;
+      left: 0;
+    }
+
+    #wireframeToggle {
+      z-index: 31;
+      inset: 0;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    #wireframeToggle:checked+.switch-container {
+      background-color: #5071C8;
+      transition: all ease-in-out .3s;
+    }
+
+    #wireframeToggle:checked+.switch-container .switch-container__ball {
+      transition: right ease-in-out .5s;
+      left: 100%;
+      transform: translateX(-100%);
+      transition: all ease-in-out .3s;
+
+    }
+
+    #change-writeframe img.second-state {
+      display: none;
+    }
+
+    input[type="range"] {
+      width: 50px;
+      position: absolute;
+      left: 0px;
+      height: 16px;
+      z-index: 3;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    .range-container {
+      position: relative;
+      width: 50px;
+      height: 16px;
+      margin-right: 10px;
+      /* background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #0057ff 100%); */
+      border-radius: 3px;
+    }
+
+    .rect-container {
+      position: relative;
+      width: 100%;
+      height: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .range-rect {
+      width: 5px;
+      height: 14px;
+      border: 1px solid white;
+      border-radius: 2px;
+      position: absolute;
+      left: 100%;
+      transform: translateX(-50%);
+    }
+
+    .my-range {
+      border-radius: 5px;
+      width: 100%;
+      height: 16px;
+      position: absolute;
+      padding: 0 7px;
+    }
+    .bg-bl {
+      background-color: #2B3863;
+    }
+
+    #back-img-frame .loading{
+        background-color: rgba(0, 0, 0, .7);
+    }
+
+    #back-img-frame .loading i,
+    #page-loading i{
+        animation: spin 1s linear infinite;
+    }
+    #page-loading {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px); /* Safari desteği için gerekli */
+        display: flex;
+        }
+  </style>
+{% endblock %}
+{% block headerButtons %}
+    <div id="change-writeframe" class="d-flex align-items-center pe-4">
+        <img src="{% static '/dicom/images/teethWhite.svg' %}" class="first-state" alt="">
+        <img src="{% static '/dicom/images/teeth.svg' %}" class="second-state" alt="">
+        <h3 class="fs-6 m-2">Wireframe mode</h3>
+        <div class="position-relative">
+            <input id="wireframeToggle" type="checkbox" class="position-absolute">
+        <div class="switch-container d-flex align-items-center">
+            <div class="switch-container__ball position-absolute"></div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+<div id="page-loading" class="position-fixed align-items-center justify-content-center" style="inset: 0; z-index: 9999999999;">
+    <i class="fa-solid fa-spinner fs-1"></i>
+</div>
+  <main class="d-flex">
+    <div class="container-fluid">
+        <div class="adjustable-content py-1 h-100" style="overflow: hidden;">
+            <div class="row h-100 g-0">
+                <div class="h-100" style="width: 300px;">
+                  <div class="diagnosis-content h-100 p-2 py-3 me-2">
+                    <div class="d-flex align-items-center border-bottom-smooth">
+                        <h3 class="heading p-0 m-0 mx-1 border-0" style="font-size: 12px">STL Viewer</h3>
+                        <input type="text" class="search-input ms-auto" placeholder="Search"
+                            oninput="liveSearchingForDiagnosis(event)" id="search-diagnosis">
+                    </div>
+                    <div id="container">
+                      <div id="contextMenuContainer">
+                        <div id="contextMenu" class="">
+                          <div id="illnessesMenu" class="d-none">
+                            <h3 class="parent-header p-2 my-2 rounded bg-bl d-flex justify-content-between align-items-center" style="gap: 6px; cursor: pointer;"
+                              onclick="toggleSubMenu(event)">
+                              <div>
+                                <i class="toggle-icon fa-solid fa-angle-up active"></i>
+                                {% trans 'Illnesses' %}
+                              </div>
+                              <div class="d-flex align-items-center gap-2">
+                                <label for="illnessesMenuShowAll">{% trans 'Show All' %}</label>
+                                <div class="checkboxContainer">
+                                  <input id="illnessesMenuShowAll" data-menu-type="illnessesMenu" class="showall" type="checkbox">
+                                  <img src="/static/dicom/images/eye.svg" class="active-eye">
+                                  <img src="/static/dicom/images/eyeClose.svg" class="passive-eye">
+                                </div>
+                              </div>
+                            </h3>
+                          </div>
+                          <div id="anatomyMenu" class="d-none">
+                            <h3 class="parent-header p-2 my-2 rounded bg-bl d-flex justify-content-between align-items-center" style="gap: 6px; cursor: pointer;"
+                              onclick="toggleSubMenu(event)">
+                              <div>
+                                <i class="toggle-icon fa-solid fa-angle-up active"></i>
+                                {% trans 'Anatomy' %}
+                              </div>
+                              <div class="d-flex align-items-center gap-2">
+                                <label for="anatomyMenuShowAll">{% trans 'Show All' %}</label>
+                                <div class="checkboxContainer">
+                                  <input id="anatomyMenuShowAll" data-menu-type="anatomyMenu" class="showall" type="checkbox">
+                                  <img src="/static/dicom/images/eye.svg" class="active-eye">
+                                  <img src="/static/dicom/images/eyeClose.svg" class="passive-eye">
+                                </div>
+                              </div>
+                            </h3>
+                          </div>
+                          <div id="teethMenu" class="d-none">
+                            <h3 class="parent-header p-2 my-2 rounded bg-bl d-flex justify-content-between align-items-center"
+                              style="gap: 6px; cursor: pointer;" onclick="toggleSubMenu(event)">
+                              <div>
+                                <i class="toggle-icon fa-solid fa-angle-up active"></i>
+                                {% trans 'Teeth' %}
+                              </div>
+                              <div class="d-flex align-items-center gap-2">
+                                <label for="teethMenuShowAll">{% trans 'Show All' %}</label>
+                                <div class="checkboxContainer">
+                                  <input id="teethMenuShowAll" data-menu-type="teethMenu"class="showall" type="checkbox" checked>
+                                  <img src="/static/dicom/images/eye.svg" class="active-eye">
+                                  <img src="/static/dicom/images/eyeClose.svg" class="passive-eye">
+                                </div>
+                              </div>
+                            </h3>
+
+                          </div>
+                          <div id="otherMenu" class="d-none">
+                            <h3 class="parent-header p-2 my-2 rounded bg-bl d-flex justify-content-between align-items-center" style="gap: 6px; cursor: pointer;"
+                              onclick="toggleSubMenu(event)">
+                              <div>
+                                <i class="toggle-icon fa-solid fa-angle-up active"></i>
+                                {% trans 'Other' %}
+                              </div>
+                              <div class="d-flex align-items-center gap-2">
+                                <label for="otherMenuShowAll">{% trans 'Show All' %}</label>
+                                <div class="checkboxContainer">
+                                  <input id="otherMenuShowAll" data-menu-type="otherMenu" class="showall" type="checkbox">
+                                  <img src="/static/dicom/images/eye.svg" class="active-eye">
+                                  <img src="/static/dicom/images/eyeClose.svg" class="passive-eye">
+                                </div>
+                              </div>
+                            </h3>
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="flex: 1;">
+                  <div id="renderer">
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+{% endblock %}
+{% block customJs %}
+<!--    <script >-->
+<!--    $('.change-mode').click(function () {-->
+<!--        $.ajax({-->
+<!--            url: "/user/api/changeUserThemeChoice/",-->
+<!--            method: "GET",-->
+<!--            success: function (resp) {-->
+<!--                document.getElementById("loading").style.display = "none"-->
+<!--            }-->
+<!--        })-->
+<!--    })-->
+<!--    </script>-->
+    <script>
+    let sidebar = document.getElementById("contextMenu")
+    let openButton = document.querySelector(".open-button")
+
+    function handleCloseSidebar() {
+      sidebar.style.width = 0;
+      openButton.style.left = "10px"
+      openButton.classList.add("active")
+    }
+
+    function handleOpenSidebar() {
+      sidebar.style.width = "100%";
+      openButton.style.left = "calc(23% + 10px)";
+      openButton.classList.remove("active")
+    }
+
+    function toggleSubMenu(event) {
+      let targetId = $(event.target).parent().attr("id")
+      let targetDivs = $(`#${targetId} .my-container`).toggle()
+      $(event.target).find("i.toggle-icon").toggleClass("active")
+      // $(event.target).toggleClass('active')
+    }
+
+    function toggleWireframeModeUI(event) {
+      let firstStateImage = document.querySelector(".first-state")
+      let secondStateImage = document.querySelector(".second-state")
+      if (event.target.checked) {
+        // wireframe seçili ise
+        secondStateImage.style.display = "block"
+        firstStateImage.style.display = "none"
+      } else {
+        secondStateImage.style.display = "none"
+        firstStateImage.style.display = "block"
+      }
+    }
+
+    </script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
+    <script src="https://unpkg.com/camera-controls@1.37.4/dist/camera-controls.js"></script>
+    <script src="/static/dicom/stl-viewer/DRACOLoader.js"></script>
+    <script src="/static/dicom/stl-viewer/geometry_helper.js"></script>
+    <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    {% comment %} <script src="{% static 'js/diagnosis_exstra.js' %}"></script> {% endcomment %}
+    <script>
+      var image_report_id = "{{image_report_id}}"
+    </script>
+    <script>
+    var renderOrders = {
+      "soft_tissue": 2,
+      "maxilla_polynomial": 1,
+      "mandibula_polynomial": 1,
+
+      "caries": 0,
+      "pontic": 1,
+      "filling": 0,
+      "jaw_lesion_radiolucent": 1,
+      "jaw_lesion_radiopaque": 1,
+      "periapical_lesion": 0,
+      "residual_root": 0,
+      "root_canal_filling": 0,
+
+      "mesiodens_dental_problems": 1,
+      "supernumerary_tooth_dental_problems": 1,
+
+      "11_permanent_tooth_numbering": 1,
+      "12_permanent_tooth_numbering": 1,
+      "13_permanent_tooth_numbering": 1,
+      "14_permanent_tooth_numbering": 1,
+      "15_permanent_tooth_numbering": 1,
+      "16_permanent_tooth_numbering": 1,
+      "17_permanent_tooth_numbering": 1,
+      "18_permanent_tooth_numbering": 1,
+
+      "21_permanent_tooth_numbering": 1,
+      "22_permanent_tooth_numbering": 1,
+      "23_permanent_tooth_numbering": 1,
+      "24_permanent_tooth_numbering": 1,
+      "25_permanent_tooth_numbering": 1,
+      "26_permanent_tooth_numbering": 1,
+      "27_permanent_tooth_numbering": 1,
+      "28_permanent_tooth_numbering": 1,
+
+      "31_permanent_tooth_numbering": 1,
+      "32_permanent_tooth_numbering": 1,
+      "33_permanent_tooth_numbering": 1,
+      "34_permanent_tooth_numbering": 1,
+      "35_permanent_tooth_numbering": 1,
+      "36_permanent_tooth_numbering": 1,
+      "37_permanent_tooth_numbering": 1,
+      "38_permanent_tooth_numbering": 1,
+
+      "41_permanent_tooth_numbering": 1,
+      "42_permanent_tooth_numbering": 1,
+      "43_permanent_tooth_numbering": 1,
+      "44_permanent_tooth_numbering": 1,
+      "45_permanent_tooth_numbering": 1,
+      "46_permanent_tooth_numbering": 1,
+      "47_permanent_tooth_numbering": 1,
+      "48_permanent_tooth_numbering": 1,
+    }
+    var presetColors = {
+      "soft_tissue": '#66ffb8',
+      "maxilla_polynomial": '#9d00ff',
+      "mandibula_polynomial": '#e354ff',
+
+      "caries": '#ff4a4a',
+      "pontic": '#7d1169',
+      "filling": '#ff00d0',
+      "jaw_lesion_radiolucent": '#c99da5',
+      "jaw_lesion_radiopaque": '#754d54',
+      "periapical_lesion": '#452127',
+      "residual_root": '#ff002b',
+      "root_canal_filling": '#660213',
+
+      "mesiodens_dental_problems": '#a2ff00',
+      "supernumerary_tooth_dental_problems": '#00fff7',
+
+      "11_permanent_tooth_numbering": '#ffcc85',
+      "12_permanent_tooth_numbering": '#e6ad5c',
+      "13_permanent_tooth_numbering": '#ebaa4d',
+      "14_permanent_tooth_numbering": '#d18f32',
+      "15_permanent_tooth_numbering": '#d68c22',
+      "16_permanent_tooth_numbering": '#d98918',
+      "17_permanent_tooth_numbering": '#e0880b',
+      "18_permanent_tooth_numbering": '#f59002',
+
+      "21_permanent_tooth_numbering": '#fab796',
+      "22_permanent_tooth_numbering": '#f5a57d',
+      "23_permanent_tooth_numbering": '#f29566',
+      "24_permanent_tooth_numbering": '#f08956',
+      "25_permanent_tooth_numbering": '#ed783e',
+      "26_permanent_tooth_numbering": '#e66d30',
+      "27_permanent_tooth_numbering": '#e85e1a',
+      "28_permanent_tooth_numbering": '#d94f0b',
+
+      "31_permanent_tooth_numbering": '#93fa99',
+      "32_permanent_tooth_numbering": '#84fa8a',
+      "33_permanent_tooth_numbering": '#72f778',
+      "34_permanent_tooth_numbering": '#61f268',
+      "35_permanent_tooth_numbering": '#4ff057',
+      "36_permanent_tooth_numbering": '#33e83c',
+      "37_permanent_tooth_numbering": '#19e623',
+      "38_permanent_tooth_numbering": '#00ff0d',
+
+      "41_permanent_tooth_numbering": "#98c2f5",
+      "42_permanent_tooth_numbering": "#86b9f7",
+      "43_permanent_tooth_numbering": "#72acf2",
+      "44_permanent_tooth_numbering": "#5c9eed",
+      "45_permanent_tooth_numbering": "#4992eb",
+      "46_permanent_tooth_numbering": "#3b8aeb",
+      "47_permanent_tooth_numbering": "#2880eb",
+      "48_permanent_tooth_numbering": "#1373e8",
+    }
+    var tagGroups = {
+      "soft_tissue": 'anatomyMenu',
+      "maxilla_polynomial": 'anatomyMenu',
+      "mandibula_polynomial": 'anatomyMenu',
+
+      "caries": 'illnessesMenu',
+      "pontic": 'illnessesMenu',
+      "filling": 'illnessesMenu',
+      "jaw_lesion_radiolucent": 'illnessesMenu',
+      "jaw_lesion_radiopaque": 'illnessesMenu',
+      "periapical_lesion": 'illnessesMenu',
+      "residual_root": 'illnessesMenu',
+      "root_canal_filling": 'illnessesMenu',
+
+      "mesiodens_dental_problems": 'illnessesMenu',
+      "supernumerary_tooth_dental_problems": 'illnessesMenu',
+
+      "11_permanent_tooth_numbering": 'teethMenu',
+      "12_permanent_tooth_numbering": 'teethMenu',
+      "13_permanent_tooth_numbering": 'teethMenu',
+      "14_permanent_tooth_numbering": 'teethMenu',
+      "15_permanent_tooth_numbering": 'teethMenu',
+      "16_permanent_tooth_numbering": 'teethMenu',
+      "17_permanent_tooth_numbering": 'teethMenu',
+      "18_permanent_tooth_numbering": 'teethMenu',
+      "21_permanent_tooth_numbering": 'teethMenu',
+      "22_permanent_tooth_numbering": 'teethMenu',
+      "23_permanent_tooth_numbering": 'teethMenu',
+      "24_permanent_tooth_numbering": 'teethMenu',
+      "25_permanent_tooth_numbering": 'teethMenu',
+      "26_permanent_tooth_numbering": 'teethMenu',
+      "27_permanent_tooth_numbering": 'teethMenu',
+      "28_permanent_tooth_numbering": 'teethMenu',
+      "31_permanent_tooth_numbering": 'teethMenu',
+      "32_permanent_tooth_numbering": 'teethMenu',
+      "33_permanent_tooth_numbering": 'teethMenu',
+      "34_permanent_tooth_numbering": 'teethMenu',
+      "35_permanent_tooth_numbering": 'teethMenu',
+      "36_permanent_tooth_numbering": 'teethMenu',
+      "37_permanent_tooth_numbering": 'teethMenu',
+      "38_permanent_tooth_numbering": 'teethMenu',
+      "41_permanent_tooth_numbering": "teethMenu",
+      "42_permanent_tooth_numbering": "teethMenu",
+      "43_permanent_tooth_numbering": "teethMenu",
+      "44_permanent_tooth_numbering": "teethMenu",
+      "45_permanent_tooth_numbering": "teethMenu",
+      "46_permanent_tooth_numbering": "teethMenu",
+      "47_permanent_tooth_numbering": "teethMenu",
+      "48_permanent_tooth_numbering": "teethMenu",
+    }
+    CameraControls.install({ THREE: THREE });
+
+    var camera, scene, renderer;
+    var clock, cameraControls;
+    var spotLight;
+    var directionalLight;
+
+    // Configure decoder and create loader.
+    var dracoLoader = new THREE.DRACOLoader();
+    var meshes = [];
+
+    init();
+    animate();
+    render();
+
+    function init() {
+      //camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 2000 );
+      camera = new THREE.OrthographicCamera(
+        window.innerWidth / -2, window.innerWidth / 2,
+        window.innerHeight / 2, window.innerHeight / -2, 1, 2000);
+      camera.position.set(5, 1, 5);
+      camera.up = new THREE.Vector3(1, 0, 0);
+
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x000000);
+      //scene.fog = new THREE.Fog( 0x777777, 500, 1600 );
+
+      // Lights
+      var light = new THREE.HemisphereLight(0x443333, 0x111122);
+      scene.add(light);
+
+      directionalLight = new THREE.DirectionalLight(0xffffff, .5);
+      directionalLight.position = camera.position;
+      scene.add(directionalLight);
+
+      // renderer
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      // renderer.sortObjects = false;
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth * .9, window.innerHeight);
+      renderer.shadowMap.enabled = true;
+      document.getElementById('renderer').appendChild(renderer.domElement);
+
+      window.addEventListener('resize', onWindowResize, false);
+
+      clock = new THREE.Clock();
+      cameraControls = new CameraControls(camera, renderer.domElement);
+      cameraControls.dampingFactor = 1;
+      cameraControls.draggingDampingFactor = 1;
+      cameraControls.mouseButtons.middle = CameraControls.ACTION.NONE;
+
+      camera.lookAt(0, 0, 0);
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      render();
+    }
+
+    function animate() {
+      const delta = clock.getDelta();
+      const hasControlsUpdated = cameraControls.update(delta);
+
+      requestAnimationFrame(animate);
+
+      // you can skip this condition to render though
+      if (hasControlsUpdated) {
+        render();
+      }
+    }
+
+  function render() {
+      directionalLight.position.copy(camera.position);
+      renderer.render(scene, camera);
+      // let rangeElements = document.querySelectorAll("input[type=range]")
+      // rangeElements.forEach(element=>{
+      //   element.parentNode.querySelector(".my-range").style.background =
+      //   `linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, ${element.parentNode.querySelector(".my-range").parentNode.nextSibling.value} 100%), url(https://app.craniocatch.com/static/dicom/images/my-transparent.png)`
+      // })
+    }
+
+    
+
+    function toDataUrl(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function(){
+        callback(xhr.response)
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob';
+      xhr.send();
+    }
+
+    window.onload = function () {
+      let zip;
+      let drc_path = "{{drc_path}}"
+      console.log("drc", drc_path)
+      drc_path = "https://dcm.craniocatch.com" + "{{drc_path}}"
+      //drc_path = "https://aiv2.craniocatch.com" + "/media/niftii2draco/3275b5c24c134d6abdf5bddcaa401d4a/8bd2028e43544d9cbb56f0b4afd24ae5/11411.zip"
+      
+      console.log("DRCPATH", drc_path)
+      toDataUrl(`${drc_path}`, function(x){
+        zip = x;
+
+        const dT = new ClipboardEvent('').clipboardData || new DataTransfer();
+        dT.items.add(new File([zip], 'myNewFile'));
+        // document.getElementById('fileInput').files = dT.files;
+        JSZip.loadAsync(dT.files[0]).then(function (zip) {
+          var geometries = [];
+          var onEveryFileDecoded = function (geometries) {
+          const axesHelper = new THREE.AxesHelper(100000);
+          scene.add(axesHelper);
+
+          // overall bounding box of the loaded geometries
+          var boundingX;
+          var boundingY;
+          var boundingZ;
+
+          var biggestGeometry;
+          var biggestDiagonalSize = 0;
+          for (var i = 0; i < geometries.length; i++) {
+            meshes.push(geometries[i]["geometry"]);
+
+            var bufferGeometry = geometries[i]["buffer"];
+            bufferGeometry.computeBoundingBox();
+            var sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+            var sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+            var sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+            var diagonalSize = Math.sqrt(sizeX * sizeX + sizeY * sizeY + sizeZ * sizeZ);
+
+            if (diagonalSize > biggestDiagonalSize) {
+              biggestDiagonalSize = diagonalSize;
+              biggestGeometry = geometries[i]["geometry"];
+            }
+          }
+
+          // UPDATE CAMERA FAR POINT
+          var geometry = biggestGeometry.geometry;
+          geometry.computeBoundingBox();
+          var sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+          var sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+          var sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+
+          var midX = (bufferGeometry.boundingBox.min.x + bufferGeometry.boundingBox.max.x) / 2;
+          var midY = (bufferGeometry.boundingBox.min.y + bufferGeometry.boundingBox.max.y) / 2;
+          var midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
+          var start = new THREE.Vector3(bufferGeometry.boundingBox.min.x, bufferGeometry.boundingBox.min.y, bufferGeometry.boundingBox.min.z);
+
+          cameraControls.setOrbitPoint(0, 0, 0)
+          cameraControls.setPosition(0, -midY * 3, 0);
+          cameraControls.setTarget(0, 0, 0);
+          cameraControls.update();
+
+          for (var i = 0; i < geometries.length; i++) {
+            geometries[i]["geometry"].position.x -= midX;
+            geometries[i]["geometry"].position.y -= midY;
+            geometries[i]["geometry"].position.z -= midZ;
+          }
+
+          // UPDATE CAMERA FAR POINT
+          if (sizeX > sizeY && sizeX > sizeZ && sizeX > 2000)
+            camera.far = sizeX * 2;
+          if (sizeY > sizeX && sizeY > sizeZ && sizeY > 2000)
+            camera.far = sizeY * 2;
+          if (sizeZ > sizeY && sizeZ > sizeX && sizeZ > 2000)
+            camera.far = sizeZ * 2;
+          camera.updateProjectionMatrix();
+          render();
+        }
+
+          var fileNames = Object.keys(zip.files);
+          var readers = [];
+          fileNames.forEach(function (fileName, index) {
+            if (fileName.endsWith('.drc')) {
+              readers.push(new FileReader());
+              readers[index].onload = function (e) {
+                var taskConfig = {
+                  attributeIDs: dracoLoader.defaultAttributeIDs,
+                  attributeTypes: dracoLoader.defaultAttributeTypes,
+                  useUniqueIDs: !! null
+                };
+
+                dracoLoader.decodeGeometry(this.result, taskConfig).then((bufferGeometry) => {
+                  if (dracoLoader.decode_time !== undefined) {
+                    fileDisplayArea.innerText = 'Decode time = ' + dracoLoader.decode_time + '\n' +
+                      'Import time = ' + dracoLoader.import_time;
+                  }
+
+                  bufferGeometry.computeVertexNormals();
+                  var material = new THREE.MeshStandardMaterial({ vertexColors: THREE.VertexColors });
+                  material.side = THREE.DoubleSide;
+                  material.transparent = true;
+
+                  var geometry = new THREE.Mesh(bufferGeometry, material);
+                  geometry.castShadow = true;
+                  geometry.receiveShadow = true;
+
+                  var name = fileName.toLowerCase();
+                  name = name.replace(/\s/g, '_').replace('.drc', '');
+                  if (renderOrders[name] !== undefined) {
+                    var renderOrder = renderOrders[name];
+                    geometry.renderOrder = renderOrder;
+                  }
+
+                  if (presetColors[name] !== undefined) {
+                    var color = presetColors[name];
+                    geometry.material.color.set(color);
+                  }
+
+                  geometries.push({
+                    "geometry": geometry,
+                    "buffer": bufferGeometry,
+                  });
+                  geometry.name = fileName;
+                  scene.add(geometry);
+                  createButton(fileName);
+
+                  if (geometries.length == fileNames.length) {
+                    console.log(`Every file loaded current file: ${fileName}`);
+                    onEveryFileDecoded(geometries);
+                    var menuDivs = ["#illnessesMenu", "#anatomyMenu", "#teethMenu", "#otherMenu"]
+
+                    // Her bir div elementi için döngü
+                    menuDivs.forEach(function (div) {
+                        const length_of_divs = ($(`${div} div`).children().length)
+                        console.log("lenghth", length_of_divs)
+                        if (length_of_divs > 6){
+                            $(`${div}`).removeClass("d-none")
+                        }
+                    });
+                    $("#page-loading").hide()
+                  }
+                  
+                  render();
+                  
+                });
+              }
+              readers[index].onerror = (error) => {
+                console.log(error);
+              }
+              zip.files[fileName].async('arraybuffer').then(function (arraybuffer) {
+                readers[index].readAsArrayBuffer(new Blob([arraybuffer]));
+             });}
+          });
+        });
+
+      })
+
+      var wireframeToggle = document.getElementById('wireframeToggle');
+      wireframeToggle.onclick = function (e) {
+        toggleWireframeMode(wireframeToggle.checked);
+        toggleWireframeModeUI(e)
+      };
+
+      render();
+
+    }
+
+    function createButton(name) {
+      var tag = name.toLowerCase().replace(/\s/g, '_').replace('.drc', '');
+      var menus = {
+        //'context': document.getElementById('contextMenu'),
+        'teethMenu': document.getElementById('teethMenu'),
+        'illnessesMenu': document.getElementById('illnessesMenu'),
+        'anatomyMenu': document.getElementById('anatomyMenu'),
+        'otherMenu': document.getElementById('otherMenu'),
+      }
+      var div = document.createElement('div');
+      div.classList.add("my-container")
+      div.classList.add("active")
+
+      var itemsContainerDiv = document.createElement('div')
+      itemsContainerDiv.classList.add("items-container")
+
+      var opacityInput = document.createElement('input');
+      opacityInput.type = "range";
+      opacityInput.min = "1";
+      opacityInput.max = "100";
+      opacityInput.value = "100";
+      opacityInput.classList.add("me-2");
+      opacityInput.oninput = function (e) {
+        var mesh = scene.getObjectByName(name);
+        mesh.material.opacity = opacityInput.value / 100;
+        render();
+        console.log(e.target.value)
+        let targetRectangle = e.target.nextSibling.querySelector('.range-rect')
+        targetRectangle.style.left = e.target.value + "%"
+        targetRectangle.style.transform = "translateX(-50%)";
+      };
+
+      var input = document.createElement('input');
+      let colorOfThis = presetColors[tag] === undefined ? '#333333' : presetColors[tag];
+      input.type = 'color';
+      input.value = colorOfThis
+      input.oninput = function (e) {
+        var mesh = scene.getObjectByName(name);
+        mesh.material.color.set(input.value);
+        $(e.target).prev().css("background",`linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, ${e.target.value} 100%), url('{% static 'dicom/images/my-transparent.png' %}')`)
+        render();
+      };
+
+      var checkbox = document.createElement('input');
+      checkbox.id = `${name}`;
+      checkbox.type = "checkbox";
+      checkbox.checked = true;
+      checkbox.onclick = function (e) {
+        var mesh = scene.getObjectByName(name);
+        mesh.visible = !mesh.visible;
+        render();
+      };
+
+      var eyeIcon = document.createElement('img')
+      eyeIcon.src = "{% static '/dicom/images/eye.svg' %}"
+      eyeIcon.classList.add("active-eye")
+      var eyeIconClose = document.createElement('img')
+      eyeIconClose.src = "{% static '/dicom/images/eyeClose.svg' %}"
+      eyeIconClose.classList.add("passive-eye")
+      var checkboxContainer = document.createElement('div')
+      var characterThreshold = 20;
+      var label = document.createElement('label');
+
+
+      label.for = `${name}`;
+      if (name.length < characterThreshold)
+        label.innerHTML = `${name}`;
+      else
+        label.innerHTML = `${name.substring(0, characterThreshold)}`;
+
+      var chckConrtainer = document.createElement('div')
+      chckConrtainer.classList.add('checkboxContainer')
+
+      var colorContainer = document.createElement('div')
+      colorContainer.classList.add("color-container")
+
+      var rangeContainer = document.createElement('div')
+      rangeContainer.classList.add('range-container')
+      rangeContainer.classList.add('ms-auto')
+      rangeContainer.style.background = `linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, ${presetColors[tag] === undefined ? '#333333' : presetColors[tag]} 100%), url('{% static 'dicom/images/my-transparent.png' %}')`
+
+      var myRange = document.createElement('div')
+      myRange.classList.add('my-range')
+
+      var rectContainer = document.createElement('div')
+      rectContainer.classList.add('rect-container')
+
+      var rangeRect = document.createElement('div')
+      rangeRect.classList.add('range-rect')
+
+      // div.appendChild(checkbox);
+      // div.appendChild(eyeIcon)
+      itemsContainerDiv.appendChild(div)
+      div.appendChild(chckConrtainer)
+      chckConrtainer.appendChild(checkbox)
+      chckConrtainer.appendChild(eyeIcon)
+      chckConrtainer.appendChild(eyeIconClose)
+      div.appendChild(label);
+      div.appendChild(rangeContainer)
+      rangeContainer.appendChild(opacityInput);
+      rangeContainer.appendChild(myRange);
+      myRange.appendChild(rectContainer);
+      rectContainer.appendChild(rangeRect);
+      div.appendChild(input);
+      // div.appendChild(myColorLabel);
+      // myColorLabel.appendChild(colorContainer);
+
+
+      if (tagGroups[tag] !== undefined && menus[tagGroups[tag]] !== undefined) {
+        menus[tagGroups[tag]].appendChild(div);
+      } else {
+        menus['otherMenu'].appendChild(div);
+      }
+    }
+
+    function toggleWireframeMode(value) {
+      for (var i = 0; i < meshes.length; i++) {
+        meshes[i].material.wireframe = value;
+      }
+      render();
+    }
+    </script>
+  <script>
+    $('.showall').click(function () {
+      let menu_type = $(this).attr("data-menu-type")
+      if ($(this).is(':checked')){
+        
+        $(`#${menu_type} .my-container input[type="checkbox"]`).each(function(index, item){
+          if (!$(item).is(":checked")){
+            $(item).click()
+          }
+        })
+        
+      }
+      else{
+        $(`#${menu_type} .my-container input[type="checkbox"]`).each(function(index, item){
+          if ($(item).is(":checked")){
+            $(item).click()
+          }
+        })
+        
+      }
+    });
+  </script>
+{% endblock %}

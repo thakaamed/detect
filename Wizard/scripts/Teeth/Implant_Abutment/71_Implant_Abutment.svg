@@ -1,0 +1,19 @@
+<svg width="4" height="15" viewBox="0 0 4 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.78 14.3495H1.56C1.2 14.3495 0.890001 14.1595 0.860001 13.8995L0.25 3.51953H3.08L2.47 13.8995C2.44 14.1495 2.13 14.3495 1.77 14.3495H1.78Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<mask id="mask0_226_1012" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="3" width="4" height="12">
+<path d="M1.78 14.3495H1.56C1.2 14.3495 0.890001 14.1595 0.860001 13.8995L0.25 3.51953H3.08L2.47 13.8995C2.44 14.1495 2.13 14.3495 1.77 14.3495H1.78Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_226_1012)">
+<path d="M4.17844 5.6893L-0.851562 3.7793" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.17844 6.80941L-0.851562 4.89941" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.17844 7.9393L-0.851562 6.0293" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.17844 9.05917L-0.851562 7.15918" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.17844 10.1893L-0.851562 8.2793" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.17844 11.3192L-0.851562 9.40918" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.17844 12.4393L-0.851562 10.5293" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.17844 13.5692L-0.851562 11.6592" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M4.17844 14.6893L-0.851562 12.7793" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+</g>
+<path d="M2.38109 1H0.96109C0.85109 1 0.751094 1.1 0.731094 1.24C0.711094 1.44 0.68109 1.75 0.64109 2.09C0.55109 2.78 0.371094 3.57 0.371094 3.57H2.96109C2.96109 3.57 2.78109 2.78 2.69109 2.09C2.65109 1.75 2.62109 1.44 2.60109 1.24C2.59109 1.11 2.49109 1 2.37109 1H2.38109Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<path d="M3.13143 3.45996H0.201431C0.141431 3.45996 0.121437 3.70996 0.161437 3.99996C0.191437 4.27996 0.261431 4.50996 0.311431 4.50996H3.03143C3.08143 4.50996 3.15143 4.28996 3.18143 3.99996C3.21143 3.69996 3.19143 3.45996 3.14143 3.45996H3.13143Z" fill="#757577" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+</svg>

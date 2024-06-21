@@ -1,0 +1,485 @@
+2024-02-05 05:58:05,789 [ERROR] Exception at 'Checking User and Company Key' user key: l3b27ctxlyyz7y22awwfo27gw9k38img company key: 9swv2mj8ilae6do7bsro9lvgpyv91tr1 occurred in check_user: Profile matching query does not exist.
+2024-02-05 06:34:49,286 [ERROR] Exception at 'Checking User and Company Key' user key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● company key: 12312312312312312312312312312312 occurred in check_user: Profile matching query does not exist.
+2024-02-05 06:40:54,617 [ERROR] Exception at 'Checking User and Company Key' user key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●1 company key: 12341234123412341241234123412341 occurred in check_user: Profile matching query does not exist.
+2024-02-09 11:07:23,783 [ERROR] Exception at 'Checking User and Company Key' user key: l3b27ctxlyyz7y22awwfo27gw9k38img company key: 9swv2mj8ilae6do7bsro9lvgpyv91tr1 occurred in check_user: Profile matching query does not exist.
+2024-02-11 12:42:29,901 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: Profile matching query does not exist.
+2024-02-18 21:44:26,299 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-18 21:44:26,303 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6387, 2024-02-18 21:44:26.302312, media/dental/radio/3cf6612c-ddd4-466c-bc60-2ff1aafe65a8.png, 2024-02-18 21:44:26.302308+00, 2024-02-18 21:44:26.302313+00, f, null, null, 567, 0, ).
+
+2024-02-18 21:44:26,313 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-18 23:34:27,115 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-18 23:34:27,118 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6562, 2024-02-18 23:34:27.116819, media/dental/radio/f6cc2258-79e3-43b8-9e20-f53ca0d47c20.png, 2024-02-18 23:34:27.116816+00, 2024-02-18 23:34:27.116819+00, f, null, null, 567, 0, ).
+
+2024-02-18 23:34:27,128 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 00:09:08,166 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 00:09:08,170 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6563, 2024-02-19 00:09:08.167055, media/dental/radio/b38044ea-54e9-41c8-9f82-270f2d69ebba.png, 2024-02-19 00:09:08.167053+00, 2024-02-19 00:09:08.167055+00, f, null, null, 567, 0, ).
+
+2024-02-19 00:09:08,170 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 00:43:37,535 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 00:43:37,538 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6564, 2024-02-19 00:43:37.536160, media/dental/radio/6728dd58-2312-4a5d-bb1b-16ff05d04dca.png, 2024-02-19 00:43:37.536158+00, 2024-02-19 00:43:37.536161+00, f, null, null, 567, 0, ).
+
+2024-02-19 00:43:37,539 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 01:18:08,023 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 01:18:08,026 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6565, 2024-02-19 01:18:08.023872, media/dental/radio/bd3c5aa9-093e-4589-84e9-69f36911755a.png, 2024-02-19 01:18:08.023868+00, 2024-02-19 01:18:08.023872+00, f, null, null, 567, 0, ).
+
+2024-02-19 01:18:08,026 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 01:52:39,177 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 01:52:39,181 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6566, 2024-02-19 01:52:39.178134, media/dental/radio/bcb79a5e-83de-4445-8430-03285e603872.png, 2024-02-19 01:52:39.178131+00, 2024-02-19 01:52:39.178134+00, f, null, null, 567, 0, ).
+
+2024-02-19 01:52:39,181 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 02:27:09,442 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 02:27:09,444 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6567, 2024-02-19 02:27:09.442551, media/dental/radio/307c6882-51d3-49a4-a8e6-918cf9c70cbc.png, 2024-02-19 02:27:09.442548+00, 2024-02-19 02:27:09.442552+00, f, null, null, 567, 0, ).
+
+2024-02-19 02:27:09,444 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 03:01:39,105 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 03:01:39,108 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6568, 2024-02-19 03:01:39.106196, media/dental/radio/b953d8f9-4492-42b7-94f3-41f39bee0dcc.png, 2024-02-19 03:01:39.106194+00, 2024-02-19 03:01:39.106196+00, f, null, null, 567, 0, ).
+
+2024-02-19 03:01:39,108 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 03:36:06,477 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 03:36:06,480 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6569, 2024-02-19 03:36:06.478363, media/dental/radio/87196917-92b5-4400-856c-9714a6cbbccd.png, 2024-02-19 03:36:06.47836+00, 2024-02-19 03:36:06.478363+00, f, null, null, 567, 0, ).
+
+2024-02-19 03:36:06,480 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 04:10:34,270 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 04:10:34,273 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6570, 2024-02-19 04:10:34.270840, media/dental/radio/3aaa14a0-34e4-4562-a731-b8eefa6f69d7.png, 2024-02-19 04:10:34.270836+00, 2024-02-19 04:10:34.27084+00, f, null, null, 567, 0, ).
+
+2024-02-19 04:10:34,274 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 04:45:04,159 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 04:45:04,162 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6571, 2024-02-19 04:45:04.159974, media/dental/radio/d5e69f36-8f63-4c5f-b63c-f62437d1024a.png, 2024-02-19 04:45:04.159971+00, 2024-02-19 04:45:04.159974+00, f, null, null, 567, 0, ).
+
+2024-02-19 04:45:04,163 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 05:19:33,839 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 05:19:33,842 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6572, 2024-02-19 05:19:33.840191, media/dental/radio/b3a285e5-facb-4682-82eb-55745ab582ff.png, 2024-02-19 05:19:33.840189+00, 2024-02-19 05:19:33.840192+00, f, null, null, 567, 0, ).
+
+2024-02-19 05:19:33,843 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 05:54:04,641 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 05:54:04,644 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6573, 2024-02-19 05:54:04.642416, media/dental/radio/6e5fc2c4-f9ac-4fe6-b490-446f15addbb5.png, 2024-02-19 05:54:04.642412+00, 2024-02-19 05:54:04.642416+00, f, null, null, 567, 0, ).
+
+2024-02-19 05:54:04,645 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 06:28:34,730 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 06:28:34,734 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6574, 2024-02-19 06:28:34.731230, media/dental/radio/98d0a158-2460-49c8-a985-6173f05403c9.png, 2024-02-19 06:28:34.731224+00, 2024-02-19 06:28:34.731231+00, f, null, null, 567, 0, ).
+
+2024-02-19 06:28:34,735 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 07:03:05,233 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 07:03:05,238 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6575, 2024-02-19 07:03:05.234425, media/dental/radio/29f7bef6-b785-49ef-bc8f-9704c777be91.png, 2024-02-19 07:03:05.23442+00, 2024-02-19 07:03:05.234426+00, f, null, null, 567, 0, ).
+
+2024-02-19 07:03:05,239 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 07:37:31,857 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 07:37:31,860 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6576, 2024-02-19 07:37:31.857567, media/dental/radio/2a67fb4a-a67c-464a-8a36-a70c0f1b2025.png, 2024-02-19 07:37:31.857565+00, 2024-02-19 07:37:31.857568+00, f, null, null, 567, 0, ).
+
+2024-02-19 07:37:31,861 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 08:12:00,000 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 08:12:00,004 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6578, 2024-02-19 08:12:00.001430, media/dental/radio/f0d821cf-789e-4e53-9794-da400a611df7.png, 2024-02-19 08:12:00.001424+00, 2024-02-19 08:12:00.001431+00, f, null, null, 567, 0, ).
+
+2024-02-19 08:12:00,006 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 08:46:29,769 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 08:46:29,773 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6579, 2024-02-19 08:46:29.770174, media/dental/radio/d558b479-66c3-4e51-a4b4-62eadfb24825.png, 2024-02-19 08:46:29.770171+00, 2024-02-19 08:46:29.770175+00, f, null, null, 567, 0, ).
+
+2024-02-19 08:46:29,774 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 09:20:59,486 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 09:20:59,489 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6580, 2024-02-19 09:20:59.487369, media/dental/radio/b992c87b-eb60-40c5-9447-7d5842541357.png, 2024-02-19 09:20:59.487367+00, 2024-02-19 09:20:59.487369+00, f, null, null, 567, 0, ).
+
+2024-02-19 09:20:59,490 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 09:55:28,601 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 09:55:28,604 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6581, 2024-02-19 09:55:28.602277, media/dental/radio/0a4538ab-1a0e-402b-8664-57efadfaf27b.png, 2024-02-19 09:55:28.602274+00, 2024-02-19 09:55:28.602278+00, f, null, null, 567, 0, ).
+
+2024-02-19 09:55:28,606 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 10:29:56,107 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 10:29:56,111 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6587, 2024-02-19 10:29:56.108150, media/dental/radio/e6b37fd0-be7a-4982-bf61-5950bfe1fcac.png, 2024-02-19 10:29:56.108147+00, 2024-02-19 10:29:56.10815+00, f, null, null, 567, 0, ).
+
+2024-02-19 10:29:56,112 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 11:04:25,945 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 11:04:25,949 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6588, 2024-02-19 11:04:25.946904, media/dental/radio/35a54955-c878-40f8-91e8-9468e571a454.png, 2024-02-19 11:04:25.9469+00, 2024-02-19 11:04:25.946904+00, f, null, null, 567, 0, ).
+
+2024-02-19 11:04:25,950 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 11:38:55,324 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 11:38:55,329 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6589, 2024-02-19 11:38:55.325579, media/dental/radio/d920b9ae-76ca-4bb2-9e8e-4b7311e8f429.png, 2024-02-19 11:38:55.325576+00, 2024-02-19 11:38:55.325579+00, f, null, null, 567, 0, ).
+
+2024-02-19 11:38:55,330 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 12:13:24,131 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 12:13:24,134 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6590, 2024-02-19 12:13:24.132126, media/dental/radio/632ae976-f1be-4b0f-a86b-f81a6420de8b.png, 2024-02-19 12:13:24.132123+00, 2024-02-19 12:13:24.132126+00, f, null, null, 567, 0, ).
+
+2024-02-19 12:13:24,134 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 12:47:51,873 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 12:47:51,876 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6591, 2024-02-19 12:47:51.873687, media/dental/radio/7b35242b-d76f-4925-8efe-43d4973b5e6d.png, 2024-02-19 12:47:51.873684+00, 2024-02-19 12:47:51.873688+00, f, null, null, 567, 0, ).
+
+2024-02-19 12:47:51,876 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 13:22:21,068 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 13:22:21,071 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6592, 2024-02-19 13:22:21.068754, media/dental/radio/c67a08fc-a111-4e39-82fb-fbde8a2e5f1e.png, 2024-02-19 13:22:21.068749+00, 2024-02-19 13:22:21.068754+00, f, null, null, 567, 0, ).
+
+2024-02-19 13:22:21,072 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 13:56:49,161 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 13:56:49,163 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6593, 2024-02-19 13:56:49.162040, media/dental/radio/4706bfc5-fbda-4367-951f-accf238b2805.png, 2024-02-19 13:56:49.162036+00, 2024-02-19 13:56:49.16204+00, f, null, null, 567, 0, ).
+
+2024-02-19 13:56:49,164 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 14:31:44,898 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 14:31:44,901 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6595, 2024-02-19 14:31:44.899035, media/dental/radio/98f4a9f3-203d-4905-bcf9-b6dee8f6e6a9.png, 2024-02-19 14:31:44.899033+00, 2024-02-19 14:31:44.899036+00, f, null, null, 567, 0, ).
+
+2024-02-19 14:31:44,902 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 21:50:27,174 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 21:50:27,178 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6598, 2024-02-19 21:50:27.175424, media/dental/radio/f1a46a03-ec54-4095-b7a3-c58b597e14fb.png, 2024-02-19 21:50:27.175419+00, 2024-02-19 21:50:27.175425+00, f, null, null, 567, 0, ).
+
+2024-02-19 21:50:27,179 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 22:27:01,506 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 22:27:01,509 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6603, 2024-02-19 22:27:01.507124, media/dental/radio/f4d1a62a-7fa5-407c-a901-6c2a1422041e.png, 2024-02-19 22:27:01.507121+00, 2024-02-19 22:27:01.507124+00, f, null, null, 567, 0, ).
+
+2024-02-19 22:27:01,510 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 23:01:30,930 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 23:01:30,935 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6604, 2024-02-19 23:01:30.931355, media/dental/radio/38d55172-6611-4231-98ca-6ddd2d3e9d21.png, 2024-02-19 23:01:30.931351+00, 2024-02-19 23:01:30.931355+00, f, null, null, 567, 0, ).
+
+2024-02-19 23:01:30,936 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-19 23:36:02,700 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-19 23:36:02,704 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6605, 2024-02-19 23:36:02.701379, media/dental/radio/9926e1b2-d1fc-4260-8674-5bcbfc70c16f.png, 2024-02-19 23:36:02.701376+00, 2024-02-19 23:36:02.70138+00, f, null, null, 567, 0, ).
+
+2024-02-19 23:36:02,705 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 00:10:31,986 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 00:10:31,990 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6606, 2024-02-20 00:10:31.987010, media/dental/radio/c470e9f3-ed21-4717-b064-336996c93632.png, 2024-02-20 00:10:31.987007+00, 2024-02-20 00:10:31.987011+00, f, null, null, 567, 0, ).
+
+2024-02-20 00:10:31,991 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 00:45:00,135 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 00:45:00,139 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6607, 2024-02-20 00:45:00.136712, media/dental/radio/10d9a261-419c-408e-90b8-0f5304cc84a5.png, 2024-02-20 00:45:00.136709+00, 2024-02-20 00:45:00.136713+00, f, null, null, 567, 0, ).
+
+2024-02-20 00:45:00,140 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 01:19:29,159 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 01:19:29,162 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6608, 2024-02-20 01:19:29.160510, media/dental/radio/04363c24-181b-4da6-a74e-9e1fad7a446a.png, 2024-02-20 01:19:29.160507+00, 2024-02-20 01:19:29.16051+00, f, null, null, 567, 0, ).
+
+2024-02-20 01:19:29,163 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 01:54:01,195 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 01:54:01,199 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6609, 2024-02-20 01:54:01.196002, media/dental/radio/a2de40b8-f061-4919-8cf5-e7faef89b91e.png, 2024-02-20 01:54:01.195999+00, 2024-02-20 01:54:01.196003+00, f, null, null, 567, 0, ).
+
+2024-02-20 01:54:01,199 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 02:28:32,099 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 02:28:32,104 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6610, 2024-02-20 02:28:32.100882, media/dental/radio/547e0542-2ad2-48fe-9177-b7439b5fa5d2.png, 2024-02-20 02:28:32.100877+00, 2024-02-20 02:28:32.100883+00, f, null, null, 567, 0, ).
+
+2024-02-20 02:28:32,106 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 03:03:03,066 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 03:03:03,070 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6611, 2024-02-20 03:03:03.067547, media/dental/radio/704a50e7-fbde-456e-881a-92d42b8a539f.png, 2024-02-20 03:03:03.067543+00, 2024-02-20 03:03:03.067547+00, f, null, null, 567, 0, ).
+
+2024-02-20 03:03:03,071 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 03:37:31,651 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 03:37:31,655 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6612, 2024-02-20 03:37:31.652409, media/dental/radio/f48d0903-cff3-48a5-867e-7ea2bc702eb0.png, 2024-02-20 03:37:31.652406+00, 2024-02-20 03:37:31.652409+00, f, null, null, 567, 0, ).
+
+2024-02-20 03:37:31,656 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 04:12:01,883 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 04:12:01,887 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6613, 2024-02-20 04:12:01.884505, media/dental/radio/bc4fea38-a828-44fc-b1bb-ee99e0de9c56.png, 2024-02-20 04:12:01.884502+00, 2024-02-20 04:12:01.884505+00, f, null, null, 567, 0, ).
+
+2024-02-20 04:12:01,888 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 04:46:32,857 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 04:46:32,860 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6614, 2024-02-20 04:46:32.857486, media/dental/radio/b1f794e6-d22c-4dea-aedb-19767a298de9.png, 2024-02-20 04:46:32.857483+00, 2024-02-20 04:46:32.857486+00, f, null, null, 567, 0, ).
+
+2024-02-20 04:46:32,860 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 05:21:02,851 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 05:21:02,856 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6615, 2024-02-20 05:21:02.853763, media/dental/radio/a139186a-5372-4b9a-8125-29f1caadce72.png, 2024-02-20 05:21:02.853758+00, 2024-02-20 05:21:02.853763+00, f, null, null, 567, 0, ).
+
+2024-02-20 05:21:02,857 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 05:55:33,995 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 05:55:33,997 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6616, 2024-02-20 05:55:33.995620, media/dental/radio/8be89a3c-b137-4af5-8313-e98096dcfe3a.png, 2024-02-20 05:55:33.995616+00, 2024-02-20 05:55:33.99562+00, f, null, null, 567, 0, ).
+
+2024-02-20 05:55:33,998 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 06:30:04,739 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 06:30:04,743 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6617, 2024-02-20 06:30:04.740499, media/dental/radio/9c57ffeb-ef68-480e-8430-80191e462312.png, 2024-02-20 06:30:04.740495+00, 2024-02-20 06:30:04.7405+00, f, null, null, 567, 0, ).
+
+2024-02-20 06:30:04,744 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 07:04:33,063 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 07:04:33,066 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6618, 2024-02-20 07:04:33.064256, media/dental/radio/b20751a9-0175-45e2-a1c6-4f07a333387c.png, 2024-02-20 07:04:33.064253+00, 2024-02-20 07:04:33.064257+00, f, null, null, 567, 0, ).
+
+2024-02-20 07:04:33,067 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 07:39:01,547 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 07:39:01,549 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6619, 2024-02-20 07:39:01.547627, media/dental/radio/96d26393-c396-4ee8-add8-c7824e8f4e4c.png, 2024-02-20 07:39:01.547624+00, 2024-02-20 07:39:01.547627+00, f, null, null, 567, 0, ).
+
+2024-02-20 07:39:01,550 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 08:13:31,561 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 08:13:31,564 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6620, 2024-02-20 08:13:31.562421, media/dental/radio/c383e839-4f8a-4035-86d3-69ce0518290e.png, 2024-02-20 08:13:31.562418+00, 2024-02-20 08:13:31.562421+00, f, null, null, 567, 0, ).
+
+2024-02-20 08:13:31,565 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 08:48:12,615 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 08:48:12,619 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6621, 2024-02-20 08:48:12.615822, media/dental/radio/46466ffa-3530-4ddc-b36b-8152734f8426.png, 2024-02-20 08:48:12.615818+00, 2024-02-20 08:48:12.615823+00, f, null, null, 567, 0, ).
+
+2024-02-20 08:48:12,620 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 09:22:42,311 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 09:22:42,316 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6622, 2024-02-20 09:22:42.312386, media/dental/radio/d2ba088f-6982-4a3e-8bd2-48adc9609f20.png, 2024-02-20 09:22:42.312383+00, 2024-02-20 09:22:42.312386+00, f, null, null, 567, 0, ).
+
+2024-02-20 09:22:42,317 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 09:57:13,493 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 09:57:13,497 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6623, 2024-02-20 09:57:13.494256, media/dental/radio/e823ab69-d7bc-48ad-96df-8f84f7f71c52.png, 2024-02-20 09:57:13.494254+00, 2024-02-20 09:57:13.494257+00, f, null, null, 567, 0, ).
+
+2024-02-20 09:57:13,498 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 10:31:41,882 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 10:31:41,885 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6624, 2024-02-20 10:31:41.883380, media/dental/radio/d8afac0a-af69-433a-bba7-52e74d559b42.png, 2024-02-20 10:31:41.883377+00, 2024-02-20 10:31:41.88338+00, f, null, null, 567, 0, ).
+
+2024-02-20 10:31:41,886 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 11:06:12,466 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 11:06:12,469 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6625, 2024-02-20 11:06:12.468098, media/dental/radio/068a83d9-1182-4337-ada1-8e242a7b8922.png, 2024-02-20 11:06:12.468094+00, 2024-02-20 11:06:12.468098+00, f, null, null, 567, 0, ).
+
+2024-02-20 11:06:12,480 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 11:40:42,077 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 11:40:42,080 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6626, 2024-02-20 11:40:42.078208, media/dental/radio/3facd52a-987f-431d-aae9-2204ac3decc1.png, 2024-02-20 11:40:42.078205+00, 2024-02-20 11:40:42.078208+00, f, null, null, 567, 0, ).
+
+2024-02-20 11:40:42,082 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 12:15:12,777 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 12:15:12,781 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6627, 2024-02-20 12:15:12.778220, media/dental/radio/271357ce-4908-4642-8ea3-9829f7d3479b.png, 2024-02-20 12:15:12.778217+00, 2024-02-20 12:15:12.77822+00, f, null, null, 567, 0, ).
+
+2024-02-20 12:15:12,782 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 12:49:41,978 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 12:49:41,980 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6628, 2024-02-20 12:49:41.978635, media/dental/radio/bedfa267-0c7f-445a-839e-f3a9eef422e4.png, 2024-02-20 12:49:41.978633+00, 2024-02-20 12:49:41.978636+00, f, null, null, 567, 0, ).
+
+2024-02-20 12:49:41,983 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 13:24:11,744 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 13:24:11,746 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6633, 2024-02-20 13:24:11.744665, media/dental/radio/aa98f131-b642-40db-8425-0af0f162c08a.png, 2024-02-20 13:24:11.744662+00, 2024-02-20 13:24:11.744665+00, f, null, null, 567, 0, ).
+
+2024-02-20 13:24:11,751 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 13:58:43,850 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 13:58:43,853 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6634, 2024-02-20 13:58:43.850955, media/dental/radio/d88dc3fe-efdb-4af7-bf48-62314290c860.png, 2024-02-20 13:58:43.850952+00, 2024-02-20 13:58:43.850956+00, f, null, null, 567, 0, ).
+
+2024-02-20 13:58:43,854 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 14:33:14,788 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 14:33:14,792 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6635, 2024-02-20 14:33:14.788917, media/dental/radio/37777c0e-12b5-4153-8542-3467f2389e1a.png, 2024-02-20 14:33:14.788914+00, 2024-02-20 14:33:14.788918+00, f, null, null, 567, 0, ).
+
+2024-02-20 14:33:14,793 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 15:07:45,399 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 15:07:45,401 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6636, 2024-02-20 15:07:45.399975, media/dental/radio/98fbd300-7f8c-48ce-ad60-236d4c532df7.png, 2024-02-20 15:07:45.399972+00, 2024-02-20 15:07:45.399975+00, f, null, null, 567, 0, ).
+
+2024-02-20 15:07:45,402 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 15:42:15,805 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 15:42:15,808 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6638, 2024-02-20 15:42:15.806385, media/dental/radio/fa57093a-380a-4354-bf56-857280a031b5.png, 2024-02-20 15:42:15.806382+00, 2024-02-20 15:42:15.806385+00, f, null, null, 567, 0, ).
+
+2024-02-20 15:42:15,808 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 16:17:54,914 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 16:17:54,916 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6641, 2024-02-20 16:17:54.914844, media/dental/radio/254cc8ad-5f15-4f0d-8d58-ef8d8696b5ec.png, 2024-02-20 16:17:54.914841+00, 2024-02-20 16:17:54.914845+00, f, null, null, 567, 0, ).
+
+2024-02-20 16:17:54,917 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-20 16:52:25,285 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-20 16:52:25,290 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6642, 2024-02-20 16:52:25.286405, media/dental/radio/77a52f30-3066-49b6-91f8-b5eaae39e90d.png, 2024-02-20 16:52:25.286402+00, 2024-02-20 16:52:25.286405+00, f, null, null, 567, 0, ).
+
+2024-02-20 16:52:25,291 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-24 18:53:30,166 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-24 18:53:30,171 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6737, 2024-02-24 18:53:30.168549, media/dental/radio/852a3241-af28-4a1f-9444-eb770a620939.png, 2024-02-24 18:53:30.168541+00, 2024-02-24 18:53:30.168551+00, f, null, null, 567, 0, ).
+
+2024-02-24 18:53:30,178 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-24 19:30:42,751 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-24 19:30:42,753 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6743, 2024-02-24 19:30:42.752010, media/dental/radio/d40ed243-d45e-4b14-874d-184bcfcac792.png, 2024-02-24 19:30:42.752007+00, 2024-02-24 19:30:42.75201+00, f, null, null, 567, 0, ).
+
+2024-02-24 19:30:42,754 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-24 20:05:11,703 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-24 20:05:11,707 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6744, 2024-02-24 20:05:11.703814, media/dental/radio/97d0075f-c6cb-4f2f-aff8-a88e14be1ca1.png, 2024-02-24 20:05:11.703811+00, 2024-02-24 20:05:11.703815+00, f, null, null, 567, 0, ).
+
+2024-02-24 20:05:11,714 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-24 20:39:40,894 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-24 20:39:40,898 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6745, 2024-02-24 20:39:40.895016, media/dental/radio/bac78feb-aa2c-46c3-a245-6c6fbfb9d682.png, 2024-02-24 20:39:40.895013+00, 2024-02-24 20:39:40.895016+00, f, null, null, 567, 0, ).
+
+2024-02-24 20:39:40,899 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-24 21:14:21,500 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-24 21:14:21,502 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6746, 2024-02-24 21:14:21.500802, media/dental/radio/d616da72-687f-4020-8676-25a5990e161c.png, 2024-02-24 21:14:21.500799+00, 2024-02-24 21:14:21.500803+00, f, null, null, 567, 0, ).
+
+2024-02-24 21:14:21,503 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-24 21:48:50,703 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-24 21:48:50,705 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6747, 2024-02-24 21:48:50.703909, media/dental/radio/315dec15-537e-415d-9a2a-ad41126c179c.png, 2024-02-24 21:48:50.703906+00, 2024-02-24 21:48:50.703909+00, f, null, null, 567, 0, ).
+
+2024-02-24 21:48:50,706 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-24 22:23:19,211 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-24 22:23:19,214 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6748, 2024-02-24 22:23:19.211637, media/dental/radio/5b3a8927-919e-4caa-beb7-4c4dd00337e8.png, 2024-02-24 22:23:19.211634+00, 2024-02-24 22:23:19.211637+00, f, null, null, 567, 0, ).
+
+2024-02-24 22:23:19,215 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-24 22:57:49,652 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-24 22:57:49,656 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6749, 2024-02-24 22:57:49.653496, media/dental/radio/a4ce9b69-2a8f-4a44-a877-95d34748b115.png, 2024-02-24 22:57:49.653493+00, 2024-02-24 22:57:49.653496+00, f, null, null, 567, 0, ).
+
+2024-02-24 22:57:49,657 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-24 23:32:17,014 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-24 23:32:17,017 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6752, 2024-02-24 23:32:17.015182, media/dental/radio/0fb9c4fd-9708-4530-af0f-091dd96b86b2.png, 2024-02-24 23:32:17.015179+00, 2024-02-24 23:32:17.015182+00, f, null, null, 567, 0, ).
+
+2024-02-24 23:32:17,017 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 00:06:46,197 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 00:06:46,200 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6753, 2024-02-25 00:06:46.198000, media/dental/radio/c6c2fc5c-71e8-467c-a882-9ae4faa588b4.png, 2024-02-25 00:06:46.197997+00, 2024-02-25 00:06:46.198+00, f, null, null, 567, 0, ).
+
+2024-02-25 00:06:46,200 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 00:41:26,412 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 00:41:26,415 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6754, 2024-02-25 00:41:26.412549, media/dental/radio/f2810e2c-3440-4611-a40e-d29672935025.png, 2024-02-25 00:41:26.412547+00, 2024-02-25 00:41:26.41255+00, f, null, null, 567, 0, ).
+
+2024-02-25 00:41:26,415 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 01:15:55,992 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 01:15:55,995 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6755, 2024-02-25 01:15:55.993251, media/dental/radio/8cea3d1c-a09e-4917-a632-27185f59b4a6.png, 2024-02-25 01:15:55.993248+00, 2024-02-25 01:15:55.993252+00, f, null, null, 567, 0, ).
+
+2024-02-25 01:15:55,996 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 01:50:36,335 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 01:50:36,338 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6756, 2024-02-25 01:50:36.336246, media/dental/radio/fe02413e-6624-4615-a2dc-a1dff210cd70.png, 2024-02-25 01:50:36.336243+00, 2024-02-25 01:50:36.336246+00, f, null, null, 567, 0, ).
+
+2024-02-25 01:50:36,338 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 02:25:05,750 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 02:25:05,753 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6757, 2024-02-25 02:25:05.750769, media/dental/radio/44331327-8365-42bf-bc83-f357280dbb94.png, 2024-02-25 02:25:05.750766+00, 2024-02-25 02:25:05.750769+00, f, null, null, 567, 0, ).
+
+2024-02-25 02:25:05,753 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 02:59:45,791 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 02:59:45,793 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6758, 2024-02-25 02:59:45.791708, media/dental/radio/befd0c40-9af9-4133-ba80-29b6fd65affa.png, 2024-02-25 02:59:45.791705+00, 2024-02-25 02:59:45.791708+00, f, null, null, 567, 0, ).
+
+2024-02-25 02:59:45,793 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 03:34:13,169 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 03:34:13,171 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6761, 2024-02-25 03:34:13.170075, media/dental/radio/9bb2b28d-0ce7-4d94-b5f4-115ebb28daf5.png, 2024-02-25 03:34:13.170072+00, 2024-02-25 03:34:13.170075+00, f, null, null, 567, 0, ).
+
+2024-02-25 03:34:13,172 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 04:09:05,306 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 04:09:05,309 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6762, 2024-02-25 04:09:05.306802, media/dental/radio/ed9ecb81-fab9-42cf-87dc-2e6864500b48.png, 2024-02-25 04:09:05.306799+00, 2024-02-25 04:09:05.306802+00, f, null, null, 567, 0, ).
+
+2024-02-25 04:09:05,310 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 04:43:56,897 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 04:43:56,901 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6763, 2024-02-25 04:43:56.898296, media/dental/radio/5ba037ba-891a-45c8-955c-294e9daae04c.png, 2024-02-25 04:43:56.898292+00, 2024-02-25 04:43:56.898297+00, f, null, null, 567, 0, ).
+
+2024-02-25 04:43:56,902 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 05:18:23,746 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 05:18:23,749 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6764, 2024-02-25 05:18:23.747061, media/dental/radio/5c05a17d-c69c-4e14-b66f-1f0dfe28a6a7.png, 2024-02-25 05:18:23.747058+00, 2024-02-25 05:18:23.747061+00, f, null, null, 567, 0, ).
+
+2024-02-25 05:18:23,749 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 05:52:54,532 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 05:52:54,537 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6765, 2024-02-25 05:52:54.533182, media/dental/radio/d8a18f1c-4a51-4033-8ffe-5b1fa7ec504c.png, 2024-02-25 05:52:54.533175+00, 2024-02-25 05:52:54.533183+00, f, null, null, 567, 0, ).
+
+2024-02-25 05:52:54,538 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 06:27:46,490 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 06:27:46,492 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6766, 2024-02-25 06:27:46.490773, media/dental/radio/d0a515be-bd9b-4115-b857-4915ad404514.png, 2024-02-25 06:27:46.49077+00, 2024-02-25 06:27:46.490773+00, f, null, null, 567, 0, ).
+
+2024-02-25 06:27:46,493 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 07:02:15,937 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 07:02:15,940 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6767, 2024-02-25 07:02:15.938211, media/dental/radio/bc7c3f5a-621e-4017-86cd-e634ed2f6788.png, 2024-02-25 07:02:15.938207+00, 2024-02-25 07:02:15.938211+00, f, null, null, 567, 0, ).
+
+2024-02-25 07:02:15,941 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 07:37:08,241 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 07:37:08,245 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6768, 2024-02-25 07:37:08.241935, media/dental/radio/8791814f-7451-43d9-ba71-40a1f1017509.png, 2024-02-25 07:37:08.241933+00, 2024-02-25 07:37:08.241936+00, f, null, null, 567, 0, ).
+
+2024-02-25 07:37:08,246 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 08:11:37,136 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 08:11:37,139 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6769, 2024-02-25 08:11:37.136538, media/dental/radio/52e98799-e57d-4324-9c85-a39d291bce72.png, 2024-02-25 08:11:37.136535+00, 2024-02-25 08:11:37.136538+00, f, null, null, 567, 0, ).
+
+2024-02-25 08:11:37,140 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 08:46:04,511 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 08:46:04,513 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6770, 2024-02-25 08:46:04.511552, media/dental/radio/18de6a20-0d31-48d3-a445-dfc3a9f30be0.png, 2024-02-25 08:46:04.51155+00, 2024-02-25 08:46:04.511553+00, f, null, null, 567, 0, ).
+
+2024-02-25 08:46:04,514 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 09:20:33,705 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 09:20:33,708 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6771, 2024-02-25 09:20:33.705537, media/dental/radio/3686b7d7-a8d6-47f4-ac90-f7d2d316150e.png, 2024-02-25 09:20:33.705534+00, 2024-02-25 09:20:33.705537+00, f, null, null, 567, 0, ).
+
+2024-02-25 09:20:33,709 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 09:55:04,519 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 09:55:04,521 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6772, 2024-02-25 09:55:04.519548, media/dental/radio/dfbf3d89-b142-462a-aefb-dee55d5dada4.png, 2024-02-25 09:55:04.519546+00, 2024-02-25 09:55:04.519549+00, f, null, null, 567, 0, ).
+
+2024-02-25 09:55:04,521 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 10:29:34,614 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 10:29:34,617 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6773, 2024-02-25 10:29:34.614796, media/dental/radio/5b3b8341-6498-4ea1-bc56-aba1d8a76643.png, 2024-02-25 10:29:34.614793+00, 2024-02-25 10:29:34.614797+00, f, null, null, 567, 0, ).
+
+2024-02-25 10:29:34,618 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 11:04:03,093 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 11:04:03,096 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6774, 2024-02-25 11:04:03.094183, media/dental/radio/637ed3b7-a59c-404e-978b-38bf8f6e73ec.png, 2024-02-25 11:04:03.09418+00, 2024-02-25 11:04:03.094184+00, f, null, null, 567, 0, ).
+
+2024-02-25 11:04:03,097 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 11:38:30,016 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 11:38:30,019 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6775, 2024-02-25 11:38:30.017049, media/dental/radio/062a16ed-48ad-46dc-964a-dde30808cfbc.png, 2024-02-25 11:38:30.017047+00, 2024-02-25 11:38:30.017049+00, f, null, null, 567, 0, ).
+
+2024-02-25 11:38:30,019 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 12:12:59,118 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 12:12:59,122 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6776, 2024-02-25 12:12:59.119436, media/dental/radio/53bf2001-0e66-47bc-8422-3fd0f346d332.png, 2024-02-25 12:12:59.119433+00, 2024-02-25 12:12:59.119436+00, f, null, null, 567, 0, ).
+
+2024-02-25 12:12:59,123 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 12:47:47,566 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 12:47:47,570 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6777, 2024-02-25 12:47:47.567114, media/dental/radio/7bf35045-ce88-4580-a65e-38900571078d.png, 2024-02-25 12:47:47.56711+00, 2024-02-25 12:47:47.567114+00, f, null, null, 567, 0, ).
+
+2024-02-25 12:47:47,570 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 13:22:18,526 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 13:22:18,528 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6778, 2024-02-25 13:22:18.526611, media/dental/radio/78b35f87-6c91-481c-bd07-b1f23b1c9df0.png, 2024-02-25 13:22:18.526609+00, 2024-02-25 13:22:18.526611+00, f, null, null, 567, 0, ).
+
+2024-02-25 13:22:18,529 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'
+2024-02-25 13:56:58,267 [ERROR] Exception at 'Creating Patinet' occurred in create_patient: get() returned more than one Patient -- it returned 3!
+2024-02-25 13:56:58,271 [ERROR] Exception at 'Creating Image' occurred in create_image: null value in column "patient_id" violates not-null constraint
+DETAIL:  Failing row contains (6779, 2024-02-25 13:56:58.268087, media/dental/radio/e9473f05-3799-4a8e-b4f3-a8663317e791.png, 2024-02-25 13:56:58.268084+00, 2024-02-25 13:56:58.268087+00, f, null, null, 567, 0, ).
+
+2024-02-25 13:56:58,271 [ERROR] Exception at 'Profile.DoesNotExist' occurred in create_patient: 'NoneType' object has no attribute 'delete'

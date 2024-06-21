@@ -1,0 +1,462 @@
+
+* {
+    user-select: none;
+}
+.text-label-healthy {
+    color: #FF5050;
+}
+.text-label-unhealthy {
+    color: #5bff58;
+}
+.text-success-i {
+    color: #A8FFAC!important;
+}
+.text-danger-i {
+    color: #FF5050!important;
+}
+.icon * {
+    white-space: nowrap;
+}
+.imgToChange {
+    cursor: pointer;
+}
+.weekstrong-checkbox {
+    inset: 0;
+    cursor: pointer;
+    opacity: 0;
+}
+.weekstrong-checkbox + p + p {
+    color: #6c757d;
+}
+.weekstrong-checkbox:checked + p + p{
+    color: #eee!important;
+}
+.search-input,
+.search-input::placeholder {
+    color: rgba(255, 255, 255, .7)!important;
+}
+.modal-container .checkbox {
+    position: relative;
+    background-color: #6479c0;
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+}
+.modal-container .checkbox i {
+    display: none;
+    font-size: 12px;
+}
+.modal-container .checkbox input[type=checkbox] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.modal-container .checkbox input[type=checkbox]:checked + i {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.ck-editor__editable[role="textbox"] {
+    color: #111;
+    min-height: 300px;
+}
+.ck.ck-powered-by {
+    display: none;
+}
+.ck.ck-editor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.ck.ck-editor__main,
+.ck-restricted-editing_mode_standard {
+    height: 100%;
+}
+.map-hover-popup {
+    background-color: rgba(56, 71, 122, 0.7);
+    backdrop-filter: blur(2px);
+    border-left: 2px solid white;
+    color: #eee;
+    padding: 10px 20px;
+    display: inline-flex;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.map-hover-popup .like,
+.map-hover-popup .unlike {
+    cursor: pointer;
+}
+.map-hover-popup__root {
+    background-color: #eee;
+    position: absolute;
+    outline: 1px solid #eee;
+    outline-offset: 2px;
+}
+.dropzone.dz-started .dz-message {
+    display: block !important;
+}
+#dropZone {
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: transparent;
+}
+.dropzone {
+    border: 2px dashed #526092!important;
+    background-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.dropzone .dz-preview:not(.dz-processing) .dz-progress {
+    display: none;
+}
+.dropzone .dz-preview.dz-image-preview {
+    background-color: transparent;
+    margin: 5px 0;
+}
+.planning-item-box:hover {
+    background-color: rgb(231, 231, 231);
+}
+.planning-item-box p:nth-of-type(1) {
+    cursor: pointer;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+#back-img-frame .loading{
+    background-color: rgba(0, 0, 0, .7);
+}
+#back-img-frame .loading i,
+#page-loading i{
+    animation: spin 1s linear infinite;
+}
+#back-img-frame {
+    height: auto!important;
+}
+.leaflet-bottom.leaflet-right {
+    display: none;
+}
+.tooth-percent:hover {
+    text-decoration: underline;
+    cursor: pointer!important;
+}
+.tooth-menu.active.left-opened::before {
+    /* diagnosis sayfasındaki diş menüsünün açıldığında taşmamasını sağlamak */
+    content: '';
+    right: auto!important;
+    left: 100%!important;
+    transform: translateY(-50%) rotate(180deg)!important;
+}
+#doctor-comment-area {
+    border-radius: 5px;
+    transition: top ease-in-out 500ms;
+}
+
+#doctor-comment-save-btn:hover,
+#doctor-comment-cancel-btn:hover {
+    color: #fff!important;
+}
+
+/* fişler için diş kutusu stillendirmesi */
+.root {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #eee;
+    outline: 1px solid #eee;
+    outline-offset: 4px;
+    display: none;
+}
+
+.line {
+    height: 0;
+    width: 1px;
+    background-color: #eee;
+    transform: translateX(-50%);
+}
+
+.tooth-number-value {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #eee;
+    opacity: 0;
+}
+@keyframes increaseHeightTopTooth {
+    0% {
+        height: 0;
+        margin-top: 0;
+    }
+
+    100% {
+        height: 100px;
+        margin-top: -100px;
+    }
+}
+@keyframes increaseHeightBottomTooth {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 100px;
+    }
+}
+/* dişler için diş kutusu stillendirmesi end */
+#teethDrawSvg-eng {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99999;
+}
+.tooth .item img {
+    max-width: 100%;
+    height: 55px!important;
+    max-height: 55px;
+    margin-top: 5px;
+}
+.tooth .item img.auto-height {
+    height: auto!important;
+    max-height: 55px;
+}
+
+path.drawsElement[data-pointer-events="false"] {
+    pointer-events: none!important;
+}
+
+.draw-icon-item img.active {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+#page-loading {
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px); /* Safari desteği için gerekli */
+display: flex;
+}
+.doctorAddedIllnessCircle {
+width: 17px;
+height: 17px;
+border-radius: 50%;
+background-color: #0057FF;
+display: flex;
+justify-content: center;
+align-items: center;
+position: absolute;
+z-index: 9;
+cursor: pointer;
+transform: translate(-50%, -50%);
+}
+
+.doctorAddedIllnessCircle i {
+font-size: 10px;
+}
+
+/* labelling stillendirme start */
+#labeling-box {
+min-width: 250px;
+height: 200px;
+position: absolute;
+z-index: 90;
+color: #aaa;
+}
+
+#diseases-list-container {
+overflow-y: auto;
+gap: 5px;
+}
+
+.diseases-item {
+gap: 7px;
+}
+
+.check-container {
+width: 17px;
+height: 17px;
+border-radius: 50%;
+overflow: hidden;
+cursor: pointer;
+}
+
+.check-container .check-container-bg {
+background-color: #898989;
+inset: 0;
+}
+
+.check-container input[type="radio"] {
+position: absolute;
+inset: 0;
+opacity: 0;
+z-index: 12;
+cursor: pointer;
+}
+
+.check-container input[type="radio"]:checked  + .check-container-bg{
+background-color: #0057FF;
+}
+
+.check-container input[type="radio"]:checked  + div + i {
+opacity: 1;
+transform: rotate(0deg);
+}
+
+.check-container i {
+font-size: 10px;
+color: white;
+position: absolute;
+inset: 0;
+z-index: 3;
+text-align: center;
+line-height: 17px;
+transform: rotate(-360deg);
+transition: ease-in-out 300ms transform;
+opacity: 0;
+}
+
+.check-container + label {
+cursor: pointer;
+user-select: none;
+}
+/* labelling stillendirme end */
+
+#modal-report .icon-container,
+#modalReportForMail .icon-container {
+    border: 1px solid #303030;
+    border-radius: 5px;
+    width: 85px;
+    height: 85px;
+}
+input[data-type="reporting-custom-radio-input"] {
+    pointer-events: none;
+    position: absolute;
+    opacity: 0;
+}
+#modal-report .icon-container img.selected,
+#modalReportForMail .icon-container img.selected,
+input[data-type="reporting-custom-radio-input"]:checked + label img.not-selected {
+    display: none;
+}
+
+input[data-type="reporting-custom-radio-input"]:checked + label img + img.selected {
+    display: block!important;
+}
+
+input[data-type="reporting-custom-radio-input"]:checked + label .icon-container {
+    border: 1px solid #5071C8!important;
+}
+
+input[data-type="reporting-custom-radio-input"]:checked + label + p {
+    color: #5071C8;
+}
+
+#exam_questions {
+    padding: 27px;
+}
+.custom-hr {
+    width: 100%;
+    height: 1px;
+    background-color: #3B4978;
+    margin: 20px 0;
+}
+
+.treatment-section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+.treatment-section.chapter-1,
+.treatment-section.chapter-2 {
+    transition: top ease-in-out 500ms;
+}
+.treatment-section.chapter-1 {
+    top: -200%;
+}
+.treatment-section.chapter-1 .half {
+    background-color: #1A264E;
+}
+.treatment-section.chapter-1 .half:not(:first-child) {
+    background-color: white;
+}
+.treatment-section.chapter-1.active {
+    top: 0;
+}
+
+.treatment-section.chapter-2 {
+    top: 200%;
+}
+
+.treatment-section.chapter-2.active {
+    top: 0;
+}
+#measurement {
+        position: absolute;
+            background-color: rgba(0, 0, 255, 0.3);
+            pointer-events: none;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 5px;
+            display: none;
+    z-index: 99999;
+}
+#back-value {
+    width: 30px;
+    height: 15px;
+    z-index: 99;
+    background-color: #5071C8;
+    transition: width ease-in-out 300ms;
+}
+#background-base {
+    width: 240px;
+    height: 15px;
+    z-index: -1;
+    background-color: #364064;
+}
+#back-marked {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    z-index: 999;
+    border-radius: 50%;
+    left: 12.5%;
+    transform: translate(-50%, -50%);
+    transition: left ease-in-out 300ms;
+    background-color: #5071C8;
+}
+#triangele-back {
+    height: 20px;
+    width: 60px;
+    top: 7px;
+    background-color: #5071C8;
+    border-radius: 2px;
+    left: 0%;
+    transition: left ease-in-out 300ms;
+}
+#triangele-back::before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 2.5px solid #5071C8;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+}

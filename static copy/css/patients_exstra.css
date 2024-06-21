@@ -1,0 +1,124 @@
+.modal-container {
+    opacity: 0 !important;
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 99999;
+}
+
+.modal-container.active {
+    opacity: 1 !important;
+    pointer-events: all;
+}
+
+section#header .dropdown-menu .notification li a:active {
+    color: inherit;
+}
+section#header .dropdown-menu .notification li i.completed-ok {
+    color: #1cf171;
+}
+section#header .dropdown-menu .notification li i.completed-no {
+    color: #ff2727;
+}
+section#header .dropdown-menu .notification li i.process {
+    color: #125cc7;
+    transform: rotate(0deg);
+    animation: spin 1s infinite linear;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.modal-container .modal-box {
+    border-radius: 10px;
+    display: block;
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    padding: 50px 10px 10px 10px;
+    overflow: hidden;
+    color: #111;
+    transition: top ease-in-out 700ms;
+}
+
+.modal-container.active .modal-box {
+    top: 50%;
+    transition: top ease-in-out 700ms;
+    padding: 35px 75px;
+}
+
+.modal-container .modal-box .modal-box__close {
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.modal-container .modal-box .modal-box__close .close-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #FF7979;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-container .modal-box .modal-box__close .close-icon:hover i {
+    font-size: 18px;
+    transform: rotate(180deg);
+    transition: transform ease-in-out 300ms, font-size ease-in-out 300ms;
+}
+
+.modal-container .modal-box .modal-box__close .close-icon i {
+    transition: transform ease-in-out 300ms, font-size ease-in-out 300ms;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.modal-container .modal-box .modal-container__buttons {
+    gap: 7px;
+    margin-top: 10px;
+}
+
+.modal-container .modal-box .modal-container__buttons button {
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 5px 50px;
+}
+
+.modal-container .modal-box .modal-container__buttons button.yes {
+    background-color: #5071C8;
+    color: white;
+}
+
+.modal-container .modal-box .modal-big-icon {
+    text-align: center;
+}
+
+.modal-container .modal-box .modal-big-icon i {
+    color: #FF7979;
+    border-radius: 50%;
+    border: 1px solid #EBEBEB;
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.modal-container .modal-box p.main-text {
+    color: #111;
+    font-size: 16px;
+    margin: 40px 20px;
+}

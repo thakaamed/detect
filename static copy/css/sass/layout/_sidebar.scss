@@ -1,0 +1,27 @@
+aside {
+    position: fixed;
+    left: 0;
+    top: 55px;
+    bottom: 55px;
+    width: 55px;
+    background-color: $bg-dark-2;
+    color: white!important;
+    padding: 24px 5px;
+    font-size: 12px;
+    & a.sidebar-link {
+        padding: 10px 2px;
+        border-radius: 3px;
+        display: block;
+        text-align: center;
+        margin-bottom: 7px;
+        &.active,
+        &:hover {
+            background-color: $menu-active-color;
+            color: inherit;
+        }
+        & i {
+            display: block;
+            font-size: 14px;
+        }
+    }
+}

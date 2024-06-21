@@ -1,0 +1,71 @@
+@import "../layout/form";
+@import "../abstracts/variables";
+@import "../abstracts/placeholder";
+@import "../abstracts/typography";
+@import "../layout/header";
+@import "../layout/footer";
+@import "../layout/sidebar";
+@import "../base/reset";
+@import "../main";
+@import "../components/button";
+@import "../components/userbar";
+
+.profile {
+  & .left-profile {
+    & .profile-box {
+      background-color: white;
+      & h2 {
+        color: #111;
+      }
+    }
+    & .profile-img {
+        width: 150px;
+        margin: 10px auto;
+        position: relative;
+        & a.change-icon {
+            background-color: $blue-2;
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            margin-left: auto;
+            color: white;
+            & i {
+                font-size: 10px;
+            }
+        }
+      & .avatar {
+        aspect-ratio: 1;
+        width: 150px;
+        overflow: hidden;
+        border-radius: 50%;
+        position: relative;
+        & img {
+          position: absolute;
+          @extend %centerAbsoluteBoth;
+          min-width: 150px;
+          min-height: 150px;
+          max-width: 250px;
+        }
+      }
+    }
+    & .info {
+        background-color: #EDEDED;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        color: #111;
+        & strong {
+            font-weight: 500;
+        }
+    }
+    & .member {
+        font-weight: 500;
+        margin: 15px 0 0 0;
+        text-align: center;
+        color: #111;
+    }
+  }
+}

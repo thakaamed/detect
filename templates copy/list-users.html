@@ -1,0 +1,349 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="{% static 'css/datatable.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <title>{{specs.title}} - {% trans 'Kullanıcılar' %}</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+    <style>
+    body.dark [name="users_length"], body.dark #users_filter input{
+        color:white
+    }
+    body.dark [name="users_length"] option {
+        background:black;
+    }
+    body.dark .fa-pencil:hover{
+        color: black;
+    }
+    .dataTables_length {
+        font-size: 12px;
+        margin-right: 10px;
+        width: 80%;
+    }
+
+    .dataTables_length label {
+        display: inline-block;
+        margin-bottom: 0;
+    }
+
+    .dataTables_length select {
+        height: 26px;
+        padding: 2px 6px;
+        font-size: 12px;
+    }
+    .fa-chart-line{
+        color: black !important;
+    }
+    </style>
+
+{% endblock %}
+{% block headerButtons %}
+<!--<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">-->
+<!--    <i class="fa-solid fa-upload" style="pointer-events: none;"></i>-->
+<!--    <span style="pointer-events: none;">Upload Radiograpfy</span>-->
+<!--</button>-->
+{% endblock %}
+
+{% block content %}
+
+<div id="modal-delete-user" class="modal-container">
+    <div class="modal-box">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="modal-big-icon">
+            <i class="fa-regular fa-trash-can shadow"></i>
+        </div>
+        <p class="main-text w-75 mx-auto text-center">{% trans 'Are you sure you want to delete the user?' %}</p>
+        <div class="modal-container__buttons d-flex justify-content-center">
+            <button class="custom yes" data-btn-operation="delete-user">{% trans 'Yes' %}</button>
+            <button class="custom no" data-modal-close>{% trans 'No' %}</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-agent-keys" class="modal-container">
+    <div class="modal-box">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="modal-big-icon">
+            <i class="fa-solid fa-key shadow"></i>
+        </div>
+        <div>
+            <label>{% trans 'User Api Key' %}</label>
+            <div class="d-flex gap-2 align-items-center">
+                <input id="user_api_key_input" type="text" value="" class="mb-0" style="width: 300px;" readonly>
+                <button id="copy_user_api_key" type="button" style="background-color: #0B1536; font-size: 15px; width: 100px;" class="btn btn-primary h-100">{% trans 'Copy' %}</button>
+            </div>
+
+            <label>{% trans 'Company Api Key' %}</label>
+            <div class="d-flex gap-2 align-items-center">
+                <input id="company_api_key_input" type="text" value="" class="mb-0" style="width: 300px;" readonly>
+                <button id="copy_company_api_key" type="button" style="background-color: #0B1536; font-size: 15px; width: 100px;" class="btn btn-primary h-100">{% trans 'Copy' %}</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+    <main class="position-relative" style="height: calc(100vh - 110px);">
+        <!-- veri varsa d-none class kaldır, yoksa d-none kalsın -->
+        <div class="views container">
+            <div class="heading-and-items container-fluid d-flex justify-content-between align-items-center my-3">
+                <h1 class="m-0">{% trans 'Users' %}</h1>
+                <div class="heading-and-items_right d-flex">
+                </div>
+            </div>
+            <div id="patients-table-view" class="patient-view-container container-fluid mt-3 mb-5" style="display: block;">
+                <div class="contents">
+                    <table id="users" class="patients-table table table-borderless display" style="width: 100%;">
+                        <thead>
+                            <tr style="text-align-last: center;">
+                                <th>{% trans 'User ID' %}</th>
+                                <th>{% trans 'User Name' %}</th>
+                                <th>{% trans 'Name' %}<br> {% trans 'Last Name' %}</th>
+                                <th>{% trans 'User Created Date' %}</th>
+                                <th>{% trans 'Last Login' %}</th>
+                                <th>{% trans 'User Type' %}</th>
+                                <th>{% trans 'Usage' %}</th>
+                                <th>{% trans 'Limit' %}</th>
+                                <th>{% trans 'Last Token Activity' %}</th>
+                                <th>{% trans 'Package Start-End Date' %}</th>
+                                <th>{% trans 'Active' %}</th>
+                                <th>{% trans 'Operation' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users_list %}
+                                <tr data-user-id="{{user.id}}">
+                                    <td>{{ user.profile_id }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.created_date }}</td>
+                                    <td>{{ user.last_login }}</td>
+                                    <td>{{ user.user_type }}</td>
+                                    <td>{{ user.usage }}</td>
+                                    <td>{{ user.usage_limit }}</td>
+                                    <td>{{ user.last_token_activity }}</td>
+                                    <td>{{ user.package_start_end_date }}</td>
+                                    <td>{{ user.is_active }}</td>
+                                    <td>
+                                        <div class="operations-buttons d-flex gap-3 ">
+                                            <a href="{% url 'view_user' user.id %}">
+                                                <i class="fa-solid fa-pencil" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="{% trans 'View User' %}"></i>
+                                            </a>
+                                            <i onclick="setIdForModal({{user.id}})" style="cursor:pointer; line-height: inherit !important;" class="fa-solid fa-trash-can" data-bs-toggle="tooltip"
+                                                title="{% trans 'Delete User' %}"
+                                                data-open-modal-pk="modal-delete-user"
+                                                data-modal-type="user-delete"></i>
+                                            <i onclick="getAgentKeyModal({{user.id}})" style="cursor:pointer; line-height: inherit !important;" class="fa-solid fa-key" data-bs-toggle="tooltip"
+                                                title="{% trans 'Agent Keys' %}"
+                                                data-open-modal-pk="modal-agent-keys"
+                                                data-modal-type="agent-keys"></i>
+                                            <a href="{% if user.last_token_activity %}{% url 'listActivities' user.id %}{%else%}#{%endif%}">
+                                                <i class="fa-solid fa-chart-line" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="{% trans 'List Activities' %}"></i>
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+        {% csrf_token %}
+        <!-- burada hiç veri yoksa d-none classını kaldır, veri varsa d-none kalacak -->
+    </main>
+{% endblock %}
+
+{% block customJs %}
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <script src="{% static 'js/dropzone.js' %}"></script>
+    <script src="{% static 'js/sweatalert.js' %}"></script>
+    <script src="{% static 'js/patients.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script>
+        var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()
+    </script>
+    <script>
+        function setIdForModal(id){
+            $("#modal-delete-user").attr("data-user-id",id)
+
+        }
+
+        function getAgentKeyModal(id){
+            var user_input = $('#user_api_key_input').val("")
+            var company_input = $('#company_api_key_input').val("")
+            $("#modal-agent-keys").attr("data-user-id",id)
+            $.ajax({
+                url: "{% url 'getOrCreateAgentKeys' %}",
+                method: "GET",
+                headers: { "X-CSRFToken": csrfmiddlewaretoken },
+                data: {
+                    "userId": id,
+                },
+                success: function (response) {
+                    let keys = response.keys
+                    user_input.val(keys.user_api_key)
+                    company_input.val(keys.company_api_key)
+                },
+                error: function (xhr, errmsg, err) {
+
+                }
+            })
+        }
+    </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script>
+        $(document).ready(function() {
+            // patients sayfasında patient silmek için kullanılan fonksiyon
+            $("[data-btn-operation='delete-user']").click(function (event) {
+                let userId = $("#modal-delete-user").attr("data-user-id")
+                console.log("user id ", userId)
+                $.ajax({
+                    url: "{% url 'delete_user' %}",
+                    method: "POST",
+                    headers: { "X-CSRFToken": csrfmiddlewaretoken },
+                    data: {
+                        "userId": userId,
+                    },
+                    success: function (response) {
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '{% trans "User deleted successfully." %}',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(function() {
+                        window.location.reload()
+                    });
+                    
+                        
+                    },
+                    error: function (xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText)
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '{% trans "Something went wrong." %}',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    }
+                })
+                $(event.target).closest(".modal-container").removeClass("active")
+            })
+        })
+    </script>
+<script>
+    $(document).ready(function () {
+        if (window.location.href.includes("/en/")) {
+            var lang = "en"
+        }
+        else if (window.location.href.includes("/tr/")){
+            var lang = "tr"
+        }
+        else if (window.location.href.includes("/uz/")){
+            var lang = "uz"
+        }
+        else if (window.location.href.includes("/ru/")){
+            var lang = "ru"
+        }
+        else if (window.location.href.includes("/nl/")){
+            var lang = "nl"
+        }
+        else {
+            var lang = "tr"
+        }
+        var hepsiText = lang === 'en' ? 'All' : (lang === 'uz' ? 'Hamma' : (lang === "ru" ? "все" : (lang === "nl" ? "Alle" : 'Hepsi')));
+        var mydatatable = $('#users').DataTable({
+            columnDefs: [
+                {% comment %} {orderable: false, targets: [6]} {% endcomment %}
+            ],
+            language: {
+                lengthMenu: '_MENU_',
+                zeroRecords: lang === 'en' ? 'No records available' : (lang === 'uz' ? 'Topilgan ma`lumotlar mavjud emas' : (lang === "ru" ? "Данные отсутствуют в таблице" : (lang === "nl" ? "Geen gegevens beschikbaar" :  'Aranan kriterlere uygun veri bulunamadı.'))),
+                info: '_PAGE_ / _PAGES_ sayfa',
+                infoEmpty: 'No records available',
+                infoFiltered: '(filtered from _MAX_ total records)',
+                search: lang === 'en' ? 'Search' : (lang === 'uz' ? "Bo'shliq" : (lang === "ru" ? "Поиск" : (lang === "nl" ? "Zoekopdracht" : 'Ara'))),
+                "paginate": {
+                    "next": lang === 'en' ? "Next <i class='fa-solid fa-angle-right'></i>" : (lang === 'uz' ? "Keyingi <i class='fa-solid fa-angle-right'></i>" : (lang === 'ru' ? "Следующий <i class='fa-solid fa-angle-right'></i>" : (lang === 'nl' ? "Volgende <i class='fa-solid fa-angle-right'></i>" : "Sonraki <i class='fa-solid fa-angle-right'></i>"))),
+                    "previous": lang === 'en' ? "<i class='fa-solid fa-angle-left'></i> Previous" : (lang === 'uz' ? "<i class='fa-solid fa-angle-left'></i> Oldingi" : (lang === 'ru' ? "<i class='fa-solid fa-angle-left'></i> Предыдущий" : (lang === 'nl' ? "Volgende <i class='fa-solid fa-angle-right'></i>": "<i class='fa-solid fa-angle-left'></i> Önceki"))),
+                }
+    
+            },
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, hepsiText]],
+            
+            initComplete: function () {
+            }
+        });
+    });
+</script>    
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var copyUserApiKeyButton = document.getElementById('copy_user_api_key');
+        var UserApiKeyInput = document.getElementById('user_api_key_input');
+        var copyCompanyApiKeyButton = document.getElementById('copy_company_api_key');
+        var CompanyApiKeyInput = document.getElementById('company_api_key_input');
+
+        copyUserApiKeyButton.addEventListener('click', function () {
+            // Input alanının değerini seç
+            UserApiKeyInput.select();
+
+            // Kopyala
+            document.execCommand('copy');
+
+            // Kopyalandıktan sonra seçimi kaldır
+            window.getSelection().removeAllRanges();
+
+            copyUserApiKeyButton.textContent = 'Copied!';
+
+            // 2 saniye sonra tekrar "Copy" olarak geri döndür
+            setTimeout(function () {
+                copyUserApiKeyButton.textContent = 'Copy';
+            }, 2000);
+        });
+
+        copyCompanyApiKeyButton.addEventListener('click', function () {
+            // Input alanının değerini seç
+            CompanyApiKeyInput.select();
+
+            // Kopyala
+            document.execCommand('copy');
+
+            // Kopyalandıktan sonra seçimi kaldır
+            window.getSelection().removeAllRanges();
+            copyCompanyApiKeyButton.textContent = 'Copied!';
+
+            // 2 saniye sonra tekrar "Copy" olarak geri döndür
+            setTimeout(function () {
+                copyCompanyApiKeyButton.textContent = 'Copy';
+            }, 2000);
+        });
+    });
+</script>
+    
+
+{% endblock %}

@@ -1,0 +1,338 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+input[type=text],
+input[type=password],
+input[type=number],
+input[type=date],
+input[type=email],
+select {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  border: none;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=number]:focus,
+input[type=date]:focus,
+input[type=email]:focus,
+select:focus {
+  outline: 0;
+  border: 1px solid #ccc;
+}
+
+label {
+  cursor: pointer;
+  display: block;
+  margin: 7px 0;
+}
+
+input.search-input {
+  background-color: rgba(255, 255, 255, 0.25);
+  width: 170px;
+  max-width: 100%;
+  background: url("../img/search-icon.png") rgba(255, 255, 255, 0.25);
+  background-size: 15px;
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  padding: 5px 10px 5px 30px;
+  color: rgb(140, 140, 140);
+  margin: 0;
+}
+
+select.patients-list-count-select {
+  margin: 0;
+}
+
+div.switch-checkbox span:nth-of-type(1) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+section#login .accept-portal-term, section#footer .theme-change-container {
+  display: flex;
+  align-items: center;
+}
+
+section#login .form-container {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+div.switch-checkbox span:nth-of-type(1) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+section#login .accept-portal-term, section#footer .theme-change-container {
+  display: flex;
+  align-items: center;
+}
+
+section#login .form-container {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html * {
+  font-size: 12px;
+}
+
+html, body {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  scroll-behavior: smooth !important;
+}
+
+a:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+div.switch-checkbox span:nth-of-type(1) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+section#login .accept-portal-term, section#footer .theme-change-container {
+  display: flex;
+  align-items: center;
+}
+
+section#login .form-container {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+div.switch-checkbox {
+  width: 40px;
+  height: 15.3846153846px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+div.switch-checkbox span:nth-of-type(1) {
+  transition: left ease-in-out 0.2s;
+  position: absolute;
+  left: 0;
+  width: 22.2222222222px;
+  aspect-ratio: 1;
+  background-color: #fff;
+  z-index: 1;
+  border-radius: 50%;
+}
+div.switch-checkbox span:nth-of-type(2) {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 0;
+  border-radius: 15.3846153846px;
+  transition: background-color ease-in-out 0.2s;
+}
+div.switch-checkbox input[type=checkbox] {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  cursor: pointer;
+}
+div.switch-checkbox input[type=checkbox]:checked + span {
+  left: calc(100% - 22.2222222222px);
+  transition: left ease-in-out 0.2s;
+}
+div.switch-checkbox input[type=checkbox]:checked + span + span {
+  background-color: #1876ff;
+  transition: background-color ease-in-out 0.2s;
+}
+
+body {
+  background-color: #F5F5F5;
+  color: #272727;
+  font-size: 14px;
+  font-family: "Inter", sans-serif !important;
+}
+
+.dark {
+  background: #0B1536;
+  color: #eee;
+}
+
+main {
+  position: fixed;
+  top: 55px;
+  bottom: 55px;
+  left: 55px;
+  right: 0;
+  overflow-y: auto;
+}
+main h1 {
+  font-size: 28px;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+}
+aside p.version {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: #0B1536;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5071C8;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5071C8;
+}
+
+.swal2-title {
+  font-size: 12px !important;
+  font-weight: 300 !important;
+}
+
+.swal2-popup.swal2-modal {
+  width: auto !important;
+  padding: 0 70px 10px 70px;
+}
+
+section#footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 55px;
+  height: 55px;
+  background-color: #212C51;
+  color: white;
+  user-select: none;
+}
+section#footer .container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+section#footer .container-fluid p {
+  margin: 0;
+}
+section#footer .footer-links {
+  display: flex;
+  gap: 15px;
+}
+section#footer .theme-change-container {
+  gap: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html * {
+  font-size: 12px;
+}
+
+html, body {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  scroll-behavior: smooth !important;
+}
+
+a:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+section#login {
+  height: 100vh;
+  min-height: 100vh;
+  user-select: none;
+}
+section#login p.handleError {
+  transition: opacity ease-in-out 0.5s;
+}
+section#login .form-container {
+  border-radius: 15px;
+  padding: 2rem;
+  background-color: white;
+}
+section#login h1 {
+  text-align: center;
+  font-weight: 300;
+  font-size: 26px;
+  margin: 10px 0;
+}
+section#login .left-area {
+  height: 100%;
+}
+section#login .left-area img.logo {
+  display: block;
+  margin: 0 auto;
+  width: 350px;
+  max-width: 100%;
+}
+section#login .left-area form {
+  width: 554px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+section#login .left-area form button:nth-of-type(1) {
+  background-color: #131D3E;
+}
+section#login .left-area form button:nth-of-type(1):hover {
+  background-color: rgba(19, 29, 62, 0.95);
+}
+section#login .right-area img {
+  width: 100%;
+  height: 100vh;
+}
+section#login .higlight-text {
+  margin: 25px 0;
+}
+section#login .higlight-text a:hover {
+  color: gray;
+}
+section#login .accept-portal-term {
+  gap: 10px;
+  margin: 15px 0;
+  user-select: none;
+}
+section#login .forgot-password {
+  display: block;
+  text-align: center;
+  margin: 10px 0;
+}
+section#login .forgot-password:hover {
+  color: gray;
+}

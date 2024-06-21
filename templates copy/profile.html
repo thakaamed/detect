@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <title>{{specs.title}} - Profile</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="{% static 'css/profile_extra.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="d-flex align-items-center position-relative" style="padding-bottom: 60px;">
+        <div class="container p-4">
+            <h1>{% trans 'Welcome' %} {{full_name}}</h1>
+            <p class="m-0 mb-4 text-muted">{% trans 'You can view your profile and package information.' %}
+            </p>
+            <div class="user-bar shadow">
+                <div class="profile-img">
+                    <div class="change-icon" style="background-color: #FFDC81;">
+                    </div>
+                    <div class="avatar border">
+                        <img src="{{user_informations.profile_photo}}" alt="" width="100">
+                    </div>
+                </div>
+                <div class="section">
+                    <p>{% trans 'Doctor Name' %}</p>
+                    <p>{{user_informations.full_name}}</p>
+                </div>
+                <div class="section">
+                    <p id="phoneinput">{% trans 'Phone Number' %}</p>
+                    <p>{% if user_informations.phone %} {{user_informations.phone}}{% else %} - {% endif %}</p>
+                </div>
+                <div class="section">
+                    <p>E-Mail</p>
+                    <p>{{user_informations.email}}</p>
+                </div>
+                <div class="section">
+                    <p>{% trans 'Token Expiry Date' %}</p>
+                    <p>{% if token_informations.package %} {{ token_informations.package.end_date }} {% else %} - {% endif %}</p>
+                </div>
+                {% if token_informations.extra_package %}
+                    <div class="section">
+                        <p>{% trans 'Extra Package Expiry Date' %}</p>
+                        <p>{{ token_informations.extra_package.end_date }}</p>
+                    </div>
+                {% endif %}
+                <div class="section">
+                    <button class="update-profile custom btn-blue">
+                        <i class="fa-solid fa-highlighter"></i>
+                        {% trans 'Update Profile' %}
+                    </button>
+                </div>
+            </div>
+            <div class="user-info my-3 shadow d-flex " style="background-color: white;">
+                <div class="w-100">
+                    <h2 class="user-info">{{package_name}}</h2>
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'img/circleExamp.png' %}" class="img-fluid" width alt="">
+                        <div class="w-100 mx-5">
+                            {%for index, doctor_usage in token_informations.doctor_usages.items %}
+                                <div class="line-progress d-flex align-items-end mb-3" style="gap: 25px;">
+                                    <div class="w-100">
+                                        <p class="mb-1">{% if index == 0%}{% trans 'Your Token Usage' %}{%else%}{{doctor_usage.profile.user.first_name}} {{doctor_usage.profile.user.last_name}}{%endif%}</p>
+                                        <div class="progress-container">
+                                            <div class="progress-stick blue" style="width: {{doctor_usage.package.monthly_usage_percent}}%;"></div>
+                                        </div>
+                                    </div>
+                                    <p class="m-0 text-muted">{{doctor_usage.package.monthly_usage_rate}}</p>
+                                </div>
+                            {%endfor%}
+                            <div class="line-progress d-flex align-items-end mb-3" style="gap: 25px;">
+                                <div class="w-100">
+                                    <p class="mb-1">{% trans 'Company Token Usage' %}</p>
+                                    <div class="progress-container">
+                                        <div class="progress-stick purple" style="width: {{token_informations.package.usage_percent}}%;"></div>
+                                    </div>
+                                </div>
+                                <p class="m-0 text-muted">{{token_informations.package.usage_rate}}</p>
+                            </div>
+                            {% if token_informations.extra_package%}
+                                <div class="line-progress d-flex align-items-end mb-3" style="gap: 25px;">
+                                    <div class="w-100">
+                                        <p class="mb-1">{% trans 'Company Extra Package Usage' %}</p>
+                                        <div class="progress-container">
+                                            <div class="progress-stick turquoise" style="width:{{token_informations.extra_package.usage_percent}}%;"></div>
+                                        </div>
+                                    </div>
+                                    <p class="m-0 text-muted">{{token_informations.extra_package.usage_rate}}</p>
+
+                                </div>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+                {% comment %} <button class="custom btn-blue">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    {% trans 'Buy Token' %}
+                </button> {% endcomment %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block customJs %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        {% comment %} var phone_input = document.getElementById("phoneinput").text()
+        console.log("phone_input", phone_input, typeof(phone_input))
+        IMask(document.getElementById("phoneinput").toString, {
+            mask: "+{00} (000) 000 - 00 - 00",
+        });
+        // telefon input için mask oluşturuldu {% endcomment %}
+    </script>
+    <script>
+        $(document).ready(function() {
+            var lang = "{{user_theme_choices.language}}"
+        $(".update-profile").click(function(event) {
+            window.location.href = "/" + lang + "/update-profile";
+        })
+    })
+    </script>
+
+{% endblock %}

@@ -1,0 +1,324 @@
+@import "main";
+@import "style";
+
+section#pricing {
+  & .container {
+    margin: 75px auto;
+    border-radius: 13px;
+    background-color: white;
+    box-shadow: 0 0 100px rgba($color: #000000, $alpha: 0.5);
+    padding: 25px;
+    & .steps {
+      & .step:not(.step-1) {
+        display: none;
+      }
+      & .step {
+        & h3 {
+          margin-bottom: 20px;
+        }
+        & input {
+          margin-bottom: 15px;
+          margin-top: 5px;
+          padding: 12px 20px;
+          border: 1px solid #c8c4c4;
+          border-radius: 5px;
+          &:focus {
+            outline: none;
+            border: 1px solid $site-dark-blue;
+          }
+        }
+        & input,
+        & label {
+          display: block;
+          width: 100%;
+          user-select: none;
+          cursor: pointer;
+        }
+        & .card-container {
+          width: 425px;
+          max-width: 100%;
+          margin: 35px auto;
+          aspect-ratio: 1.63;
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          &:hover .the-card {
+            transform: rotateY(180deg) !important;
+          }
+          & .the-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease-in-out;
+            transform: rotateY(0deg);
+            & .the-front,
+            & .the-back {
+              border-radius: 20px;
+              padding: 20px;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              backface-visibility: hidden;
+              color: #333;
+            }
+            & .the-front {
+              background-image: url("../media/img/cardbg.png");
+              & .chip img {
+                position: absolute;
+                left: 9.64%;
+                top: 28.4%;
+                width: 9.64%;
+                aspect-ratio: 1;
+              }
+              & .card-number-title {
+                position: absolute;
+                color: white;
+                font-size: 10px;
+                left: 9.64%;
+                top: 47.3%;
+              }
+              & .circles img {
+                position: absolute;
+                right: 7.17%;
+                bottom: 13.07%;
+              }
+              & .holder {
+                position: absolute;
+                color: white;
+                font-size: 10px;
+                top: 74.6%;
+                left: 9.64%;
+              }
+              & .card-name {
+                position: absolute;
+                left: 9.64%;
+                color: white;
+                font-size: 14px;
+                top: 81.15%;
+              }
+              & .valid {
+                position: absolute;
+                color: white;
+                font-size: 10px;
+                top: 74.6%;
+                left: 60.66%;
+              }
+              & .valid-value {
+                position: absolute;
+                color: white;
+                font-size: 14px;
+                top: 81.15%;
+                left: 60.66%;
+              }
+              & .card-number {
+                position: absolute;
+                color: white;
+                font-size: 16px;
+                left: 9.64%;
+                top: 52.69%;
+                font-family: monospace;
+                & span:nth-child(4n) {
+                  margin-right: 13px;
+                }
+              }
+            }
+            & .the-back {
+              background-color: $site-dark-blue;
+              transform: rotateY(180deg);
+              & .black-line {
+                position: absolute;
+                background-color: #262626;
+                width: 91%;
+                height: 14.43%;
+                left: 4.5%;
+                top: 15%;
+                border-radius: 3px;
+              }
+              & .top-text {
+                position: absolute;
+                color: white;
+                font-size: 9px;
+                left: 4.5%;
+                top: 37.69%;
+                & span {
+                  display: block;
+                }
+              }
+              & .bottom-text {
+                position: absolute;
+                color: white;
+                top: 71.53%;
+                left: 24%;
+                right: 14.58%;
+                font-size: 8px;
+              }
+              & .gradient {
+                position: absolute;
+                width: 75%;
+                height: 12.86%;
+                left: 4.5%;
+                top: 50%;
+                & img {
+                  width: 100%;
+                  height: 100%;
+                }
+                & span {
+                  color: #484848;
+                  position: absolute;
+                  right: 5%;
+                  top: 50%;
+                  transform: translateY(-50%);
+                }
+              }
+              & .card-frame {
+                position: absolute;
+                left: 4.5%;
+                bottom: 18.07%;
+                width: 12%;
+                height: 14.14%;
+              }
+            }
+          }
+        }
+      }
+      & .step-count {
+        width: 400px;
+        max-width: 100%;
+        position: relative;
+        margin: 50px auto;
+        user-select: none;
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          display: block;
+          top: 50%;
+          width: 50%;
+          height: 2px;
+        }
+        &::after {
+          content: "";
+          left: 50%;
+          background-color: rgba($site-dark-blue, 0.3);
+        }
+        &[data-step="1"]::before,
+        &[data-step="1"]::after {
+          background-color: rgba($site-dark-blue, 0.3);
+        }
+        &[data-step="2"]::before,
+        &[data-step="3"]::before,
+        &[data-step="3"]::after {
+          background-color: rgba($site-dark-blue, 1);
+        }
+        & .count-item {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          font-size: 15px;
+          line-height: 30px;
+          @include center-both();
+          position: relative;
+          z-index: 2;
+          background-color: white;
+          border: 2px solid $site-dark-blue;
+          &:nth-child(1)::before,
+          &:nth-child(2)::before,
+          &:nth-child(3)::before {
+            content: "";
+            color: $site-dark-blue;
+            position: absolute;
+            top: 100%;
+            font-size: 14px;
+          }
+          &:nth-child(1)::before {
+            content: "Hesap";
+          }
+          &:nth-child(2)::before {
+            content: "Ödeme";
+          }
+          &:nth-child(3)::before {
+            content: "Bitir";
+          }
+          &.active {
+            background-color: $site-dark-blue;
+            color: white;
+          }
+        }
+      }
+      & .step {
+        & button {
+          border: none;
+          outline: none;
+          color: white;
+          background-color: $site-dark-blue;
+          border-radius: 5px;
+          padding: 10px 20px;
+          display: block;
+          width: 100%;
+          transition: background-color ease-in-out 300ms;
+          &:hover {
+            transition: background-color ease-in-out 300ms;
+            background-color: rgba($color: $site-dark-blue, $alpha: 0.9);
+          }
+        }
+      }
+    }
+    & .price-plan-img {
+      padding: 20px;
+      & h2 {
+        color: white;
+        bottom: 50px;
+        width: 380px;
+        max-width: 100%;
+        text-align: center;
+        font-size: 30px;
+        line-height: 45px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 50%;
+        @media screen and (max-width: $tablet) {
+          top: 25%;
+        }
+      }
+      & .advenced-plans {
+        background-color: white;
+        border-radius: 8px;
+        left: 4rem;
+        right: 4rem;
+        bottom: 0;
+        transform: translateY(50%);
+        .img img {
+          height: 70px;
+        }
+        .text {
+          & p {
+            font-size: 20px;
+            line-height: 30px;
+          }
+        }
+      }
+    }
+    & .price-plan-li {
+      background-color: #efeef3;
+      padding-top: calc((70px + 3rem) / 2 + 3.5rem);
+      padding-left: 4rem;
+      padding-right: 4rem;
+      padding-bottom: 3.5rem;
+      border-bottom-left-radius: 13px;
+      border-bottom-right-radius: 13px;
+      & ul {
+        margin: 0;
+        padding: 0;
+        padding-left: 15px;
+        & li {
+          margin-bottom: 15px;
+          font-size: 17px;
+          & span {
+            color: #909090;
+          }
+        }
+      }
+    }
+  }
+}

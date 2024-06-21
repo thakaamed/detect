@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+$inter-font : 'Inter', sans-serif;
+
+@import "./abstracts/variables";
+@import "./components/switchCheckbox";
+
+body {
+  background-color: $bg-light;
+  color: $dark-text;
+  font-size: 14px;
+  font-family: $inter-font!important;
+}
+
+// this is where the magic happen
+@mixin theme($dark-theme: true) {
+  @if $dark-theme {
+    background: $bg-dark-1;
+    color: #eee;
+  }
+}
+
+.dark {
+  @include theme($dark-theme: true);
+}
+
+main {
+  position: fixed;
+  top: 55px;
+  bottom: 55px;
+  left: 55px;
+  right: 0;
+  overflow-y: auto;
+  & h1 {
+    font-size: 28px;
+  }
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  & p.version {
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: $bg-dark-1;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $blue-2; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $blue-2; 
+}
+
+.swal2-title {
+  font-size: 12px!important;
+  font-weight: 300!important;
+}
+.swal2-popup.swal2-modal {
+  width: auto!important;
+  padding: 0 70px 10px 70px;
+}

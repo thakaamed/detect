@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/addpatient.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>{{specs.title}} - {{card_message}}</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+
+    <style>
+        .swal2-title {
+      font-size: 16px;
+      font-weight: 300;
+    }
+    .dark-patient-container{
+        background-color:white;
+    }
+    </style>
+{% endblock %}
+{% block headerButtons %}
+<!--<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">-->
+<!--    <i class="fa-solid fa-upload" style="pointer-events: none;"></i>-->
+<!--    <span style="pointer-events: none;">Upload Radiograpfy</span>-->
+<!--</button>-->
+{% endblock %}
+
+{% block content %}
+<main class="d-flex align-items-center position-relative" style="height: calc(100vh - 110px);">
+    <div class="container p-3 rounded shadow-lg my-4 dark-patient-container">
+        <h1 class="text-dark">{% trans card_message %}</h1>
+        <p class="sub-text text-muted">{% trans 'You can add or update your patient by filling out the information below.' %}</p>
+        <div class="row text-dark">
+            <div class="col-md-6">
+                
+                <label for="patientid">
+                    <span class="text-danger">*</span>
+                    <span>{% trans 'Patient ID' %}</span>
+                    <i class="fa-solid fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="right"
+                    title="{% trans 'Patient ID will be generated automatically' %}"></i>
+                </label>
+                <input type="text" id="patientid" disabled value="{{new_patient_id}} {{patient_id}}">
+
+                <label for="gender">
+                    <span class="text-danger">*</span>
+                    <span>{% trans 'Gender' %}</span>
+                </label>
+                <select name="" id="gender" required>
+                    <option value="" {% if g == 's' %} selected {% endif %}>{% trans 'Select Gender' %}</option>
+                    <option value="Female" {% if gender == 'Female' %} selected {% endif %}>{% trans 'Female' %}</option>
+                    <option value="Male" {% if gender == 'Male' %} selected {% endif %}>{% trans 'Male' %}</option>
+                </select>
+
+                <label for="email">
+                    <span>{% trans 'Patient Email' %}</span>
+                </label>
+                <input value="{{email}}" type="text" id="email" placeholder="{% trans 'Write Patient Email' %}">
+
+                <label for="doctorname">
+                    <span>{% trans 'Doctor Name' %}</span>
+                </label>
+                <input disabled type="text" id="doctorname" value="{{doc_name}}" placeholder="{% trans 'Write doctor name...' %}">
+            </div>
+            <div class="col-md-6">
+
+                <label for="patientfullname">
+                    <span class="text-danger">*</span>
+                    <span>{% trans 'Patient Full Name' %}</span>
+                    
+                </label>
+                <input type="text" id="patientfullname" value="{{patient_full_name}}" placeholder="{% trans 'Write patient full name...' %}" required>
+
+                <label for="dateofbirth">
+                    <span>{% trans 'Date of Birth' %} </span>
+                </label>
+                <input type="date" class="datepicker" id="dateofbirth" value="{{ birthday }}">
+
+                <label for="patientphone">
+                    <span class="text-danger"></span>
+                    <span>{% trans 'Patient Phone' %}</span>
+                </label>
+                <input type="text" id="patientphone" value="{{phone}}" placeholder="+90 555 555 55 55">
+
+           
+
+                <label for="fileno">
+                    <span>{% trans 'File No (Optional)' %}</span>
+                    <i class="fa-solid fa-circle-info" data-bs-toggle="tooltip" data-bs-placement="right"
+                    title="{% trans 'You can optionally enter the file number.' %}"></i>
+                </label>
+                <input type="text" id="fileno" value="{{file_no}}" placeholder="{% trans 'Write File No' %}">
+                
+                <input type="text" hidden id="patient-slug" value="{{patient_slug}}">
+                {% csrf_token %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button id="submit-button" class="custom btn-blue">{% trans button_message %}</button>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+{% block customJs %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.js" integrity="sha512-9e9rr82F9BPzG81+6UrwWLFj8ZLf59jnuIA/tIf8dEGoQVu7l5qvr02G/BiAabsFOYrIUTMslVN+iDYuszftVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+
+    <script src="https://unpkg.com/imask"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/add_patient.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $("#email").click(function() {
+            $(this).css("border", ""); // Çerçeveyi kaldırmak için border stili boş bir değer olarak ayarlanıyor.
+        });
+        
+        $("#patientfullname").click(function() {
+            $(this).css("border", ""); // Çerçeveyi kaldırmak için border stili boş bir değer olarak ayarlanıyor.
+        });
+
+        $("#gender").click(function() {
+            $(this).css("border", ""); // Çerçeveyi kaldırmak için border stili boş bir değer olarak ayarlanıyor.
+        });
+
+
+    </script>
+    <script>
+        $(document).ready(function() {
+        $("#submit-button").click(function(event) { // Burada submit-button id'sine sahip bir butonun kullanıldığını varsayalım.
+            event.preventDefault();
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            var emailInput = document.getElementById("email").value;
+            var patientfullname = document.getElementById("patientfullname");
+            var gender = document.getElementById("gender");
+            var emailInputError = document.getElementById("email");
+            // if(!emailPattern.test(emailInput)){
+            //     emailInputError.style.border = "1px solid red"; // Geçersiz bir e-posta adresi girildiği için çerçeve kırmızı renkli olacak.
+            //     Swal.fire({
+            //             position: 'top-end',
+            //             icon: 'error',
+            //             title: '{% trans "Please enter a valid e-mail address" %}',
+            //             showConfirmButton: false,
+            //             timer: 2000
+            //         })
+            //     return false
+            // }
+            if (!patientfullname.value){
+                patientfullname.style.border = "1px solid red"
+                Swal.fire({
+                    position:'top-end',
+                    icon:'error',
+                    title:'{% trans "Please enter patient name" %}',
+                    showConfirmButton:false,
+                    timer:2000
+                })
+                return false
+            }
+            else if (!gender.value){
+                gender.style.border = "1px solid red"
+                Swal.fire({
+                    position:'top-end',
+                    icon:'error',
+                    title:'{% trans "Please select patients gender" %}',
+                    showConfirmButton:false,
+                    timer:2000
+                })
+                return false
+            }
+            event.preventDefault();
+            var radiography_id = "{{radiography.id}}"
+            var radiography_type = "{{radiography_type.id}}"
+            if (radiography_id.length != 0){
+                console.log("var")
+            }else{
+                radiography_id = null
+            }
+            if (radiography_type.length != 0){
+                console.log("var")
+            }else{
+                radiography_type = null
+            }
+            //AJAX işlemi gerçekleştiriliyor.
+            $.ajax({
+                type: "POST",
+                url: "{% url 'addpatientApi' %}",
+                data: {
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    patientid: $('#patientid').val(),
+                    patientSlug: $('#patient-slug').val(),
+                    gender: $('#gender').val(),
+                    email: $('#email').val(),
+                    doctorname: $('#doctorname').val(),
+                    patientfullname: $('#patientfullname').val(),
+                    dateofbirth: $('#dateofbirth').val(),
+                    patientphone: $('#patientphone').val().replace(/[+\-()\s]/g, ''),
+                    fileno: $('#fileno').val(),
+                    radiography_obj:radiography_id,
+                    radiography_type:radiography_type
+                },
+                success: function(response) {
+                    if (response["code"] === "patient_limit_exceeded"){
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: response["message"],
+                        showConfirmButton: false,
+                        timer: 3000
+                        }).then(function() {
+                            window.location.href = "{% url 'profile_page' %}";
+                        });
+                    }
+                    else if(response["code"] === "package_expired"){
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: response["message"],
+                        showConfirmButton: false,
+                        timer: 3000
+                        })
+                        return false
+                    }
+                    else{
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '{% trans "Patient saved successfully." %}',
+                        showConfirmButton: false,
+                        timer: 2000
+                        }).then(function() {
+                            window.location.href = "{% url 'patientsPage' %}";
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("An error occurred: " + error); // Hata durumunda bir uyarı mesajı gösteriliyor.
+                }
+            });
+
+        });
+    });
+    </script>
+
+    <script>
+    //     $(".datepicker").datepicker({
+    //     changeYear: true,
+    //     changeMonth: true,
+    //     yearRange: "-100:+0",
+    //     format: "yy-mm-dd",
+    //     dateFormat: "yy-mm-dd",
+    //     altFormat: "yy-mm-dd",
+    //     prevText: "Previous", // Display text for previous month link
+    //     nextText: "Next", // Display text for next month link
+    //     altField: "#tarih-db",
+    //     monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    //     dayNamesMin: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    //     firstDay: 1
+    // });
+        setInterval(function () {
+        try {
+                var day_spans = $('.ui-datepicker-calendar').find("span")
+                var tr_days = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
+                for (let i = 0; i < day_spans.length; i++) {
+                    day_spans[i].innerHTML = tr_days[i]
+                }
+                var month_options = $('.ui-datepicker-month').find("option")
+                // var tr_month = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
+                var tr_month = ["{% trans 'January' %}", "{% trans 'February' %}", "{% trans 'March' %}", "{% trans 'April' %}", "{% trans 'May' %}", "{% trans 'June' %}", "{% trans 'July' %}", "{% trans 'August' %}", "{% trans 'September' %}", "{% trans 'October' %}", "{% trans 'November' %}", "{% trans 'December' %}"]
+
+                for (let i = 0; i < month_options.length; i++) {
+                    month_options[i].innerHTML = tr_month[i]
+                }
+                $('.ui-icon-circle-triangle-e')[0].innerHTML = "İleri"
+                $('.ui-icon-circle-triangle-w')[0].innerHTML = "Geri"
+        } catch (e) {
+
+        }
+    }, 50)
+    </script>
+{% endblock %}
+

@@ -1,0 +1,448 @@
+2024-02-01 13:47:04,369 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-01 13:47:16,320 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-01 13:47:18,053 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-01 13:47:33,246 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-01 13:52:06,255 [ERROR] Exception at 'Checking User and Company Key' occurred in check_user: Profile matching query does not exist.
+2024-02-01 13:54:35,253 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-01 13:54:35,275 [WARNING] Bad Request: /
+2024-02-01 13:54:39,938 [WARNING] Not Found: /en/.git/config
+2024-02-01 13:54:40,833 [WARNING] Not Found: /en/static../.git/config
+2024-02-01 13:54:41,641 [WARNING] Not Found: /en/wp-content/plugins/.git/config
+2024-02-01 13:54:43,691 [WARNING] Not Found: /en/app/.git/config
+2024-02-01 14:04:20,229 [WARNING] Not Found: /en/robots.txt
+2024-02-01 14:04:21,279 [WARNING] Not Found: /en/sitemap.xml
+2024-02-01 14:04:23,882 [WARNING] Not Found: /en/login/robots.txt
+2024-02-01 14:04:31,041 [WARNING] Not Found: /en/login/sitemap.xml
+2024-02-01 14:05:30,768 [WARNING] Not Found: /en/login/sitemap.xml
+2024-02-01 14:05:30,772 [WARNING] Not Found: /en/login/robots.txt
+2024-02-01 14:10:25,064 [ERROR] Exception at 'Checking User and Company Key' occurred in check_user: Profile matching query does not exist.
+2024-02-01 14:22:28,557 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-01 14:22:28,622 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-01 14:59:18,347 [WARNING] Not Found: /en/.well-known/acme-challenge/R7wDIOgVc_iJqCbUSAlkMHmEPfLtEuVbj1NrdYrOPXw
+2024-02-01 14:59:21,865 [WARNING] Not Found: /en/.well-known/acme-challenge/R7wDIOgVc_iJqCbUSAlkMHmEPfLtEuVbj1NrdYrOPXw
+2024-02-01 14:59:28,872 [WARNING] Not Found: /en/.well-known/acme-challenge/R7wDIOgVc_iJqCbUSAlkMHmEPfLtEuVbj1NrdYrOPXw
+2024-02-01 15:48:48,528 [WARNING] Not Found: /en/login
+2024-02-01 16:54:36,833 [WARNING] Not Found: /en/.DS_Store
+2024-02-01 19:09:41,283 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-01 19:09:45,803 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-01 19:13:15,263 [WARNING] Not Found: /en/wp-login.php
+2024-02-01 20:20:02,346 [WARNING] Not Found: /en/actuator/gateway/routes
+2024-02-01 20:48:42,946 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-01 20:48:42,971 [WARNING] Bad Request: /
+2024-02-01 21:10:17,190 [ERROR] Exception at 'Checking User and Company Key' user key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● company key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● occurred in check_user: Profile matching query does not exist.
+2024-02-01 21:11:53,118 [ERROR] Exception at 'Checking User and Company Key' user key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● company key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● occurred in check_user: Profile matching query does not exist.
+2024-02-01 21:11:53,126 [ERROR] Exception at 'Checking User and Company Key' user key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● company key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● occurred in check_user: Profile matching query does not exist.
+2024-02-01 21:12:00,805 [ERROR] Exception at 'Checking User and Company Key' user key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● company key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● occurred in check_user: Profile matching query does not exist.
+2024-02-01 21:12:00,806 [ERROR] Exception at 'Checking User and Company Key' user key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● company key: ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● occurred in check_user: Profile matching query does not exist.
+2024-02-01 22:13:38,771 [WARNING] Not Found: /en/robots.txt
+2024-02-01 22:24:43,183 [WARNING] Not Found: /en/.vscode/sftp.json
+2024-02-01 23:13:54,258 [WARNING] Not Found: /en/apple-touch-icon-precomposed.png
+2024-02-01 23:13:54,523 [WARNING] Not Found: /en/apple-touch-icon.png
+2024-02-01 23:47:02,575 [WARNING] Not Found: /en/.git/config
+2024-02-02 00:04:44,177 [WARNING] Not Found: /en/a.php
+2024-02-02 00:12:42,418 [WARNING] Not Found: /en/a.php
+2024-02-02 03:58:06,384 [WARNING] Not Found: /en/.well-known/acme-challenge/_2dXbgOV38U4xSlhGRmNc8OxXYkP3TNHBJdBtrugZUo
+2024-02-02 03:58:06,900 [WARNING] Not Found: /en/.well-known/acme-challenge/_2dXbgOV38U4xSlhGRmNc8OxXYkP3TNHBJdBtrugZUo
+2024-02-02 03:58:07,047 [WARNING] Not Found: /en/.well-known/acme-challenge/_2dXbgOV38U4xSlhGRmNc8OxXYkP3TNHBJdBtrugZUo
+2024-02-02 04:41:46,172 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-02 04:41:46,195 [WARNING] Bad Request: /
+2024-02-02 04:58:02,869 [WARNING] Forbidden (CSRF token missing.): /en/login/
+2024-02-02 04:58:06,375 [WARNING] Not Found: /en/login/csrfmiddlewaretoken=Br0W9iGau4pst6Kd2Ch2ugSQyosuqtKlc0YMByHkkmHo18w60CHO1J1OSgmxNXco&emailInput=sashagav2g@outlook.com&passwordInput=qZpPjR60ekFl!
+2024-02-02 04:58:20,576 [WARNING] Forbidden (CSRF token missing.): /en/signup/
+2024-02-02 04:58:25,081 [WARNING] Not Found: /en/signup/csrfmiddlewaretoken=OWSTsKFUsAlpPaTK8B64XsHWuziwlBGfpvQJU0G4iSDlncFD6BwQuVQUOrczI58i&name=VyCkzajisQ&firstname=tvIpwgDfRzPuk&lastname=lfeOWHMDoTUq&email=sashagav2g@outlook.com&password=9IOcPstlEGTM!&repassword=9IOcPstlEGTM!&package=demo_token
+2024-02-02 05:40:11,236 [WARNING] Not Found: /en/sitemap.xml
+2024-02-02 05:40:11,265 [WARNING] Not Found: /en/robots.txt
+2024-02-02 07:28:41,230 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-02 07:28:55,667 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-02 07:29:01,333 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-02 07:29:11,960 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-02 07:29:18,570 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-02 07:29:21,860 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-02 07:29:30,584 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-02 07:33:51,368 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-02 07:33:56,493 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-02 07:45:27,793 [ERROR] Exception at 'Checking User and Company Key' user key: 9swv2mj8ilae6do7bsro9lvgpyv91trs company key: l3b27ctxlyyz7y22awwfo27gw9k38img occurred in check_user: Profile matching query does not exist.
+2024-02-02 07:46:16,197 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:11:03,300 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-02 09:11:04,920 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-02 09:11:08,388 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-02 09:11:11,778 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-02 09:16:42,985 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:16:51,574 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:17:00,789 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:18:06,999 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:19:22,317 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:19:39,065 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:19:55,725 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:20:06,474 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:21:29,696 [WARNING] Not Found: /en/home/kullanici1/CCClinicDentaverse/media/dental/radio/877e7b84-6004-410b-a68a-49550ad7afed_thumbnail.jpg
+2024-02-02 09:52:40,499 [ERROR] Internal Server Error: /api/upload/
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/home/ubuntu/Clinic/Application/api/views.py", line 808, in upload_radyografi
+    user = User.objects.get(id=user_id)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+django.contrib.auth.models.User.DoesNotExist: User matching query does not exist.
+2024-02-02 11:01:32,254 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-02 11:01:32,275 [WARNING] Bad Request: /
+2024-02-02 11:48:29,871 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-02 11:48:29,895 [WARNING] Bad Request: /
+2024-02-02 12:44:21,211 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-02 12:45:59,268 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-02 14:19:42,371 [WARNING] Forbidden (CSRF cookie not set.): /
+2024-02-02 14:19:43,689 [WARNING] Not Found: /en/.env
+2024-02-02 14:49:02,732 [WARNING] Not Found: /en/wp-login.php
+2024-02-02 16:35:32,456 [WARNING] Not Found: /en/robots.txt
+2024-02-02 18:25:24,164 [WARNING] Not Found: /en/a.php
+2024-02-02 19:34:45,479 [WARNING] Not Found: /en/.well-known/acme-challenge/rkZooHWsgv84AHnrOb-n97o0EV_tAR9q2N_jSMDO77E
+2024-02-02 19:34:46,024 [WARNING] Not Found: /en/.well-known/acme-challenge/rkZooHWsgv84AHnrOb-n97o0EV_tAR9q2N_jSMDO77E
+2024-02-02 19:34:46,038 [WARNING] Not Found: /en/.well-known/acme-challenge/rkZooHWsgv84AHnrOb-n97o0EV_tAR9q2N_jSMDO77E
+2024-02-02 21:22:29,313 [WARNING] Not Found: /en/actuator/gateway/routes
+2024-02-03 00:36:19,812 [WARNING] Not Found: /en/robots.txt
+2024-02-03 00:49:24,598 [WARNING] Not Found: /en/sitemap.xml
+2024-02-03 02:53:54,163 [WARNING] Not Found: /en/robots.txt
+2024-02-03 03:35:24,492 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-03 03:35:24,514 [WARNING] Bad Request: /
+2024-02-03 03:58:29,704 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-03 03:58:29,729 [WARNING] Bad Request: /
+2024-02-03 04:15:36,341 [WARNING] Not Found: /en/manager/html
+2024-02-03 08:21:02,655 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-03 08:21:02,678 [WARNING] Bad Request: /
+2024-02-03 14:15:12,271 [WARNING] Not Found: /en/.well-known/acme-challenge/GmeuemOplbQyibJgYVONGeZ1Tic1BDJM5VPilwPjQh4
+2024-02-03 14:15:12,724 [WARNING] Not Found: /en/.well-known/acme-challenge/GmeuemOplbQyibJgYVONGeZ1Tic1BDJM5VPilwPjQh4
+2024-02-03 14:15:12,812 [WARNING] Not Found: /en/.well-known/acme-challenge/GmeuemOplbQyibJgYVONGeZ1Tic1BDJM5VPilwPjQh4
+2024-02-03 17:44:53,833 [WARNING] Forbidden (CSRF cookie not set.): /login
+2024-02-03 19:50:04,467 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-03 19:51:04,214 [ERROR] Internal Server Error: /en/report/None
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/Clinic/Application/views.py", line 1275, in report_page
+    report_obj = CreateReportForPatient.objects.get(slug=slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Application.models.CreateReportForPatient.DoesNotExist: CreateReportForPatient matching query does not exist.
+2024-02-03 19:51:07,174 [ERROR] Internal Server Error: /en/report/None
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/Clinic/Application/views.py", line 1275, in report_page
+    report_obj = CreateReportForPatient.objects.get(slug=slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Application.models.CreateReportForPatient.DoesNotExist: CreateReportForPatient matching query does not exist.
+2024-02-03 22:03:59,648 [WARNING] Not Found: /en/.well-known/acme-challenge/lOlGoeLUNByJChcyqHz-O6qjs0IEuSp0dobAf0uWxow
+2024-02-03 22:03:59,915 [WARNING] Not Found: /en/.well-known/acme-challenge/lOlGoeLUNByJChcyqHz-O6qjs0IEuSp0dobAf0uWxow
+2024-02-03 22:04:00,107 [WARNING] Not Found: /en/.well-known/acme-challenge/lOlGoeLUNByJChcyqHz-O6qjs0IEuSp0dobAf0uWxow
+2024-02-03 22:22:02,077 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-03 23:06:11,052 [WARNING] Not Found: /en/a.php
+2024-02-03 23:53:56,442 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-03 23:53:56,462 [WARNING] Bad Request: /
+2024-02-04 00:45:00,886 [WARNING] Not Found: /en/actuator/gateway/routes
+2024-02-04 00:48:03,836 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 00:48:03,856 [WARNING] Bad Request: /
+2024-02-04 01:12:00,388 [WARNING] Not Found: /en/wp-login.php
+2024-02-04 01:26:52,330 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-04 04:37:54,169 [WARNING] Not Found: /en/robots.txt
+2024-02-04 05:19:55,071 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 05:19:55,091 [WARNING] Bad Request: /
+2024-02-04 05:19:58,264 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 05:19:58,286 [WARNING] Bad Request: /
+2024-02-04 05:19:58,567 [WARNING] Not Found: /en/.env
+2024-02-04 05:19:58,732 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 05:19:58,754 [WARNING] Bad Request: /
+2024-02-04 05:19:59,056 [WARNING] Not Found: /en/.env.dev
+2024-02-04 05:19:59,233 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 05:19:59,249 [WARNING] Bad Request: /
+2024-02-04 05:19:59,526 [WARNING] Not Found: /en/.env.prod
+2024-02-04 05:19:59,706 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 05:19:59,728 [WARNING] Bad Request: /
+2024-02-04 05:20:00,024 [WARNING] Not Found: /en/sendgrid.env
+2024-02-04 05:20:00,225 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 05:20:00,246 [WARNING] Bad Request: /
+2024-02-04 05:20:00,905 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 05:20:00,925 [WARNING] Bad Request: /
+2024-02-04 05:20:01,189 [WARNING] Not Found: /en/docker-compose.yml
+2024-02-04 05:20:01,409 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 05:20:01,431 [WARNING] Bad Request: /
+2024-02-04 05:20:01,764 [WARNING] Not Found: /en/app/config/parameters.yml
+2024-02-04 05:20:01,942 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 05:20:01,959 [WARNING] Bad Request: /
+2024-02-04 05:20:02,256 [WARNING] Not Found: /en/appsettings.json
+2024-02-04 05:50:06,326 [WARNING] Not Found: /en/robots.txt
+2024-02-04 07:51:07,178 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-04 07:51:28,723 [WARNING] Not Found: /en/img/mini-logo.png
+2024-02-04 07:53:00,809 [ERROR] Internal Server Error: /en/report/None
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/Clinic/Application/views.py", line 1275, in report_page
+    report_obj = CreateReportForPatient.objects.get(slug=slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Application.models.CreateReportForPatient.DoesNotExist: CreateReportForPatient matching query does not exist.
+2024-02-04 08:00:12,283 [ERROR] Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '/run/gunicorn.sock:'. The domain name provided is not valid according to RFC 1034/1035.
+2024-02-04 08:00:12,305 [WARNING] Bad Request: /
+2024-02-04 11:06:21,940 [WARNING] Not Found: /en/wp-login.php
+2024-02-04 11:40:20,762 [WARNING] Not Found: /en/a.php
+2024-02-04 15:00:02,173 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-04 16:02:09,407 [WARNING] Not Found: /en/img/opacitybg.png
+2024-02-04 16:03:06,516 [ERROR] Internal Server Error: /en/report/None
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/Clinic/Application/views.py", line 1275, in report_page
+    report_obj = CreateReportForPatient.objects.get(slug=slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Application.models.CreateReportForPatient.DoesNotExist: CreateReportForPatient matching query does not exist.
+2024-02-04 16:03:16,681 [ERROR] Internal Server Error: /en/report/None
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/Clinic/Application/views.py", line 1275, in report_page
+    report_obj = CreateReportForPatient.objects.get(slug=slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Application.models.CreateReportForPatient.DoesNotExist: CreateReportForPatient matching query does not exist.
+2024-02-04 16:03:25,110 [ERROR] Internal Server Error: /en/report/None
+Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/ubuntu/Clinic/Application/views.py", line 1275, in report_page
+    report_obj = CreateReportForPatient.objects.get(slug=slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Application.models.CreateReportForPatient.DoesNotExist: CreateReportForPatient matching query does not exist.

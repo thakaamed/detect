@@ -1,0 +1,501 @@
+{% extends 'wizard/base_for_wizard.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+<link rel="stylesheet" href="{% static 'css/diagnosis.css' %}">
+<title>{{specs.title}} - Documents</title>
+
+<link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+<link rel="stylesheet" href="{% static 'css/diagno-new.css' %}" />
+<link rel="stylesheet" href="{% static 'css/documents.css' %}" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="{% static 'css/rte_theme_default.css' %}" />
+<!-- <script type="text/javascript" src="{% static 'js/rte.js' %}"></script> -->
+<script type="text/javascript" src="{% static 'js/tinymce.min.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'js/all_plugins.js' %}"></script> -->
+<style>
+    .mce-content-body {
+        font-size: 12px !important;
+    }
+    .tox .tox-edit-area__iframe html img{
+        width: 100%;
+    }
+    .tox .tox-menubar ,
+    .tox:not(.tox-tinymce-inline) .tox-editor-header:not(.tox-editor-dock-transition),
+    .tox .tox-toolbar__group,
+    .tox:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type),
+    .tox .tox-toolbar-overlord .tox-toolbar:not(.tox-toolbar--scrolling):first-child, .tox .tox-toolbar-overlord .tox-toolbar__primary,
+    .tox .tox-menubar+.tox-toolbar, .tox .tox-menubar+.tox-toolbar-overlord ,
+    .tox .tox-tbtn__select-chevron{
+            background-color: white!important;
+        })
+</style>
+{% endblock %}
+{% block headerButtons %}
+<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">
+    <img src="{% static 'img/upload-rg-icon.svg' %}" class="" height="12" alt="">
+    <span style="pointer-events: none;">{% trans 'Upload Radiography' %}</span>
+</button>
+<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-report">
+    <img src="{% static 'img/export-report-icon.svg' %}" class="" height="12" alt="">
+    <span style="pointer-events: none;">{% trans 'Export Report' %}</span>
+</button>
+<button class="custom transparent blue-hover text-light" data-open-modal-pk="modalReportForMail">
+    <img src="{% static 'img/send-mail-icon.svg' %}" class="" height="10" alt="">
+    <span style="pointer-events: none;">{% trans 'Send Mail' %}</span>
+</button>
+<button class="custom transparent blue-hover text-light" data-open-treatment>
+    <img src="{% static 'img/treatment-planning-icon.svg' %}" class="" height="14" alt="">
+    <span>{% trans 'Treatment Planning' %}</span>
+</button>
+{% endblock %}
+{% block content %}
+
+<!-- ANA BÖLME -->
+<div class="row d-flex gap-4 page-one"
+    style="margin-top: 120px; padding: 0px 40px; margin-left: 9%; min-height: 81vh; overflow-y: auto;">
+    <div class="col-md-6  px-4 py-3 rounded pdf-append thakaa-pdf"
+        style="background-color: rgba(26, 38, 78, 1); height: 81vh; overflow-y: scroll; ">
+        <!-- <div  class="px-4 py-1" style="background-color: rgba(14, 24, 55, 1);">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="/static/img/treatments-table-datrted-icon.svg" alt="">
+                        <div class="form-check d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                            <label class="form-check-label" for="flexCheckIndeterminate">
+                                Demo Dentist
+                            </label>
+                          </div>
+                    </div>
+                    <div class="d-flex gap-3 align-items-center">
+                        <div class="px-3 py-1 rounded fillButton pdf-edit d-flex align-items-center gap-2" style="background-color: rgba(80, 113, 200, 1); cursor: pointer;"><i class="fa-solid fa-pen"></i> Edit</div>
+                        <i class="fa-solid fa-trash fs-6" style="cursor: pointer;"></i>
+                    </div>
+                </div>
+            </div> -->
+        <!-- logo eklenmek istenirse eklenecek -->
+        <!-- <div class="bg-light text-dark mt-4 px-5 py-3 rounded pdf-edit fillButton" style="cursor: pointer;">
+                <div style="border-bottom: 2px solid rgba(155, 155, 155, 0.6);">
+                    <img src="/static/img/craniocatch-dark-logo.svg" width="150" class="pb-2" alt="">
+                </div>
+            </div> -->
+        <!-- <div class=" pdf-append bg-light text-dark mt-4 px-5 py-3 rounded pdf-edit fillButton"></div> -->
+    </div>
+
+    <div class="col-md-5 p-0 align-items-center" style="height: 70px; background-color: rgba(26, 38, 78, 1);">
+        <div class="d-flex ">
+            <div class="col-md-6 select-documents-tab documents-edit-active rounded d-flex justify-content-center align-items-center text-center pt-3"
+                style="height: 70px; cursor: pointer;">
+                <div>
+                    <img src="/static/img/documents-edit-icon-active.svg" alt="">
+                    <p>Select Document</p>
+                </div>
+            </div>
+            <div class="col-md-6 edit-documents-tab d-flex justify-content-center rounded align-items-center text-center pt-3"
+                style="height: 70px; cursor: pointer;" id="editDocumentTab" onclick="handleClick()">
+                <div>
+                    <img src="/static/img/documents-edit-icon-active.svg" alt="">
+                    <p>Edit Document</p>
+                </div>
+            </div>
+        </div>
+        <!-- edit -->
+        <!-- <div class="edit-documents-block" style="max-height: 678px; overflow-y: auto; display: none;">
+            <div class="px-3 py-2 mt-3 " style="background-color: rgba(26, 38, 78, 1);">
+                <textarea id="inp_editor1" ></textarea>
+            </div>
+        </div> -->
+        <div class="edit-documents-block" style="max-height: 633px; overflow-y: auto; display: none;">
+            <div class="px-3 py-2 mt-3 thakaa-pdf" style="background-color: rgba(26, 38, 78, 1);">
+                <textarea id="inp_editor1"></textarea>
+                <div class="d-flex justify-content-end">
+                    <button class="px-4 py-1 mt-2 rounded save-button-pdf"
+                        style="font-size: 14px; background-color: rgba(80, 113, 200, 1); border: none; font-weight: 600; color: white!important;">Save</button>
+                </div>
+            </div>
+        </div>
+        <!-- select -->
+        <div class="edit-documents-none" style="max-height: 678px; overflow-y: auto;">
+            {% for group_name, content in html_content.items %}
+            <div data-group-name="{{group_name}}" class="px-3 py-2 mt-3 thakaa-pdf"
+                style="background-color: rgba(26, 38, 78, 1);">
+                <h3 class="mb-3">{{group_name}}</h3>
+                {% comment %} <p>Based upon the patient’s diagnosis.</p> {% endcomment %}
+                {% for item in content %}
+                <div class="d-flex align-items-center gap-3 px-3 py-2 mt-1"
+                    style="background-color: rgba(13, 23, 53, 1);">
+                    <img src="/static/img/treatments-table-datrted-icon.svg" alt="">
+                    <div class="form-check d-flex align-items-center gap-2">
+                        {% if item.type == "plan" %}
+                            <input data-plan-id="{{item.plan_id}}" data-type="{{item.type}}" {% if item.selected == "true" %} checked {% endif %} {% if item.plan_id in extra_treatments %} checked {% endif %} data-group-name="{{group_name}}"
+                                data-slug={{item.slug}} class="form-check-input template-checkbox" type="checkbox" value="">
+                            <label class="form-check-label" for="">
+                                {{item.template_name}}
+                            </label>
+                        {% else %}
+                            <input {% if item.slug in slug_list and item.template_name != "End Cover Image" %} checked {% endif %} data-group-name="{{group_name}}"
+                                data-slug={{item.slug}} class="form-check-input template-checkbox" type="checkbox" value="">
+                            <label class="form-check-label" for="">
+                                {{item.template_name}}
+                            </label>
+                            {% if item.cover_option == "True" %}
+                            <div style="display: flex; justify-content: end; width: 24vw;">
+                                <a id="uploadButton">
+                                    <button class="custom btn-blue d-block mx-auto my-3" style="background-color:gray!important">{% trans 'Upload New Cover Image' %}</button>
+                                </a>
+                            </div>
+                            <input class="d-none" type="file" id="imageInput" accept="image/*" style="display: none!important;">
+                            {% endif %}
+                            {% if item.end_cover_option == "True" %}
+                            <div style="display: flex; justify-content: end; width: 24vw;">
+                                <a id="uploadEndCoverButton">
+                                    <button style="background-color:gray!important" class="custom btn-blue d-block mx-auto my-3">{% trans 'Upload New End Cover Image' %}</button>
+                                </a>
+                            </div>
+                            <input class="d-none" type="file" id="endImageInput" accept="image/*" style="display: none!important;">
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+</div>
+</div>
+{% csrf_token %}
+{% endblock %}
+{% block customJs %}
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="{% static 'js/toastify.js' %}"></script>
+<script src="{% static 'js/sweatalert.js' %}"></script>
+<script src="{% static 'js/documents.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        setup: function (editor) {
+            editor.on('init', function () {
+                $(".clickable-div").on("click", function () {
+                    handleClickTwo(this);
+                });
+            });
+        }
+    });
+var tinymceEditor;
+var originalContent;
+var lastClickedSlug;
+
+function updateTextareaContent() {
+  // TinyMCE içeriğini kaydet
+  tinymce.triggerSave();
+  // TinyMCE editöründen içeriği al
+  tinymceEditor = tinymce.get('inp_editor1');
+  var editorContent = tinymceEditor.getContent();
+  // İçerik değişmişse
+  if (editorContent !== originalContent) {
+    // Değişen içeriği al
+    var yeniHTML = $(".appended-content").html();
+    // Yeni içeriği ekle
+    $(".appended-content").html(editorContent);
+    // Orijinal içeriği güncelle
+    originalContent = editorContent;
+    // Değişen HTML'i döndür
+    return yeniHTML;
+  } else {
+    return null;
+  }
+}
+// function handleClickTwo(slug) {
+//   console.log("Tıklanan Slug:", slug);
+//   // Tıklanan Slug'a ait div'in içeriğini al
+//   var pageContainerIcerik = $(`.pageContainer[data-slug-for-remove="${slug}"]`).html();
+//   // Textarea'ya tıklanan Slug'a ait içeriği ekle
+//   tinymceEditor.setContent(pageContainerIcerik);
+//   updateTextareaContent();
+//   lastClickedSlug = slug;
+//   console.log(321,getElementsByClassName('save-button-pdf'));
+// }
+function saveEditedPDF(slug){
+    $(".edit-documents-none").removeClass("d-none");
+    $(".select-documents-tab").addClass("documents-edit-active");
+    $(".edit-documents-tab").removeClass("documents-edit-active");
+    $(".edit-documents-block").removeClass("d-block");
+  // Get the TinyMCE instance
+  var tinymceInstance = tinymce.get('inp_editor1'); // Replace 'tinymce' with the actual ID or selector
+  var content = tinymceInstance.getContent();
+
+  $(".pdf-edit[data-slug-for-remove="+slug+"]").html(content)
+  $.ajax({
+            url: "{% url 'modify-default-templates' %}", 
+            method: "POST",
+            headers: { 'X-CSRFToken': csrf_token },
+            data: {
+                "content": content,
+                "slug": slug,
+            },
+            success:function(response){
+                
+            },
+            error:function(error){
+                Toastify({
+                    text: "{% trans 'An error occurred while save pdf.' %}",
+                    duration: 3000,
+                    backgroundColor: "#d9534f"
+                }).showToast();
+            }
+        })
+}
+
+function getModifiedHTML(slug) {
+  return modifiedHTML;
+}
+
+function handleClickTwo(clickedSlug) {
+    $(".edit-documents-none").addClass("d-none");
+    $(".select-documents-tab").removeClass("documents-edit-active");
+    $(".edit-documents-tab").addClass("documents-edit-active");
+    $(".edit-documents-block").addClass("d-block");
+    //updateTextareaContent
+    var ContentOfClickedPDF = $(".pdf-edit[data-slug-for-remove="+clickedSlug+"]").html()
+    tinymceEditor = tinymce.get('inp_editor1');
+    tinymceEditor.setContent(ContentOfClickedPDF);
+    $(".save-button-pdf").attr(`onclick`, `saveEditedPDF('`+clickedSlug+`')`);
+
+}
+
+
+    // $("#inp_editor1").html(newContentHTML);  // Uncomment if you want to set the HTML content on page load
+
+    // var editor1 = new RichTextEditor("#inp_editor1");
+    var csrf_token = $('input[name=csrfmiddlewaretoken]').val()
+    var plan_id = "{{plan_id}}"
+    var wizard_id = "{{wizard_id}}"
+    var document_data = {{ html_content| safe}}
+    function get_content_based_on_slug(slug, group_name) {
+        var group_datas = document_data[group_name]
+        var matchedData = group_datas.find(function (veri) {
+            console.log("veri",veri)
+            return veri.slug === slug;
+        });
+        var htmlcontent = `<div data-slug-for-remove=${slug} class="px-4 py-1 my-4" style="background-color: rgba(14, 24, 55, 1);">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="/static/img/treatments-table-datrted-icon.svg" alt="">
+                    <div class="form-check d-flex align-items-center gap-2">
+                        <label class="form-check-label" for="flexCheckIndeterminate">
+                            ${matchedData.template_name}
+                        </label>
+                      </div>
+                </div>
+            </div>
+        </div>`
+        if (matchedData.image_path && matchedData.image_path !== "None") {
+            htmlcontent += `<div data-slug-for-remove=${slug} class="bg-light text-dark mt-4 px-5 py-3 rounded pdf-edit fillButton pageContainer" style="cursor: pointer; " onclick="handleClickTwo('${slug}')"><img src="${matchedData.image_path}" alt="Image"></div>`;
+        } else {
+            htmlcontent += `<div data-slug-for-remove=${slug} class="bg-light text-dark mt-4 px-5 py-3 rounded pdf-edit fillButton pageContainer" style="cursor: pointer; " onclick="handleClickTwo('${slug}')">
+                ${matchedData.content}
+            </div>`
+        }
+        $('.pdf-append').append(htmlcontent);
+    }
+    var selectedCheckboxes = $('.template-checkbox:checked');
+    var selectedValues = selectedCheckboxes.map(function () {
+        var slug = $(this).attr("data-slug")
+        var group_name = $(this).attr("data-group-name")
+        get_content_based_on_slug(slug, group_name)
+    })
+    $('input[type="checkbox"]').change(function () {
+        var slug = $(this).attr("data-slug")
+        var group_name = $(this).attr("data-group-name")
+        var is_type_plan = $(this).attr("data-type")
+        var group_datas = document_data[group_name]
+        if ($(this).prop('checked')) {
+            if (is_type_plan==="plan"){
+                send_request_for_extra_treatment_plan($(this),"add")
+            }else{
+                get_content_based_on_slug(slug, group_name)
+                $.ajax({
+                    url: "{% url 'save-templates-for-treatment-plan' %}",
+                    method: "POST",
+                    headers: { 'X-CSRFToken': csrf_token },
+                    data: {
+                        "plan_id": plan_id,
+                        "slug": slug,
+                        "parameter": "save",
+                    }
+                })
+            }
+        } else {
+            if (is_type_plan === "plan"){
+                send_request_for_extra_treatment_plan($(this),"remove")
+            }else{
+                var matchedDivForRemove = $('[data-slug-for-remove="' + slug + '"]')
+                matchedDivForRemove.each(function () {
+                    $(this).remove();
+                })
+                $.ajax({
+                    url:"{% url 'save-templates-for-treatment-plan' %}",
+                    method:"POST",
+                    headers:{'X-CSRFToken': csrf_token},
+                    data:{
+                        "plan_id":plan_id,
+                        "slug":slug,
+                        "parameter":"cancel",
+                }
+                })
+            }
+            
+        }
+    });
+
+    function send_request_for_extra_treatment_plan(selected,request_type){
+        var selected_plan_id = selected.attr("data-plan-id")
+        console.log("plan id", plan_id)
+        $.ajax({
+            url:"{% url 'save-extra-treatment' %}",
+            headers:{'X-CSRFToken':csrf_token},
+            method:"POST",
+            data:{
+                "selected_plan_id":selected_plan_id,
+                "wizard_id":wizard_id,
+                "current_treatment_plan":plan_id,
+                "request_type":request_type,
+            }
+        })
+    }
+    function handleClick() {
+        $(".edit-documents-none").addClass("d-none")
+        $(".select-documents-tab").removeClass("documents-edit-active")
+        $(".edit-documents-tab").addClass("documents-edit-active")
+        $(".edit-documents-block").addClass("d-block")
+    }
+    $(".select-documents-tab").click(function () {
+        $(".select-documents-tab").addClass("documents-edit-active")
+        $(".edit-documents-tab").removeClass("documents-edit-active")
+        $(".edit-documents-none").removeClass("d-none")
+        $(".edit-documents-block").removeClass("d-block")
+    })
+
+    $(".pdf-edit").click(function () {
+        var pdfEditHTML = $(".pdf-edit p, .pdf-edit h3").map(function () {
+            return $(this).html();
+        }).get().join(""); // Alınan içerikleri birleştir
+        // console.log(pdfEditHTML)
+        // $(".ck-editor__editable").val("pdfEditHTML");
+        //     $(".edit-documents-none").addClass("d-none")
+        //     $(".edit-documents-block").addClass("d-block")
+        //     $(".select-documents-tab").removeClass("documents-edit-active")
+        //     $(".edit-documents-tab").addClass("documents-edit-active")
+    })
+    var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();
+    document.getElementById('uploadButton').addEventListener('click', function () {
+        document.getElementById('imageInput').click();
+    });
+    document.getElementById('uploadEndCoverButton').addEventListener('click', function () {
+        document.getElementById('endImageInput').click();
+    });
+    document.getElementById('imageInput').addEventListener('change', function() {
+        var file = this.files[0];
+        var formData = new FormData();
+        formData.append('image', file);
+
+        // AJAX isteği yap
+        $.ajax({
+            url: "{% url 'save_cover_image' %}",
+            type: 'POST',
+            data: formData,
+            headers: {
+            'X-CSRFToken': csrftoken
+            },
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Yükleme başarılı oldu
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: "{% trans 'Your cover image has been updated' %}",
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(function(){
+                    window.location.reload()
+                })
+                
+            },
+            error: function(xhr, status, error) {
+                // Yükleme başarısız oldu
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: "{% trans 'An error occured while updating your cover image' %}",
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }
+        });
+    });
+    document.getElementById('endImageInput').addEventListener('change', function() {
+        var file = this.files[0];
+        var formData = new FormData();
+        formData.append('image', file);
+
+        // AJAX isteği yap
+        $.ajax({
+            url: "{% url 'save_end_cover_image' %}",
+            type: 'POST',
+            data: formData,
+            headers: {
+            'X-CSRFToken': csrftoken
+            },
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Yükleme başarılı oldu
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: "{% trans 'Your end cover image has been updated' %}",
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(function(){
+                    window.location.reload()
+                })
+                
+            },
+            error: function(xhr, status, error) {
+                // Yükleme başarısız oldu
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: "{% trans 'An error occured while updating your end cover image' %}",
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            }
+        });
+    });
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+<svg width="6" height="17" viewBox="0 0 6 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.45235 0.25H2.80235C3.37235 0.25 3.85235 0.55 3.89235 0.95L4.85236 12.74H0.402344L1.36235 0.95C1.40235 0.55 1.89235 0.25 2.45235 0.25Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<mask id="mask0_226_1030" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="5" height="13">
+<path d="M2.45235 0.25H2.80235C3.37235 0.25 3.85235 0.55 3.89235 0.95L4.85236 12.74H0.402344L1.36235 0.95C1.40235 0.55 1.89235 0.25 2.45235 0.25Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_226_1030)">
+<path d="M-0.308594 9.74023L5.55141 11.9602" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M-0.167969 8.10059L5.69203 10.3206" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M-0.0273438 6.45996L5.83266 8.67996" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M0.101562 4.82031L5.96156 7.04031" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M0.242188 3.18066L6.10219 5.40066" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M0.382812 1.54004L6.24281 3.76004" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M0.519531 -0.0996094L6.36952 2.13039" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+</g>
+<path d="M1.50984 16.7099H3.73985C3.91985 16.7099 4.06984 16.5499 4.08984 16.3399C4.11984 16.0299 4.16985 15.5399 4.23985 14.9999C4.37985 13.9199 4.65985 12.6699 4.65985 12.6699H0.589844C0.589844 12.6699 0.869842 13.9199 1.00984 14.9999C1.07984 15.5399 1.12985 16.0199 1.15985 16.3399C1.17985 16.5499 1.33984 16.7099 1.50984 16.7099Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<path d="M0.320655 12.8504H4.92065C5.01065 12.8504 5.04065 12.4604 4.99065 11.9904C4.94065 11.5404 4.84064 11.1904 4.76064 11.1904H0.480643C0.400643 11.1904 0.290647 11.5404 0.250647 11.9904C0.200647 12.4504 0.230655 12.8504 0.320655 12.8504Z" fill="#757577" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+</svg>

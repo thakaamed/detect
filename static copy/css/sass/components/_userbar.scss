@@ -1,0 +1,41 @@
+$radius: 10px;
+.user-bar {
+    background-color: $bg-dark-3;
+    border-radius: $radius;
+    @extend %centerFlexVertical;
+    padding: 10px 20px;
+    margin: 7px 0;
+    color: #fff;
+    justify-content: space-between;
+    & .avatar-img-container {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      background-color: #cdcdcd;
+      & img {
+        max-width: 150px;
+        position: absolute;
+        @extend %centerAbsoluteBoth;
+      }
+    }
+    & p {
+      margin: 0;
+      color: #cdcdcd;
+      &.white-bold {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: 1.1em;
+        &.name {
+          font-size: 14px;
+          margin: 5px 0;
+        }
+      }
+    }
+    & button.custom.btn-blue {
+      @extend %centerFlexBoth;
+      gap: 10px;
+    }
+  }

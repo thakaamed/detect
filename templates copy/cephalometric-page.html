@@ -1,0 +1,3135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/diagnosis.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+    <title>{{specs.title}} - Cephalometric</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="{% static 'css/filepond.css' %}" />
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/filepond.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/drawing.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/exstra.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/leaflet-geoman.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/leaflet.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/leaflet.draw.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/papaya.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/toastify.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/cephalometric.css' %}"/>
+{% endblock %}
+{% block headerButtons %}
+    <button class="custom transparent blue-hover text-light" data-open-view-analysis>
+        <img src="{% static 'img/treatment-planning-icon.svg' %}" class="" height="14" alt="" style="pointer-events: none;">
+        <span style="pointer-events: none;">{% trans 'View Analysis' %}</span>
+    </button>
+    <button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">
+        <img src="{% static 'img/upload-rg-icon.svg' %}" class="" height="12" alt="">
+        <span style="pointer-events: none;">{% trans 'Upload Radiography' %}</span>
+    </button>
+    <button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-report">
+        <img src="{% static 'img/export-report-icon.svg' %}" class="" height="12" alt="">
+        <span style="pointer-events: none;">{% trans 'Export Report' %}</span>
+    </button>
+    <button class="custom transparent blue-hover text-light" data-open-modal-pk="modalReportForMail">
+        <img src="{% static 'img/send-mail-icon.svg' %}" class="" height="10" alt="">
+        <span style="pointer-events: none;">{% trans 'Send Mail' %}</span>
+    </button>
+{% endblock %}
+{% block content %}
+
+
+<div id="labeling-box" class="bg-light rounded p-2 d-none flex-column flex-wrap">
+    <input type="search" class="form-control" style="height: 30px; font-size: 12px" placeholder="search.." oninput="liveSearch(event, $('.labeling-box_content label'), 'Aradığınız hastalık bulunamadı..', $('.labeling-box_search-error'), 1)">
+    <div id="diseases-list-container" class="d-flex flex-column p-2 mt-2" style="flex: 1">
+        <div class="labeling-box_search-error"></div>
+        <div class="labeling-box_content d-flex flex-column" style="gap: 5px;"></div>
+    </div>
+</div>
+
+<svg id="teethDrawSvg-eng"></svg>
+<div id="page-loading" class="position-fixed align-items-center justify-content-center" style="inset: 0; z-index: 9999999999;">
+    <i class="fa-solid fa-spinner fs-1"></i>
+</div>
+<div class="teeth-draw-container" style="position: fixed; inset: 0; z-index: 999; pointer-events: none;"></div>
+<div id="modal-delete-treatment" class="modal-container">
+    <div class="modal-box">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="modal-big-icon">
+            <i class="fa-regular fa-trash-can shadow"></i>
+        </div>
+        <p class="main-text w-75 mx-auto text-center">{% trans 'Are you sure you want to delete treatment?' %}</p>
+        <div class="modal-container__buttons d-flex justify-content-center">
+            <button class="custom yes" data-btn-operation="delete-treatment" data-modal-close>{% trans 'Yes' %}</button>
+            <button class="custom no" data-modal-close>{% trans 'No' %}</button>
+        </div>
+    </div>
+</div>
+<div id="modalReportForMail" class="modal-container">
+    <div class="modal-box">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <p class="fs-4 mb-4">{% trans 'Send Mail' %}</p>
+        <p class="fs-6 mb-1">{% trans '1. Mail Information' %}</p>
+        <p class="text-muted">{% trans 'Enter the information of the person you are sending the email to.' %}</p>
+        <div class="d-flex">
+            <label for="" class="me-3">
+                {% trans 'Name Surname' %}
+                <input id="nameForSendMail" type="text" class="my-2" name="shadow-none border" value="{{patient_full_name}}" placeholder="{% trans 'Write name..' %}">
+            </label>
+            <label for="">
+                E-mail
+                <input id="emailForSendMail" type="email" class="my-2" name="report-email-input" value="{% if patient_email%}{{patient_email}}{%else%}{%endif%}" placeholder="{% trans 'Write e-mail' %}">
+            </label>
+        </div>
+        <p class="fs-6 mb-1">{% trans '2. Report Format' %}</p>
+        <p class="text-muted">{% trans 'Choose in which format you will create the report' %}</p>
+        <div class="d-flex mb-4" style="gap: 20px">
+            <div class="report-radio-container">
+                <input checked type="radio" name="reporting-area-mail" data-type="reporting-custom-radio-input" value="PATIENT" id="patient-input-mail">
+                <label for="patient-input-mail" class="m-0">
+                    <div class="icon-container d-flex align-items-center justify-content-center">
+                        <img src="{% static 'img/report-icon2.svg' %}" class="not-selected" alt="" width="35">
+                        <img src="{% static 'img/report-icon2-active.svg' %}" class="selected" alt="" width="35">
+                    </div>
+                </label>
+                <p class="my-1 text-center">{% trans 'Patient Format' %}</p>
+            </div>
+        </div>
+        <p class="fs-6 mb-1">{% trans '3. Information to Display' %}</p>
+        <p class="text-muted">{% trans 'Select the information you want to displayed in the report' %}</p>
+        <div class="d-flex align-items-start mt-1 mb-2">
+            <input {% if doctor_choices_dict.patient_infos %} checked {% endif %} type="checkbox" name="report-modal-checkbox" id="report-ch-mail-1" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-mail-1">
+                <p class="fw-bold m-0">{% trans 'Patient Informations' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include patient information in the report' %}</p>
+            </label>
+        </div>
+        <div class="d-flex align-items-start mt-1 mb-2">
+            <input {% if doctor_choices_dict.undrawed_radiography %} checked {% endif %} type="checkbox" name="report-modal-checkbox" id="report-ch-mail-2" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-mail-2">
+                <p class="fw-bold m-0">{% trans 'Radiography' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include radiography information in the report' %}</p>
+            </label>
+        </div>
+        <div class="d-flex align-items-start mt-1 mb-2">
+            <input {% if doctor_choices_dict.doctor_note %} checked {% endif %} type="checkbox" name="report-modal-checkbox" id="report-ch-mail-4" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-mail-4">
+                <p class="fw-bold m-0">{% trans 'Doctor Note' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include doctor note in the report' %}</p>
+            </label>
+        </div>
+
+        <div class="d-flex align-items-start mt-1 mb-2">
+            <input {% if doctor_choices_dict.view_analysis %} checked {% endif %} type="checkbox"
+                   name="report-modal-checkbox" id="report-ch-mail-view" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-mail-view">
+                <p class="fw-bold m-0">{% trans 'Analyses' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include analysis information in the report' %}</p>
+            </label>
+        </div>
+
+
+        <div id="additional-options-mail-view" style="margin-left:40px;">
+            {% for index, analysis_type_name in ceph_analysis_types_dict.items %}
+                <div class="d-flex align-items-start mt-1 mb-2">
+                    <input type="checkbox" name="additional-option-view" id="additional-ch-mail-view-{{index}}" class="me-2" {% if doctor_choices_dict.bjork %} checked {% endif %}>
+                    <label class="input-text d-flex flex-column m-0" for="additional-ch-mail-view-{{index}}">
+                        <p class="fw-bold m-0">{% trans analysis_type_name %}</p>
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="d-flex align-items-start mt-1 mb-2">
+            <input {% if doctor_choices_dict.doctor_signature %} checked {% endif %} type="checkbox" name="report-modal-checkbox" id="report-ch-mail-6" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-mail-6">
+                <p class="fw-bold m-0">{% trans 'Doctor Signature' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include doctor signature in the report' %}</p>
+            </label>
+        </div>
+        <div class="d-flex justify-content-between">
+            <label for="save-choices-for-mail" class="d-flex align-items-center">
+                <input type="checkbox" name="save-choices-for-mail" id="save-choices-for-mail" class="me-2">
+                {% trans 'Save my choices' %}
+            </label>
+            <div class="modal-container__buttons ms-5 me-2">
+                <button class="custom no" data-modal-close>{% trans 'Cancel' %}</button>
+            </div>
+            <div class="modal-container__buttons">
+                <button id="sendReportMail" class="custom yes" data-modal-close>{% trans 'Send Mail' %}</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="modal-report" class="modal-container">
+    <div class="modal-box">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <p class="fs-4 mb-4">{% trans 'Export Report' %}</p>
+        <p class="fs-6 mb-1">{% trans '1. Report Format' %}</p>
+        <p class="text-muted">{% trans 'Choose in which format you will create the report' %}</p>
+        <div class="d-flex mb-4" style="gap: 20px">
+            <div class="report-radio-container">
+                <input checked type="radio" name="reporting-area" data-type="reporting-custom-radio-input" value="PATIENT" id="patient-input">
+                <label for="patient-input" class="m-0">
+                    <div class="icon-container d-flex align-items-center justify-content-center">
+                        <img src="{% static 'img/report-icon2.svg' %}" class="not-selected" alt="" width="35">
+                        <img src="{% static 'img/report-icon2-active.svg' %}" class="selected" alt="" width="35">
+                    </div>
+                </label>
+                <p class="my-1 text-center">{% trans 'Patient Format' %}</p>
+            </div>
+        </div>
+        <p class="fs-6 mb-1">{% trans '2. Information to Display' %}</p>
+        <p class="text-muted">{% trans 'Select the information you want to displayed in the report' %}</p>
+        <div class="d-flex align-items-start mt-1 mb-2">
+
+            <input {% if doctor_choices_dict.patient_infos %} checked {% endif %} type="checkbox" name="report-modal-checkbox" id="report-ch-1" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-1">
+                <p class="fw-bold m-0">{% trans 'Patient Informations' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include patient information in the report' %}</p>
+            </label>
+        </div>
+        <div class="d-flex align-items-start mt-1 mb-2">
+            <input {% if doctor_choices_dict.undrawed_radiography %} checked {% endif %} type="checkbox" name="report-modal-checkbox" id="report-ch-2" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-2">
+                <p class="fw-bold m-0">{% trans 'Radiography' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include radiography information in the report' %}</p>
+            </label>
+        </div>
+        <div class="d-flex align-items-start mt-1 mb-2">
+            <input {% if doctor_choices_dict.doctor_note %} checked {% endif %} type="checkbox" name="report-modal-checkbox" id="report-ch-4" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-4">
+                <p class="fw-bold m-0">{% trans 'Doctor Note' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include doctor note in the report' %}</p>
+            </label>
+        </div>
+        <div class="d-flex align-items-start mt-1 mb-2">
+            <input {% if doctor_choices_dict.view_analysis %} checked {% endif %} type="checkbox"
+                   name="report-modal-checkbox" id="report-ch-view" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-view">
+                <p class="fw-bold m-0">{% trans 'Analyses' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include analysis information in the report' %}</p>
+            </label>
+        </div>
+
+        <div id="additional-options-view" style="margin-left:40px;">
+            {% for index, analysis_type_name in ceph_analysis_types_dict.items %}
+                <div class="d-flex align-items-start mt-1 mb-2">
+                    <input type="checkbox" name="additional-option-view" id="additional-ch-view-{{index}}" class="me-2" {% if doctor_choices_dict.bjork %} checked {% endif %}>
+                    <label class="input-text d-flex flex-column m-0" for="additional-ch-view-{{index}}">
+                        <p class="fw-bold m-0">{% trans analysis_type_name %}</p>
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="d-flex align-items-start mt-1 mb-2">
+            <input {% if doctor_choices_dict.doctor_signature %} checked {% endif %} type="checkbox" name="report-modal-checkbox" id="report-ch-6" class="me-2">
+            <label class="input-text d-flex flex-column m-0" for="report-ch-6">
+                <p class="fw-bold m-0">{% trans 'Doctor Signature' %}</p>
+                <p class="m-0 text-muted">{% trans 'Include doctor signature in the report' %}</p>
+            </label>
+        </div>
+        <div class="d-flex justify-content-between">
+            <label for="report-save-choice" class="d-flex align-items-center">
+                <input type="checkbox" name="report-save-choices" id="report-save-choice" class="me-2">
+                {% trans 'Save my choices' %}
+            </label>
+            <div class="modal-container__buttons ms-5 me-2">
+                <button class="custom no" data-modal-close>{% trans 'Cancel' %}</button>
+            </div>
+            <div class="modal-container__buttons">
+                <button id="createReport" class="custom yes" data-modal-close>{% trans 'Report' %}</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="delete-illness-from-tooth" class="modal-container">
+    <div class="modal-box">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="modal-big-icon">
+            <i class="fa-regular fa-trash-can shadow"></i>
+        </div>
+        <p class="main-text w-75 mx-auto text-center">{% trans 'Are you sure you want to delete illness from tooth?' %}</p>
+        <div class="modal-container__buttons d-flex justify-content-center">
+            <button class="custom yes" data-modal-close data-delete-illness-btn>{% trans 'Yes' %}</button>
+            <button class="custom no" data-modal-close>{% trans 'No' %}</button>
+        </div>
+    </div>
+</div>
+<div id="delete-treatment-from-tooth" class="modal-container">
+    <div class="modal-box">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="modal-big-icon">
+            <i class="fa-regular fa-trash-can shadow"></i>
+        </div>
+        <p class="main-text w-75 mx-auto text-center">{% trans 'Are you sure you want to delete treatment from tooth?' %}</p>
+        <div class="modal-container__buttons d-flex justify-czontent-center">
+            <button class="custom yes" data-modal-close data-delete-treatment-btn>{% trans 'Yes' %}</button>
+            <button class="custom no" data-modal-close>{% trans 'No' %}</button>
+        </div>
+    </div>
+</div>
+<div class="map-hover-popup__root"></div>
+<div class="flex-column map-hover-popup single">
+    <div class="item d-flex justify-content-between align-items-center">
+        <strong><span class="illness-name-span">Bone Loss </span></strong>
+    </div>
+</div>
+<div class="flex-column map-hover-popup doctor-draw">
+    <div class="item d-flex justify-content-between align-items-center">
+        <i class="fa-solid fa-tooth me-2" style="color:#0dcaf0"></i>
+        <strong><span class="illness-name-doctor">Bone Loss </span></strong>
+        <i class="fa-solid fa-xmark ms-2 text-light" data-close-doctor-draw style="cursor: pointer;"></i>
+    </div>
+</div>
+<div class="flex-column map-hover-popup multiple">
+    <div class="tooth-name mb-2">
+        <i class="fa-solid fa-tooth text-primary"></i>
+        Tooth 45
+    </div>
+    <div id="multiple-card-body">
+
+    </div>
+</div>
+<div id="modal-add-diagnosis" class="modal-container">
+    <div class="modal-box px-4 d-flex flex-column text-light" style="min-width: 350px; height: auto; max-height: 100vh; max-width: 100vw; background-color: #1A264E;">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <p class="my-2" style="font-size: 22px;">{% trans 'Add Diagnosis' %}</p>
+        <input type="text" class="search-input w-100 py-3" placeholder="{% trans 'Search' %}" oninput="liveSearchingForAddDiagnosis(event)">
+        <div style="overflow: auto; height: 300px;" class="my-4 add-diagnosis-patient-container">
+            <div class="not-found-current-patient text-muted"></div>
+            {% for key, value in illness_dict.items %}
+
+            <div class="patient-item px-2 mb-2 round    ed align-items-center" style="background-color: #2B3863; display: flex;">
+                <div class="checkbox d-flex">
+                    <input type="checkbox" name="AddDiagnosis"  id="{{key}}">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                {% if '/tr/' in request.path %}
+                    <label class="w-100 py-2 ps-2 m-0 patient-text" for="{{key}}" style="user-select: none">{{value.tr_disease_name}}</label>
+                {% elif '/en/' in request.path %}
+                    <label class="w-100 py-2 ps-2 m-0 patient-text" for="{{key}}" style="user-select: none">{{value.en_disease_name}}</label>
+
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <button class="save-diagnosis custom btn-blue">{% trans 'Complete' %}</button>
+    </div>
+
+</div>
+<div id="modal-add-treatment" class="modal-container">
+    <div class="modal-box px-4 d-flex flex-column text-light" style="min-width: 350px; height: auto; max-height: 100vh; max-width: 100vw; background-color: #1A264E;">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <p class="my-2" style="font-size: 22px;">{% trans 'Add Treatment' %}</p>
+        <input type="text" class="search-input w-100 py-3" placeholder="{% trans 'Search'  %}" oninput="liveSearchingForAddDiagnosis(event)">
+        <div style="overflow: auto; height: 300px;" id="modalAddTreatment" class="my-4 add-diagnosis-patient-container">
+            <div class="not-found-current-patient text-muted"></div>
+        </div>
+        <button id="saveTreatment" class="save-treatment custom btn-blue">{% trans 'Complete' %}</button>
+    </div>
+</div>
+<div id="modal-radyografy-upload" class="modal-container">
+    <div class="modal-box px-4 d-flex flex-column text-light" style="min-width: 350px; height: auto; max-height: 100vh; max-width: 100vw; background-color: #1A264E;">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <p class="my-2" style="font-size: 22px;">{% trans 'Add Radiography' %}</p>
+        <select name="radiography_types" id="radiography_types">
+            <option value="" selected>{% trans 'Select Radiography Type...' %}</option>
+            {% for type_id, type_name in image_type_dict.items %}
+                <option value="{{type_id}}">{%if 'Lateral Cephalometric' in type_name %}{{type_name}} (BETA) {%elif 'CBCT' in type_name%}{{type_name}} (BETA) {%else%}{{type_name}}{%endif%}</option>
+            {% endfor %}
+        </select>
+        <div id="uploadFilepond" class="px-2">
+            <div class="custom-filepond-container">
+                <input type="file" id="filepond" accept=".png">
+                <div id="previewFilePond"></div>
+                </div>
+        </div>
+        <form enctype='multipart/form-data' method="post" class="dropzone dz my-0 d-none" id="dicomDropzone" style="margin: 10px;">
+            {% csrf_token %}
+            <div class="fallback">
+                <input name="file" type="file" multiple class="bg-primary">
+            </div>
+            <div class="dz-message needsclick"></div>
+            <div class="dz-default dz-message text-light my-0">
+                <i class="fa-solid fa-upload border" style="border-radius: 50%; padding: 10px;"></i>
+                <p class="m-0 my-2">Dosyaları sürükleyin ve bırakın veya dosya seçin</p>
+                <p class="m-0">JPG, PNG, JPEG</p>
+            </div>
+        </form>
+        <div id="cbtcContainer" class="mt-3 mb-4" style="display: none;">
+            a.r.k will insert content
+        </div>
+        <button id="filepondUploadButton" class="custom btn-blue my-2">{% trans 'Start Upload' %}</button>
+        <button id="CBCTUpload" class="custom btn-blue my-2 d-none">{% trans 'CBCT Upload' %}</button>
+        <div id="progress" style="display: none; width: 100%; background-color: #f0f0f0; border-radius: 4px;" class="custom btn-blue mb-2">
+            <div id="progressBar" style="width: 0;height: 20px;background-color: #5071C8;border-radius: 4px;">
+                <div id="progressText" style="text-align: right; line-height: 20px; color: black; padding-right:5px;"></div>
+            </div>
+        </div>
+        <button id="close-upload-modal" class="save-treatment custom no" data-modal-close>{% trans 'Cancel' %}</button>
+        <button id="open-new-tab" class="d-none custom no" data-open-new-page="/">{% trans 'Open in New Tab' %}</button>
+    </div>
+</div>
+<div id="modalCalibration" class="modal-container">
+    <div class="modal-box">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <h2 style="font-size: 20px;" class="text-center">{% trans 'Put 2 points on the radiography' %}</h2>
+        <p class="text-muted">
+            {% trans 'Please put 2 points on the radiography and select measurement in the popup window.' %}
+        </p>
+        <div class="d-flex justify-content-end gap-2">
+            <button class="custom mb-2 px-5 py-1" data-modal-close>{% trans 'Cancel' %}</button>
+            <button id="startPutTwoPoint" class="custom btn-blue mb-2 px-5 py-1" data-modal-close>{% trans 'Start Put' %}</button>
+        </div>
+    </div>
+</div>
+<main class="d-flex">
+    <div class="container-fluid">
+        <div class="adjustable-content py-1" style="overflow: hidden;">
+            <div class="row h-100 g-0">
+                    <div id="parent-back-img-frame" class="d-flex flex-column align-items-center justify-content-center" style="flex: 4; overflow: hidden">
+                        {% if calibration_status == 'False' %}
+                            <div id="calibrationWarning" class="my-3 w-100 align-self-start rounded position-relative">
+                                {% trans 'Calibration not done, please calibrate!' %}
+                                <div class="warning-close position-absolute">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div id="back-img-frame" class="patient-radiography d-flex align-items-start justify-content-center" style="overflow: hidden; transform-origin: 0px 0px; background: transparent;">
+                            {% if "media/dental/radio/" in radiography_section.image_path|safe %}
+                                <img class="mb-2" id="back-img" src="{{radiography_section.image_path}}"
+                                 style="width: 100%; z-index: 9; max-height:80dvh;">
+                            <div id="container" style="display: none">
+                                <canvas id="canvas" style="z-index: 9;"></canvas>
+                                <textarea id="textInput" style="position: absolute; display: none; z-index: 100;"></textarea>
+                            </div>
+                            {% else %}
+                                <img class="mb-2" id="back-img" src="https://aiv2.craniocatch.com/media/{{radiography_section.image_path}}"
+                                 style="width: 100%; z-index: 9;max-height:80dvh;">
+                            {% endif %}
+                        </div>
+                    </div>
+                <div id="mini-icon-bar">
+                        <div class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Edit Radiography' %}">
+                            <img src="{% static 'img/editPictureTool.png' %}" alt="" width="20">
+                            <div class="dropdown-section" style="gap: 12px;">
+                                <div class="mx-2 d-flex align-items-center">
+                                    <div class="switch-checkbox me-1" style="transform: scale(0.8);">
+                                        <input type="checkbox" id="editPicture">
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                    <label for="editPicture" style="user-select: none;">{% trans 'Edit Radiography' %}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="calibrationTool" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Calibration' %}" data-open-modal-pk="modalCalibrationInfo">
+                            <img src="{% static 'img/point_line.png' %}" alt="" width="40" style="padding: 10px;">
+                            <div class="dropdown-section d-none justify-content-between align-items-center gap-2" style="gap: 12px;">
+                                <div class="d-flex flex-column">
+                                    <p class="m-0"><small>{% trans 'Set Calibration Value' %}</small></p>
+                                    <div class="dropdown-section-item range-container brightness">
+                                        <input type="range" id="calibrationRange" name="" min="0" max="100" value="100">
+                                        <div class="range-bg"></div>
+                                        <div class="range-value" style="width: 0;"></div>
+                                        <div class="range-marker shadow" style="left: 0;"></div>
+                                    </div>
+                                </div>
+                                <div id="calibrationValue" class="bg-danger text-center bg-light rounded text-dark" style="min-width: 30px;">0</div>
+                                <button class="custom btn-blue py-1 px-2" id="calibrationSaveBtn">Kaydet</button>
+                            </div>
+                        </div>
+                        <div id="filter-tool" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Filter' %}" style="display: none;">
+                            <img src="{% static 'img/magic_wand.png' %}" alt="" width="20">
+                            <div class="dropdown-section" style="gap: 12px;">
+                                <div class="d-flex flex-column">
+                                    <div class="d-flex" style="gap: 7px;">
+                                        <input type="radio" name="filter-tool" id="grayscale-tool" value="grayscale">
+                                        <label for="grayscale-tool" class="m-0">{% trans 'Grayscale' %}</label>
+                                    </div>
+                                    <div class="d-flex" style="gap: 7px;">
+                                        <input type="radio" name="filter-tool" id="sepia-tool" value="sepia">
+                                        <label for="sepia-tool" class="m-0">{% trans 'Sepia' %}</label>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <div class="d-flex" style="gap: 7px;">
+                                        <input type="radio" name="filter-tool" id="blur-tool" value="blur">
+                                        <label for="blur-tool" class="m-0">{% trans 'Blur' %}</label>
+                                    </div>
+                                    <div class="d-flex" style="gap: 7px;">
+                                        <input type="radio" name="filter-tool" id="invert-tool" value="invert">
+                                        <label for="invert-tool" class="m-0">{% trans 'Invert' %}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon" id="brightness-tool"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Brightness' %}">
+                            <i class="fa-solid fa-sun translate" style="font-size: 16px;"></i>
+                            <div class="dropdown-section flex-column align-items-stretch justify-content-between">
+                                <div class="d-flex justify-content-between dropdown-section-item">
+                                    <span>
+                                        <i class="fa-solid fa-sun" style="font-size: 16px;"></i>
+                                        <span class="text" style="white-space: nowrap;">{% trans 'Brightness Level' %}</span>
+                                    </span>
+                                    <span class="text" id="brightness-value">+ 100</span>
+                                </div>
+                                <div class="dropdown-section-item range-container" style="height: 20px;">
+                                    <input type="range" name="" min="0" max="300" id="brightness-btn" value="100">
+                                    <div class="range-bg"></div>
+                                    <div class="range-value" style="width: 33.3%;"></div>
+                                    <div class="range-marker shadow" style="left: 33.3%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon" id="contrast-tool"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Contrast' %}">
+                            <i class="fa-solid fa-circle-half-stroke translate" style="font-size: 16px;"></i>
+                            <div class="dropdown-section flex-column align-items-stretch justify-content-between">
+                                <div class="d-flex justify-content-between dropdown-section-item">
+                                    <span>
+                                        <i class="fa-solid fa-circle-half-stroke" style="font-size: 16px;"></i>
+                                        <span class="text" style="white-space: nowrap;">{% trans 'Contrast Level' %}</span>
+                                    </span>
+                                    <span class="text" id="contrast-value">+ 100</span>
+                                </div>
+                                <div class="dropdown-section-item range-container contrast">
+                                    <input type="range" name="" min="0" max="500" value="100" id="contrast-btn">
+                                    <div class="range-bg"></div>
+                                    <div class="range-value" style="width: 20%;"></div>
+                                    <div class="range-marker shadow" style="left: 20%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon" id="flip-tool"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Flip' %}" style="display: none;">
+                            <img src="{% static 'img/flip.png' %}" alt="" width="20">
+                            <div class="dropdown-section align-items-center justify-content-between">
+                                <span class="flip_span d-flex align-items-center py-1 px-2 rounded me-2 active" id="" data-direction="horizontal" style="user-select: none;">
+                                    <img src="{% static 'img/flip.png' %}" style="transform: rotate(-90deg);" alt="" width="13" class="me-1"> {% trans 'Flip Horizontal' %}
+                                </span>
+                                <span class="flip_span d-flex align-items-center py-1 px-2 rounded" data-direction="vertical" style="user-select: none;">
+                                    <img src="{% static 'img/flip.png' %}" alt="" width="13" class="me-1"> {% trans 'Flip Vertical' %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="icon" id="cropButton"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Crop' %}" style="display: none;">
+                            <img src="{% static 'img/scale.png' %}" alt="" width="20">
+                        </div>
+                        <div class="icon" id="rotate_tool"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Rotate' %}" style="display: none;">
+                            <img src="{% static 'img/rotate.png' %}" alt="" width="20">
+                            <div class="dropdown-section align-items-center justify-content-between py-1" style="height: auto;">
+                                <div class="d-flex flex-column" style="gap: 5px;">
+                                    <span>{% trans 'Range Input' %}</span>
+                                    <!-- <input type="range" name="" id="" min="0" max="360"> -->
+                                    <div class="dropdown-section-item range-container">
+                                        <input type="range" name="" min="0" max="360" value="0" id="rotate-btn">
+                                        <div class="range-bg"></div>
+                                        <div class="range-value" style="width: 0%;"></div>
+                                        <div class="range-marker shadow" style="left: 0%;"></div>
+                                    </div>
+                                    <span class="d-flex align-items-center">
+                                        <input type="text" name="" id="rotateInput" maxlength="3" pattern="[0-9]+" >
+                                        <button id="resetRotateBtn" class="custom">{% trans 'Reset' %}</button>
+                                    </span>
+                                </div>
+                                <span class="flip_span d-flex align-items-center py-1 px-2 rounded mx-2" data-rotate-direction="-90" style="user-select: none;">
+                                    <img src="{% static 'img/rotate.png' %}" style="transform: scaleX(-1);" alt="" width="13" class="me-1">
+                                    {% trans 'Rotate Left 90°' %}
+                                </span>
+                                <span class="flip_span d-flex align-items-center py-1 px-2 rounded" data-rotate-direction="90" style="user-select: none;">
+                                    <img src="{% static 'img/rotate.png' %}" alt="" width="13" class="me-1">
+                                    {% trans 'Rotate Right 90°' %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="icon" id="draw-tool"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Draw' %}" style="display: none;">
+                            <img src="{% static 'img/pencil.png' %}" alt="" width="20">
+                            <div class="dropdown-section flex-column py-1 align-items-start" style="height: auto;">
+                                <div class="d-flex justify-content-between my-2" style="gap: 12px;">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="draw_tool_type" class="me-1" id="draw_tool_line" value="line">
+                                        <label for="draw_tool_line" class="m-0">{% trans 'Straight Line' %}</label>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="draw_tool_type" class="me-1" id="draw_tool_free" value="pencil">
+                                        <label for="draw_tool_free" class="m-0">{% trans 'Free Drawing' %}</label>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="draw_tool_type" class="me-1" id="draw_tool_arrow" value="arrow">
+                                        <label for="draw_tool_arrow" class="m-0">{% trans 'Arrow' %}</label>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-end" style="gap: 5px;">
+                                     <div class="d-flex flex-column">
+                                        <span>{% trans 'Draw Line' %}</span>
+                                        <div class="dropdown-section-item range-container mx-1">
+                                            <input type="range" name="" min="1" max="20" value="1" id="draw-btn-border">
+                                            <div class="range-bg"></div>
+                                            <div class="range-value" style="width: 0%;"></div>
+                                            <div class="range-marker shadow" style="left: 0%;"></div>
+                                        </div>
+                                     </div>
+                                     <div class="position-relative" style="width: 40px; height: 20px; border-radius: 3px; overflow: hidden;">
+                                        <div class="slider">
+                                            <input type="range" name="" id="" min="0" max="100" oninput="changeOpacityForDiagnosisPage(event, `.pointer[data-id='1']`) ">
+                                            <div class="transparent-img"></div>
+                                            <div class="gradient" data-id="1" style="background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #679BFF 100%);"></div>
+                                            <div class="pointer-container">
+                                                <div class="pointer" data-id="1" style="background-color: #679BFF;"></div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                     <div class="color" style="background-color: #679BFF" data-id="1">
+                                        <input id="canvasDrawColorChange" type="color" value="#679BFF" name="" oninput="changeColorForDiagnosisPage(event, 1)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                        <div class="icon" id="font-tool"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Font' %}" style="display: none;">-->
+<!--                            <input id="fontCheckbox" type="checkbox" class="position-absolute" style="inset: 0; cursor: pointer; opacity: 0; z-index: 4;">-->
+<!--                            <div id="fontCheckboxBg" class="position-absolute" style="inset: 0;"></div>-->
+<!--                            <img src="{% static 'img/font_icon.png' %}" alt="" width="20" style="position: relative; z-index: 3;">-->
+<!--                            <div class="dropdown-section align-items-end justify-content-between py-1" style="height: auto; gap: 10px;">-->
+<!--                                <div class="d-flex flex-column">-->
+<!--                                    <div class="d-flex justify-content-between my-1 px-1">-->
+<!--                                        <p class="m-0 text-light">{% trans 'Fonts' %}</p>-->
+<!--                                        <div>-->
+<!--                                            <span style="font-weight: bold;">B</span>-->
+<!--                                            <span style="text-decoration: underline; font-weight: 200;">U</span>-->
+<!--                                            <span style="font-style: italic;">I</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <select name="" id="fontTypeName" class="m-0" style="background-color: rgba(103, 155, 255, .2); width: 150px; height: 22px; color: white;">-->
+<!--                                        <option value="Arial">Arial</option>-->
+<!--                                        <option value="Times New Roman">Times New Roman</option>-->
+<!--                                        <option value="Verdana">Verdana</option>-->
+<!--                                        <option value="Rockwell">Rockwell</option>-->
+<!--                                        <option value="Franklin Gothic">Franklin Gothic</option>-->
+<!--                                        <option value="Univers">Univers</option>-->
+<!--                                        <option value="Frutiger">Frutiger</option>-->
+<!--                                        <option value="Avenir">Avenir</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                <div class="d-flex flex-column">-->
+<!--                                    <p class="m-0 text-light my-1 px-1">-->
+<!--                                        {% trans 'Font Size' %}-->
+<!--                                    </p>-->
+<!--                                    <input id="fontTypeSize" type="text" value="18" class="m-0" style="background-color: rgba(103, 155, 255, .2); width: 100px; height: 22px; color: white;">-->
+<!--                                </div>-->
+<!--                                <div class="d-flex" style="gap: 5px;">-->
+<!--                                    <div class="position-relative" style="width: 40px; height: 20px; border-radius: 3px; overflow: hidden;">-->
+<!--                                        <div class="slider">-->
+<!--                                            <input type="range" name="" id="" min="0" max="100" oninput="changeOpacityForDiagnosisPage(event, `.pointer[data-id='2']`) ">-->
+<!--                                            <div class="transparent-img"></div>-->
+<!--                                            <div class="gradient" data-id="2" style="background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #679BFF 100%);"></div>-->
+<!--                                            <div class="pointer-container">-->
+<!--                                                <div class="pointer" data-id="2" style="background-color: #679BFF;"></div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                     </div>-->
+<!--                                    <div class="color" style="background-color: #679BFF" data-id="2">-->
+<!--                                        <input id="canvasTextColorInput" type="color" value="#679BFF" name="" oninput="changeColorForDiagnosisPage(event, 2)">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="icon" id="shape-tool"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Shape' %}" style="display: none;">
+                            <img src="{% static 'img/triangle.png' %}" alt="" width="20">
+                            <div class="dropdown-section flex-column py-1 align-items-start" style="height: auto;">
+                                <div class="d-flex justify-content-between my-2" style="gap: 12px;">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="shape_tool_type" class="me-1" id="shape_tool_rectangular" value="rect">
+                                        <label for="shape_tool_rectangular" class="m-0">{% trans 'Rectangular' %}</label>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="shape_tool_type" class="me-1" id="shape_tool_circle"  value="circle">
+                                        <label for="shape_tool_circle" class="m-0">{% trans 'Circle' %}</label>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="shape_tool_type" class="me-1" id="shape_tool_triangle"  value="triangle">
+                                        <label for="shape_tool_triangle" class="m-0">{% trans 'Triangle' %}</label>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-end" style="gap: 5px;">
+                                     <div class="d-flex flex-column">
+                                        <span>{% trans 'Stroke Width' %}</span>
+                                        <div class="dropdown-section-item range-container mx-1">
+                                            <input type="range" name="" min="1" max="20" value="1" id="draw-shape-border">
+                                            <div class="range-bg"></div>
+                                            <div class="range-value" style="width: 0%;"></div>
+                                            <div class="range-marker shadow" style="left: 0%;"></div>
+                                        </div>
+                                     </div>
+                                     <div class="position-relative" style="width: 40px; height: 20px; border-radius: 3px; overflow: hidden;">
+                                        <div class="slider">
+                                            <input type="range" name="" id="" min="0" max="100" oninput="changeOpacityForDiagnosisPage(event, `.pointer[data-id='3']`) ">
+                                            <div class="transparent-img"></div>
+                                            <div class="gradient" data-id="3" style="background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #679BFF 100%);"></div>
+                                            <div class="pointer-container">
+                                                <div class="pointer" data-id="3" style="background-color: #679BFF;"></div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                     <div class="color" style="background-color: #679BFF" data-id="3">
+                                        <input id="canvasDrawShapeFillColorChange" type="color" value="#679BFF" name="" oninput="changeColorForDiagnosisPage(event, 3)">
+                                    </div>
+                                    <div class="position-relative" style="width: 40px; height: 20px; border-radius: 3px; overflow: hidden;">
+                                        <div class="slider">
+                                            <input type="range" name="" id="" min="0" max="100" oninput="changeOpacityForDiagnosisPage(event, `.pointer[data-id='4']`) ">
+                                            <div class="transparent-img"></div>
+                                            <div class="gradient" data-id="4" style="background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #679BFF 100%);"></div>
+                                            <div class="pointer-container">
+                                                <div class="pointer" data-id="4" style="background-color: #679BFF;"></div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                     <div class="color" style="background-color: #679BFF" data-id="4">
+                                        <input id="canvasDrawShapeBorderColorChange"type="color" value="#679BFF" name="" oninput="changeColorForDiagnosisPage(event, 4)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon" id="zoomin-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Zoom In' %}">
+                            <i class="fa-solid fa-magnifying-glass-plus translate" style="font-size: 16px;"></i>
+                        </div>
+                        <div class="icon" id="zoomout-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Zoom Out' %}">
+                            <i class="fa-solid fa-magnifying-glass-minus translate" style="font-size: 16px;"></i>
+                        </div>
+                        <div class="icon" id="reset-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="{% trans 'Reset' %}">
+                            <i class="fa-solid fa-rotate-right translate" style="font-size: 16px;"></i>
+                        </div>
+                        <div class="icon" id="editmode-tool"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Edit Mode' %}">
+                            <img src="{% static 'img/edit_mode_tool_icon.png' %}" alt="" width="20">
+                            <div class="dropdown-section py-1">
+                                <div class="switch-checkbox me-1" style="transform: scale(0.8);">
+                                    <input type="checkbox" id="editMode">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <label for="editMode" style="user-select: none;">{% trans 'Edit Mode' %}</label>
+                            </div>
+                        </div>
+                        <div id="img-reset-tool" class="icon" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Reset' %}" style="display: none;">
+                            <i class="fa-solid fa-rotate-right translate" style="font-size: 16px;"></i>
+                        </div>
+                        <div class="icon" id="save-tool"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Save' %}" style="display: none;">
+                            <img src="{% static 'img/saveTool.png' %}" alt="" width="20">
+                            <div class="dropdown-section py-1" style="gap: 10px;">
+                                <div class="d-flex" style="gap: 5px;">
+                                    <input id="saveOptImg" type="radio" name="saveOption" value="image">
+                                    <label for="saveOptImg">{% trans 'Image' %}</label>
+                                </div>
+                                <div class="d-flex" style="gap: 5px;">
+                                    <input id="saveOptPdf" type="radio" name="saveOption" value="pdf">
+                                    <label for="saveOptPdf">{% trans 'PDF' %}</label>
+                                </div>
+                                <div>
+                                    <img id="saveBtnForImage" src="{% static 'img/saveTool.png' %}" alt="" width="20">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="h-100 teeth-and-treatment-section position-relative active" style="transition: width ease-in-out 500ms;">
+                    <div class="tooth-chart-illnesses-by-tooth px-2 py-3" style="position: relative; opacity: 1;">
+                        <div id="view-analysis" class="position-absolute">
+                            <h3 class="heading d-flex flex-column align-items-center">
+                                <span>{% trans 'Analyses' %}</span>
+                            </h3>
+                            <select class="blue-selectbox" id="view-analysis-selectbox">
+                                {% for key, value in view_analysis_dict.items %}
+                                    <option value="{{key}}">{{key}}</option>
+                                {%endfor%}
+                            </select>
+                            <table id="report-table" class="table text-white">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">{% trans 'Descriptor'%}</th>
+                                    <th scope="col">{% trans 'Meas' %}</th>
+                                    <th scope="col">{% trans 'Type' %}</th>
+                                    <th scope="col">{% trans 'Mean' %}</th>
+                                    <th scope="col">{% trans 'Sd' %}</th>
+                                    <th scope="col">{% trans 'Patient' %}</th>
+                                  </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <h3 class="heading d-flex justify-content-between align-items-center">
+                            Landmarks
+                            <div class="d-flex align-items-center ms-auto me-2 doctor-comment">
+                            </div>
+                        </h3>
+                        <div class="d-flex">
+                            <div class="w-50 px-3">
+                                <div class="d-flex justify-content-between my-3 px-2">
+                                    <span>Group</span>
+                                </div>
+                                <div class="report-list d-flex flex-column one pb-2">
+                                    <div class="input-container d-flex position-relative">
+                                        <input type="text" placeholder="{% trans 'Search'%}" class="w-100" oninput="liveSearch(event, $('.one .report-items .report-item'), 'Aradığınız rapor bulunamadı', $('#baby-dont-hurt-me'))">
+                                    </div>
+                                    <div id="baby-dont-hurt-me" class="px-3 text-muted"></div>
+                                    <div class="report-items" id="group_report_item" data-point-items="group">
+                                        <div class="report-item justify-content-between align-items-center active">
+                                            ANS-PNS Center
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Nasion
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Nasal Bone Apex
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Posterior Nasal Bone
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Bottom-Left S
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-50 px-3">
+                                <div class="d-flex justify-content-between my-3 px-2">
+                                    <span>Point</span>
+                                </div>
+                                <div id="report_item" class="report-list d-flex flex-column two pb-2">
+                                    <div class="input-container d-flex position-relative">
+                                        <input type="text" placeholder="{% trans 'Search' %}" class="w-100" oninput="liveSearch(event, $('.two .report-items .report-item'), 'Aradığınız rapor bulunamadı', $('#what-is-love'))">
+                                    </div>
+                                    <div id="what-is-love" class="px-3 text-muted"></div>
+                                    <div class="report-items" id="point_report_item" data-point-items="item">
+                                        <div class="report-item justify-content-between align-items-center active">
+                                            ANS-PNS Center
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Nasion
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Nasal Bone Apex
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Posterior Nasal Bone
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Bottom-Left S
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Bottom-Left S
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center">
+                                            Bottom-Left S
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4 d-none">
+                            <div class="w-50 p-3">
+                                <div class=" d-flex justify-content-between align-items-center my-2">
+                                    <span class="">Point</span>
+                                    <div class="d-flex align-items-center">
+                                        <div class="checkbox me-2">
+                                            <input type="checkbox" name="" id="select_all_point" onchange="selectAllMultipleSelect(event, $('#overlay_selectbox'))">
+                                            <i class="fa-solid fa-check"></i>
+                                        </div>
+                                        <label for="select_all_point" style="user-select: none;">Select All</label>
+                                    </div>
+                                </div>
+                                <div class="report-list d-flex flex-column three pb-2">
+                                    <div class="input-container d-flex position-relative">
+                                        <input type="text" placeholder="{% trans 'Search' %}" class="w-100" oninput="liveSearch(event, $('.three .report-items .report-item'), 'Aradığınız rapor bulunamadı', $('#baby-dont-hurt-me-2'))">
+                                    </div>
+                                    <div id="baby-dont-hurt-me-2" class="px-3 text-muted"></div>
+                                    <div class="report-items" id="overlay_selectbox">
+                                        <div class="report-item justify-content-between align-items-center active" data-multiple-selectbox="true">
+                                            ANS-PNS Center
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center" data-multiple-selectbox="true">
+                                            Nasion
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center" data-multiple-selectbox="true">
+                                            Nasal Bone Apex
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center" data-multiple-selectbox="true">
+                                            Posterior Nasal Bone
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                        <div class="report-item justify-content-between align-items-center" data-multiple-selectbox="true">
+                                            Bottom-Left S
+                                            <i class="fa-solid fa-check text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-50 p-3 d-flex flex-column">
+                                <div class=" d-flex justify-content-between align-items-center my-2" style="min-height: 32px;">
+                                    <span class="">Point</span>
+                                </div>
+                                <select name="" id="" style="height: 52px;" class="blue-selectbox mb-1">
+                                    <option>seçiniz</option>
+                                    <option value="">İtem 1</option>
+                                    <option value="">İtem 2</option>
+                                    <option value="">İtem 3</option>
+                                    <option value="">İtem 4</option>
+                                    <option value="">İtem 5</option>
+                                </select>
+                                <div class=" d-flex justify-content-between align-items-center my-2" style="min-height: 16px;">
+                                    <span class="">Angle</span>
+                                </div>
+                                <div class="angle-container position-relative d-flex">
+                                    <div class="section-number-container">
+                                        <div class="current-number"></div>
+                                        <div class="number text-light">1</div>
+                                        <div class="number text-light">2</div>
+                                        <div class="number text-light">3</div>
+                                        <div class="number text-light">4</div>
+                                        <div class="number text-light">5</div>
+                                    </div>
+                                    <div class="section-back"></div>
+                                    <div class="section-back-value-container">
+                                        <div class="section-back-value"></div>
+                                    </div>
+                                    <div class="section-marker-container">
+                                        <div class="section-marker"></div>
+                                    </div>
+                                    <div class="section-count">
+                                        <input type="radio" name="section-count" id="" value="1">
+                                    </div>
+                                    <div class="section-count">
+                                        <input type="radio" name="section-count" id="" value="2">
+                                    </div>
+                                    <div class="section-count">
+                                        <input type="radio" name="section-count" id="" value="3">
+                                    </div>
+                                    <div class="section-count">
+                                        <input type="radio" name="section-count" id="" value="4">
+                                    </div>
+                                    <div class="section-count">
+                                        <input type="radio" name="section-count" id="" value="5">
+                                    </div>
+                                </div>
+                                <div class="rotate-btns d-flex" style="flex: 1; gap: 10px;">
+                                    <button class="custom btn-blue w-50 d-flex flex-column align-items-center justify-content-center" style="gap: 3px;" id="rotate_">
+                                        <img src="{% static 'img/rotate_left.png' %}" class="img-fluid">
+                                        Rotate
+                                    </button>
+                                    <button class="custom btn-blue w-50 d-flex flex-column align-items-center justify-content-center" style="gap: 3px;">
+                                        <img src="{% static 'img/rotate_right.png' %}" class="img-fluid">
+                                        Rotate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% if not grouped_treatments %}
+                    <div id="first-planning" class="treatment-section d-flex flex-column chapter-1">
+                        <div class="half d-flex align-items-center justify-content-center py-4">
+                            <img src="{% static 'img/panel-circle.png' %}" class="img-fluid" alt="">
+                        </div>
+                        <div class="half d-flex flex-column align-items-center justify-content-center" style="gap: 10px; flex: 1;">
+                            <p class="m-0 text-dark font-weight-bold fs-5">{% trans 'Treatment Planning' %}</p>
+                            <p class="m-0 text-dark fs-6 text-muted text-center">{% trans 'Here you can add and view treatment planning' %}</p>
+                            <button class="custom text-light" style="background: linear-gradient(90deg, #0E2D58 0%, #203F6C 100%);" data-pass-two-chapter>{% trans 'Start Planning' %}</button>
+                        </div>
+                    </div>
+                {% else %}
+                    <div id="other-plannings" class="treatment-section d-flex flex-column chapter-1">
+                        <div class="half d-flex flex-column align-items-center justify-content-center py-4">
+                            <img src="{% static 'img/panel-circle.png' %}" class="img-fluid" alt="">
+                            <p class="m-0 font-weight-bold fs-5 text-light my-2">{% trans 'Treatment Planning' %}</p>
+                            <p class="m-0 fs-6 text-muted text-center">{% trans 'Here you can add and view treatment planning' %}</p>
+                        </div>
+                        <div class="half d-flex flex-column align-items-center justify-content-center" style="gap: 10px; flex: 1;">
+                            <div class="position-sticky d-flex justify-content-end w-100 top-0" style="background-color: white;">
+                                <button class="custom text-light m-2" style="background: linear-gradient(90deg, #0E2D58 0%, #203F6C 100%);" data-pass-two-chapter>{% trans 'Start Planning' %}</button>
+                            </div>
+
+                            <div class="px-3 py-1 w-100" style="flex: 1; overflow-y: auto;">
+                                {% if 'Today' in grouped_treatments %}
+                                    <div class="planning-item">
+                                        <p class="m-0 text-dark fs-6"><strong>Today</strong></p>
+                                    </div>
+                                    {% for item in grouped_treatments.Today %}
+                                            <div class="planning-item">
+                                                <div class="rounded p-3 text-dark my-3 d-flex planning-item-box" style="box-shadow: 0 0 30px rgba(0, 0, 0, .15);">
+                                                    <span style="width: 12px; height: 12px; border-radius: 50%; background-color: lime;"></span>
+                                                    <div class="mx-3">
+                                                        <p data-treatment-id="{{ item.id }}" class="m-0 mb-1" data-pass-two-chapter=""><strong>Treatments Plan {{item.counter}} </strong></p>
+                                                        <p class="m-0">{{ item.modified_date }}</p>
+                                                    </div>
+                                                    <span class="ms-auto d-flex align-items-end">
+                                                        <i data-open-modal-pk="modal-delete-treatment"
+                                                        data-modal-type="treatment-delete" class="fa-solid fa-trash fs-6" style="cursor: pointer;"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                {% endif %}
+                                {% for date, items in grouped_treatments.items %}
+                                    {% if date != 'Today' %}
+                                        <div class="planning-item">
+                                            <p class="m-0 text-dark fs-6"><strong>{{ date }}</strong></p>
+                                        </div>
+                                        {% for item in items %}
+                                                <div class="planning-item">
+                                                    <div class="rounded p-3 text-dark my-3 d-flex planning-item-box" style="box-shadow: 0 0 30px rgba(0, 0, 0, .15);">
+                                                        <span style="width: 12px; height: 12px; border-radius: 50%; background-color: lightgray;"></span>
+                                                        <div class="mx-3">
+                                                            <p data-treatment-id="{{ item.id }}" class="m-0 mb-1" data-pass-two-chapter=""><strong>Treatments Plan {{ item.counter }}</strong></p>
+                                                            <p class="m-0">{{ item.modified_date }}</p>
+                                                        </div>
+                                                        <span class="ms-auto d-flex align-items-end">
+                                                            <i data-open-modal-pk="modal-delete-treatment"
+                                                            data-modal-type="treatment-delete" class="fa-solid fa-trash fs-6" style="cursor: pointer;"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                                <div id="planning-items-list"></div>
+                            </div>
+
+                        </div>
+                    </div>
+            {% endif %}
+                    <div class="treatment-section bg-light chapter-2 p-3 d-flex flex-column">
+                        <h3 class="text-dark fs-3">{% trans 'Treatment Planning' %}</h3>
+                        <p class="text-muted">{% trans 'You can add or update treatment planning' %}</p>
+                        <form id="treatment-planning">
+                            <textarea name="ck-editor" id="editor"></textarea>
+                            <div class="d-flex justify-content-end mt-2">
+                                <button class="custom text-dark me-2" data-pass-one-chapter type="button">Cancel</button>
+                                <button type="submit" class="save-treatment-planning custom btn-blue" data-treatment-save>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<section id="bottom-drop-section">
+    <div class="open-section-icon" onclick="toggleDropSection(event)">
+        <i class="fa-solid fa-angle-up"></i>
+    </div>
+    <div class="content">
+        {% for image_report_id, value in other_radiographys_section.radiography.items %}
+            <div class="radyografi-img-container">
+                {% if value.status2 == 'success' %}
+                    <a href="{{value.href}}">
+                        <div class="main-overlay">
+                            <span class="position-absolute text-light" style="bottom: 7px; left: 7px; z-index: 13; font-size: 10px;">{{value.date}}</span>
+                        </div>
+                        <div class="hover-section {{value.status1}}"></div>
+                        <div class="status-circle {{value.status2}}"></div>
+                        <img style="width:205px; height: 100px;" src="{{value.path}}"
+                                alt="" class="radyografi rounded">
+
+                    </a>
+                {% else %}
+                    <a data-image-path="{{value.path}}" style="cursor:pointer" data-image-id="{{value.image_id}}" onclick="start_analyze(this)">
+                        <div class="main-overlay">
+                            <span class="position-absolute text-light" style="bottom: 7px; left: 7px; z-index: 13; font-size: 10px;">{{value.date}}</span>
+                        </div>
+                        <div class="hover-section {{value.status1}}"></div>
+                        <div data-image-id-div="{{value.image_id}}" class="status-circle {{value.status2}}"></div>
+                        <img style="width:205px; height: 100px;" src="{{value.path}}"
+                                alt="" class="radyografi rounded">
+
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    {% csrf_token %}
+</section>
+{% endblock %}
+{% block customJs %}
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/swiper.min.js' %}"></script>
+<script src="{% static 'js/jspdf.min.js' %}"></script>
+<script src="{% static 'js/toastify.js' %}"></script>
+<script src="/static/js/annotorious.min.js"></script>
+<script src="/static/js/leaflet.js"></script>
+<script src="/static/js/leaflet.draw.js"></script>
+<script src="/static/js/leaflet-spline.js"></script>
+<script src="/static/js/leaflet-geoman.min.js"></script>
+
+<!--<script src="/static/js/leaflet-curve@1.0.0_leaflet.curve.min.js"></script>-->
+<script src="/static/js/wheelzoom.js"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script src="/static/js/dragZoom.js"></script>
+<script src="{% static 'js/sweatalert.js' %}"></script>
+<script src="{% static 'js/dropzone.js' %}"></script>
+<script src="{% static 'js/ckeditor2.js' %}"></script>
+<script src="{% static 'js/drawing2.js' %}"></script>
+<script src="{% static 'js/multi-input.js' %}"></script>
+<script src="{% static 'js/cephalometric.js' %}"></script>
+<script>
+    var lateral_cephalometric_dict = {{lateral_cephalometric_dict|safe}}
+    var view_analysis_dict = {{view_analysis_dict_str|safe}}
+    var view_angle_dict = {{view_angle_dict_str|safe}}
+    var res_splines =  {{view_spline_points_dict|safe}}
+    var allPoints = []
+</script>
+
+<script>
+    $(document).ready(function () {
+        var editableLayers = new L.FeatureGroup();
+        map.addLayer(editableLayers);
+     })
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Düğmeye tıklanma olayını yakalayın
+        $('#sendReportMail').click(function () {
+
+            // Tıklanma olayı gerçekleştiğinde çalışacak kodu buraya yazabilirsiniz
+
+            // Tüm inputları döngüye alarak seçili olanı bulun
+            var formatInputs = $('input[name="reporting-area-mail"]:checked');
+            var formatType = formatInputs.val();
+
+            var hasta = $('#report-ch-mail-1').prop('checked');
+            var radiography = $('#report-ch-mail-2').prop('checked');
+            var drawed_radiography = $('#report-ch-mail-3').prop('checked');
+            var draw_selected = $('#additional-ch-mail-1').prop('checked');
+            var draw_all = $('#additional-ch-mail-2').prop('checked');
+
+            var view_analysis = $('#report-ch-mail-view').prop('checked');
+            var bjork = $('#additional-ch-mail-view-3').prop('checked');
+            var skeletal = $('#additional-ch-mail-view-4').prop('checked');
+            var withanalysis = $('#additional-ch-mail-view-5').prop('checked');
+            var downsanalysis = $('#additional-ch-mail-view-6').prop('checked');
+
+            var hekim = $('#report-ch-mail-4').prop('checked');
+            var hekim_imzasi = $('#report-ch-mail-6').prop('checked');
+            // var tedavi_planlari = $('#report-ch-mail-5').prop('checked');
+            var nameForSendMail = $('#nameForSendMail').val()
+            var emailForSendMail = $('#emailForSendMail').val()
+            var emailInputError = document.getElementById("emailForSendMail");
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if(!emailPattern.test(emailForSendMail)){
+                emailInputError.style.border = "1px solid red"; // Geçersiz bir e-posta adresi girildiği için çerçeve kırmızı renkli olacak.
+                Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: '{% trans "Please enter a valid e-mail address" %}',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                return false
+            }
+            if (window.location.href.includes("/en/")) {
+                var lang = "en"
+            }
+            else{
+                var lang = "tr"
+            }
+            var filterBasedInputs = $('input[name="report-data-mail"]:checked');
+            var saveChoices = $('input[name="save-choices-for-mail"]').is(':checked');
+            var filterBasedType = filterBasedInputs.val();
+            let csrfToken = $('input[name=csrfmiddlewaretoken]').val()
+            $.ajax({
+                url: '{% url "createReportForPatient" %}', // AJAX isteğinin gönderileceği URL
+                method: 'POST', // İstek yöntemi (GET, POST, PUT, DELETE vb.)
+                headers: {'X-CSRFToken': csrfToken},
+                data: {
+
+                    formatType: formatType,
+                    hasta: hasta,
+                    radiography: radiography,
+                    drawed_radiography:"false",
+                    draw_selected:"false",
+                    draw_all:"false",
+
+                    view_analysis: view_analysis,
+                    bjork: bjork,
+                    skeletal: skeletal,
+                    withanalysis: withanalysis,
+                    downsanalysis: downsanalysis,
+
+                    selected_items: selectedItems,
+                    hekim: hekim,
+                    hekim_imzasi: hekim_imzasi,
+                    tedavi_planlari: "false",
+                    filterBasedType: "false",
+                    save_choices: saveChoices,
+                    imageReportID: {{image_report_id}},
+                    nameForSendMail:nameForSendMail,
+                    emailForSendMail:emailForSendMail,
+
+                }, // Gönderilecek veriler
+                success: function (response) {
+                    $.ajax({
+                        url:'{% url "sendReportMail" %}',
+                        method:"POST",
+                        headers: {'X-CSRFToken': csrfToken},
+                        data : {
+                            nameForSendMail:nameForSendMail,
+                            emailForSendMail:emailForSendMail,
+                            slug:response.slug,
+                            lang:lang,
+                            image_report_id:{{image_report_id}},
+                        },
+                        success:function(response){
+                            swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title:"{% trans 'Report sent as e-mail' %}",
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        },
+                        error:function(xhr, status, error){
+                        }
+                    })
+                }, // İstek başarılı olduğunda çalışacak işlev
+                error: function (xhr, status, error) {
+                    console.error('İstek sırasında bir hata oluştu.');
+                    console.error('Hata durumu:', status);
+                    console.error('Hata detayı:', error);
+                } // İstek başarısız olduğunda çalışacak işlev
+            });
+
+        });
+    });
+</script>
+<script>
+    $(".draw-icon-item img").click(function() {
+        // toolbardaki kalem ikonun içindeki polygon ve rectangle ikonlarına tıklanınca active class verir
+        $(".draw-icon-item img.active") ? $(".draw-icon-item img.active").removeClass("active") : null
+        $(this).addClass("active")
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        var editableLayers = new L.FeatureGroup();
+        map.addLayer(editableLayers);
+     })
+</script>
+
+<script>
+    $("input[name='kalem']").change(function(event) {
+        // labeling muhabbeti
+        if($(event.target).val() === "rectangele") {
+            // rectangele çizilmek isteniyor
+            console.log("rect çiz")
+        } else if($(event.target).val() === "polygon")  {
+            // ploygon çizilmek isteniyor çizilmek isteniyor
+            console.log("poly çiz")
+        }
+    })
+</script>
+
+<script>
+    // 'Drawed Radiography' checkbox'unu seçin
+    var drawedRadiographyCheckbox2 = document.getElementById('report-ch-view');
+
+    // 'Drawed Radiography' checkbox'unun durumunu kontrol eden işlevi tanımlayın
+    function toggleAdditionalOptions2() {
+        var additionalOptionsDiv2 = document.getElementById('additional-options-view');
+
+        // 'Drawed Radiography' seçildiyse ek seçenekleri görüntüle, aksi takdirde gizle
+        const inputElements = additionalOptionsDiv2.querySelectorAll("input[name='additional-option-view']");//divin altındaki analiz türleri inputlarını al
+        const inputList = Array.from(inputElements); // alınan analiz türlerini bir listeye çevir
+        if (drawedRadiographyCheckbox2.checked) {
+            additionalOptionsDiv2.style.display = 'block';
+            for (const input of inputList) { // bu listede for dönerek dinamik olarak alınan ceph analiz türlerini checkedini true ya da false yap
+                input.checked = true;
+            }
+        } else {
+            additionalOptionsDiv2.style.display = 'none';
+            for (const input of inputList) { // bu listede for dönerek dinamik olarak alınan ceph analiz türlerini checkedini true ya da false yap
+                input.checked = false;
+            }
+        }
+    }
+
+    // 'Drawed Radiography' checkbox'unun durumu değiştiğinde toggleAdditionalOptions işlevini çağırın
+    drawedRadiographyCheckbox2.addEventListener('change', toggleAdditionalOptions2);
+
+    // SEND MAİL
+    // 'Drawed Radiography' checkbox'unu seçin
+    var drawedMailRadiographyCheckbox = document.getElementById('report-ch-mail-view');
+
+    // 'Drawed Radiography' checkbox'unun durumunu kontrol eden iş
+
+    // 'Drawed Radiography' checkbox'unun durumunu kontrol eden işlevi tanımlayın
+    function toggleAdditionalMailOptions2() {
+        var additionalMailOptionsDiv = document.getElementById('additional-options-mail-view');
+
+        // 'Drawed Radiography' seçildiyse ek seçenekleri görüntüle, aksi takdirde gizle
+        const inputElements = additionalMailOptionsDiv.querySelectorAll("input[name='additional-option-view']");//divin altındaki analiz türleri inputlarını al
+        const inputList = Array.from(inputElements); // alınan analiz türlerini bir listeye çevir
+        if (drawedMailRadiographyCheckbox.checked) {
+            additionalMailOptionsDiv.style.display = 'block';
+            for (const input of inputList) { // bu listede for dönerek dinamik olarak alınan ceph analiz türlerini checkedini true ya da false yap
+                input.checked = true;
+            }
+        } else {
+            additionalMailOptionsDiv.style.display = 'none';
+            for (const input of inputList) { // bu listede for dönerek dinamik olarak alınan ceph analiz türlerini checkedini true ya da false yap
+                input.checked = false;
+            }
+        }
+    }
+        window.onload = function() {
+        toggleAdditionalOptions2();
+        toggleAdditionalMailOptions2();
+    };
+
+    // 'Drawed Radiography' checkbox'unun durumu değiştiğinde toggleAdditionalOptions işlevini çağırın
+    drawedMailRadiographyCheckbox.addEventListener('change', toggleAdditionalMailOptions2);
+
+</script>
+<script>
+    var saveChoiceCheckboxForMail = document.getElementById("save-choices-for-mail");
+    saveChoiceCheckboxForMail.addEventListener("change",function(){
+        //checkbox seçiliyse
+        if (saveChoiceCheckboxForMail.checked){
+            var formatInputs = $('input[name="reporting-area-mail"]:checked');
+            var formatType = formatInputs.val();
+            var hasta = $('#report-ch-mail-1').prop('checked');
+            var radiography = $('#report-ch-mail-2').prop('checked');
+            var drawed_radiography = $('#report-ch-mail-3').prop('checked');
+            var draw_selected = $('#additional-ch-mail-1').prop('checked');
+            var draw_all = $('#additional-ch-mail-2').prop('checked');
+
+
+            var view_analysis = $('#report-ch-mail-view').prop('checked');
+            var bjork = $('#additional-ch-mail-view-3').prop('checked');
+            var skeletal = $('#additional-ch-mail-view-4').prop('checked');
+            var withanalysis = $('#additional-ch-mail-view-5').prop('checked');
+            var downsanalysis = $('#additional-ch-mail-view-6').prop('checked');
+
+            var hekim_notu = $('#report-ch-mail-4').prop('checked');
+            var hekim_imzasi = $('#report-ch-mail-6').prop('checked');
+            // var tedavi_planlari = $('#report-ch-mail-5').prop('checked');
+            var filterBasedInputs = $('input[name="report-data-mail"]:checked');
+            var filterBasedType = filterBasedInputs.val();
+            let csrfToken = $('input[name=csrfmiddlewaretoken]').val()
+            var data = {
+                formatType: formatType,
+                hasta: hasta,
+                radiography: radiography,
+                drawed_radiography: "false",
+                draw_selected: "false",
+                draw_all: "false",
+
+                view_analysis: view_analysis,
+                bjork: bjork,
+                skeletal: skeletal,
+                withanalysis: withanalysis,
+                downsanalysis: downsanalysis,
+
+                selected_items: selectedItems,
+                hekim_notu: hekim_notu,
+                hekim_imzasi: hekim_imzasi,
+                tedavi_planlari: "false",
+                filterBasedType: "false",
+                csrfmiddlewaretoken: csrfToken,
+                image_report_id:{{image_report_id}},
+            };
+            $.ajax({
+                url: "{% url 'save_doctor_choices' %}",
+                type: "POST",
+                headers: {'X-CSRFToken': csrfToken},
+                data: JSON.stringify(data),
+                success: function(response) {
+                    console.log("choices success")
+                },
+                error: function(error) {
+                    console.log("choices error")
+                }
+            })
+        } else {
+            console.log("Checkbox is unchecked");
+        }
+    })
+    var saveChoiceCheckbox = document.getElementById("report-save-choice");
+    saveChoiceCheckbox.addEventListener("change",function(){
+        //checkbox seçiliyse
+        if (saveChoiceCheckbox.checked){
+            var formatInputs = $('input[name="reporting-area"]:checked');
+            var formatType = formatInputs.val();
+            var hasta = $('#report-ch-1').prop('checked');
+            var radiography = $('#report-ch-2').prop('checked');
+            var drawed_radiography = $('#report-ch-3').prop('checked');
+            var draw_selected = $('#additional-ch-1').prop('checked');
+            var draw_all = $('#additional-ch-2').prop('checked');
+
+            var view_analysis = $('#report-ch-view').prop('checked');
+            var bjork = $('#additional-ch-view-3').prop('checked');
+            var skeletal = $('#additional-ch-view-4').prop('checked');
+            var withanalysis = $('#additional-ch-view-5').prop('checked');
+            var downsanalysis = $('#additional-ch-view-6').prop('checked');
+            var hekim_notu = $('#report-ch-4').prop('checked');
+            var hekim_imzasi = $('#report-ch-6').prop('checked');
+            // var tedavi_planlari = $('#report-ch-5').prop('checked');
+            var filterBasedInputs = $('input[name="report-data"]:checked');
+            var filterBasedType = filterBasedInputs.val();
+            let csrfToken = $('input[name=csrfmiddlewaretoken]').val()
+            var data = {
+                formatType: formatType,
+                hasta: hasta,
+                radiography: radiography,
+                drawed_radiography: "false",
+                draw_selected: "false",
+                draw_all: "false",
+
+                view_analysis: view_analysis,
+                bjork: bjork,
+                skeletal: skeletal,
+                withanalysis: withanalysis,
+                downsanalysis: downsanalysis,
+
+                selected_items: selectedItems,
+                hekim_notu: hekim_notu,
+                hekim_imzasi: hekim_imzasi,
+                tedavi_planlari: "false",
+                filterBasedType: "false",
+                csrfmiddlewaretoken: csrfToken,
+                image_report_id:{{image_report_id}},
+            };
+            $.ajax({
+                url: "{% url 'save_doctor_choices' %}",
+                type: "POST",
+                headers: {'X-CSRFToken': csrfToken},
+                data: JSON.stringify(data),
+                success: function(response) {
+                    console.log("choices success")
+                },
+                error: function(error) {
+                    console.log("choices error")
+                }
+            })
+        } else {
+            console.log("Checkbox is unchecked");
+        }
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Düğmeye tıklanma olayını yakalayın
+        $('#createReport').click(function () {
+            // Tıklanma olayı gerçekleştiğinde çalışacak kodu buraya yazabilirsiniz
+
+            // Tüm inputları döngüye alarak seçili olanı bulun
+            var formatInputs = $('input[name="reporting-area"]:checked');
+            var formatType = formatInputs.val();
+
+            var hasta = $('#report-ch-1').prop('checked');
+            var radiography = $('#report-ch-2').prop('checked');
+            var drawed_radiography = $('#report-ch-3').prop('checked');
+            var draw_selected = $('#additional-ch-1').prop('checked');
+            var draw_all = $('#additional-ch-2').prop('checked');
+            var hekim = $('#report-ch-4').prop('checked');
+            var hekim_imzasi = $('#report-ch-6').prop('checked');
+            // var tedavi_planlari = $('#report-ch-5').prop('checked');
+
+
+            var view_analysis = $('#report-ch-view').prop('checked');
+            var bjork = $('#additional-ch-view-3').prop('checked');
+            var skeletal = $('#additional-ch-view-4').prop('checked');
+            var withanalysis = $('#additional-ch-view-5').prop('checked');
+            var downsanalysis = $('#additional-ch-view-6').prop('checked');
+            var filterBasedInputs = $('input[name="report-data"]:checked');
+            var saveChoices = $('input[name="save-choices"]').is(':checked');
+            var filterBasedType = filterBasedInputs.val();
+            let csrfToken = $('input[name=csrfmiddlewaretoken]').val()
+            $.ajax({
+                url: '{% url "createReportForPatient" %}', // AJAX isteğinin gönderileceği URL
+                method: 'POST', // İstek yöntemi (GET, POST, PUT, DELETE vb.)
+                headers: {'X-CSRFToken': csrfToken},
+                data: {
+
+                    formatType: formatType,
+                    hasta: hasta,
+                    radiography: radiography,
+                    // drawed_radiography: drawed_radiography,
+                    // draw_selected: draw_selected,
+                    // draw_all: draw_all,
+                    drawed_radiography: "false",
+                    draw_selected: "false",
+                    draw_all: "false",
+
+                    view_analysis: view_analysis,
+                    bjork: bjork,
+                    skeletal: skeletal,
+                    withanalysis: withanalysis,
+                    downsanalysis: downsanalysis,
+
+                    selected_items: selectedItems,
+                    hekim: hekim,
+                    hekim_imzasi: hekim_imzasi,
+                    tedavi_planlari: "false",
+                    filterBasedType: "false",
+                    save_choices: saveChoices,
+                    imageReportID: {{image_report_id}},
+
+                }, // Gönderilecek veriler
+                success: function (response) {
+                    let slug = response["slug"]
+                    let redirectURL = "/report/" + slug
+                    // Yeni sekmede yönlendirme yap
+                    window.open(redirectURL, '_blank');
+                }, // İstek başarılı olduğunda çalışacak işlev
+                error: function (xhr, status, error) {
+                    console.error('İstek sırasında bir hata oluştu.');
+                    console.error('Hata durumu:', status);
+                    console.error('Hata detayı:', error);
+                } // İstek başarısız olduğunda çalışacak işlev
+            });
+        });
+    });
+</script>
+
+<script>
+    // doctor comment alanı
+    $(".doctor-comment i").click(function() {
+        $(".doctor-comment").toggleClass("active")
+        if($(".doctor-comment").hasClass("active")) {
+            // panel açılmak isteniyor o halde aç
+            $("#doctor-comment-area").css({
+                "top" : "0%"
+            })
+        } else {
+            $("#doctor-comment-area").css({
+                "top" : "-100%"
+            })
+        }
+    })
+    $("#doctor-comment-cancel-btn").click(function() {
+        $("#doctor-comment-area").css({
+            "top" : "-100%"
+        })
+    })
+</script>
+
+<script>
+    if(!rectangle_state || !$("#editMode").prop("checked") || !$("#editPicture").prop("checked")) {
+        $('#back-img-frame').dragZoom({
+            zoom: 1,
+            onWheelStart: function(event) {
+            },
+        });
+    }
+    // $('#back-img-frame').dragZoom({
+    //         zoom: 1,
+    //     });
+
+    // burası diagnosis kısmındaki select all kısmı - tıklanınca münkün olan checkboxları seçer
+    $('[data-select-all-diagnosis]').change(function () {
+        if ($(this).is(':checked')) {
+            $(".diagnosis-content .item:not(.empty) input[type='checkbox']").prop('checked', true);
+        } else {
+            $(".diagnosis-content .item:not(.empty) input[type='checkbox']").prop('checked', false);
+        }
+    });
+</script>
+<script>
+    function closeModal() {
+        var modal = document.querySelector(".modal-container.active");
+        modal.classList.remove("active");
+        var checkboxesForDiagnosis = document.querySelectorAll('.patient-item input[type="checkbox"]:checked');
+        checkboxesForDiagnosis.forEach(function(checkbox) {
+        checkbox.checked = false;
+    })
+    }
+</script>
+
+
+<script>
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    function appendLeafletDrawJs() {
+        var a = document.createElement("script");
+        a.type = "text/javascript";
+        a.src = "/static/js/leaflet.draw.js";
+        $("head").append(a);
+    }
+    var spline_list = [];
+    var spline_list_latlng = [];
+    var drawSplineMapList= [];
+    var spline_list_name = [];
+    var spline_circleMarker_list = [];
+    function pushSplines(dragSplineList = false) {
+        var imageElement = document.getElementById("back-img");
+        var originalHeight = imageElement.naturalHeight;
+        var originalWidth = imageElement.naturalWidth;
+        var width_rate = $("#back-img").width() / originalWidth;
+        var height_rate = ($("#back-img").height() - 5) / originalHeight;
+        if(dragSplineList) {
+            drawSplineMapList = [];
+            for (var j = 0; j < spline_list_name.length; j++) {
+                spline_list_latlng = [];
+                for(var p = 0; p < spline_list_name[j].length; p++) {
+                    for (var k = 0; k < spline_circleMarker_list.length; k++) {
+                        if (spline_circleMarker_list[k]._path.dataset.circleName == spline_list_name[j][p]) {
+                            spline_list_latlng.push([spline_circleMarker_list[k].getLatLng().lat, spline_circleMarker_list[k].getLatLng().lng]);
+                        }
+                    }
+                }
+                var drawSpline = L.spline(spline_list_latlng);
+                drawSpline.addTo(map);
+                drawSpline.pm.disable();
+                drawSplineMapList.push([drawSpline]);
+                drawSpline.bringToBack()
+                map.pm.disableGlobalDragMode();
+                map.pm.enableGlobalDragMode();
+                $(drawSpline._curve._path).css("pointer-events","none");
+            }
+        }else {
+            for (var j = 0; j < spline_list.length; j+=2){
+              spline_list_latlng.push([map.layerPointToLatLng(L.point(spline_list[j] * width_rate, spline_list[j + 1] * height_rate)).lat,map.layerPointToLatLng(L.point(spline_list[j] * width_rate, spline_list[j + 1] * height_rate)).lng]);
+            }
+            var drawSpline = L.spline(spline_list_latlng);
+            drawSpline.addTo(map);
+            drawSplineMapList.push([drawSpline]);
+            $(drawSpline._curve._path).css("pointer-events","none");
+        }
+        spline_list = [];
+        spline_list_latlng = [];
+    }
+
+
+    var angels_list = [];
+    var analyse_line_list_latlng = [];
+    var drawPolylineMapList = [];
+    var polyline_list_name = [];
+    var polyline_circleMarker_list = [];
+    function pushAnalyseLines() {
+        var imageElement = document.getElementById("back-img");
+        var originalHeight = imageElement.naturalHeight;
+        var originalWidth = imageElement.naturalWidth;
+        var width_rate = $("#back-img").width() / originalWidth;
+        var height_rate = ($("#back-img").height() - 5) / originalHeight;
+        for (var j = 0; j < angels_list.length; j+=2){
+            analyse_line_list_latlng.push([map.layerPointToLatLng(L.point(angels_list[j] * width_rate, angels_list[j + 1] * height_rate)).lat, map.layerPointToLatLng(L.point(angels_list[j] * width_rate, angels_list[j + 1] * height_rate)).lng]);
+        }
+        var drawPolyline = L.polyline(analyse_line_list_latlng).setStyle({
+            color: "#223e9b",
+            weight: 1.5
+        });
+        drawPolyline.addTo(map);
+        polyline_circleMarker_list.push(drawPolyline);
+        drawPolylineMapList.push([drawPolyline]);
+        $(drawPolyline._path).css("pointer-events","none");
+        angels_list = [];
+        analyse_line_list_latlng = [];
+        $("#page-loading").hide();
+    }
+    var draw_tooth_svg_top_point;
+    var draw_tooth_svg_bottom_point;
+    function drawWithCoordinates(original_shape, xy_array, colorCode, is_poly = false, is_polynomial = false, data_illness_name = null, data_illness_proba = null, tooth_card_status = false, illness_list = null, data_pointer = false) { //edit mod iken bununla tekrar çizdirelebilir
+        if (!xy_array) {
+            null;
+        }
+        var point_array = []
+        width_rate = original_shape["width_rate"]
+        height_rate = original_shape["height_rate"]
+        if (original_shape["bitewing_status"] && data_illness_name == "Dental Pulp"){
+            width_rate = 1.0025
+            height_rate = 1.0025
+        }
+        for (let i = 0; i < xy_array.length; i++) {
+            point_array.push(map.layerPointToLatLng(L.point(xy_array[i][0] * width_rate, xy_array[i][1] * height_rate)))
+        }
+        if (point_array.length < 4) {
+            var circleMarker = L.circleMarker(point_array[0]).addTo(map).setStyle({
+                color: "#000000",
+                fill: true,
+                fillColor: colorCode,
+                fillOpacity: 1,
+                opacity: 1,
+                radius: 1.5,
+                repeatMode: false,
+                stroke: true,
+                weight: 1
+            });
+            if(data_illness_name == "Md1c" || data_illness_name == "Mx1c") {
+                 draw_tooth_svg_top_point = point_array[0]
+                console.log(draw_tooth_svg_top_point)
+            }else if (data_illness_name == "Md1r" || data_illness_name == "Mx1r") {
+                draw_tooth_svg_bottom_point = point_array[0]
+                console.log(draw_tooth_svg_bottom_point)
+                if(data_illness_name == "Md1r") {
+                    var svgContent = '<object type="image/svg+xml" data="/static/img/Vector_22.svg" width="50" height="50" style="position: absolute;"></object>';
+                }else {
+                    var svgContent = '<object type="image/svg+xml" data="/static/img/Vector_26.svg" width="50" height="50" style="position: absolute;"></object>';
+                }
+                var pixelDistance = map.latLngToLayerPoint([draw_tooth_svg_bottom_point.lat, draw_tooth_svg_bottom_point.lng]).y - map.latLngToLayerPoint([draw_tooth_svg_top_point.lat, draw_tooth_svg_top_point.lng]).y;
+                var svg = new DOMParser().parseFromString(svgContent, 'image/svg+xml');
+                var svgRoot = svg.documentElement;
+                var svgHeight = Math.abs(pixelDistance);
+                svgRoot.setAttribute('width', '50');
+                svgRoot.setAttribute('height', svgHeight);
+
+                // Harita üzerine SVG ikonunu ekleyin ve konumunu ayarlayın
+                if(data_illness_name == "Md1r") {
+                    // SVG ikonunu oluştur
+                    var svgIcon = L.divIcon({
+                      className: 'custom-svg-icon',
+                      html: svgRoot.outerHTML, // SVG içeriği olarak güncellenmiş SVG root elementini kullanın
+                      iconSize: [50, svgHeight],
+                      iconAnchor: [0, svgHeight], // SVG'nin sol alt köşesi için [0, svgHeight] kullanın
+                    });
+                }else {
+                    // SVG ikonunu oluştur
+                    var svgIcon = L.divIcon({
+                      className: 'custom-svg-icon',
+                      html: svgRoot.outerHTML, // SVG içeriği olarak güncellenmiş SVG root elementini kullanın
+                      iconSize: [50, svgHeight],
+                      iconAnchor: [0, 0], // SVG'nin sol üst köşesi için [0, 0] kullanın
+                    });
+
+                }
+                var marker = L.marker([draw_tooth_svg_bottom_point.lat, draw_tooth_svg_bottom_point.lng], { icon: svgIcon });
+
+                marker.addTo(map);
+            }
+            spline_circleMarker_list.push(circleMarker);
+            $("#back-img-frame svg path").last().attr("data-circle-name", data_illness_name)
+            $("#back-img-frame svg path").last().addClass("path_circle")
+            allPoints.push(data_illness_name)
+            if(getPointCategoryByPoint(data_illness_name)) {
+                $("#back-img-frame svg path").last().attr("data-point-category",getPointCategoryByPoint(data_illness_name))
+            }
+            return null
+        } else if (is_poly) {
+            L.polygon(point_array).addTo(map).setStyle({
+                color: colorCode,
+                fill: true,
+                fillOpacity: 0.2,
+                weight: 1
+            });
+            $(".leaflet-interactive").last().attr({"data-illness-name" : data_illness_name, "data-proba-val" : data_illness_proba, "data-pointer-events": data_pointer});
+            $(".leaflet-interactive").last().addClass("drawsElement");
+        } else if (is_polynomial) {
+            L.polyline(point_array).addTo(map).setStyle({
+                color: colorCode,
+                fill: true,
+                fillOpacity: 0.2,
+                weight: 1
+            });
+        } else if (tooth_card_status){
+            L.rectangle(point_array).addTo(map).setStyle({
+                // color: "transparent",
+                color: colorCode,
+                fill: true,
+                fillOpacity: 0,
+                weight: 1,
+            });
+            $(".leaflet-interactive").last().attr({"tooth-name" : data_illness_name});
+            $(".leaflet-interactive").last().addClass("toothCardElement");
+            var data_ilness_name_list;
+            var data_illness_proba_list;
+            var data_illness_slug_list;
+            var data_illness_approve_list;
+            for (let i = 0; i < illness_list.length; i++) {
+                if(i === 0) {
+                    data_ilness_name_list = illness_list[i]["name"];
+                    data_illness_proba_list = illness_list[i]["probability"];
+                    data_illness_slug_list = illness_list[i]["slug"];
+                    data_illness_approve_list = illness_list[i]["approve_status"];
+                }else {
+                    data_ilness_name_list += "*" + illness_list[i]["name"];
+                    data_illness_proba_list += "*" + illness_list[i]["probability"];
+                    data_illness_slug_list += "*" + illness_list[i]["slug"];
+                    data_illness_approve_list += "*" + illness_list[i]["approve_status"];
+                }
+
+            }
+            $(".leaflet-interactive").last().attr({
+                    "data-illness-name" : data_ilness_name_list,
+                    "data-illness-proba" : data_illness_proba_list,
+                    "data-illness-slug" : data_illness_slug_list,
+                    "data-illness-approve" : data_illness_approve_list}
+                )
+        } else {
+            L.rectangle(point_array).addTo(map).setStyle({
+                color: colorCode,
+                fill: true,
+                fillOpacity: 0.2,
+                weight: 1
+            });
+        }
+        $("#page-loading").hide()
+        // SAYFA RESİZE KAYMA KODLARI SİLME
+        // paths = $("g")[0].children
+        // paths_d.push(paths[paths.length-1].attributes.d.value)
+
+    }
+    // var res_splines = [];
+    var draw_function_res = [];
+    var res_angle_planes;
+    var res_analyse_types;
+    var res_tooth_cephalometric_coords;
+    var g_original_shape;
+    function draw_function(res) {
+        draw_function_res = res;
+        console.log("drawFunc", res)
+        let illness_coords_colors = res['illness_coords_colors']
+        let tooth_illness_coords = res['tooth_illness_coords']
+        let tooth_cephalometric_coords = res['results']['results']['cephalometric_landmarks']
+        res_tooth_cephalometric_coords = res['results']['results']['cephalometric_landmarks']
+        view_analysis_dict = res.results.results.analysis_types
+        view_angle_dict = res.results.results.angle_planes
+        try {
+            for (var j = 0; j < res.results.results.spline_points.length; j++){
+                var spline_group = [];
+                for (var key in res.results.results.spline_points[j]) {
+                    if (res.results.results.spline_points[j].hasOwnProperty(key)) {
+                        var deger = res.results.results.spline_points[j][key];
+                        spline_list.push(parseInt(deger[0]),parseInt(deger[1]));
+                        spline_group.push(key);
+                    }
+                }
+                spline_list_name.push(spline_group);
+            pushSplines();
+            }
+
+        }catch (e) {
+            console.log(e);
+        }
+        console.log("tooth", tooth_cephalometric_coords)
+        var imageElement = document.getElementById("back-img"); // Resmin HTML öğesini seçin veya uygun bir seçici kullanın
+        var original_shape
+        if (4 === res["image_type_id"]){
+            original_shape = {width_rate: $("#back-img").width() / 512, height_rate: ($("#back-img").height() - 5) / 512, periapical_status: true}
+        }else if (2 === res["image_type_id"]){
+            original_shape = {width_rate: $("#back-img").width() / 512, height_rate: ($("#back-img").height() - 5) / 512, bitewing_status: true}
+        }else{
+            var originalHeight = imageElement.naturalHeight;
+            var originalWidth = imageElement.naturalWidth;
+            original_shape = {width_rate: $("#back-img").width() / originalWidth, height_rate: ($("#back-img").height() - 5) / originalHeight, bitewing_status: false}
+        }
+        g_original_shape = original_shape;
+        if (illness_coords_colors) {
+            for (let i = 0; i < illness_coords_colors.length; i++) {
+                drawWithCoordinates(original_shape, illness_coords_colors[i]['coords'], illness_coords_colors[i]['color'], true, false, illness_coords_colors[i]['name'], illness_coords_colors[i]['proba'], false, null, illness_coords_colors[i]['data-pointer']);
+                // ilk çizdirmede tüm hastalıkları çizen if
+            }
+        }
+
+        if (tooth_illness_coords) {
+            // hastalığın çizdirmesini ekleme çıkarma ifi
+            for (let i = 0; i < tooth_illness_coords.length; i++) {
+                console.log("2.for", illness_coords_colors[i]['data-pointer'])
+                // tooth_illness_coords[i]["illness"].map(item=>console.log("itms : ", item.approve_status))
+                drawWithCoordinates(original_shape, tooth_illness_coords[i]['coordinates'], false, false, false, tooth_illness_coords[i]["tooth_number"], tooth_illness_coords[i]['probability'], true, tooth_illness_coords[i]["illness"], illness_coords_colors[i]['data-pointer']);
+            }
+        }
+        if (tooth_cephalometric_coords) {
+            console.log("tooth_cephalometric_coords= ",tooth_cephalometric_coords)
+            for (let i = 0; i < tooth_cephalometric_coords.length; i++) {
+                drawWithCoordinates(original_shape, tooth_cephalometric_coords[i]['coordinates'], "#fbff21", false, false, tooth_cephalometric_coords[i]["label"]);
+            }
+            doPointSelectbox(allPoints) // tüm noktalar diziye aktarıldı ve sağdaki noktalar divine konuldu
+        }
+        var leafs = $(".leaflet-interactive")
+        for (let i = 0; i < leafs.length; i++) {
+            leafs[i].classList.remove("leaflet-interactive");
+        }
+        // appendLeafletDrawJs();
+        toggleMapPopup()
+        mapPopup()
+        map.addLayer(editableLayers);
+        $("#page-loading").hide()
+    }
+
+    function drawAngleChangeFunc(angels_types_name_list) {
+        try {
+            var allAngelsValues = $.map(view_angle_dict, function(value,key) {
+                for (var i = 0; i < angels_types_name_list.length; i++) {
+                    if(key == angels_types_name_list[i]) {
+                        console.log("line çizildi= ", key)
+                        angels_list.push(value[0][0][0],value[0][0][1]);
+                        angels_list.push(value[0][1][0],value[0][1][1]);
+                        angels_list.push(value[1][0][0],value[1][0][1]);
+                        angels_list.push(value[1][1][0],value[1][1][1]);
+                        pushAnalyseLines();
+                    }   
+                }
+            });
+
+        }catch (e) {
+            console.log(e);
+        }
+    }
+</script>
+<script>
+    var checkboxes = document.querySelectorAll('.diagnosis-content .item:not(.empty) input[type="checkbox"]');
+    // var checkboxes = Array.from(document.querySelectorAll(".item:not(.empty) input[type='checkbox']"));
+    var selectAllCheckbox = document.querySelector('[data-select-all-diagnosis]');
+    var selectedItems = [];
+
+    function updateSelectedItems() {
+        selectedItems = [];
+        checkboxes.forEach(function (checkbox) {
+            if (checkbox.checked) {
+                var label = checkbox.parentNode.nextElementSibling;
+                selectedItems.push(label.getAttribute('data-disease-name'));
+            }
+        });
+    }
+
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+
+            updateSelectedItems();
+
+            // AJAX isteğini burada gerçekleştir
+            sendAJAXRequest(selectedItems);
+        });
+
+        if (checkbox.checked) {
+            var label = checkbox.parentNode.nextElementSibling;
+            selectedItems.push(label.textContent);
+        }
+    });
+
+    // selectAllCheckbox.addEventListener('change', function () {
+    //     if (this.checked) {
+    //         $(".diagnosis-content .item:not(.empty) input[type='checkbox']").prop('checked', true);
+    //     } else {
+    //         $(".diagnosis-content .item:not(.empty) input[type='checkbox']").prop('checked', false);
+    //     }
+    //     updateSelectedItems();
+
+    //     // AJAX isteğini burada gerçekleştir
+    //     sendAJAXRequest(selectedItems);
+    // });
+
+    // Sayfa yüklendikten sonra hemen AJAX isteğini gerçekleştir
+    updateSelectedItems();
+
+
+    function sendAJAXRequest(selectedItems) {
+        console.log("selected items",selectedItems)
+        $.ajax({
+            url: "/api/illness-draw/?image_report_id=" + image_report_id + "&illness_list=" + selectedItems,
+            method: "GET",
+            data: {selectedItems, image_report_id},
+            success: function (response) {
+                draw_function(response)
+            },
+            error: function (xhr, status, error) {
+            }
+        });
+    }
+</script>
+
+<!--ZOOM IN ZOOM OUT MAUSE WHELL-->
+<script>
+    var scale = 1,
+        panning = false,
+        pointX = 0,
+        pointY = 0,
+        start = {x:0, y:0},
+        zoomElement = document.getElementById("back-img-frame"),
+        maxScale = 9, // maksimum yakınlaştırma düzeyi
+        minScale = 1; // minimum yakınlaştırma düzeyi
+
+    function setTransform(){
+        if(!$("#editPicture").prop("checked")) {
+            zoomElement.style.transform = "translate("+pointX+"px,"+pointY+"px) scale("+scale+")";
+        }
+    }
+
+    zoomElement.onmousedown = function(e){
+        e.preventDefault();
+        start = {x: e.clientX - pointX, y:e.clientY - pointY}
+        // panning = true;
+    }
+
+    zoomElement.onmouseup = function(e) {
+        panning = false;
+    }
+
+    zoomElement.onmousemove = function(e){
+        if(!panning){
+            return;
+        }
+        pointX = (e.clientX - start.x)
+        pointY = (e.clientY - start.y)
+        setTransform()
+    }
+
+    zoomElement.onwheel = function(e) {
+        resetPointSpecify() // zoom yapıldığında nokta kırmızılarını temizler ve menüden kaldırır
+        e.preventDefault();
+
+        if($("#drawTeethBoxesDraw").is(":checked")) {
+            // eğer ki diş numaraları açıksa kapat bitince geri açarsın
+            $("#drawTeethBoxesDraw").click()
+        }
+        var xs = (e.clientX - pointX) / scale,
+            ys = (e.clientY - pointY) / scale,
+            delta = (e.wheelDelta ? e.wheelDelta : -e.deltaY),
+            prevScale = scale;
+
+        (delta > 0) ? (scale *= 1.1) : (scale /= 1.1);
+
+        // Yakınlaştırma sınır kontrolü
+        if (scale > maxScale) {
+            scale = maxScale;
+        } else if (scale < minScale) {
+            scale = minScale;
+        }
+
+        pointX = e.clientX - xs * scale;
+        pointY = e.clientY - ys * scale;
+
+        // Yakınlaştırma düzeyi değiştiyse transform işlemini gerçekleştir
+        if (scale !== prevScale) {
+            setTransform();
+        }
+    }
+
+</script>
+
+<script>
+    var image_report_id = {{image_report_id}}
+    draw_leaflet()
+    function draw_leaflet() {
+        // $("#back-img-frame .loading").removeClass("d-none")
+        $.ajax({
+            url: "/api/illness-draw/?image_report_id=" + image_report_id+ "&first_draw=" + "True",
+            method: "GET",
+            success: function (res) {
+                console.log("illness-draw res", res)
+                if (res["status"] === "continues"){
+                    $('#continues').removeClass("d-none")
+                    // $("#back-img-frame .loading").removeClass("d-none")
+                    var intervalId = setInterval(function () {
+                        $.ajax({
+                            url: "{% url 'is_analyze_finished' %}", // İkinci isteğin gönderileceği URL'yi buraya ekleyin
+                            method: "GET",
+                            data: {image_report_id: image_report_id}, // İkinci isteğin verilerini burada belirtin
+                            success: function (res) {
+                                var divElement = document.querySelector(`div[data-image-id-div='${image_id}']`);
+                                var divAElement = document.querySelector(`a[data-image-id='${image_id}']`);
+                                var TextElement = document.querySelector(`a[data-image-id='${image_id}'] .not-completed`);
+                                if (res.status === true && res.success === true) {
+                                    // window.location.reload()
+
+                                } else if (res.status === true && res.success === false) {
+                                    clearInterval(intervalId)
+                                    divElement.classList.add('error');
+                                    divElement.classList.remove('spinner-border');
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                // İkinci isteğin hata durumunda yapılacak işlemleri burada gerçekleştirin
+                            }
+                        });
+                    }, 3000);
+                }else{
+                    // $("#back-img-frame .loading").addClass("d-none")
+                    if($("#drawTeethBoxesDraw").is(":checked")) {
+                        // draw teeth checkbox ı seçili ise önce kaldır zaten kalkık ise bişey olmaz ama sonradan da çizdirmen lazım
+                        clearTeethDraw()
+                        getCoordinatesAndDrawTeeth()
+                    }
+                    draw_function(res)
+                }
+            }
+        })
+    }
+</script>
+
+<script>
+    function start_analyze(element) {
+    var image_path = element.getAttribute("data-image-path");
+    var image_id = element.getAttribute("data-image-id");
+    $.ajax({
+        url: "{% url 'startAnalyze' %}",
+        method: "GET",
+        data: {
+        "image_report_id": image_report_id,
+        "image_path": image_path,
+        "image_id": image_id
+        },
+                success: function (res) {
+        if (res["code"] === "analyse_limit_exceeded") {
+            Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: res["message"],
+            showConfirmButton: false,
+            timer: 3000
+                        }).then(function () {
+            window.location.href = "{% url 'profile_page' %}";
+            });
+        } else if (res["code"] === "package_expired") {
+            Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: res["message"],
+            showConfirmButton: false,
+            timer: 3000
+                        }).then(function () {
+            window.location.href = "{% url 'profile_page' %}";
+            });
+        } else if (res.status === true) {
+            var divElement = document.querySelector(`div[data-image-id-div='${image_id}']`);
+            // Class çıkarma
+            divElement.classList.remove('error');
+            // Class ekleme
+            divElement.classList.add('spinner-border');
+
+            var image_report_id = res["image_report_id"];
+            // İkinci AJAX isteğini belirli aralıklarla göndermek için setInterval kullanın
+                        var intervalId = setInterval(function () {
+            $.ajax({
+                url: "{% url 'is_analyze_finished' %}", // İkinci isteğin gönderileceği URL'yi buraya ekleyin
+                method: "GET",
+                                data: {image_report_id: image_report_id}, // İkinci isteğin verilerini burada belirtin
+                                success: function (res) {
+                var divElement = document.querySelector(`div[data-image-id-div='${image_id}']`);
+                var divAElement = document.querySelector(`a[data-image-id='${image_id}']`);
+                var TextElement = document.querySelector(`a[data-image-id='${image_id}'] .not-completed`);
+                                    if (res.status === true && res.success === true) {
+                    clearInterval(intervalId)
+                    divElement.classList.add('success');
+                    divElement.classList.remove('spinner-border');
+                    divAElement.setAttribute('href', `/diagnosis/${image_report_id}`);
+                    TextElement.classList.remove("not-completed")
+                    TextElement.classList.add("completed")
+                    //d
+
+
+                                    } else if (res.status === true && res.success === false) {
+                    clearInterval(intervalId)
+                    divElement.classList.add('error');
+                    divElement.classList.remove('spinner-border');
+                }
+                },
+                                error: function (xhr, status, error) {
+                // İkinci isteğin hata durumunda yapılacak işlemleri burada gerçekleştirin
+                }
+            });
+            }, 3000); // 3 saniyede bir isteği tekrarlayacak şekilde ayarlayın
+        }
+        },
+                error: function (xhr, status, error) {
+        }
+    });
+    }
+
+</script>
+
+<script>
+    var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+    var image_report_id = {{image_report_id}}
+</script>
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+
+    try {
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            var target = document.querySelector(tooltipTriggerEl.dataset.bsTarget)
+
+            return new bootstrap.Tooltip(tooltipTriggerEl, {
+                title: target.innerHTML,
+                html: true
+            })
+        })
+    }catch (e) {
+    }
+
+</script>
+
+<script>
+    $("[data-event-type='collapse-section']").click(function (event) {
+        // radyografiyi büyültüp küçültür
+        $(".teeth-and-treatment-section").toggleClass("active ")
+        $("[data-event-type='collapse-section'] i").toggleClass("active")
+        $("svg.leaflet-zoom-animated").remove()
+        $("#back-img-frame .loading").removeClass("d-none")
+        if($(".teeth-and-treatment-section").hasClass("active")) {
+            setTimeout(function() {
+               $(".tooth-chart-illnesses-by-tooth").css("opacity", "1")
+            }, 500)
+        } else {
+            $(".tooth-chart-illnesses-by-tooth").css("opacity", "0")
+        }
+        setTimeout(function (){
+            draw_leaflet()
+        },500)
+    })
+
+    $(".see-all-teeth-detail").click(function (event) {
+        $(".tooth .item").removeClass("active")
+        if($(event.target).attr("data-eye") === "open") {
+            // hastalıklar gösteriliyor artık kapat
+            $(event.target).attr("data-eye","close").removeClass("fa-eye-slash").addClass("fa-eye")
+            $(".tooth-detail").css("display","none")
+        } else {
+            // hastalıklar gösterilmiyor onları aç
+            $(event.target).attr("data-eye","open").removeClass("fa-eye").addClass("fa-eye-slash")
+            $(".tooth-detail").css("display","block")
+        }
+    })
+</script>
+
+<script>
+    function toggleDropSection(event) {
+        // aşağıdan açılır menünün açılıp kapanmasını sağlayan fonksiyon
+        let dropSection = $("#bottom-drop-section")
+        let iconSection = $(event.target)
+        dropSection.toggleClass("active")
+        iconSection.toggleClass("active")
+    }
+</script>
+
+
+<script>
+    function approve_status_change(event) {
+        let data_id = event.target.getAttribute("data-id")
+        let image_report_id = {{image_report_id}}
+        var iconStatus = event.target.getAttribute('data-icon-status');
+        var approveStatus = event.target.getAttribute('data-approve-status');
+        let parentElement = event.target.parentElement;
+
+
+        // AJAX ile sunucuya yeni onay durumunu gönderme
+        if (iconStatus === '1') {
+            if (approveStatus === '1') {
+                approveStatus = '0';  // Beğeni durumunu geri almak için 0
+            } else {
+                approveStatus = '1';  // Beğenme durumunu ayarlamak için 1
+            }
+        } else if (iconStatus === '2') {
+            if (approveStatus === '2') {
+                approveStatus = '0';  // Beğenmeme durumunu geri almak için 0
+            } else {
+                approveStatus = '2';  // Beğenmeme durumunu ayarlamak için 2
+            }
+        }
+
+       $.ajax({
+            type: "POST",
+            url: "{% url 'changetoothapprovedstatusviewApi' %}",
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                data_id: data_id,
+                data_approve_status: approveStatus,
+                image_report_id: image_report_id
+            },
+            success: function (response) {
+                let newApproveStatus = response["new_approve_status"]
+                let otherIcons = parentElement.querySelectorAll('[data-approve-status]'); // istek başarılı geldiğinde istekten dönen new_approve statusu ikonların ikisi için de güncelliyoruz
+                //foreach ile ikon sayısı ilerde artarsa her ikonun data-approve-status değerini viewden dönen sonuçla güncellemiş olacağız
+                let approveIcon = parentElement.querySelector('[data-icon-status="1"]');
+                let rejectIcon = parentElement.querySelector('[data-icon-status="2"]');
+                otherIcons.forEach(function(icon) {
+                    icon.setAttribute('data-approve-status', newApproveStatus);
+            });
+                if (response["new_approve_status"] === "1"){
+                    event.target.src = "{% static 'img/like-active.png' %}"
+                    rejectIcon.src = "{% static 'img/dislike.png' %}"
+                }
+                else if (response["new_approve_status"]==="2"){
+                    event.target.src = "{% static 'img/like-passive.png' %}"
+                    approveIcon.src = "{% static 'img/like.png' %}"
+                }
+                else{
+                    rejectIcon.src = "{% static 'img/dislike.png' %}"
+                    approveIcon.src = "{% static 'img/like.png' %}"
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("An error occurred: " + error); // Hata durumunda bir uyarı mesajı gösteriliyor.
+            }
+        });
+    }
+</script>
+
+<script>
+    function save_tooth_note(event) {
+        let tooth = event
+        let tooth_note = $(`#tooth_note_${tooth}`).val()
+        let image_report_id = {{image_report_id}}
+        $.ajax({
+            type: "POST",
+            url: "{% url 'saveToothNoteApi' %}",
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                tooth_number: tooth,
+                tooth_note: tooth_note,
+                image_report_id: image_report_id,
+            },
+            success: function (response) {
+                if (response["status"] === true) {
+                    Toastify({
+                        text: "Success",
+                        gravity: "bottom", // `top` or `bottom`
+                        position: "right", // `left`, `center` or `right`
+                        duration: 3000,
+                        backgroundColor: "green",
+                        icon: "<i class='fa-solid fa-check'></i>"
+                    }).showToast();
+                } else {
+                    Toastify({
+                        text: "Failed",
+                        gravity: "bottom", // `top` or `bottom`
+                        position: "right", // `left`, `center` or `right`
+                        duration: 3000,
+                        backgroundColor: "red",
+                        icon: "<i class='fa-solid fa-xmark'></i>"
+                    }).showToast();
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("An error occurred: " + error); // Hata durumunda bir uyarı mesajı gösteriliyor.
+            }
+        });
+    }
+</script>
+
+<script>
+    function tools() {
+        let zoom = 1
+        let map = $('#back-img-frame')
+        let mapImg = $("img#back-img")
+
+        function contrastReset() {
+            mapImg.css("filter", "contrast(100%)")
+            $("#contrast-btn").nextAll('.range-marker').first().css("left", "20%");
+            $("#contrast-btn").nextAll('.range-value').first().css("width", "20%");
+            $("#contrast-value").html("+100");
+        }
+
+        function brightnessReset() {
+            mapImg.css("filter", "brightness(100%)")
+            $("#brightness-btn").nextAll('.range-marker').first().css("left", "33.3%");
+            $("#brightness-btn").nextAll('.range-value').first().css("width", "33.3%");
+            $("#brightness-value").html("+100");
+        }
+
+        // zoom + butonuna tıklayınca zoom işlemi yapar
+        $("#zoomin-btn").click(function() {
+            if(zoom <= 3) {
+                // zoom 3 katı kadar yapsın en fazla
+                zoom += 0.1;
+                map.css('transform', `scale(${zoom})`);
+                if($("#drawTeethBoxesDraw").is(":checked")) {
+                    $("#drawTeethBoxesDraw").click() // eğer ki diş numaraları açıksa kapat
+                }
+            }
+        })
+
+        // zoom - butonuna tıklayınca zoom işlemi yapar
+        $("#zoomout-btn").click(function() {
+            if(zoom >= 0.5) {
+                // zoom yarıya kadar yapsın en fazla
+                zoom -= 0.1;
+                map.css('transform', `scale(${zoom})`);
+                if($("#drawTeethBoxesDraw").is(":checked")) {
+                    $("#drawTeethBoxesDraw").click() // eğer ki diş numaraları açıksa kapat
+                }
+            }
+        })
+
+        // zoom contrast ve parlaklık sıfırla
+        $("#reset-btn").click(function() {
+            zoom = 1
+            map.css('transform', `scale(${zoom})`);
+            contrastReset()
+            brightnessReset()
+        })
+
+
+        // contrast değerini değiştir
+        $("#contrast-btn").on("input", function() {
+            var contrastValue = this.value;
+            var contrastCSS = 'contrast(' + contrastValue + '%)';
+            $("#contrast-value").html(contrastValue != 0 ? `+ ${contrastValue}` : 0);
+            mapImg.css("filter", contrastCSS)
+            $(this).nextAll('.range-marker').first().css("left", `${contrastValue / 5}%`);
+            $(this).nextAll('.range-value').first().css("width", `${contrastValue / 5}%`);
+        })
+
+         // brightness değerini değiştir
+         $("#brightness-btn").on("input", function() {
+            console.log("brightness btn calıstı")
+            var brightnessValue = this.value;
+            var brightnessCSS = 'brightness(' + brightnessValue + '%)';
+            $("#brightness-value").html(brightnessValue != 0 ? `+ ${brightnessValue}` : 0);
+            mapImg.css("filter", brightnessCSS)
+            $(this).nextAll('.range-marker').first().css("left", `${brightnessValue / 3}%`);
+            $(this).nextAll('.range-value').first().css("width", `${brightnessValue / 3}%`);
+        })
+
+        $("#calibrationRange").on("input", function() {
+            // calibrationRange range itemı değiştiğinde sayıyı gösterir ve custom range i çalıştırır
+            var calibrationValue = this.value;
+            $(this).nextAll('.range-marker').first().css("left", `${calibrationValue}%`);
+            $(this).nextAll('.range-value').first().css("width", `${calibrationValue}%`);
+            $("#calibrationValue").text(calibrationValue)
+        })
+
+
+
+        $("#rotate-btn").on("input", function() {
+            var rotateValue = this.value;
+            $(this).nextAll('.range-marker').first().css("left", `${rotateValue / 3.6}%`);
+            $(this).nextAll('.range-value').first().css("width", `${rotateValue / 3.6}%`);
+        })
+
+        $("#draw-btn-border, #draw-shape-border").on("input", function() {
+            var rotateValue = this.value;
+            $(this).nextAll('.range-marker').first().css("left", `${rotateValue * 5}%`);
+            $(this).nextAll('.range-value').first().css("width", `${rotateValue * 5}%`);
+        })
+
+        $("#bar-length-btn, #scale-bar-btn").on("input", function() {
+            var rotateValue = this.value;
+            $(this).nextAll('.range-marker').first().css("left", `${rotateValue}%`);
+            $(this).nextAll('.range-value').first().css("width", `${rotateValue}%`);
+        })
+
+
+
+        $("#download-btn").click(function() {
+            var link = document.createElement('a');
+            let yol = mapImg.attr("src")
+            link.href = yol; // Resmin URL'sini buraya ekleyin
+            link.download = yol; // İndirilecek dosya adını buraya ekleyin
+            link.target = '_blank'; // Yeni sekmede açmak için "_blank" kullanın
+            link.click();
+        })
+
+    }
+
+    tools()
+</script>
+<script>
+    function sendSelectedItems(event) {
+        var selectedItems = []; // Seçilen öğeleri depolamak için bir dizi oluşturun
+        var checkboxes2 = document.getElementsByClassName('weekstrong-checkbox'); // Checkbox öğelerini seçin
+        var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+        // Checkbox öğelerini döngüyle kontrol edin
+        for (var i = 0; i < checkboxes2.length; i++) {
+            var checkbox = checkboxes2[i];
+            if (checkbox.checked) {
+                selectedItems.push(checkbox.getAttribute('data-type')); // İşaretlenen öğeyi diziye ekleyin
+            }
+        }
+
+        // Seçilen öğeleri post etmek için Ajax isteği gönderin
+        $.ajax({
+            url: "{% url 'illnessDraw' %}", // Post isteği yapılacak URL'yi buraya ekleyin
+            type: 'GET',
+            data: {
+                selected_items: selectedItems,
+                csrfmiddlewaretoken: csrfmiddlewaretoken,
+                image_report_id: image_report_id,
+                first_draw: "True"
+            }, // Seçilen öğeleri 'selected_items' adıyla gönderin
+            success: function (res) {
+                if (res["status"] === "continues"){
+
+                }
+                // Başarılı yanıt durumunda yapılacak işlemler
+                draw_function(res)
+            },
+            error: function (xhr, status, error) {
+                // Hata durumunda yapılacak işlemler
+            }
+        });
+    }
+
+    // Checkboxların değişikliklerini dinlemek için event listener ekleyin
+    var checkboxes2 = document.getElementsByClassName('weekstrong-checkbox');
+    for (var i = 0; i < checkboxes2.length; i++) {
+        checkboxes2[i].addEventListener('change', sendSelectedItems);
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+
+        // CSRF token değerini al
+        var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+
+        $('.save-diagnosis').on('click', function() {
+            var selectedIllnesses = [];
+            // toothNumber = $('#modal-add-diagnosis').data('tooth-number');
+
+            // İşaretlenen checkbox'ları toplayın
+            $('input[name="AddDiagnosis"]:checked').each(function() {
+                var illnessId = $(this).attr('id');
+                selectedIllnesses.push(illnessId);
+            });
+
+            // AJAX isteği gönder
+            $.ajax({
+                url: "{% url 'add_diagnosis' %}",
+                type: 'POST',
+                headers: { 'X-CSRFToken': csrfToken },
+                data: {
+                    'selectedIllnesses[]': selectedIllnesses,
+                    'image_type': "{{image_type}}",
+                    'tooth_number': toothNumber,
+                    'image_report_id':"{{image_report_id}}",
+                },
+                success: function(response) {
+                    console.log("res",response)
+                    if(response.error){
+                        console.log("ife girdi")
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: response["error"],
+                        showConfirmButton: false,
+                        timer: 3000
+                        })
+                        return false
+                    }
+                    else{
+                        // Hastalık isimlerini al
+                    var selectedIllnesses = response.selected_illnesses;
+                    var toothNumber = response.tooth_number;
+
+                    // Hastalık isimlerini HTML içeriğine ekle
+                    var diseasesContainer = $('.tooth-detail[data-tooth-id="' + toothNumber + '"] .diseases');
+                    var probability = response.probability
+                    for (var i = 0; i < selectedIllnesses.length; i++) {
+                        if (window.location.href.includes("/en/")) {
+                            var illness = selectedIllnesses[i].en_name;
+                        }
+                        else{
+                            var illness = selectedIllnesses[i].tr_name;
+
+                        }
+                        console.log("illness",illness)
+
+                        console.log("selected illness",selectedIllnesses)
+                        var probability = 'normal'; // Örnek bir varsayılan sınıf
+
+                        // Hastalık olasılığına göre sınıf belirle
+                        if (illness.probability < 81) {
+                            probability = 'low';
+                        } else if (illness.probability > 90) {
+                            probability = 'high';
+                        }
+
+                        // Hastalık ismi ve olasılığı içeren HTML'i ekle
+                        // var html = '<span class="tooth-percent high">' + illness + "" + "(-)" + '</span>';
+                        var html = '<span>' + illness + '<span class="tooth-percent high"> (-) </span></span>'
+                        diseasesContainer.append(html);
+                    }
+                    closeModal()
+                    }
+                    Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: "{% trans 'Diagnosis added successfully' %}",
+                    showConfirmButton: false,
+                    timer: 2000
+                    })
+                },
+                error: function(xhr, status, error) {
+                }
+            });
+        });
+    });
+
+</script>
+
+<script>
+    $(document).ready(function() {
+
+    // CSRF token değerini al
+    var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+
+    $('#saveTreatment').on('click', function() {
+        var selectedTreatments = [];
+        let selectedTreatmentNames = [];
+        // toothNumber = $('#modal-add-diagnosis').data('tooth-number');
+
+        // İşaretlenen checkbox'ları toplayın
+        $('input[name="AddTreatment"]:checked').each(function() {
+            var treatmentSlug = $(this).attr('slug');
+            let treatmentName = $(this).parent().next().attr('data-treatment-name')
+            selectedTreatments.push(treatmentSlug);
+            selectedTreatmentNames.push(treatmentName)
+        });
+
+        // AJAX isteği gönder
+        $.ajax({
+            url: "{% url 'add_treatment' %}",
+            type: 'POST',
+            headers: { 'X-CSRFToken': csrfToken },
+            data: {
+                'selectedTreatments[]': selectedTreatments,
+                'image_type': "{{image_type}}",
+                'tooth_number': toothNumber,
+                'image_report_id':"{{image_report_id}}",
+            },
+            success: function(response) {
+                if (response.error === "already exists"){
+                    swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title:"{% trans 'Treatment is already exists' %}",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                }
+                else {
+                    var treatmentRecommendation = {{treatment_recommendation_auto|safe}}
+                    console.log("treatment recom",treatmentRecommendation)
+                    var treatmentMethods = treatmentRecommendation[toothNumber].treatment_methods;
+                    let spanItems = "" //modal kapandıktan sonra dişlere eklenecekler
+                    selectedTreatmentNames.forEach(function(treatmentName){
+                        spanItems += `
+                            <span>${treatmentName}</span>
+                        `
+                    })
+                    $("#treatmentForTooth").append(spanItems)
+                    swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title:"{% trans 'Treatment has been added successfully' %}",
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(function () {
+                        window.location.reload()
+                        });
+                closeModal()
+                }
+
+
+
+            },
+            error: function(xhr, status, error) {
+            }
+        });
+    });
+});
+
+</script>
+<script>
+    var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()
+    function uuidv4() {
+        return ([1e7]+1e3+4e3+8e3+1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
+    
+    var parametre
+    url = "{% url 'dicom_image_upload'%}";
+    Dropzone.autoDiscover = false;
+    var image_response_type = null;
+    var file_url = null;
+    var progress_slug;
+    var check_dicom_uploaded_before = false
+    var u_can_upload = false
+    var file_name = null;
+    console.log("DROPZONE")
+    var totalAddedFiles = 0;
+    var uploadedTotalFiles = 0;
+    var myDropzone2 = new Dropzone('#dicomDropzone', {
+        autoProcessQueue: false,
+        url: url,
+        maxFiles: 100000000,
+        maxFilesize: 99999,
+        acceptedFiles: '.dcm',
+        timeout: 9999999999,
+        chunking: true,
+        previewsContainer: false,
+        chunkSize: 2000000,
+        clickable: "#dicomDropzone",
+        parallelChunkUploads: false,
+        retryChunks: true,
+        retryChunksLimit: 5,
+        forceChunking: true,
+        init: function() {
+            $('#CBCTUpload').click(function(){
+                parametre = uuidv4()
+                myDropzone2.processQueue();
+                $('#CBCTUpload').hide();
+                $('#progress').show();
+                $('#modal-radyografy-upload div[data-modal-close]').css("pointer-events", "none");
+                $('#modal-radyografy-upload div[data-modal-close]').css("background-color", "grey");
+                $('#open-new-tab').removeClass("d-none");
+                $('#close-upload-modal').addClass("d-none");
+                $('#radiography_types').prop("disabled", true);
+            })
+            
+            this.on("addedfile", function(file) {
+                totalAddedFiles++;
+                console.log("Toplam Eklenen Dosya Sayısı: " + totalAddedFiles);
+                $('#dicomDropzone').removeClass("d-flex");
+                $('#dicomDropzone').hide();
+                $('#cbtcContainer').css("display", "block");
+    
+                totalAddedFiles==1 ? $('#cbtcContainer').text(`${totalAddedFiles} file selected.`) : $('#cbtcContainer').text(`${totalAddedFiles} files selected.`);
+            });
+            this.on("sending", function(file, xhr, formData) {
+                // Gönderilecek diğer parametreleri burada belirtebilirsiniz
+                formData.append('slug', parametre);
+                if (file.upload.totalChunkCount!=1){
+                    $('#progressBar').css("width", `${file.upload.progress}%`);
+                    $('#progressText').text(`${parseInt(file.upload.progress)}%`);
+                }
+                
+            });
+
+            this.on("success", function(file, response) {
+                // Dosya yükleme başarılı olduğunda yapılacak işlemleri burada tanımlayabilirsiniz
+                uploadedTotalFiles++;
+                console.log("Dosya başarıyla yüklendi:", response);
+                if (uploadedTotalFiles<totalAddedFiles){
+                    myDropzone2.processQueue();
+                    console.log("Process in queue", "Uploaded: ", uploadedTotalFiles, "Total: ", totalAddedFiles);
+                }
+                $('#progressBar').css("width", `${uploadedTotalFiles/totalAddedFiles*100}%`);
+                $('#progressText').text(`${parseInt(uploadedTotalFiles/totalAddedFiles*100)}%`);
+
+            });
+
+            //this.on("error", function(file, errorMessage) {
+                // Dosya yükleme hatası durumunda yapılacak işlemleri burada tanımlayabilirsiniz
+            //    console.error("Dosya yüklenirken hata oluştu:", errorMessage);
+            //});
+    
+            this.on("queuecomplete", function() {
+                // Tüm dosyalar yüklendikten sonra API isteğini burada yapabilirsiniz
+                console.log("Tüm dosyalar yüklendi. API isteği gönderilecek.");
+                // Örnek olarak jQuery kullanarak bir POST isteği gönderelim
+                var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+                $.ajax({
+                    url: "{% url 'convert_niftii_and_panoramic' %}",
+                    method: 'POST',
+                    headers: { 'X-CSRFToken': csrfmiddlewaretoken },
+                    data: {
+                        // Burada gerekli verileri ve dosya bilgilerini gönderebilirsiniz
+                        // Ekstra verileri burada ekleyebilirsiniz
+                        slug: parametre,
+                        image_report_id: "{{image_report_id}}"
+                    },
+                    success: function(response) {
+                        totalAddedFiles = 0
+                        uploadedTotalFiles = 0
+                        $('#bildirim').click();
+                        myDropzone2.removeAllFiles();
+                        $('modal_radiography_upload').removeClass("active");
+                        $('#modal-radyografy-upload div[data-modal-close]').css("pointer-events", "auto");
+                        $('#modal-radyografy-upload div[data-modal-close]').css("background-color", "#FF7979");
+                        $('#CBCTUpload').show();
+                        $('#progress').hide();
+                        $('#open-new-tab').removeClass("d-block");
+                        $('#open-new-tab').addClass("d-none");
+                        $('#close-upload-modal').removeClass("d-none");
+                        $('#radiography_types').prop("disabled", false);
+                        $('#dicomDropzone').addClass("d-flex");
+                        $('#dicomDropzone').show();
+                        $('#cbtcContainer').css("display", "none");
+
+                        // API isteği başarılı olduğunda yapılacak işlemleri burada tanımlayabilirsiniz
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("API isteği sırasında hata oluştu:", error);
+                        // API isteği sırasında hata durumunda yapılacak işlemleri burada tanımlayabilirsiniz
+                    }
+                });
+            });
+        }
+    })
+</script>
+<script>
+    function filepondInit() {
+    // dropzone alternatifi bir dosya yükleme kütüphanesi
+    // FilePond'u yükle
+    const inputElement      = document.getElementById('filepond');
+    const previewElement    = document.getElementById('previewFilePond');
+    const uploadButton      = document.getElementById('filepondUploadButton');
+
+    const allowedFileTypes  = ['.png', '.jpg', '.jpeg', '.tif'];
+    const allowedMimeTypes  = ['image/png', 'image/jpeg', 'image/tiff'];
+
+    var fileThatFilepond
+    const pond = FilePond.create(inputElement, {
+        acceptedFileTypes: allowedFileTypes,
+        instantUpload: false,
+        allowMultiple: false,
+        credits: '',
+        dropValidation: true,
+        labelIdle: `
+        <div class="text-light">
+            <i class="fa-solid fa-upload border" style="border-radius: 50%; padding: 10px;"></i>
+            <p class="m-0 my-2">Drag &amp; Drop or Choose file upload</p>
+            <p class="m-0">JPG, PNG or JPEG</p>
+        </div>
+        `,
+        onaddfile: (error, file) => {
+            if (!error) {
+                const fileExtension = file.file.name.split('.').pop();
+                const fileType = file.file.type;
+                fileThatFilepond = file.file
+                console.log(file.file)
+                if (allowedFileTypes.includes('.' + fileExtension) && allowedMimeTypes.includes(fileType)) {
+                    // Geçerli dosya uzantısı ve MIME türüne sahip dosyayı kabul et
+                    if (fileExtension.toLowerCase() === 'tif') {
+                        // Eğer dosya uzantısı .tiff ise önizleme mesajını göster
+                        previewElement.innerHTML = '<p>Tif dosyası yüklendi</p>';
+                    } else {
+                        // Diğer resim dosyaları için önizlemeyi göster
+                        const img = new Image();
+                        img.src = URL.createObjectURL(file.file);
+                        previewElement.innerHTML = '';
+                        previewElement.appendChild(img);
+
+                        // Dosya adını ve boyutunu görüntüle
+                        const fileInfo = document.createElement('div');
+                        fileInfo.innerHTML = `<p>${file.file.name}</p><p>${formatBytes(file.file.size)}</p>`;
+                        previewElement.appendChild(fileInfo);
+                    }
+                } else {
+                    // Geçerli dosya uzantısı veya MIME türüne sahip değil, dosyayı reddet
+                    pond.removeFile(file.id);
+                    console.log("Lütfen geçerli bir dosya seçiniz: .png, .jpg, .jpeg veya .tif");
+                }
+            } else {
+                console.error('Dosya yüklenirken bir hata oluştu:', error);
+            }
+        }
+    });
+    var csrfmiddlewaretoken= $('input[name=csrfmiddlewaretoken]').val()
+// ##############################
+    //data: {
+    //    "patientId": patientId,
+//
+  //  },
+    //###################################
+    // Yükleme butonuna tıklanınca
+    uploadButton.addEventListener('click', () => {
+        console.log("tamamdır",fileThatFilepond)
+        const files = pond.getFiles();
+        const patientSlug = $("#modal-radyografy-upload").attr("data-patient-slug")
+        console.log("files", files)
+        if( $("#radiography_types").val() === '' ) {
+            // radyografi tipi seçilmemiş
+            swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title:"{% trans 'Select a type of upload file' %}",
+                showConfirmButton: false,
+                timer: 2000,
+            })
+        }
+        else if (files.length > 0) {
+            // Dosyaları sunucuya gönderme
+            const formData = new FormData();
+            var radiographyTypesSelect = document.querySelector("#radiography_types");
+            var selectedRadiographyTypeId = radiographyTypesSelect.value;
+            formData.append("radiography_type", selectedRadiographyTypeId);
+            formData.append('image_report_id', "{{image_report_id}}");
+            formData.append('file', fileThatFilepond);
+            console.log("formdata", formData)
+            $("#page-loading").show()
+            // files.forEach(file => {
+            //     formData.append('files', file.file);
+            // });
+
+            fetch("{% url 'upload_radyografi' %}", {
+                method: 'POST',
+                body: formData,
+                headers: { "X-CSRFToken": csrfmiddlewaretoken },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("data", data)
+                if (data["code"] === "image_limit_exceeded"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: data['message'],
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    return false
+                }
+                if (data["code"] === "analyse_limit_exceeded"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: data['message'],
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    return false
+                }
+                if (data["success"]=== false){
+                    $("#page-loading").hide()
+                    alert(data['message'])
+                } else if (data["success"]=== true){
+                    $("#page-loading").hide()
+                    pond.removeFiles();
+                    $('#previewFilePond').html("")
+                    $('#modal-radyografy-upload').removeClass("active")
+                    document.getElementById('bildirim').click()
+                }
+            })
+            .catch(error => {
+                $("#page-loading").hide()
+                console.error('Hata:', error);
+            });
+
+            radiographyTypesSelect.value = '';
+            $('#radiography_types option:first').prop('selected', true);
+        } else {
+            // dosya yüklenmeden butona tıklandı
+            swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title:"{% trans 'Select a file' %}",
+                showConfirmButton: false,
+                timer: 2000,
+            })
+        }
+    });
+
+    // Byte cinsinden dosya boyutunu formatlama işlevi
+    function formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return '0 Bytes';
+
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+
+}
+    
+$(document).ready(function () {
+    filepondInit() // dosya yükleme panoramic bitewing vs için
+});
+
+$(document).ready(function () {
+
+    $("#radiography_types").on("change",function() {
+        let selectValue = $(this).val()
+        if(selectValue === '3') {
+            // cbct
+
+            // butonları göster gizle
+            $("#CBCTUpload").removeClass("d-none")
+            $("#filepondUploadButton").addClass("d-none")
+
+            // formları göster gizle
+            $("#dicomDropzone").removeClass("d-none")
+            $("#uploadFilepond").addClass("d-none")
+        } else {
+            // diğerleri
+
+            // butonları göster gizle
+            $("#CBCTUpload").addClass("d-none")
+            $("#filepondUploadButton").removeClass("d-none")
+
+            // formları göster gizle
+            $("#dicomDropzone").addClass("d-none")
+            $("#uploadFilepond").removeClass("d-none")
+        }
+    })
+    
+})
+</script>
+<script> // kullanıcı dicom yüklerken yeni sekmede sayfa açtıram kodu
+    document.addEventListener("DOMContentLoaded", function() {
+        var openButton = document.getElementById("open-new-tab");
+        
+        openButton.addEventListener("click", function() {
+            var newPageURL = openButton.getAttribute("data-open-new-page");
+            window.open(newPageURL, "_blank");
+        });
+    });
+</script>
+
+{% comment %} <script>
+    var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()
+    // dosya yükleme ayarları
+    var myDropzone = Dropzone.options.myGreatDropzone = {
+        autoProcessQueue: false,
+        paramName: "file",
+        maxFilesize: 10,
+        clickable: "#dropZone", // the ID of our parent wrapper div
+        maxFiles: 1 // Sadece 1 dosya seçimine izin ver
+    };
+    setTimeout(function () {
+        $(".dz-default.dz-message").html(`
+        <i class="fa-solid fa-upload border" style="border-radius: 50%; padding: 10px;"></i>
+        <p class="m-0 my-2">Drag & Drop or Choose file upload</p>
+        <p class="m-0">JPG, PNG, DCM or JPEG</p>
+    `).addClass("text-light")
+        $("form.dropzone").addClass("d-flex flex-column align-items-center")
+    }, 1000)
+
+    // Form submit olayını engelleyin ve dosyaları AJAX ile gönderin
+    document.querySelector("#upload-form").addEventListener("click", function (event) {
+        // ajax göndermeden butonu pasife çek
+        $("#upload-form").attr("disabled", true).css("cursor","progress")
+        event.preventDefault();
+        let modal_radiography_upload = $('#modal-radyografy-upload')
+        modal_radiography_upload.removeClass("active")
+        var myDropzone = Dropzone.forElement("#my-great-dropzone");
+        var radiographyTypesSelect = document.querySelector("#radiography_types");
+        var selectedRadiographyTypeId = radiographyTypesSelect.value;
+        if (myDropzone.files.length > 0) {
+            // Dosyaları AJAX ile göndermek için FormData oluşturun
+            var formData = new FormData();
+            for (var i = 0; i < myDropzone.files.length; i++) {
+                formData.append("file", myDropzone.files[i]);
+            }
+            formData.append("radiography_type", selectedRadiographyTypeId);
+            formData.append('image_report_id', "{{image_report_id}}");
+            // AJAX isteği gönder
+            fetch("{% url 'upload_radyografi' %}", {
+                method: "POST",
+                body: formData,
+                headers: { 'X-CSRFToken': csrfmiddlewaretoken },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    $("#upload-form").attr("disabled", false).css("cursor","pointer")
+                    if (data["status"] === false){
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: data['message'],
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        return false
+                    }
+                    if (data["success"] === false){
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: data['message'],
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                    } else{
+                        myDropzone.removeAllFiles();
+                        // $('#modal-radyografy-upload').removeClass("active")
+                        $('#bildirim').click()
+                    }
+                    // İşlem tamamlandığında yapılacak işlemleri buraya ekleyebilirsiniz
+                })
+                .catch(error => {
+                    console.error("Hata oluştu:", error);
+                    // Hata durumunda yapılacak işlemleri buraya ekleyebilirsiniz
+                });
+        } else {
+        }
+    });
+</script> {% endcomment %}
+
+<script>
+    $("input[name='saveOption']").click(function () {
+    console.log($(this).val());
+    var image_report_id = {{image_report_id}}
+    console.log("image report id",image_report_id)
+    if ($(this).val() == "pdf") {
+        var canvas = document.getElementById('canvas');
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF();
+
+        pdf.addImage(imgData, 'JPEG', 0, 0, 225, 225);
+        pdf.save("Cephalometric_"+ image_report_id + ".pdf");
+    } else if ($(this).val() == "image") {
+        var canvas = document.getElementById('canvas');
+        let canvasUrl = canvas.toDataURL("image/jpeg", 0.5);
+        console.log(canvasUrl);
+        const createEl = document.createElement('a');
+        createEl.href = canvasUrl;
+        createEl.download = "Cephalometric_"+ image_report_id ;
+        createEl.click();
+        createEl.remove();
+    }
+})
+</script>
+
+{% endblock %}

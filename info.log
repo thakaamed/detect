@@ -1,0 +1,1526 @@
+2024-03-20 11:09:23,259 - ERROR - views - Error occurred while rendering wizard overview part: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 804, in get_context_data
+    self.fill_content_list()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 848, in fill_content_list
+    templates_obj = ClinicSavedTemplatesForTreatment.objects.get(treatment_plan__id = self.plan_id)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.ClinicSavedTemplatesForTreatment.DoesNotExist: ClinicSavedTemplatesForTreatment matching query does not exist.
+ 
+2024-03-20 11:41:35,202 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 699, in pdf_report_create
+    for template in templates_obj.templates.all().order_by("template_group_queue"):
+AttributeError: 'NoneType' object has no attribute 'templates'
+ 
+2024-03-20 12:27:56,813 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 786, in pdf_report_create
+    pdf_file_path = treatment_plan_obj.pdf_file.path
+AttributeError: 'str' object has no attribute 'path'
+ 
+2024-03-20 12:29:41,068 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 786, in pdf_report_create
+    pdf_file_path = treatment_plan_obj.pdf_file.path if treatment_plan_obj.pdf_file else None
+AttributeError: 'str' object has no attribute 'path'
+ 
+2024-03-20 13:23:15,943 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 304, in get_context_data
+    treatments = self.get_diseases_svg_paths(treatments)
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 371, in get_diseases_svg_paths
+    svg_path = svg_path_dict.get(treatment_name)
+TypeError: unhashable type: 'dict'
+ 
+2024-03-20 14:06:37,761 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 304, in get_context_data
+    treatments = self.get_diseases_svg_paths(treatments)
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 371, in get_diseases_svg_paths
+    svg_path = svg_path_dict.get(treatment_name)
+TypeError: unhashable type: 'dict'
+ 
+2024-03-20 14:09:52,820 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 304, in get_context_data
+    treatments = self.get_diseases_svg_paths(treatments)
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 376, in get_diseases_svg_paths
+    tooth["svg_path"] = svg_path if svg_path is not None else None
+UnboundLocalError: local variable 'svg_path' referenced before assignment
+ 
+2024-03-20 14:40:52,354 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-20 14:41:20,860 - ERROR - views - Error occurred while changing pricing type: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: 's'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 620, in post
+    treatment_obj.save()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 990, in _save_table
+    updated = self._do_update(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1947, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 954, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2060, in get_db_prep_value
+    value = super().get_db_prep_value(value, connection, prepared)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 947, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'discount' expected a number but got 's'.
+ -- user: alwaleed@dentaverse.io 
+2024-03-20 14:41:21,044 - ERROR - views - Error occurred while changing pricing type: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: '-s'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 620, in post
+    treatment_obj.save()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 990, in _save_table
+    updated = self._do_update(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1947, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 954, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2060, in get_db_prep_value
+    value = super().get_db_prep_value(value, connection, prepared)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 947, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'discount' expected a number but got '-s'.
+ -- user: alwaleed@dentaverse.io 
+2024-03-20 14:41:34,820 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 793, in pdf_report_create
+    if os.path.exists("/home/ubuntu/Clinic"+old_pdf_file_path):
+TypeError: can only concatenate str (not "NoneType") to str
+ 
+2024-03-20 14:42:02,120 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 793, in pdf_report_create
+    if os.path.exists("/home/ubuntu/Clinic"+old_pdf_file_path):
+TypeError: can only concatenate str (not "NoneType") to str
+ 
+2024-03-20 14:42:14,620 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 793, in pdf_report_create
+    if os.path.exists("/home/ubuntu/Clinic"+old_pdf_file_path):
+TypeError: can only concatenate str (not "NoneType") to str
+ 
+2024-03-20 14:43:19,683 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 793, in pdf_report_create
+    if os.path.exists("/home/ubuntu/Clinic"+old_pdf_file_path):
+TypeError: can only concatenate str (not "NoneType") to str
+ 
+2024-03-20 14:45:00,660 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-20 14:45:22,483 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 728, in pdf_report_create
+    treatment_sorted_dict = prep_treatment_sorted_dict(treatment_data,adult_teeth_list)
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 639, in prep_treatment_sorted_dict
+    svg_path = svg_path_dict.get(treatment_name["treatment_method"])
+TypeError: unhashable type: 'dict'
+ 
+2024-03-20 14:46:24,806 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-21 06:38:01,924 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-21 07:08:48,578 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: patikler_12@hotmail.com 
+2024-03-21 07:08:51,383 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: patikler_12@hotmail.com 
+2024-03-21 07:08:54,516 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: patikler_12@hotmail.com 
+2024-03-21 07:08:57,807 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: patikler_12@hotmail.com 
+2024-03-21 07:09:03,329 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: patikler_12@hotmail.com 
+2024-03-21 07:15:28,258 - ERROR - views - Error occurred while rendering wizard overview part: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 833, in get_context_data
+    self.prep_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 867, in prep_treatments
+    for key,value in self.grouped_treatments.items():
+AttributeError: 'str' object has no attribute 'items'
+ 
+2024-03-21 07:38:32,833 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-21 07:38:43,088 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-21 07:38:48,346 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-21 07:39:17,551 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-21 07:39:21,601 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-21 07:59:42,242 - INFO - views - Total price: 1002.11, price per token: 0.2 
+2024-03-21 08:13:40,653 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 736, in pdf_report_create
+    for key,value in grouped_treatments.items():
+AttributeError: 'str' object has no attribute 'items'
+ 
+2024-03-21 08:32:59,177 - ERROR - views - Error occurred while changing pricing type: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: '-'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 620, in post
+    treatment_obj.save()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 990, in _save_table
+    updated = self._do_update(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1947, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 954, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2060, in get_db_prep_value
+    value = super().get_db_prep_value(value, connection, prepared)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 947, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'discount' expected a number but got '-'.
+ -- user: ahmetresul159@gmail.com 
+2024-03-21 08:33:01,267 - ERROR - views - Error occurred while changing pricing type: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: '-'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 620, in post
+    treatment_obj.save()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 990, in _save_table
+    updated = self._do_update(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1947, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 954, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2060, in get_db_prep_value
+    value = super().get_db_prep_value(value, connection, prepared)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 947, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'discount' expected a number but got '-'.
+ -- user: ahmetresul159@gmail.com 
+2024-03-21 08:33:01,478 - ERROR - views - Error occurred while changing pricing type: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: '-'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 620, in post
+    treatment_obj.save()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 990, in _save_table
+    updated = self._do_update(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1947, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 954, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2060, in get_db_prep_value
+    value = super().get_db_prep_value(value, connection, prepared)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 947, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'discount' expected a number but got '-'.
+ -- user: ahmetresul159@gmail.com 
+2024-03-21 08:33:03,209 - ERROR - views - Error occurred while changing pricing type: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: '-'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 620, in post
+    treatment_obj.save()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 990, in _save_table
+    updated = self._do_update(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1947, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 954, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2060, in get_db_prep_value
+    value = super().get_db_prep_value(value, connection, prepared)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 947, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'discount' expected a number but got '-'.
+ -- user: ahmetresul159@gmail.com 
+2024-03-21 08:51:49,157 - INFO - views - Total price: 1002.11, price per token: 0.2 
+2024-03-21 08:54:03,167 - ERROR - views - Error occurred while changing pricing type: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: '-'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 620, in post
+    treatment_obj.save()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 990, in _save_table
+    updated = self._do_update(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1947, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 954, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2060, in get_db_prep_value
+    value = super().get_db_prep_value(value, connection, prepared)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 947, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'discount' expected a number but got '-'.
+ -- user: patikler_12@hotmail.com 
+2024-03-21 08:54:09,785 - ERROR - views - Error occurred while changing pricing type: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2053, in get_prep_value
+    return int(value)
+ValueError: invalid literal for int() with base 10: '-'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 620, in post
+    treatment_obj.save()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 990, in _save_table
+    updated = self._do_update(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1947, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 954, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2060, in get_db_prep_value
+    value = super().get_db_prep_value(value, connection, prepared)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 947, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/fields/__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'discount' expected a number but got '-'.
+ -- user: patikler_12@hotmail.com 
+2024-03-21 11:01:13,512 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 791, in pdf_report_create
+    filename = str(uuid.uuid4()) + ".pdf"
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-21 11:01:42,504 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 791, in pdf_report_create
+    filename = str(uuid.uuid4()) + ".pdf"
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-21 11:11:46,636 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 798, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-21 11:46:57,554 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 798, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-21 11:47:19,295 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 798, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-21 11:49:20,092 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 798, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-21 11:57:04,057 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-21 13:08:47,057 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 699, in pdf_report_create
+    treatment_plan_obj = TreatmentPlan.objects.get(id=plan_id)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentPlan.DoesNotExist: TreatmentPlan matching query does not exist.
+ 
+2024-03-21 13:09:10,486 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 505, in parse
+    compile_func = self.tags[command]
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 800, in pdf_report_create
+    template = get_template(template_path)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/defaulttags.py", line 853, in do_for
+    nodelist_loop = parser.parse(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/defaulttags.py", line 953, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 507, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 558, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 285: 'endfor', expected 'elif', 'else' or 'endif'. Did you forget to register or load this tag?
+ 
+2024-03-21 18:44:39,402 - INFO - views - Total price: 450.15, price per token: 0.45 
+2024-03-21 21:02:03,457 - INFO - views - Total price: 1002.11, price per token: 0.2 
+2024-03-22 07:12:46,281 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-22 07:14:07,534 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: patikler_12@hotmail.com 
+2024-03-22 07:47:57,566 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-22 08:04:02,556 - ERROR - views - Error occurred while adding manual illness: name 'svg_path' is not defined 
+2024-03-22 08:20:29,083 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 08:20:45,157 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 08:20:59,198 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 08:24:49,636 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 08:30:34,882 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 08:37:20,761 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 08:45:36,040 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 10:26:28,059 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 10:30:08,443 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 10:30:22,904 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 10:31:34,750 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 10:35:33,615 - ERROR - views - Error occurred while rendering wizard diagnosis part: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 111, in get_context_data
+    self.data = json.loads(self.wizard_obj.diagnosis_data)
+  File "/usr/lib/python3.8/json/__init__.py", line 357, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.8/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.8/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+ 
+2024-03-22 10:40:36,884 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 707, in pdf_report_create
+    wizard_obj = TreatmentWizard.objects.get(image_report__id=wizard_id)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 640, in get
+    raise self.model.MultipleObjectsReturned(
+Wizard.models.TreatmentWizard.MultipleObjectsReturned: get() returned more than one TreatmentWizard -- it returned 2!
+ 
+2024-03-22 10:41:46,102 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 812, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 10:47:08,503 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 812, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 10:54:42,592 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 808, in pdf_report_create
+    html = template.render(context)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 196, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1082, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    (self._fIdent(f,60,frame),_fSizeString(f),self.page, self.frame.id,
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 893, in _fIdent
+    return f.identity(maxLen)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/flowables.py", line 183, in identity
+    r = self.getPlainText(identify=1)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/reportlab_paragraph.py", line 1788, in getPlainText
+    return "".join([frag.text] for frag in frags if hasattr(frag, "text"))
+TypeError: sequence item 0: expected str instance, list found
+ 
+2024-03-22 11:20:23,722 - ERROR - analyze - Error occurred while creating wizard object: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Application/api/analyze.py", line 143, in start_analyze_thread
+    create_objects_for_wizard(image_report, results_json["tooth_results"],results_json["treatment_results"])
+  File "/home/ubuntu/Clinic/Application/functions.py", line 72, in create_objects_for_wizard
+    TreatmentPlan.objects.create(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 778, in save
+    self._prepare_related_fields_for_save(operation_name="save")
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1093, in _prepare_related_fields_for_save
+    raise ValueError(
+ValueError: save() prohibited to prevent data loss due to unsaved related object 'treatment_wizard'.
+ 
+2024-03-22 12:26:40,972 - ERROR - views - Error occurred while rendering wizard diagnosis part: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 108, in get_context_data
+    self.wizard_obj = TreatmentWizard.objects.get(image_report__id=self.id)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentWizard.DoesNotExist: TreatmentWizard matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 110, in get_context_data
+    self.wizard_obj = fix_one_time(self.id) #eski analizlerde de açılabilmesi için 1 kereliğine gerekli verileri dbde dolduran fonk
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 89, in fix_one_time
+    treatment_obj = TreatmentPlan.objects.create(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 778, in save
+    self._prepare_related_fields_for_save(operation_name="save")
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1093, in _prepare_related_fields_for_save
+    raise ValueError(
+ValueError: save() prohibited to prevent data loss due to unsaved related object 'treatment_wizard'.
+ 
+2024-03-22 12:27:29,706 - ERROR - views - Error occurred while rendering wizard diagnosis part: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 108, in get_context_data
+    self.wizard_obj = TreatmentWizard.objects.get(image_report__id=self.id)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentWizard.DoesNotExist: TreatmentWizard matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 110, in get_context_data
+    self.wizard_obj = fix_one_time(self.id) #eski analizlerde de açılabilmesi için 1 kereliğine gerekli verileri dbde dolduran fonk
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 89, in fix_one_time
+    treatment_obj = TreatmentPlan.objects.create(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 778, in save
+    self._prepare_related_fields_for_save(operation_name="save")
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1093, in _prepare_related_fields_for_save
+    raise ValueError(
+ValueError: save() prohibited to prevent data loss due to unsaved related object 'treatment_wizard'.
+ 
+2024-03-22 13:06:56,793 - ERROR - views - Error occurred while rendering wizard diagnosis part: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 108, in get_context_data
+    self.wizard_obj = TreatmentWizard.objects.get(image_report__id=self.id)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentWizard.DoesNotExist: TreatmentWizard matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 110, in get_context_data
+    self.wizard_obj = fix_one_time(self.id) #eski analizlerde de açılabilmesi için 1 kereliğine gerekli verileri dbde dolduran fonk
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 89, in fix_one_time
+    treatment_obj = TreatmentPlan.objects.create(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 778, in save
+    self._prepare_related_fields_for_save(operation_name="save")
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1093, in _prepare_related_fields_for_save
+    raise ValueError(
+ValueError: save() prohibited to prevent data loss due to unsaved related object 'treatment_wizard'.
+ 
+2024-03-22 13:10:54,439 - ERROR - views - Error occurred while rendering wizard diagnosis part: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 110, in get_context_data
+    self.wizard_obj = TreatmentWizard.objects.get(image_report__id=self.id)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 637, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentWizard.DoesNotExist: TreatmentWizard matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 112, in get_context_data
+    self.wizard_obj = fix_one_time(self.id) #eski analizlerde de açılabilmesi için 1 kereliğine gerekli verileri dbde dolduran fonk
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 90, in fix_one_time
+    treatment_obj = TreatmentPlan.objects.create(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 778, in save
+    self._prepare_related_fields_for_save(operation_name="save")
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/base.py", line 1093, in _prepare_related_fields_for_save
+    raise ValueError(
+ValueError: save() prohibited to prevent data loss due to unsaved related object 'treatment_wizard'.
+ 
+2024-03-23 11:24:24,989 - INFO - views - Total price: 1002.11, price per token: 0.2 
+2024-03-26 14:16:20,098 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in get_treatments
+    result = {key: {"treatment_methods": value["treatment_methods"] if "en_treatment_method" not in value["treatment_methods"]["treatment_method"] else [value["en_treatment_method"]]}for key, value in treatment_data.items()}
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in <dictcomp>
+    result = {key: {"treatment_methods": value["treatment_methods"] if "en_treatment_method" not in value["treatment_methods"]["treatment_method"] else [value["en_treatment_method"]]}for key, value in treatment_data.items()}
+TypeError: list indices must be integers or slices, not str
+ 
+2024-03-26 14:17:06,260 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in get_treatments
+    result = {key: {"treatment_methods": value["treatment_methods"] if "en_treatment_method" not in value["treatment_methods"]["treatment_method"] else [value["en_treatment_method"]]}for key, value in treatment_data.items()}
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in <dictcomp>
+    result = {key: {"treatment_methods": value["treatment_methods"] if "en_treatment_method" not in value["treatment_methods"]["treatment_method"] else [value["en_treatment_method"]]}for key, value in treatment_data.items()}
+TypeError: list indices must be integers or slices, not str
+ 
+2024-03-26 14:20:26,833 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in get_treatments
+    result = {key: {"treatment_methods": value["treatment_methods"] if "treatment_method" in value["treatment_methods"] and "en_treatment_method" not in value["treatment_methods"]["treatment_method"] else [value["treatment_methods"]["treatment_method"]["en_treatment_method"]]}for key, value in treatment_data.items()}
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in <dictcomp>
+    result = {key: {"treatment_methods": value["treatment_methods"] if "treatment_method" in value["treatment_methods"] and "en_treatment_method" not in value["treatment_methods"]["treatment_method"] else [value["treatment_methods"]["treatment_method"]["en_treatment_method"]]}for key, value in treatment_data.items()}
+TypeError: list indices must be integers or slices, not str
+ 
+2024-03-26 14:31:02,945 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in get_treatments
+    result = {key: {"treatment_methods": treatment_method["treatment_method"]["en_treatment_method"] if "6b3a9a9ea64c4c7eb3ed0c75ed39565a" ==  treatment_method["treatment_method"]["slug"] else treatment_method["treatment_method"] for treatment_method in value["treatment_methods"]} for key, value in treatment_data.items()}
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in <dictcomp>
+    result = {key: {"treatment_methods": treatment_method["treatment_method"]["en_treatment_method"] if "6b3a9a9ea64c4c7eb3ed0c75ed39565a" ==  treatment_method["treatment_method"]["slug"] else treatment_method["treatment_method"] for treatment_method in value["treatment_methods"]} for key, value in treatment_data.items()}
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in <dictcomp>
+    result = {key: {"treatment_methods": treatment_method["treatment_method"]["en_treatment_method"] if "6b3a9a9ea64c4c7eb3ed0c75ed39565a" ==  treatment_method["treatment_method"]["slug"] else treatment_method["treatment_method"] for treatment_method in value["treatment_methods"]} for key, value in treatment_data.items()}
+TypeError: string indices must be integers
+ 
+2024-03-26 14:31:07,961 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in get_treatments
+    result = {key: {"treatment_methods": treatment_method["treatment_method"]["en_treatment_method"] if "6b3a9a9ea64c4c7eb3ed0c75ed39565a" ==  treatment_method["treatment_method"]["slug"] else treatment_method["treatment_method"] for treatment_method in value["treatment_methods"]} for key, value in treatment_data.items()}
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in <dictcomp>
+    result = {key: {"treatment_methods": treatment_method["treatment_method"]["en_treatment_method"] if "6b3a9a9ea64c4c7eb3ed0c75ed39565a" ==  treatment_method["treatment_method"]["slug"] else treatment_method["treatment_method"] for treatment_method in value["treatment_methods"]} for key, value in treatment_data.items()}
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 403, in <dictcomp>
+    result = {key: {"treatment_methods": treatment_method["treatment_method"]["en_treatment_method"] if "6b3a9a9ea64c4c7eb3ed0c75ed39565a" ==  treatment_method["treatment_method"]["slug"] else treatment_method["treatment_method"] for treatment_method in value["treatment_methods"]} for key, value in treatment_data.items()}
+TypeError: string indices must be integers
+ 
+2024-03-26 14:34:06,793 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 419, in get_treatments
+    method_key = method["slug"]
+TypeError: string indices must be integers
+ 
+2024-03-26 14:42:47,593 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 422, in get_treatments
+    method_key = method["slug"]
+TypeError: string indices must be integers
+ 
+2024-03-26 14:49:39,946 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 421, in get_treatments
+    method_key = method["slug"]
+TypeError: string indices must be integers
+ 
+2024-03-26 14:52:36,094 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 427, in get_treatments
+    for method in value["treatment_methods"]:
+TypeError: list indices must be integers or slices, not str
+ 
+2024-03-26 15:00:50,093 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 429, in get_treatments
+    method_key = method["slug"]
+KeyError: 'slug'
+ 
+2024-03-26 15:02:06,396 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 427, in get_treatments
+    method_key = method["slug"]
+TypeError: list indices must be integers or slices, not str
+ 
+2024-03-26 15:02:52,990 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 432, in get_treatments
+    grouped_data[method_key] = {"treatment_method": method["treatment_method"], "teeth": [], "unit_price":price,"total_price": 0}
+KeyError: 'treatment_method'
+ 
+2024-03-26 15:03:59,421 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 411, in get_treatments
+    treatment_method["treatment_method"]["treatment_method"]=treatment_method["en_treatment_method"]
+KeyError: 'en_treatment_method'
+ 
+2024-03-26 15:04:37,507 - ERROR - views - Error occurred while trying to get context data for wizard treatment page: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 303, in get_context_data
+    treatments,redirect_status = self.get_treatments()
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 412, in get_treatments
+    treatment_method["treatment_method"]["treatment_method"]=treatment_method["en_treatment_method"]
+KeyError: 'en_treatment_method'
+ 
+2024-03-28 08:23:36,422 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 831, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f8528e27ac0 frame=body>•Alveolar Bone Loss •Caries •Pulp Stone •Horizontal Bone Los(504.0 x 785.65846875) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-28 08:23:48,544 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 831, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f8529e17190 frame=body>•Alveolar Bone Loss •Caries •Pulp Stone •Horizontal Bone Los(504.0 x 785.65846875) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 12:53:54,663 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f362d627970 frame=body>•Dental Pulp •Alveolar Bone Loss •Horizontal Bone Loss •Cari(504.0 x 784.678) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 12:55:15,729 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f362d5e8100 frame=body>(504.0 x 770.803) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:07:09,315 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f6ce74db670 frame=body>(504.0 x 770.803) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:07:49,357 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f6ce73076a0 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:07:58,962 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f6ce696a730 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:08:18,239 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f6ce5fac0a0 frame=body>(504.0 x 770.803) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:08:46,491 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f6ce4b672e0 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:08:59,876 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f6ce5f89520 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:10:23,286 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f08a1e9b550 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:12:44,021 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 790, in pdf_report_create
+    treatment_data = json.loads(TreatmentPlan.objects.get(id=plan_id).plan_treatment_data)
+  File "/usr/lib/python3.8/json/__init__.py", line 357, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.8/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.8/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+ 
+2024-03-29 13:13:05,744 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f08a134eee0 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:16:08,392 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 861, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f3ec9d6c8b0 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:19:55,446 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fbf0d3677c0 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:20:11,869 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fbf0e03ffa0 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:20:51,283 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fbf0e0a2e20 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:22:12,896 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fbf0c938700 frame=body>(504.0 x 762.409517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:23:02,878 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'trans'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 857, in pdf_report_create
+    template = get_template(template_path)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loaders/cached.py", line 58, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loaders/base.py", line 29, in get_template
+    return Template(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 531, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 346: 'trans'. Did you forget to register or load this tag?
+ 
+2024-03-29 13:24:03,036 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f6ba514c5e0 frame=body>•Vertical Bone Loss •Pontic •Dental Pulp •Crown  (504.0 x 776.284517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:24:47,889 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'endfor'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 857, in pdf_report_create
+    template = get_template(template_path)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loaders/cached.py", line 58, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loaders/base.py", line 29, in get_template
+    return Template(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 531, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 380: 'endfor'. Did you forget to register or load this tag?
+ 
+2024-03-29 13:26:02,980 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fa0dbd59910 frame=body>•Vertical Bone Loss •Dental Pulp •Pontic •Crown  (504.0 x 776.284517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:26:19,606 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fa0dbb28910 frame=body>•Vertical Bone Loss •Dental Pulp •Pontic •Crown  (504.0 x 776.284517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:26:59,966 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 470, in parse
+    compile_func = self.tags[command]
+KeyError: 'endcomment'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 857, in pdf_report_create
+    template = get_template(template_path)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loaders/cached.py", line 58, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/loaders/base.py", line 29, in get_template
+    return Template(
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 472, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/template/base.py", line 531, in invalid_block_tag
+    raise self.error(
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 339: 'endcomment'. Did you forget to register or load this tag?
+ 
+2024-03-29 13:27:43,960 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fa0dbd49430 frame=body>•Vertical Bone Loss •Dental Pulp •Pontic •Crown  (504.0 x 776.284517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:28:39,448 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fa0dbb5fbb0 frame=body>•Vertical Bone Loss •Dental Pulp •Pontic •Crown  (504.0 x 776.284517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:29:23,159 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fa0dba5c3d0 frame=body>•Vertical Bone Loss •Dental Pulp •Pontic •Crown  (504.0 x 776.284517094017) too large on page 3 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:29:48,223 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: rahimecabuk988@gmail.com 
+2024-03-29 13:29:49,267 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: rahimecabuk988@gmail.com 
+2024-03-29 13:29:50,247 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: rahimecabuk988@gmail.com 
+2024-03-29 13:29:50,469 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: rahimecabuk988@gmail.com 
+2024-03-29 13:29:51,066 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: rahimecabuk988@gmail.com 
+2024-03-29 13:29:51,942 - ERROR - views - Error occurred while updating price of treatment: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/api/views.py", line 472, in post
+    treatment_method = TreatmentNamesForWizard.objects.get(slug=treatment_slug)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/django/db/models/query.py", line 435, in get
+    raise self.model.DoesNotExist(
+Wizard.models.TreatmentNamesForWizard.DoesNotExist: TreatmentNamesForWizard matching query does not exist.
+ -- user: rahimecabuk988@gmail.com 
+2024-03-29 13:31:08,817 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7fa0daea3ca0 frame=body>•Vertical Bone Loss •Dental Pulp •Pontic •Crown  (504.0 x 776.284517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 
+2024-03-29 13:31:50,205 - ERROR - views - Error occurred while creating pdf: Traceback (most recent call last):
+  File "/home/ubuntu/Clinic/Wizard/views.py", line 862, in pdf_report_create
+    pisa.CreatePDF(html, dest=pdf_file,pagesize=letter)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/xhtml2pdf/document.py", line 144, in pisaDocument
+    doc.build(context.story)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 1079, in build
+    self.handle_flowable(flowables)
+  File "/home/ubuntu/Env/base/lib/python3.8/site-packages/reportlab/platypus/doctemplate.py", line 958, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError: Flowable <PmlParagraph at 0x7f46d8aa6a30 frame=body>•Pontic •Implant Supported Crown •Crown •Dental Pulp •Vertic(504.0 x 776.284517094017) too large on page 2 in frame 'body'(504.0 x 684.0*) of template 'body'
+ 

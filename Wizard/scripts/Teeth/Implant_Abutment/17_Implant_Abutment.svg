@@ -1,0 +1,18 @@
+<svg width="7" height="21" viewBox="0 0 7 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.70062 0.620117H3.29062C2.63062 0.620117 2.06062 0.980117 2.01062 1.44012L0.890625 16.2001H6.08063L4.96063 1.44012C4.91063 0.980117 4.34062 0.620117 3.68062 0.620117H3.70062Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<mask id="mask0_226_643" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="7" height="17">
+<path d="M3.70062 0.620117H3.29062C2.63062 0.620117 2.06062 0.980117 2.01062 1.44012L0.890625 16.2001H6.08063L4.96063 1.44012C4.91063 0.980117 4.34062 0.620117 3.68062 0.620117H3.70062Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_226_643)">
+<path d="M6.49173 14.8706L0.511719 12.6006" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.49173 13.0903L0.511719 10.8203" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.49173 11.31L0.511719 9.04004" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.49173 9.54051L0.511719 7.27051" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.49173 7.76023L0.511719 5.49023" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.49173 5.97996L0.511719 3.70996" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.49173 4.20043L0.511719 1.94043" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.49173 2.43016L0.511719 0.160156" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+</g>
+<path d="M4.7989 20.8201H2.1989C1.9889 20.8201 1.80889 20.6301 1.78889 20.3901C1.74889 20.0201 1.6989 19.4601 1.6189 18.8301C1.4589 17.5701 1.12891 16.1201 1.12891 16.1201H5.87891C5.87891 16.1201 5.5489 17.5701 5.3889 18.8301C5.3089 19.4501 5.2489 20.0201 5.2189 20.3901C5.1989 20.6401 5.0089 20.8201 4.8089 20.8201H4.7989Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<path d="M6.17911 16.3196H0.81913C0.71913 16.3196 0.679128 15.8596 0.739128 15.3196C0.789128 14.7996 0.919117 14.3896 1.00912 14.3896H5.99912C6.09912 14.3896 6.21913 14.7996 6.26913 15.3196C6.32913 15.8596 6.28912 16.3196 6.18912 16.3196H6.17911Z" fill="#757577" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+</svg>

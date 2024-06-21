@@ -1,0 +1,1399 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-12 11:39+0000\n"
+"PO-Revision-Date: 2024-02-26 11:39+0000\n"
+"Last-Translator: ahmet resul kuru <ahmetresul159@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.9\n"
+
+#: Server/urls.py:44
+msgid "jsi18n/"
+msgstr ""
+
+#: templates/add-patient.html:30
+msgid ""
+"You can add or update your patient by filling out the information below."
+msgstr ""
+"Vous pouvez ajouter ou mettre à jour votre patient en remplissant les "
+"informations ci-dessous."
+
+msgid "Bjork-Jarabak Analysis"
+msgstr "Analyse Bjork-Jarabak"
+
+msgid "View Detail"
+msgstr "Voir le détail"
+
+msgid "Detail"
+msgstr "Détail"
+
+msgid "Illnesses"
+msgstr "Maladies"
+
+msgid "Anatomy"
+msgstr "Anatomie"
+
+msgid "Teeth"
+msgstr "Dents"
+
+msgid "Other"
+msgstr "Autres"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Patient Radiography"
+msgstr "Radiographie du patient"
+
+msgid "Create as Patient"
+msgstr "Créer en tant que patient"
+
+msgid "Skeletal Factors - Anterior/Posterior Analysis"
+msgstr "Facteurs squelettiques - Analyse antérieure/postérieure"
+
+msgid "Wits Analysis"
+msgstr "Analyse de Wits"
+
+msgid "Analyses"
+msgstr "Analyses"
+
+msgid "Include analysis information in the report"
+msgstr "Inclure des informations sur l'analyse dans le rapport"
+
+msgid "Update Patient"
+msgstr "Mise Ó jour Patient"
+
+msgid "Generate QR Code"
+msgstr "Générer un code QR"
+
+msgid "Generate QR Code for Patient Mail"
+msgstr "Générer un code QR pour le courrier des patients"
+
+msgid "Add Patient"
+msgstr "Ajouter le patient"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "Update"
+msgstr "Mise Ó jour"
+
+msgid "Patient ID"
+msgstr "Pièce d'identité du patient"
+
+msgid "Gender"
+msgstr "Genre"
+
+msgid "Select Gender"
+msgstr "Sélectionner le sexe"
+
+msgid "Female"
+msgstr "Femelle"
+
+msgid "Male"
+msgstr "Mâle"
+
+msgid "Patient Email"
+msgstr "E-mail du patient"
+
+msgid "Doctor Name"
+msgstr "Nom du médecin"
+
+msgid "Patient Full Name"
+msgstr "Nom complet du patient"
+
+msgid "Date of Birth"
+msgstr "Date de naissance"
+
+msgid "Patient Phone"
+msgstr "Téléphone patient"
+
+msgid "Hi"
+msgstr "Salut"
+
+msgid "File No (Optional)"
+msgstr "Fichier non (facultatif)"
+
+msgid "You can optionally enter the file number."
+msgstr "Vous pouvez éventuellement entrer le numéro de fichier."
+
+msgid "Write patient full name..."
+msgstr "Inscrivez le nom complet du patient..."
+
+msgid "Write doctor name..."
+msgstr "Inscrivez le nom du médecin..."
+
+msgid "Write Patient Email"
+msgstr "Rédiger l'e-mail du patient"
+
+msgid "Patient ID will be generated automatically"
+msgstr "L'identifiant du patient sera généré automatiquement"
+
+msgid "You can enter the patient name and surname."
+msgstr "Vous pouvez saisir le nom et le prénom du patient."
+
+msgid "Logout"
+msgstr "Se déconnecter"
+
+msgid "Clarification Text"
+msgstr "Texte de clarification"
+
+msgid "Cookie Policy"
+msgstr "Politique de cookie"
+
+msgid "Privacy Policy"
+msgstr "Politique de confidentialité"
+
+msgid "Dark Theme"
+msgstr "Thème sombre"
+
+msgid "Please enter a valid e-mail address"
+msgstr "Veuillez saisir une adresse électronique valide"
+
+msgid "The patient is successfully added."
+msgstr "Le patient est ajouté avec succès."
+
+msgid "January"
+msgstr "Janvier"
+
+msgid "February"
+msgstr "Février"
+
+msgid "March"
+msgstr "Mars"
+
+msgid "April"
+msgstr "Avril"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "June"
+msgstr "Juin"
+
+msgid "July"
+msgstr "Juillet"
+
+msgid "August"
+msgstr "Août"
+
+msgid "September"
+msgstr "Septembre"
+
+msgid "October"
+msgstr "Octobre"
+
+msgid "November"
+msgstr "Novembre"
+
+msgid "December"
+msgstr "Décembre"
+
+msgid "Login Page"
+msgstr "Page de connexion"
+
+msgid "Login"
+msgstr "Connexion"
+
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+msgid "Username or Password Incorrect"
+msgstr "Nom d'utilisateur ou mot de passe incorrect"
+
+msgid "Username or Phone Number"
+msgstr "Nom d'utilisateur ou numéro de téléphone"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "I have read and understood the"
+msgstr "J'ai lu et compris le"
+
+msgid ""
+"Policy prepared by Thakaamed Medikal ve Dental Bilişim Teknolojileri Anonim "
+"Şirketi."
+msgstr ""
+"Politique préparée par Thakaamed Medical and Dental Information Technologies"
+" Incorporé."
+
+msgid "Clarification text"
+msgstr "Texte de clarification"
+
+msgid "on the Processing of Personal Data and the"
+msgstr "sur le traitement des données Ó caractère personnel et la"
+
+msgid "Personal Data Protection Policy"
+msgstr "Politique de protection des données personnelles"
+
+msgid "Personal Data Protection"
+msgstr "Protection des données personnelles"
+
+msgid "I have read and accept the Portal Terms of Use."
+msgstr "J'ai lu et j'accepte les conditions d'utilisation du portail."
+
+msgid "Sign In"
+msgstr "S'inscrire"
+
+msgid "Forgot Password"
+msgstr "Mot de passe oublié"
+
+msgid "Send"
+msgstr "Envoyer"
+
+msgid "Radiology Upload"
+msgstr "Chargement en radiologie"
+
+msgid ""
+"You can start the analysis by uploading the Radiography image, view the "
+"images you have uploaded and add multiple images"
+msgstr ""
+"Vous pouvez commencer l'analyse en téléchargeant l'image radiographique, "
+"visualiser les images que vous avez téléchargées et ajouter plusieurs "
+"images."
+
+msgid ""
+"Welcome patient_dict.full_name, you can start the analysis by uploading the "
+"Radiography image, view the images you have uploaded and add multiple images"
+msgstr ""
+"Welcome patient_dict.full_name, vous pouvez commencer l'analyse en "
+"téléchargeant l'image Radiographie, visualiser les images que vous avez "
+"téléchargées et ajouter plusieurs images"
+
+msgid "Hello"
+msgstr "Bonjour"
+
+msgid "Please upload a radiography"
+msgstr "Veuillez télécharger une radiographie"
+
+msgid "Please select radiography type"
+msgstr "Veuillez sélectionner le type de radiographie"
+
+msgid "Accept the Terms of Use!"
+msgstr "Acceptez les conditions d'utilisation !"
+
+msgid "Wrong username or password!"
+msgstr "Mauvais nom d'utilisateur ou mot de passe !"
+
+msgid "Successfully logged in!"
+msgstr "Connexion réussie !"
+
+msgid "Forgot Password"
+msgstr "Mot de passe oublié"
+
+msgid "Phone Number"
+msgstr "Numéro de téléphone"
+
+msgid "Phone Number"
+msgstr "Numéro de téléphone"
+
+msgid "The passwords you entered do not match"
+msgstr "Les mots de passe saisis ne correspondent pas"
+
+msgid "Your password has been reset!"
+msgstr "Votre mot de passe a été réinitialisé !"
+
+msgid "Your reset code is wrong."
+msgstr "Votre code de réinitialisation est erroné."
+
+msgid "No user found for this mail"
+msgstr "Aucun utilisateur n'a été trouvé pour ce courrier"
+
+msgid "User Name"
+msgstr "Nom de l'utilisateur"
+
+msgid "User ID"
+msgstr "ID de l'utilisateur"
+
+msgid "User Created Date"
+msgstr "Date créée par l'utilisateur"
+
+msgid "User Type"
+msgstr "Type d'utilisateur"
+
+msgid "Usage"
+msgstr "Usage"
+
+msgid "Limit"
+msgstr "Limite"
+
+msgid "Token Expiry Date"
+msgstr "Date d'expiration du jeton"
+
+msgid "Last Token Activity"
+msgstr "Dernière activité de jeton"
+
+msgid "Your Token Usage"
+msgstr "Utilisation du jeton"
+
+msgid "Company Token Usage"
+msgstr "Utilisation du jeton d'entreprise"
+
+msgid "Company Token Usage"
+msgstr "Utilisation du jeton d'entreprise"
+
+msgid "Buy Token"
+msgstr "Acheter un token"
+
+msgid "Last Login"
+msgstr "Dernière connexion"
+
+msgid "Mail Sent"
+msgstr "Courrier envoyé"
+
+msgid "Patients"
+msgstr "Les patients"
+
+msgid "Token"
+msgstr "Jeton"
+
+msgid "Are you sure you want to delete the patient?"
+msgstr "Êtes-vous sûr de vouloir supprimer le patient ?"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Favoried"
+msgstr "Favorisé"
+
+msgid "Patient Name"
+msgstr "Nom du patient"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Date of Birth"
+msgstr "Date de naissance"
+
+msgid "Created Date"
+msgstr "Date de création"
+
+msgid "Last Process"
+msgstr "Dernier processus"
+
+msgid "Last Name"
+msgstr "Nom de famille"
+
+msgid "X-Ray Types"
+msgstr "Types de rayons X"
+
+msgid "Operation"
+msgstr "Opération"
+
+msgid "Patient deleted successfully."
+msgstr "Patient supprimé avec succès."
+
+msgid ""
+"You can get a password reset code by entering your registered email address."
+msgstr ""
+"Vous pouvez obtenir un code de réinitialisation du mot de passe en "
+"saisissant votre adresse électronique enregistrée."
+
+msgid "Your Mail"
+msgstr "Votre courrier"
+
+msgid "Send Mail"
+msgstr "Envoyer un mail"
+
+msgid "Reset Password"
+msgstr "Réinitialiser le mot de passe"
+
+msgid "Your reset code"
+msgstr "Votre code de réinitialisation"
+
+msgid "New Password"
+msgstr "Nouveau mot de passe"
+
+msgid "New Password Again"
+msgstr "Nouveau mot de passe"
+
+msgid "Please enter patient name"
+msgstr "Veuillez saisir le nom du patient"
+
+msgid "Please select patients gender"
+msgstr "Veuillez sélectionner le sexe des patients"
+
+msgid "Patient saved successfully."
+msgstr "Le patient a été enregistré avec succès."
+
+msgid "Please enter your name"
+msgstr "Veuillez saisir votre nom"
+
+msgid "Please enter your surname"
+msgstr "Veuillez saisir votre nom de famille"
+
+msgid "Please enter your phone number"
+msgstr "Veuillez saisir votre numéro de téléphone"
+
+msgid "Patient saved successfully."
+msgstr "Le patient a été enregistré avec succès."
+
+msgid "Update Profile"
+msgstr "Mise Ó jour du profil"
+
+msgid "Surname"
+msgstr "Nom de famille"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Member since:"
+msgstr "Membre depuis :"
+
+msgid "Maximum upload size is:"
+msgstr "La taille maximale de téléchargement est de :"
+
+msgid "Upload new avatar."
+msgstr "Télécharger un nouvel avatar."
+
+msgid "Upload New Photo"
+msgstr "Télécharger une nouvelle photo"
+
+msgid "Update Profile"
+msgstr "Mise Ó jour du profil"
+
+msgid "Profile Information"
+msgstr "Informations sur le profil"
+
+msgid "You can view and update your profile information."
+msgstr ""
+"Vous pouvez consulter et mettre Ó jour les informations de votre profil."
+
+msgid "Your Password"
+msgstr "Votre mot de passe"
+
+msgid "Your profile photo has been updated"
+msgstr "Votre photo de profil a été mise Ó jour"
+
+msgid "View User"
+msgstr "Afficher l'utilisateur"
+
+msgid "Delete User"
+msgstr "Supprimer l'utilisateur"
+
+msgid "Agent Keys"
+msgstr "Clés d'agent"
+
+msgid "Users"
+msgstr "Utilisateurs"
+
+msgid "List Activities"
+msgstr "Lister les activités"
+
+msgid "Users List (CHANGED)"
+msgstr "Liste des utilisateurs (modifiée)"
+
+msgid "An error occured while updating your profile photo"
+msgstr ""
+"Une erreur s'est produite lors de la mise Ó jour de votre photo de profil"
+
+msgid "Old Password"
+msgstr "Ancien mot de passe"
+
+msgid "New Password Again"
+msgstr "Nouveau mot de passe"
+
+msgid "Invalid password"
+msgstr "Mot de passe invalide"
+
+msgid "Passwords do not match"
+msgstr "Les mots de passe ne correspondent pas"
+
+msgid "Your password updated successfully"
+msgstr "Votre mot de passe a été mis Ó jour avec succès"
+
+msgid "Please do not leave the password fields blank"
+msgstr "Ne laissez pas les champs du mot de passe vides"
+
+msgid "You can view your profile and package information."
+msgstr ""
+"Vous pouvez consulter votre profil et les informations relatives Ó votre "
+"colis."
+
+msgid "Patients"
+msgstr "Les patients"
+
+msgid "Package Start-End Date"
+msgstr "Date de début de début du package"
+
+msgid "Favorite Patient"
+msgstr "Patient préféré"
+
+msgid "Your patient limit has been reached."
+msgstr "Votre limite de patients a été atteinte."
+
+msgid "View Patient"
+msgstr "Voir le patient"
+
+msgid "Delete Patient"
+msgstr "Supprimer le patient"
+
+msgid "Your analyse limit has been exceeded"
+msgstr "Votre limite d'analyse a été dépassée"
+
+msgid "Your package has expired, please renew"
+msgstr "Votre forfait a expiré, veuillez le renouveler"
+
+msgid "Welcome"
+msgstr "Accueillir"
+
+msgid "Forms"
+msgstr "Accueillir"
+
+msgid "Renewal Date"
+msgstr "Date de renouvellement"
+
+msgid "End Date"
+msgstr "Date de fin"
+
+msgid "All Uses"
+msgstr "Toutes les utilisations"
+
+msgid ""
+"you can continue by starting to <strong>Add Favorite Patients!</strong>"
+msgstr ""
+"vous pouvez continuer en commençant à <strong>Ajouter des patients "
+"favoris!</strong>."
+
+msgid "Let's Go!"
+msgstr "Allons-y!"
+
+msgid "Patient added to favorites"
+msgstr "Patient ajouté aux favoris"
+
+msgid "Patient removed from favorites"
+msgstr "Patient retiré des favoris"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "View Radiography"
+msgstr "Voir la radiographie"
+
+msgid "Treatment planning successfully deleted"
+msgstr "Planification du traitement supprimée avec succès"
+
+msgid "Treatment Planning"
+msgstr "Planification du traitement"
+
+msgid "You can add or update treatment planning"
+msgstr "Vous pouvez ajouter ou mettre Ó jour la planification des traitements"
+
+msgid "Diagnosis added successfully"
+msgstr "Diagnostic ajouté avec succès"
+
+msgid "you can continue by starting to"
+msgstr "vous pouvez continuer en commenant Ó"
+
+msgid "you can continue by starting to"
+msgstr "vous pouvez continuer en commenant Ó"
+
+msgid "You can create your form by"
+msgstr "Vous pouvez créer votre formulaire en"
+
+msgid "Clicking the button"
+msgstr "Cliquer sur le bouton"
+
+msgid "Add Patients!"
+msgstr "Ajouter des patients !"
+
+msgid "Write File No"
+msgstr "Numéro de fichier d'écriture"
+
+msgid "Upload Radiography"
+msgstr "Télécharger une radiographie"
+
+msgid "Send Mail"
+msgstr "Envoyer un courrier"
+
+msgid "Treatment Planning"
+msgstr "Planification du traitement"
+
+msgid "Complete"
+msgstr "Compléter"
+
+msgid "Add Diagnosis"
+msgstr "Ajouter un diagnostic"
+
+msgid "Add Treatment"
+msgstr "Ajouter un traitement"
+
+msgid "Add Treatments"
+msgstr "Ajouter des traitements"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Save"
+msgstr "Sauvegarder"
+
+msgid "Disease removed from tooth"
+msgstr "Maladie retirée de la dent"
+
+msgid "Export Default"
+msgstr "Exportation par défaut"
+
+msgid "Weak"
+msgstr "Faible"
+
+msgid "Medium"
+msgstr "Moyen"
+
+msgid "Strong"
+msgstr "Fort"
+
+msgid "Dentist"
+msgstr "Dentiste"
+
+msgid "Brightness Level"
+msgstr "Niveau de luminosité"
+
+msgid "Contrast Level"
+msgstr "Niveau de contraste"
+
+msgid "Are you sure you want to delete illness from tooth?"
+msgstr "Êtes-vous sûr de vouloir supprimer la maladie de la dent ?"
+
+msgid "Diagnosis"
+msgstr "Diagnostic"
+
+msgid "Patient Limit"
+msgstr "Limite des patients"
+
+msgid "Radiography Limit"
+msgstr "Limite de la radiographie"
+
+msgid "Analyse Limit"
+msgstr "Analyser la limite"
+
+msgid "Update Package"
+msgstr "Paquet de mise Ó jour"
+
+msgid "Search"
+msgstr "Recherche"
+
+msgid "Tooth Chart"
+msgstr "Tableau des dents"
+
+msgid "Tooth"
+msgstr "Dent"
+
+msgid "Write doctor name..."
+msgstr "Inscrivez le nom du médecin..."
+
+msgid "Add Radiography"
+msgstr "Ajouter Radiographie"
+
+msgid "Select Radiography Type..."
+msgstr "Sélectionnez le type de radiographie..."
+
+msgid "Start Upload"
+msgstr "Démarrer le téléchargement"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "You can enter a  description here..."
+msgstr "Vous pouvez entrer une description ici..."
+
+msgid "Here you can add and view treatment planning"
+msgstr "Ici, vous pouvez ajouter et visualiser la planification du traitement"
+
+msgid "Treatment Planning"
+msgstr "Planification du traitement"
+
+msgid "Start Planning"
+msgstr "Commencer à planifier"
+
+msgid "Are you sure you want to delete treatment?"
+msgstr "Êtes-vous sûr de vouloir supprimer le traitement ?"
+
+msgid "Upload Signature"
+msgstr "Télécharger la signature"
+
+msgid "Upload Clinic Logo"
+msgstr "Télécharger le logo de la clinique"
+
+msgid "Update Password"
+msgstr "Mise Ó jour du mot de passe"
+
+msgid "Your clinic logo has been updated"
+msgstr "Le logo de votre clinique a été mis Ó jour"
+
+msgid "An error occured while updating your clinic logo"
+msgstr ""
+"Une erreur s'est produite lors de la mise Ó jour du logo de votre clinique"
+
+msgid "Your signature has been updated"
+msgstr "Votre signature a été mise Ó jour"
+
+msgid "An error occured while updating your signature"
+msgstr "Une erreur s'est produite lors de la mise Ó jour de votre signature"
+
+msgid "Doctor note has been saved"
+msgstr "La note du médecin a été sauvegardée"
+
+msgid "Save my choices"
+msgstr "Sauvegarder mes choix"
+
+msgid "Report"
+msgstr "Rapport"
+
+msgid "Tooth Based"
+msgstr "Sur la base des dents"
+
+msgid "Choose on what basis your report will be based"
+msgstr "Choisissez la base de votre rapport"
+
+msgid "3. Choose Your Report Filter"
+msgstr "3. Choisissez votre filtre de rapport"
+
+msgid "Include doctor signature in the report"
+msgstr "Inclure la signature du médecin dans le rapport"
+
+msgid "Doctor Signature"
+msgstr "Signature du médecin"
+
+msgid "Include treatment plannings in the report"
+msgstr "Inclure les plans de traitement dans le rapport"
+
+msgid "Treatment Plannigs"
+msgstr "Plans de traitement"
+
+msgid "Include doctor note in the report"
+msgstr "Inclure la note du médecin dans le rapport"
+
+msgid "Doctor Note"
+msgstr "Note du médecin"
+
+msgid "Drawed Radiography"
+msgstr "Radiographie tirée"
+
+msgid "Include drawed radiography information in the report"
+msgstr "Inclure des informations sur la radiographie dessinée dans le rapport"
+
+msgid "Include radiography information in the report"
+msgstr "Inclure des informations sur la radiographie dans le rapport"
+
+msgid "Radiography"
+msgstr "Radiographie"
+
+msgid "Include patient information in the report"
+msgstr "Inclure des informations sur le patient dans le rapport"
+
+msgid "Patient Informations"
+msgstr "Informations pour les patients"
+
+msgid "Select the information you want to displayed in the report"
+msgstr ""
+"Sélectionnez les informations que vous souhaitez voir appara¯tre dans le "
+"rapport."
+
+msgid "2. Information to Display"
+msgstr "2. Informations Ó afficher"
+
+msgid "Patient Format"
+msgstr "Format du patient"
+
+msgid "Choose in which format you will create the report"
+msgstr "Choisissez le format dans lequel vous allez créer le rapport"
+
+msgid "1. Report Format"
+msgstr "1. Format du rapport"
+
+msgid "Export Report"
+msgstr "Rapport d'exportation"
+
+msgid "Analyzes"
+msgstr "Analyses"
+
+msgid "Doctor Comment"
+msgstr "Commentaire du médecin"
+
+msgid "Are you sure you want to delete treatment from tooth?"
+msgstr "Êtes-vous sûr de vouloir supprimer le traitement de la dent ?"
+
+msgid "Treatment removed from tooth"
+msgstr "Traitement retiré de la dent"
+
+msgid "Treatment is already exists"
+msgstr "Le traitement existe déjÓ"
+
+msgid "Treatment has been added successfully"
+msgstr "Le traitement a été ajouté avec succès"
+
+msgid "The disease you are trying to add already exists"
+msgstr "La maladie que vous essayez d'ajouter existe déjÓ"
+
+msgid "1. Mail Information"
+msgstr "1. Informations sur le e-mail"
+
+msgid "Dear"
+msgstr "Chère"
+
+msgid "Thanks!"
+msgstr "Merci de votre attention !"
+
+msgid "Your radiography image has been uploaded to our system."
+msgstr "Votre image radiographique a été téléchargée dans notre système."
+
+msgid "Enter the information of the person you are sending the email to."
+msgstr ""
+"Saisissez les informations relatives Ó la personne Ó laquelle vous envoyez "
+"le e-mail."
+
+msgid "Write name.."
+msgstr "Nom d'écriture..."
+
+msgid "Name Surname"
+msgstr "Nom et nom de famille"
+
+msgid "Write e-mail"
+msgstr "Ecrire un e-mail"
+
+msgid "2. Report Format"
+msgstr "2. Format du rapport"
+
+msgid "3. Information to Display"
+msgstr "3. Informations Ó afficher"
+
+msgid "4. Choose Your Report Filter"
+msgstr "4. Choisissez votre filtre de rapport"
+
+msgid "Report sent as e-mail"
+msgstr "Rapport envoyé par e-mail"
+
+msgid "There are not any treatment plans"
+msgstr "Il n'y a pas de plan de traitement"
+
+msgid "Treatments Plans"
+msgstr "Plan de traitements"
+
+msgid "File No"
+msgstr "Numéro de dossier"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "The doctor did not create a note"
+msgstr "Le médecin n'a pas créé de note"
+
+msgid "All Teeth are present except"
+msgstr "Toutes les dents sont présentes"
+
+msgid "Package Expiry Date"
+msgstr "Date d'expiration du paquet"
+
+msgid "You can update the user by filling out the information below."
+msgstr ""
+"Vous pouvez mettre à jour l'utilisateur en remplissant les informations ci-"
+"dessous."
+
+msgid "You can add or update user by filling out the information below."
+msgstr ""
+"Vous pouvez ajouter ou mettre Ó jour un utilisateur en remplissant les "
+"informations ci-dessous."
+
+msgid "Package"
+msgstr "Emballer"
+
+msgid "List Users"
+msgstr "Liste des utilisateurs"
+
+msgid "Zoom In"
+msgstr "Agrandir"
+
+msgid "Zoom Out"
+msgstr "Dézoomer"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Treatment planning successfully deleted"
+msgstr "Planification du traitement supprimée avec succès"
+
+msgid "Treatment planning successfully saved"
+msgstr "Planification du traitement sauvegardée avec succès"
+
+msgid "Change Size"
+msgstr "Modifier la taille"
+
+msgid "Show Teeth Numbering"
+msgstr "Montrer la numérotation des dents"
+
+msgid ""
+"Have you ever been diagnosed with any chronic diseases? If so, please "
+"specify."
+msgstr ""
+"Avez-vous déjà été diagnostiqué comme souffrant d'une maladie chronique ? Si"
+" oui, veuillez préciser."
+
+msgid "If so, please specify."
+msgstr "Si oui, veuillez préciser."
+
+msgid "How would you describe your weekly physical activity?"
+msgstr "Comment décririez-vous votre activité physique hebdomadaire ?"
+
+msgid "Do you currently have dental insurance?"
+msgstr "Avez-vous actuellement une assurance dentaire ?"
+
+msgid "What is your annual household income?"
+msgstr "Quel est le revenu annuel de votre ménage ?"
+
+msgid "Do you regularly visit a dentist for check-ups and cleaning?"
+msgstr ""
+"Allez-vous régulièrement chez le dentiste pour des contr¶les et des "
+"nettoyages ?"
+
+msgid "Are you currently taking any medication? If yes, please specify."
+msgstr ""
+"Prenez-vous actuellement des médicaments ? Si oui, veuillez préciser.Şu anda"
+" herhangi bir ilaç kullanıyor musunuz? Evet ise lütfen belirtiniz."
+
+msgid "Are you currently taking any medication?"
+msgstr "Prenez-vous actuellement des médicaments ?"
+
+msgid "What is your age?"
+msgstr "Quel est votre Ôge ?"
+
+msgid "Please list any known allergies"
+msgstr "Veuillez indiquer toute allergie connue"
+
+msgid "(drug, food, environmental)"
+msgstr "(médicaments, aliments, environnement)"
+
+msgid "Do you smoke?"
+msgstr "Fumez-vous ?"
+
+msgid "Do you drink alcohol?"
+msgstr "Consommez-vous de l'alcool ?"
+
+msgid "What is your employment status?"
+msgstr "Quelle est votre situation professionnelle ?"
+
+msgid ""
+"Have you ever had any dental surgery or procedure done in the past? If yes, "
+"please specify."
+msgstr ""
+"Avez-vous déjà subi une opération ou une procédure dentaire dans le passé ? "
+"Si oui, veuillez préciser."
+
+msgid "Have you ever had any dental surgery or procedure done in the past?"
+msgstr ""
+"Avez-vous déjÓ subi une opération ou une procédure dentaire dans le passé ?"
+
+msgid "What is your dietary preference?"
+msgstr "Quelles sont vos préférences alimentaires ?"
+
+msgid ""
+"Have you ever experienced any adverse or allergic reactions to dental "
+"treatments?"
+msgstr ""
+"Avez-vous déjà eu des réactions indésirables ou allergiques à des "
+"traitements dentaires?"
+
+msgid "Please upload a radiography"
+msgstr "Veuillez télécharger une radiographie"
+
+msgid "Your form has been sent"
+msgstr "Votre formulaire a été envoyé"
+
+msgid "Please select a radiography type"
+msgstr "Veuillez sélectionner un type de radiographie"
+
+msgid "Download"
+msgstr "Télécharger"
+
+msgid "Radiography Upload"
+msgstr "Chargement de la radiographie"
+
+msgid "Measure"
+msgstr "Mesure"
+
+msgid "Create User"
+msgstr "Créer un utilisateur"
+
+msgid "Clinic Name"
+msgstr "Nom de la clinique"
+
+msgid "Your radiography upload limit has been exceeded"
+msgstr "La limite de téléchargement de votre radiographie a été dépassée"
+
+msgid "Draw the Diseases I chose"
+msgstr "Dessinez les maladies que j'ai choisies"
+
+msgid "Draw all Diseases"
+msgstr "Dessiner toutes les maladies"
+
+msgid "Show Tooth Numbers"
+msgstr "Afficher les numéros des dents"
+
+msgid "You have not started an analysis yet"
+msgstr "Vous n'avez pas encore commencé une analyse"
+
+msgid "Send form to patient"
+msgstr "Envoyer un formulaire au patient"
+
+msgid "Dentition"
+msgstr "Dentition"
+
+msgid "Your form choices has been saved"
+msgstr "Vos choix de formulaire ont été sauvegardés"
+
+msgid "You have not created a treatment plan."
+msgstr "Vous n'avez pas établi de plan de traitement."
+
+msgid "Dear Patient,"
+msgstr "Chère patiente, cher patient,"
+
+msgid "Choose your answer"
+msgstr "Choisissez votre réponse"
+
+msgid ""
+"To enhance your personalized care, we request you to upload your dental "
+"X-rays and fill out this short questionnaire. This information, kept "
+"confidential, allows us to accurately assess your oral health and tailor "
+"your dental care based on your health history, lifestyle, and financial "
+"situation. Your cooperation aids in early disease detection, prevention, and"
+" improves your overall wellbeing."
+msgstr ""
+"Afin d'améliorer vos soins personnalisés, nous vous demandons de télécharger"
+" vos radiographies dentaires et de remplir ce bref questionnaire. Ces "
+"informations, qui restent confidentielles, nous permettent d'évaluer avec "
+"précision votre santé bucco-dentaire et d'adapter vos soins dentaires en "
+"fonction de vos antécédents médicaux, de votre mode de vie et de votre "
+"situation financière. Votre coopération contribue à la détection précoce des"
+" maladies, à la prévention et à l'amélioration de votre bien-être général."
+
+msgid ""
+"You can update or create your form questions by filling out the information "
+"below."
+msgstr ""
+"Vous pouvez mettre à jour ou créer vos questions de formulaire en "
+"remplissant les informations ci-dessous."
+
+msgid "Your form url:"
+msgstr "L'url de votre formulaire :"
+
+msgid "You are redirecting to add patient page."
+msgstr "Vous Ûtes redirigé vers la page d'ajout de patient."
+
+msgid "Your form has been saved"
+msgstr "Votre formulaire a été sauvegardé"
+
+msgid "In the form below"
+msgstr "Dans le formulaire ci-dessous"
+
+msgid "Company Name"
+msgstr "Nom de l'entreprise"
+
+msgid "First Name"
+msgstr "Prénom"
+
+msgid ""
+"You can see the information that the patient has filled in, and if you want,"
+" you can register this person as your patient."
+msgstr ""
+"Vous pouvez voir les informations que le patient a remplies et, si vous le "
+"souhaitez, vous pouvez enregistrer cette personne en tant que patient."
+
+msgid "If so, please specify."
+msgstr "Si oui, veuillez préciser."
+
+msgid ""
+"Have you ever had any dental surgery or procedure done in the past? If yes, "
+"please specify."
+msgstr ""
+"Avez-vous déjà subi une opération ou une procédure dentaire dans le passé ? "
+"Si oui, veuillez préciser."
+
+msgid "Health Tourism Form"
+msgstr "Formulaire de tourisme de santé"
+
+msgid "Required"
+msgstr "Exigée"
+
+msgid "Form"
+msgstr "Formulaire"
+
+msgid "Show"
+msgstr "Afficher"
+
+msgid "Panaromic"
+msgstr "Panaromique"
+
+msgid "Your package has been expired."
+msgstr "Votre colis a expiré."
+
+msgid "User deleted successfully."
+msgstr "L'utilisateur a été supprimé avec succès."
+
+msgid "Something went wrong."
+msgstr "Quelque chose n'a pas fonctionné."
+
+msgid "List Forms"
+msgstr "Liste des formulaires"
+
+msgid "Favorite"
+msgstr "Favoris"
+
+msgid "Write your Email"
+msgstr "Ecrivez votre Email"
+
+msgid "View Analysis"
+msgstr "Ecrivez votre Email"
+
+msgid "Treatments Plan"
+msgstr "Plan de traitements"
+
+msgid "Treatments Plan"
+msgstr "Plan de traitements"
+
+msgid "Cephalometric"
+msgstr "Céphalométrie"
+
+msgid "Email"
+msgstr "E-Mail"
+
+msgid ""
+"Do you have any family history of dental issues? (e.g., gum disease, tooth "
+"decay)"
+msgstr ""
+"Avez-vous des antécédents familiaux de problèmes dentaires ? (par exemple, "
+"maladie des gencives, carie dentaire)"
+
+msgid "Add Crown"
+msgstr "Ajouter la couronne"
+
+msgid "Add Implant"
+msgstr "Ajouter l'implant"
+
+msgid "Make Markup"
+msgstr "Faire un balisage"
+
+msgid "Add Diagnosis"
+msgstr "Ajouter le diagnostic"
+
+msgid "This E-Mail already exists"
+msgstr "Ce courriel existe déjÓ"
+
+msgid "Please fill all fields"
+msgstr "Veuillez remplir tous les champs"
+
+msgid "Please specify."
+msgstr "Veuillez préciser."
+
+msgid "Edit Radiography"
+msgstr "Editer la radiographie"
+
+msgid "Grayscale"
+msgstr "Niveaux de gris"
+
+msgid "Sepia"
+msgstr "Sépia"
+
+msgid "Blur"
+msgstr "Flou"
+
+msgid "Invert"
+msgstr "Inverser"
+
+msgid "Brightness Level"
+msgstr "Niveau de luminosité"
+
+msgid "Contrast Level"
+msgstr "Niveau de contraste"
+
+msgid "Flip Horizontal"
+msgstr "Retournement horizontal"
+
+msgid "Flip Vertical"
+msgstr "Flip Vertical"
+
+msgid "Range Input"
+msgstr "Plage d'entrée"
+
+msgid "Rotate Value"
+msgstr "Valeur de rotation"
+
+msgid "Rotate Left 90°"
+msgstr "Rotate Left 90°"
+
+msgid "Rotate Right 90°"
+msgstr "Rotate Right 90°"
+
+msgid "Straight Line"
+msgstr "Ligne droite"
+
+msgid "Free Drawing"
+msgstr "Dessin libre"
+
+msgid "Arrow"
+msgstr "Flèche"
+
+msgid "Draw Line"
+msgstr "Tracer une ligne"
+
+msgid "Fonts"
+msgstr "Polices de caractères"
+
+msgid "Font Size"
+msgstr "Taille de la police"
+
+msgid "Rectangular"
+msgstr "Rectangulaire"
+
+msgid "Circle"
+msgstr "Cercle"
+
+msgid "Triangle"
+msgstr "Triangle"
+
+msgid "Stroke Width"
+msgstr "Largeur de la course"
+
+msgid "Edit Mode"
+msgstr "Mode édition"
+
+msgid "Edit Radyography"
+msgstr "Editer la radyographie"
+
+msgid "Brightness"
+msgstr "Luminosité"
+
+msgid "Contrast"
+msgstr "Contraste"
+
+msgid "Filter"
+msgstr "Filtre"
+
+msgid "Flip"
+msgstr "Retournement"
+
+msgid "Crop"
+msgstr "Culture"
+
+msgid "Rotate"
+msgstr "Rotation"
+
+msgid "Draw"
+msgstr "Dessiner"
+
+msgid "Shape"
+msgstr "Forme"
+
+msgid "Descriptor"
+msgstr "Descripteur"
+
+msgid "Meas"
+msgstr "Mesure"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Mean"
+msgstr "Moyenne"
+
+msgid "Sd"
+msgstr "Sd"
+
+msgid "Patient"
+msgstr "Patient"
+
+msgid "Fill out the form below to send the form to your patient!"
+msgstr "Remplissez le formulaire ci-dessous pour l'envoyer Ó votre patient !"
+
+msgid "User Api Key"
+msgstr "Clé Api utilisateur"
+
+msgid "Company Api Key"
+msgstr "Clé de l'entreprise Api"
+
+msgid "Copy"
+msgstr "Copie"
+
+msgid "Successfully added"
+msgstr "Ajouté avec succès"
+
+msgid "Successfully updated"
+msgstr "Mise à jour réussie"
+
+msgid "Username or email already exists"
+msgstr "Le nom d'utilisateur ou l'adresse électronique existe déjà"
+
+msgid ""
+"Password must be a minimum of 5 characters, contain at least one capital "
+"letter and one special character"
+msgstr ""
+"Le mot de passe doit être composé d'au moins 5 caractères, contenir au moins"
+" une lettre majuscule et un caractère spécial"
+
+msgid "How do you rate Thakaamed according to the <br> categories below?"
+msgstr "Comment évaluez-vous Thakaamed selon les catégories <br> ci-dessous ?"
+
+msgid "Can you rate each one from 1 to 5?"
+msgstr "Pouvez-vous noter chacun de 1 à 5 "
+
+msgid "UI Design"
+msgstr "Conception de l'interface utilisateur"
+
+msgid "BUG"
+msgstr "Bogue"
+
+msgid "Features"
+msgstr "Fonctionnalités"
+
+msgid "Performance"
+msgstr "Performance"
+
+msgid "Expected outcome achieved?"
+msgstr "Le résultat escompté a-t-il été atteint?"
+
+msgid "How we can improve?"
+msgstr "Comment pouvons-nous nous améliorer ?"
+
+msgid "If you have any additional feedback, please type it in here"
+msgstr ""
+"Si vous avez d'autres commentaires à formuler, veuillez les indiquer ici."
+
+msgid "I have read and accept the Privacy Policy."
+msgstr "J'ai lu et j'accepte la politique de confidentialité."
+
+msgid "Send Feedback"
+msgstr "Envoyer un feedback"
+
+msgid "You must accept the Privacy Policy."
+msgstr "Vous devez accepter la politique de confidentialité."
+
+msgid "Warning"
+msgstr "Avertissement"
+
+msgid "Submit Feedback"
+msgstr "Soumettre un feedback"
+
+msgid "Thank you for your feedback"
+msgstr "Merci pour votre avis"
+
+msgid "There was an error sending feedback, please try again later"
+msgstr ""
+"Une erreur s'est produite lors de l'envoi des commentaires, veuillez "
+"réessayer plus tard"
+
+msgid "You have to adjust form settings first to see link"
+msgstr ""
+"Vous devez d'abord ajuster les paramètres du formulaire pour voir le lien."

@@ -1,0 +1,502 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+html,
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+.main-heading {
+  font-size: 50px;
+  line-height: 58px;
+}
+@media screen and (max-width: 768px) {
+  .main-heading {
+    font-size: 30px;
+    line-height: 38px;
+    margin-top: 20px;
+  }
+}
+
+.big-heading {
+  font-size: 70px;
+  line-height: 82px;
+}
+
+.main-paragrafh {
+  font-size: 16px;
+  line-height: 19px;
+  margin: 26px 0;
+}
+
+.color-dark-blue {
+  color: #021838;
+}
+
+.bg-dark-blue {
+  background-color: #021838;
+}
+
+.color-light {
+  color: #FFF;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.custom-button {
+  font-size: 25px;
+  line-height: 29px;
+  padding: 17px 94px;
+  border: none;
+  transition: background-color ease-in-out 0.2s;
+}
+.custom-button.dark {
+  background-color: #021838;
+  color: #FFF;
+}
+.custom-button.light {
+  background-color: #FFF;
+  color: #021838;
+}
+
+.custom-checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.custom-checkbox-container input {
+  position: absolute;
+  opacity: 1;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.custom-checkbox-container input:checked ~ .checkmark {
+  background-color: #021838;
+}
+.custom-checkbox-container input:checked ~ .checkmark.yellow {
+  background-color: #edff18;
+}
+.custom-checkbox-container input:checked ~ .checkmark.blue {
+  background-color: #1d79ff;
+}
+.custom-checkbox-container input:checked ~ .checkmark.purple {
+  background-color: #bf2bb9;
+}
+.custom-checkbox-container input:checked ~ .checkmark.red {
+  background-color: #ff3434;
+}
+.custom-checkbox-container input:checked ~ .checkmark.turquoise {
+  background-color: #49e7e7;
+}
+.custom-checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+.custom-checkbox-container .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+.custom-checkbox-container .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.custom-checkbox-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+section#logos {
+  padding: 100px 0;
+  text-align: center;
+}
+@media screen and (max-width: 768px) {
+  section#logos {
+    padding: 50px 0;
+  }
+  section#logos .row {
+    flex-wrap: wrap;
+  }
+}
+section#logos .col-md:not(:last-of-type) {
+  border-right: 2px solid #d9d9d9;
+}
+@media screen and (max-width: 768px) {
+  section#logos .col-md:not(:last-of-type) {
+    border-right: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  section#logos {
+    padding: 10px 0;
+  }
+}
+
+.font-weight-100 {
+  font-weight: 100;
+}
+
+.font-weight-200 {
+  font-weight: 200;
+}
+
+.font-weight-300 {
+  font-weight: 300;
+}
+
+.font-weight-400 {
+  font-weight: 400;
+}
+
+.font-weight-500 {
+  font-weight: 500;
+}
+
+.font-weight-600 {
+  font-weight: 600;
+}
+
+.font-weight-700 {
+  font-weight: 700;
+}
+
+.font-weight-800 {
+  font-weight: 800;
+}
+
+.font-weight-900 {
+  font-weight: 900;
+}
+
+section#pricing .container {
+  margin: 75px auto;
+  border-radius: 13px;
+  background-color: white;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+  padding: 25px;
+}
+section#pricing .container .steps .step:not(.step-1) {
+  display: none;
+}
+section#pricing .container .steps .step h3 {
+  margin-bottom: 20px;
+}
+section#pricing .container .steps .step input {
+  margin-bottom: 15px;
+  margin-top: 5px;
+  padding: 12px 20px;
+  border: 1px solid #c8c4c4;
+  border-radius: 5px;
+}
+section#pricing .container .steps .step input:focus {
+  outline: none;
+  border: 1px solid #021838;
+}
+section#pricing .container .steps .step input, section#pricing .container .steps .step label {
+  display: block;
+  width: 100%;
+  user-select: none;
+  cursor: pointer;
+}
+section#pricing .container .steps .step .card-container {
+  width: 425px;
+  max-width: 100%;
+  margin: 35px auto;
+  aspect-ratio: 1.63;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+section#pricing .container .steps .step .card-container:hover .the-card {
+  transform: rotateY(180deg) !important;
+}
+section#pricing .container .steps .step .card-container .the-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease-in-out;
+  transform: rotateY(0deg);
+}
+section#pricing .container .steps .step .card-container .the-card .the-front, section#pricing .container .steps .step .card-container .the-card .the-back {
+  border-radius: 20px;
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  color: #333;
+}
+section#pricing .container .steps .step .card-container .the-card .the-front {
+  background-image: url("../media/img/cardbg.png");
+}
+section#pricing .container .steps .step .card-container .the-card .the-front .chip img {
+  position: absolute;
+  left: 9.64%;
+  top: 28.4%;
+  width: 9.64%;
+  aspect-ratio: 1;
+}
+section#pricing .container .steps .step .card-container .the-card .the-front .card-number-title {
+  position: absolute;
+  color: white;
+  font-size: 10px;
+  left: 9.64%;
+  top: 47.3%;
+}
+section#pricing .container .steps .step .card-container .the-card .the-front .circles img {
+  position: absolute;
+  right: 7.17%;
+  bottom: 13.07%;
+}
+section#pricing .container .steps .step .card-container .the-card .the-front .holder {
+  position: absolute;
+  color: white;
+  font-size: 10px;
+  top: 74.6%;
+  left: 9.64%;
+}
+section#pricing .container .steps .step .card-container .the-card .the-front .card-name {
+  position: absolute;
+  left: 9.64%;
+  color: white;
+  font-size: 14px;
+  top: 81.15%;
+}
+section#pricing .container .steps .step .card-container .the-card .the-front .valid {
+  position: absolute;
+  color: white;
+  font-size: 10px;
+  top: 74.6%;
+  left: 60.66%;
+}
+section#pricing .container .steps .step .card-container .the-card .the-front .valid-value {
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: 81.15%;
+  left: 60.66%;
+}
+section#pricing .container .steps .step .card-container .the-card .the-front .card-number {
+  position: absolute;
+  color: white;
+  font-size: 16px;
+  left: 9.64%;
+  top: 52.69%;
+  font-family: monospace;
+}
+section#pricing .container .steps .step .card-container .the-card .the-front .card-number span:nth-child(4n) {
+  margin-right: 13px;
+}
+section#pricing .container .steps .step .card-container .the-card .the-back {
+  background-color: #021838;
+  transform: rotateY(180deg);
+}
+section#pricing .container .steps .step .card-container .the-card .the-back .black-line {
+  position: absolute;
+  background-color: #262626;
+  width: 91%;
+  height: 14.43%;
+  left: 4.5%;
+  top: 15%;
+  border-radius: 3px;
+}
+section#pricing .container .steps .step .card-container .the-card .the-back .top-text {
+  position: absolute;
+  color: white;
+  font-size: 9px;
+  left: 4.5%;
+  top: 37.69%;
+}
+section#pricing .container .steps .step .card-container .the-card .the-back .top-text span {
+  display: block;
+}
+section#pricing .container .steps .step .card-container .the-card .the-back .bottom-text {
+  position: absolute;
+  color: white;
+  top: 71.53%;
+  left: 24%;
+  right: 14.58%;
+  font-size: 8px;
+}
+section#pricing .container .steps .step .card-container .the-card .the-back .gradient {
+  position: absolute;
+  width: 75%;
+  height: 12.86%;
+  left: 4.5%;
+  top: 50%;
+}
+section#pricing .container .steps .step .card-container .the-card .the-back .gradient img {
+  width: 100%;
+  height: 100%;
+}
+section#pricing .container .steps .step .card-container .the-card .the-back .gradient span {
+  color: #484848;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+section#pricing .container .steps .step .card-container .the-card .the-back .card-frame {
+  position: absolute;
+  left: 4.5%;
+  bottom: 18.07%;
+  width: 12%;
+  height: 14.14%;
+}
+section#pricing .container .steps .step-count {
+  width: 400px;
+  max-width: 100%;
+  position: relative;
+  margin: 50px auto;
+  user-select: none;
+}
+section#pricing .container .steps .step-count::before, section#pricing .container .steps .step-count::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 50%;
+  width: 50%;
+  height: 2px;
+}
+section#pricing .container .steps .step-count::after {
+  content: "";
+  left: 50%;
+  background-color: rgba(2, 24, 56, 0.3);
+}
+section#pricing .container .steps .step-count[data-step="1"]::before, section#pricing .container .steps .step-count[data-step="1"]::after {
+  background-color: rgba(2, 24, 56, 0.3);
+}
+section#pricing .container .steps .step-count[data-step="2"]::before, section#pricing .container .steps .step-count[data-step="3"]::before, section#pricing .container .steps .step-count[data-step="3"]::after {
+  background-color: #021838;
+}
+section#pricing .container .steps .step-count .count-item {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 15px;
+  line-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  background-color: white;
+  border: 2px solid #021838;
+}
+section#pricing .container .steps .step-count .count-item:nth-child(1)::before, section#pricing .container .steps .step-count .count-item:nth-child(2)::before, section#pricing .container .steps .step-count .count-item:nth-child(3)::before {
+  content: "";
+  color: #021838;
+  position: absolute;
+  top: 100%;
+  font-size: 14px;
+}
+section#pricing .container .steps .step-count .count-item:nth-child(1)::before {
+  content: "Hesap";
+}
+section#pricing .container .steps .step-count .count-item:nth-child(2)::before {
+  content: "Ödeme";
+}
+section#pricing .container .steps .step-count .count-item:nth-child(3)::before {
+  content: "Bitir";
+}
+section#pricing .container .steps .step-count .count-item.active {
+  background-color: #021838;
+  color: white;
+}
+section#pricing .container .steps .step button {
+  border: none;
+  outline: none;
+  color: white;
+  background-color: #021838;
+  border-radius: 5px;
+  padding: 10px 20px;
+  display: block;
+  width: 100%;
+  transition: background-color ease-in-out 300ms;
+}
+section#pricing .container .steps .step button:hover {
+  transition: background-color ease-in-out 300ms;
+  background-color: rgba(2, 24, 56, 0.9);
+}
+section#pricing .container .price-plan-img {
+  padding: 20px;
+}
+section#pricing .container .price-plan-img h2 {
+  color: white;
+  bottom: 50px;
+  width: 380px;
+  max-width: 100%;
+  text-align: center;
+  font-size: 30px;
+  line-height: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+}
+@media screen and (max-width: 768px) {
+  section#pricing .container .price-plan-img h2 {
+    top: 25%;
+  }
+}
+section#pricing .container .price-plan-img .advenced-plans {
+  background-color: white;
+  border-radius: 8px;
+  left: 4rem;
+  right: 4rem;
+  bottom: 0;
+  transform: translateY(50%);
+}
+section#pricing .container .price-plan-img .advenced-plans .img img {
+  height: 70px;
+}
+section#pricing .container .price-plan-img .advenced-plans .text p {
+  font-size: 20px;
+  line-height: 30px;
+}
+section#pricing .container .price-plan-li {
+  background-color: #efeef3;
+  padding-top: calc((70px + 3rem) / 2 + 3.5rem);
+  padding-left: 4rem;
+  padding-right: 4rem;
+  padding-bottom: 3.5rem;
+  border-bottom-left-radius: 13px;
+  border-bottom-right-radius: 13px;
+}
+section#pricing .container .price-plan-li ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 15px;
+}
+section#pricing .container .price-plan-li ul li {
+  margin-bottom: 15px;
+  font-size: 17px;
+}
+section#pricing .container .price-plan-li ul li span {
+  color: #909090;
+}

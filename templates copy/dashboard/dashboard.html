@@ -1,0 +1,350 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block customCss %}
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'admin-lte/plugins/fontawesome-free/css/all.min.css' %}">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="{%static 'admin-lte/dist/css/adminlte.min.css' %}">
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="{% static 'css/patients.css' %}">
+<link rel="stylesheet" href="{% static 'css/addpatient.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<title>{{specs.title}} - {{card_message}}</title>
+<link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+<!-- <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}"> -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<style>
+    .ion {
+        color: White
+    }
+
+    .card-header {
+        background-color: #212C51 !important;
+    }
+    .small-box p{
+        font-size: 0.8rem!important;
+    }
+</style>
+{% endblock %}
+{% block headerButtons %}
+
+{% endblock %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<main class="position-relative" style="height: calc(100vh - 110px);">
+    <div class="views container">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <h1><b>{% trans 'You can select the date range yourself with the following inputs or you can select ready-made date ranges with the period selection input' %}</b></h2>
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <label for="start">{% trans 'Start Date' %}:</label>
+                            <input oninput="updateInterval()" type="date" id="start" name="start">
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <label for="end">{% trans 'End Date' %}:</label>
+                            <input oninput="updateInterval()" type="date" id="end" name="end">
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <label for="interval">{% trans 'Or Select Period' %}:</label>
+                            <select oninput="updateDateInputs()" id="interval" name="interval">
+                                <option value="">{% trans 'Choose' %}</option>
+                                <option value="1">{% trans 'Daily' %}</option>
+                                <option value="7">{% trans 'Weekly' %}</option>
+                                <option value="30">{% trans 'Monthly' %}</option>
+                                <option value="365">{% trans 'Yearly' %}</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <label for="interval">{% trans 'Apply Date Settings' %}:</label>
+                            <button style="background-color: #212C51; color: white;" class="btn btn-block"
+                                onclick="submitSelection()">{% trans 'Submit' %}</button>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box" style="background-color: #212C51;">
+                                <div style="color:white" id="userCount" class="inner">
+                                    <h3>{{user_count}}</h3>
+                                    <p>{% trans 'Total User Count' %}</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box" style="background-color: #212C51;">
+                                <div style="color:white" id="patientCount" class="inner">
+                                    <h3>{{patient_count}}</h3>
+                                    <p>{% trans 'Total number of patients added' %}</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div style="background-color: #212C51;" class="small-box">
+                                <div style="color:white" id="radiographyCount" class="inner">
+                                    <h3>{{radiography_count}}</h3>
+                                    <p style="font-size: 14px">{% trans 'Total Uploaded Radiography' %}</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-camera"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div style="background-color: #212C51;" class="small-box">
+                                <div style="color:white" id="analyseCount" class="inner">
+                                    <h3>{{analysis_count}}</h3>
+                                    <p style="font-size: 14px">{% trans 'Total Analyse Count' %}</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-eye"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- PIE CHART -->
+                            <div class="card card-danger">
+                                <div class="card-header">
+                                    <h3 class="card-title">{% trans 'Radiograph type distribution' %}</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                                class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                                class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div id="pieChartBody" class="card-body">
+                                    <canvas id="pieChart"
+                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card-success">
+                                <div class="card-header">
+                                    <h3 class="card-title">{% trans 'Analysis Distribution' %}</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                                class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                                class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart">
+                                        <canvas id="barChart"
+                                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        {% csrf_token %}
+    </div>
+</main>
+{% endblock %}
+{% block customJs %}
+<script src="{% static 'admin-lte/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- ChartJS -->
+<script src="{% static 'admin-lte/plugins/chart.js/Chart.min.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'admin-lte/dist/js/adminlte.min.js'%}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'admin-lte/dist/js/demo.js'%}"></script>
+<script src="https://unpkg.com/imask"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<!-- <script src="{% static 'js/add_patient.js' %}"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+
+<script>
+    var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()
+    function submitSelection() {
+        var startDate = document.getElementById("start").value;
+        var endDate = document.getElementById("end").value;
+        var period = document.getElementById("interval").value;
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'dashboard_homepage' %}",
+            data: {
+                'start_date': startDate,
+                'end_date': endDate,
+                'period': period,
+            },
+            headers: { 'X-CSRFToken': csrfmiddlewaretoken },
+            success: function (res) {
+                let radiography_type_count_dict = res.data.radiography_type_count_dict
+                drawPieChart(radiography_type_count_dict)
+                updateUserCount(res.data.user_count[0])
+                updatePatientCount(res.data.patient_count)
+                updateRadiographyCount(res.data.radiography_count[0])
+                updateAnalyseCount(res.data.analysis_count)
+                if (period) {
+                    startDate = ""
+                    endDate = ""
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("error")
+            }
+        })
+    }
+
+    function drawPieChart(rawPieChartDictionary) {
+        //clear the previous canvas first so it can't be seen when hover on new canvas
+        $("#pieChart").remove()
+        $("#pieChartBody").append('<canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 769px;" width="769" height="250" class="chartjs-render-monitor"></canvas>')
+        //clear the previous canvas first so it can't be seen when hover on new canvas
+        var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+        rawPieChartDictionary = JSON.parse(rawPieChartDictionary);
+        var labels = [];
+        var dataValues = [];
+        var backgroundColors = [];
+        for (var key in rawPieChartDictionary) {
+            if (rawPieChartDictionary.hasOwnProperty(key)) {
+                labels.push(key);
+                dataValues.push(rawPieChartDictionary[key]);
+
+                // Rastgele renk oluştur
+                var randomColor = '#' + (Math.random().toString(16) + '000000').slice(2, 8);
+                backgroundColors.push(randomColor);
+            }
+        }
+        var pieCharData = {
+            labels: labels,
+            datasets: [
+                {
+                    data: dataValues,
+                    backgroundColor: backgroundColors,
+                }
+            ]
+        }
+        var pieData = pieCharData;
+        var pieOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+        }
+        //Create pie or douhnut chart
+        // You can switch between pie and douhnut using the method below.
+        var pieChart = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: pieData,
+            options: pieOptions
+        })
+    }
+    function drawBarChart(rawBarChartDictionary) {
+        var barChartCanvas = $('#barChart').get(0).getContext('2d')
+        rawBarChartDictionary = JSON.parse(rawBarChartDictionary);
+        var labels = [];
+        var dataValues = [];
+        for (var key in rawBarChartDictionary) {
+            if (rawBarChartDictionary.hasOwnProperty(key)) {
+                labels.push(key);
+                dataValues.push(rawBarChartDictionary[key]);
+            }
+        }
+        var barChartData = {
+            labels: labels,
+            datasets: [
+                {
+                    data: dataValues,
+                    label: "Analyses Per Month",
+                    backgroundColor: 'rgba(60,141,188,0.9)',
+                }
+            ]
+        }
+
+        var barChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false
+        }
+
+        var barChart = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: barChartData,
+            options: barChartOptions
+        })
+    }
+    function updateUserCount(userCount) {
+        $("#userCount h3").fadeOut(400, function () {
+            $(this).text(userCount).fadeIn(400);
+        });
+        $("#userCount p").fadeOut(400, function () {
+            $(this).text("User count in the selected date range").fadeIn(400);
+        });
+    }
+    function updatePatientCount(patientCount) {
+        $("#patientCount h3").fadeOut(400, function () {
+            $(this).text(patientCount).fadeIn(400);
+        });
+        $("#patientCount p").fadeOut(400, function () {
+            $(this).text("Patient count in the selected date range").fadeIn(400);
+        });
+    }
+    function updateRadiographyCount(radiographyCount) {
+        $("#radiographyCount h3").fadeOut(400, function () {
+            $(this).text(radiographyCount).fadeIn(400);
+        });
+        $("#radiographyCount p").fadeOut(400, function () {
+            $(this).text("Radiography count in the selected date range").fadeIn(400);
+        });
+    }
+    function updateAnalyseCount(analyseCount) {
+        
+        $("#analyseCount h3").fadeOut(400, function () {
+            $(this).text(analyseCount).fadeIn(400);
+        });
+        $("#analyseCount p").fadeOut(400, function () {
+            $(this).text("Analyse count in the selected date range").fadeIn(400);
+        });
+    }
+    function updateInterval(){
+        var intervalSelect = document.getElementById('interval');
+        intervalSelect.value = "";
+    }
+    function updateDateInputs(){
+        var start = document.getElementById('start');
+        var end = document.getElementById('end');
+        start.value = "";
+        end.value = "";
+    }
+    $(document).ready(function () {
+        var rawPieChartDictionary = "{{radiography_type_count_dict|escapejs}}"
+        drawPieChart(rawPieChartDictionary)
+        var rawBarChartDictionary = "{{anaylses_by_months|escapejs}}"
+        drawBarChart(rawBarChartDictionary)
+
+    })
+
+</script>
+
+{% endblock %}

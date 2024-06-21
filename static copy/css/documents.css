@@ -1,0 +1,93 @@
+body{
+    width: 100vw;
+    max-height: 94vh;
+    overflow: hidden;
+}
+.documents-edit-active{
+    border: 2px solid rgba(80, 113, 200, 1);
+}
+.ck-editor__editable {
+    color: black!important;
+    min-height: 67vh!important;
+    overflow-y: auto!important;
+}
+.form-check-label{
+    margin-top: 12px;
+}
+.document-page-title h3{
+    color: rgba(10, 19, 50, 1);
+    font-size: 16px;
+    font-weight: 600;
+}
+.document-page-title span{
+    font-weight: 500;
+    font-size: 16px;
+    color: rgba(66, 71, 88, 1);
+}
+.your-pdf p{
+    font-size: 14px;
+    font-weight: 400;
+}
+.your-pdf span{
+    font-weight: 700;
+}
+.ck .ck-powered-by{
+    display: none;
+}
+.dotted-pdf{
+    padding: 10px!important;
+    border: 2px dotted rgba(176, 178, 181, 0.35)!important; 
+    display: flex!important; 
+    justify-content: center!important;
+}
+.tox-sidebar-wrap{
+    min-height: 645px;
+    overflow-y: hidden;
+}
+.tox-notifications-container{
+    display: none!important;
+}
+.richtexteditor rte-bottom{
+    display: none!important;
+}
+.richtexteditor{
+    color: black!important;
+}
+.rte-modern.rte-desktop.rte-toolbar-default {
+    min-width: 670px!important;
+}
+.pageContainer img{
+    width: 100%!important;
+}
+.rte-toggleborder{
+    background-color: red!important;
+}
+.tox-notifications-container{
+    display: none!important;
+}
+
+.tox-tinymce{
+    height: 605px!important;
+}
+.tox-statusbar{
+    display: none!important;
+}
+.tox-notification__body,
+.tox .tox-notification--warn, .tox .tox-notification--warning,
+.tox .tox-notification--warn p, .tox .tox-notification--warning p,
+.tox-icon,
+.tox-notification__icon{
+    background-color: transparent!important;
+    color: transparent!important;
+    border: none!important;
+    display: none!important;
+}
+
+.tox-tinymce{
+    height: 563px!important;
+}
+.next-button{
+    background-color: rgba(80, 113, 200, 1);
+    color: white;
+    border: none;
+}

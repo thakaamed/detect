@@ -1,0 +1,1083 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">      
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="{% static 'css/datatable.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <title>{{specs.title}} - {% trans 'Patients' %}</title>
+    {% comment %} <link rel="icon" type="image/png" href="{% static specs.favicon %}" /> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+    <link rel="stylesheet" href="{% static 'css/filepond.css' %}" />
+    <script src="{% static 'js/datatable.js' %}"></script>
+    <script src="{% static 'js/filepond.js' %}"></script> <!--  dropzone alternatifi dosya yükleme -->
+    <script src="{% static 'js/patients.js' %}"></script>
+    <style>
+        body.dark #example_length option{
+            background-color: #333!important;
+            color: #fff!important;
+            
+        }
+        .dropzone.dz-started .dz-message {
+            display: block !important;
+        }
+
+        #dropZone {
+            padding: 10px;
+            width: 100%;
+            border-radius: 10px;
+            background-color: transparent;
+        }
+
+        .dropzone {
+            border: 2px dashed #526092!important;
+            background-color: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .dropzone .dz-preview:not(.dz-processing) .dz-progress {
+            display: none;
+        }
+        .dropzone .dz-preview.dz-image-preview {
+            background-color: transparent;
+            margin: 5px 0;
+        }
+        /* tablo card tasarımı start */
+        table.patient-card-view {
+            display: flex;
+        }
+
+        table.patient-card-view thead {
+            display: none;
+        }
+
+        table.patient-card-view tbody {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        table.patient-card-view tr {
+            display: flex;
+            flex-direction: column;
+            width: calc(100% / 5 - 16px);
+            margin-bottom: 35px;
+            padding: 10px 10px 20px 10px;
+            background-color: white!important;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        table.patient-card-view tr td {
+            border-top-width: 0!important;
+        }
+
+        table.patient-card-view tr td:nth-child(1),
+        table.patient-card-view tr td:nth-child(6),
+        table.patient-card-view tr td:nth-child(7) {
+            display: none;
+        }
+
+        table.patient-card-view tr td:nth-child(2) {
+            position: absolute;
+            border-radius: 5px!important;
+            top: 20px;
+            left: 20px;
+            background-color: #5071C8!important;
+            color: white!important;
+        }
+
+        table.patient-card-view tr td:nth-child(3) {
+            text-align: left!important;
+            padding-left: 25px!important;
+            position: relative;
+        }
+
+        :not(body.dark) table.patient-card-view tr td:nth-child(3),
+        :not(body.dark) table.patient-card-view tr td:nth-child(5),
+        :not(body.dark) table.patient-card-view tr td:nth-child(8) {
+            background-color: white!important;
+            color: #111!important;
+        }
+
+        :not(body.dark) table.patient-card-view tr td:nth-child(9) {
+            background-color: #5071C8!important;
+        }
+
+        {% comment %} table.patient-card-view tr td:nth-child(3)::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-image: url('https://cdn-icons-png.flaticon.com/512/118/118669.png');
+            background-size: 15px 15px;
+            background-repeat: no-repeat;
+        } {% endcomment %}
+
+        table.patient-card-view tr td:nth-child(4) {
+            order: -1;
+            padding: 0;
+        }
+
+        table.patient-card-view tr td:nth-child(4) img {
+            width: 100%;
+            height: auto!important;
+            aspect-ratio: 1.75!important;
+        }
+
+        table.patient-card-view tr td:nth-child(9) {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            background-color: #5071C8!important;
+            border-radius: 7px;
+        }
+
+        table.patient-card-view tr td:nth-child(9) div i,
+        table.patient-card-view tr td:nth-child(9) div a i {
+            color: white!important;
+        }
+
+        table.patient-card-view tr td:nth-child(9) div a svg path {
+            stroke: white;
+        }
+        .swal2-container {
+            z-index: 999999 !important;
+        }
+        #back-img-frame .loading{
+            background-color: rgba(0, 0, 0, .7);
+        }
+        #back-img-frame .loading i,
+        #page-loading i{
+            animation: spin 1s linear infinite;
+        }
+        #page-loading {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px); /* Safari desteği için gerekli */
+        display: flex;
+        }
+        .repeat-analysis:hover{
+            color: greenyellow !important;
+        }
+        /* tablo card tasarımı end */
+    </style>
+<script>
+    $( document ).ready(function() {
+        $('#page-loading').hide()
+    });
+</script>
+{% endblock %}
+{% block headerButtons %}
+{% endblock %}
+
+{% block content %}
+    <div id="page-loading" class="position-fixed align-items-center justify-content-center" style="inset: 0; z-index: 9999999999;">
+        <i class="fa-solid fa-spinner fs-1"></i>
+    </div>
+    <div id="modal-delete-patient" class="modal-container">
+        <div class="modal-box">
+            <div class="modal-box__close">
+                <div class="close-icon" data-modal-close>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <div class="modal-big-icon">
+                <i class="fa-regular fa-trash-can shadow"></i>
+            </div>
+            <p class="main-text w-75 mx-auto text-center">{% trans 'Are you sure you want to delete the patient?' %}</p>
+            <div class="modal-container__buttons d-flex justify-content-center">
+                <button class="custom yes" data-btn-operation="delete-patient">{% trans 'Yes' %}</button>
+                <button class="custom no" data-modal-close>{% trans 'No' %}</button>
+            </div>
+        </div>
+    </div>
+    <div id="modal-radyografy-upload" class="modal-container">
+        <div class="modal-box px-4 d-flex flex-column text-light" style="min-width: 350px; height: auto; max-height: 100vh; max-width: 100vw; background-color: #1A264E;">
+            <div class="modal-box__close">
+                <div class="close-icon" data-modal-close>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <p class="my-2" style="font-size: 22px;">{% trans 'Add Radiography' %}</p>
+            <select name="radiography_types" id="radiography_types">
+                <option value="" selected>{% trans 'Select Radiography Type...' %}</option>
+                {% for type_id, type_name in image_type_dict.items %}
+                   <option value="{{type_id}}">{%if 'Lateral Cephalometric' in type_name %}{{type_name}} (BETA) {%elif 'CBCT' in type_name%}{{type_name}} (BETA) {%else%}{{type_name}}{%endif%}</option>
+                {% endfor %}
+            </select>
+            <div id="uploadFilepond" class="px-2">
+                <div class="custom-filepond-container">
+                    <input type="file" id="filepond" accept=".png">
+                    <div id="previewFilePond"></div>
+                  </div>
+            </div>
+            <form enctype='multipart/form-data' method="post" class="dropzone dz my-0 d-none" id="dicomDropzone" style="margin: 10px;">
+                {% csrf_token %}
+                <div class="fallback">
+                    <input name="file" type="file" multiple class="bg-primary">
+                </div>
+                <div class="dz-message needsclick"></div>
+                <div class="dz-default dz-message text-light my-0" style="z-index:-99">
+                    <i class="fa-solid fa-upload border" style="border-radius: 50%; padding: 10px;"></i>
+                    <p class="m-0 my-2">Dosyaları sürükleyin ve bırakın veya dosya seçin</p>
+                    <p class="m-0">.dcm</p>
+                </div>
+            </form>
+            <div id="cbtcContainer" class="mt-3 mb-4" style="display: none;">
+            </div>
+            <button id="filepondUploadButton" class="custom btn-blue my-2">{% trans 'Start Upload' %}</button>
+            <button id="CBCTUpload" class="custom btn-blue my-2 d-none">{% trans 'CBCT Upload' %}</button>
+            <div id="progress" style="display: none; width: 100%; background-color: #f0f0f0; border-radius: 4px;" class="custom btn-blue mb-2">
+                <div id="progressBar" style="width: 0;height: 20px;background-color: #5071C8;border-radius: 4px;">
+                    <div id="progressText" style="text-align: right; line-height: 20px; color: black; padding-right:5px;"></div>
+                </div>
+            </div>
+            <button id="close-upload-modal" class="save-treatment custom no" data-modal-close>{% trans 'Cancel' %}</button>
+            <button id="open-new-tab" class="d-none custom no" data-open-new-page="/">{% trans 'Open in New Tab' %}</button>
+        </div>
+    </div>
+
+    <div id="modal-show-past-analysis" class="modal-container">
+        <div class="modal-box px-4 d-flex flex-column text-light" style="min-width: 350px; height: auto; max-height: 100vh; max-width: 100vw; background-color: #172145;">
+            <div class="modal-box__close">
+                <div class="close-icon" data-modal-close>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <p class="my-2" style="font-size: 24px; color:#fff;">{% trans 'Past Analysis' %}</p>
+                <style>
+                    .show-past-analysis{
+                        font-size: 1rem;
+                        color: #212529;
+                        text-align: left;
+                        list-style: none;
+                        background-clip: padding-box;
+                        width:520px !important;
+                        padding: 30px 0px;
+                    }
+
+                    .past-analysis-item{
+                        display: block;
+                        width: 100%;
+                        clear: both;
+                        font-weight: 400;
+                        color: #fff;
+                        text-align: inherit;
+                        text-decoration: none;
+                        white-space: nowrap;
+                        background-color: transparent;
+                        border: 0;
+                    }
+                    .patient-transaction_list{
+                        max-height: 300px;
+                        overflow-y: auto;
+                    }
+                    i.patient-past-process-status.completed-no {
+                        color: #ff2727;
+                    }
+                    i.patient-past-process-status.completed-ok {
+                        color: #1cf171;
+                    }
+                    i.patient-past-process-status.process {
+                        color: #125cc7;
+                        transform: rotate(0deg);
+                        animation: spin 1s infinite linear;
+                    }
+
+                    .past-analysis-patient{
+                        font-size: 18px;
+                    }
+                    .past-analysis-created-date{
+                        color: #fff;
+                    }
+                    .past-analysis-radiography-tname{
+                        color: #fff;
+                    }
+                            
+                </style>
+            <ul class="show-past-analysis" id="patient-past-analysis">
+                <div class="patient-transaction_list">
+                    <ul class="dropdown-menu p-0" aria-labelledby="bildirim">
+                        <li class="past-analysis-menu p-0 p-2">{% trans 'You have not started an analysis yet' %}</li>
+                    </ul>
+                </div>                       
+            </ul>
+
+        </div>
+    </div>
+    <main class="position-relative" style="height: calc(100vh - 110px);">
+        <div class="views container {% if patients_list is None %}d-none{% endif %}">
+            <div class="heading-and-items container-fluid d-flex justify-content-between align-items-center my-3">
+                <h1 class="m-0">{% trans 'Patients' %}</h1>
+                <div class="heading-and-items_right d-flex">
+                    <input type="text" id="mySearchBox" class="search-input" placeholder="{% trans 'Search' %}">
+                    <div class="datatable-length-selectbox"></div>
+                    <div class="view-icon {% if view_type == '0' %}active{% else %}{% endif %}" data-view_type="0" data-type="#patients-table-view">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </div>
+                    <div class="view-icon {% if view_type == '1' %}active{% else %}{% endif %}" data-view_type="1" data-type="#patients-card-view">
+                        <i class="fa-solid fa-table-cells-large"></i>
+                    </div>
+                </div>
+            </div>
+            <div id="patients-table-view" class="patient-view-container container-fluid mt-3 mb-5">
+                <div class="contents">
+                    <table id="example" class="{% if view_type == '1' %}patient-card-view {% endif %}patients-table table table-borderless display" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>{% trans 'Favorite' %}</th>
+                                <th>{% trans 'Patient ID' %}</th>
+                                <th>{% trans 'Patient Name' %}</th>
+                                <th>{% trans 'Image' %}</th>
+                                <th>{% trans 'Date of Birth' %}</th>
+                                <th>{% trans 'Created Date' %}</th>
+                                <th>{% trans 'Last Process' %}</th>
+                                <th>{% trans 'X-Ray Types' %}</th>
+                                <th>{% trans 'Operation' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for patient_key in patients_list %}
+                                <tr data-patient-slug="{{patient_key.patient.slug}}">
+                                    <td>
+                                        <i data-patient-slug="{{patient_key.patient.slug}}" class="fa-solid fa-star star-icon {% if patient_key.patient.favorited == "True" %} active {% else %} {% endif %}"></i>
+                                        <span data-star-span-slug="{{patient_key.patient.slug}}" class="star-icon-value">{% if patient_key.patient.favorited %} 1 {% else %} 0 {% endif %}</span>
+                                    </td>
+                                    <td id="table_id">{{patient_key.patient_id}}</td>
+                                    <td id="table_name">
+                                        <i style="{% if view_type == '0' %}display: none {% endif %}" data-patient-slug="{{patient_key.patient.slug}}" class="fa-solid fa-star table-name-star-icon star-icon {% if patient_key.patient.favorited == "True" %} active {% else %} {% endif %}"></i>
+                                        <span style="{% if view_type == '0' %}display: none {% endif %}" data-star-span-slug="{{patient_key.patient.slug}}" class="star-icon-value table-name-star-icon ">{% if patient_key.patient.favorited %} 1 {% else %} 0 {% endif %}</span>
+                                        {{patient_key.patient.first_name}} {{patient_key.patient.last_name}}</td>
+                                    <td id="table_cover">
+                                        {% if "None" not in patient_key.cover_image %}
+                                            <img src="{{patient_key.cover_image}}" width="100" style="height:49px; background: white" class="img-fluid" alt="">
+                                        {% else %}
+                                            <img src="{% if lang == 'tr' %} {% static 'img/addradio_tr.svg' %} {% elif lang == 'en' %} {% static 'img/addradio_ing.svg' %} {% endif %}" width="100" style="height:49px; background: white" class="img-fluid" alt="">
+                                        {% endif %}
+                                    </td>
+                                    <td id="table_birth">{% if patient_key.patient.date_of_birth is not None %} {{patient_key.patient.date_of_birth}} {% else %} - {% endif %}</td>
+                                    <td id="table_cdate">{{patient_key.patient.created_date}}</td>
+                                    <td id="table_mdate">{{patient_key.patient.modified_date}}</td>
+                                    <td id="table_it">
+                                        <div class="spans d-flex flex-wrap">
+                                            {% for radiography_types in patient_key.image_types %}
+                                                <span>{{radiography_types}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="operations-buttons d-flex">
+                                            <a data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="{% trans 'View Radiography' %}" style="cursor: pointer;" data-patient-slug="{{patient_key.patient.slug}}" 
+                                                {% if patient_key.image_report_id == "None" %} 
+                                                    data-open-modal-pk="modal-show-past-analysis" data-modal-type="patient-show-past-analysis" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'View Radiography' %}" 
+                                                {% else %}
+                                                    href="{% if patient_key.is_lateral == 'True' %}
+                                                        {% url 'cephalometric_page' image_report_id=patient_key.image_report_id %}
+                                                    {%elif patient_key.is_cbct == 'True' %}
+                                                        {% url 'diagnosis3d' image_report_id=patient_key.image_report_id %}
+                                                    {%else%}
+                                                        {% url 'diagnosisPage' image_report_id=patient_key.image_report_id %}
+                                                    {%endif%}"{% endif %}>
+                                                <i class="fa-solid fa-play" style="pointer-events: none;"></i>
+                                            </a>
+                                            <a href="{% url 'addpatientPageSlug' patient_key.patient.slug %}">
+                                                <i class="fa-solid fa-pencil" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="{% trans 'View Patient' %}"></i>
+                                            </a>
+                                            <i class="fa-solid fa-trash-can" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="{% trans 'Delete Patient' %}"
+                                                data-open-modal-pk="modal-delete-patient"
+                                                data-modal-type="patient-delete"></i>
+
+                                            <a style="cursor: pointer;" data-patient-slug="{{patient_key.patient.slug}}" data-open-modal-pk="modal-radyografy-upload" data-modal-type="patient-radiography-upload" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Upload Radiography' %}">
+                                                <i data-modal-type="patient-radiography-upload" class="fa-solid fa-upload" style="pointer-events: none;"></i>
+                                            </a>
+
+                                            <a class="send-form-patient" href="{% url 'send_form_to_patient_page' patient_key.patient.slug %}" style="cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Send form to patient' %}">
+                                                <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M1 4.77779C1 2.99692 1 2.10649 1.55325 1.55325C2.10649 1 2.99692 1 4.77779 1H12.3334C14.1142 1 15.0046 1 15.5579 1.55325C16.1111 2.10649 16.1111 2.99692 16.1111 4.77779V12.3334C16.1111 15.0046 16.1111 16.3403 15.2813 17.1702C14.4514 18 13.1157 18 10.4445 18H6.66668C3.99538 18 2.65973 18 1.82987 17.1702C1 16.3403 1 15.0046 1 12.3334V4.77779Z" stroke="#5071C8" stroke-width="1.88889"/>
+                                                    <path d="M11.3893 15.167V18.0003M5.72266 15.167V18.0003" stroke="#5071C8" stroke-width="1.88889" stroke-linecap="round"/>
+                                                    <path d="M5.72266 5.72168H11.3893" stroke="#5071C8" stroke-width="1.88889" stroke-linecap="round"/>
+                                                    <path d="M5.72266 9.5H11.3893" stroke="#5071C8" stroke-width="1.88889" stroke-linecap="round"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% csrf_token %}
+        <!-- burada hiç veri yoksa d-none classını kaldır, veri varsa d-none kalacak -->
+        <div class="no-data-container h-100 d-flex align-items-center justify-content-center {% if patients_list is not None %}d-none{% endif %}">
+            <div id="no-data" class="shadow text-center p-5">
+                <img src="{% static 'img/nodata.png' %}" class="img-fluid" alt="">
+                <h3>{% trans 'Welcome'%}, {{full_name}}!</h3>
+                <h4>{% trans 'Hi' %} {{first_name}}, {% trans 'you can continue by starting to' %} <span style="font-weight:bold; font-size: 18px;">{% trans 'Add Patients!' %}</span></h4>
+                <a href="{% url 'addpatientPage' %}">
+                    <button class="custom">{% trans "Let's Go!" %}</button>
+                </a>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block customJs %}
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <script src="{% static 'js/dropzone.js' %}"></script>
+    <script src="{% static 'js/sweatalert.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+   
+    <script>
+        var patients_list = {{ patients_list|safe }};
+        console.log("patient", patients_list)
+    </script>
+
+    <script> // kullanıcı dicom yüklerken yeni sekmede sayfa açtıram kodu
+        document.addEventListener("DOMContentLoaded", function() {
+            var openButton = document.getElementById("open-new-tab");
+            
+            openButton.addEventListener("click", function() {
+                var newPageURL = openButton.getAttribute("data-open-new-page");
+                window.open(newPageURL, "_blank");
+            });
+        });
+    </script>
+    
+    <script>
+        var past_analysis_patient_slug
+        $("[data-open-modal-pk='modal-show-past-analysis']").click(function (event) {
+            let modalId = $(event.target).attr("data-open-modal-pk");
+            let openModal = $(`.modal-container#${modalId}`).addClass("active")
+            var patientSlug = $(event.target).data('patient-slug');
+            past_analysis_patient_slug = patientSlug
+            $("#modal-show-past-analysis").attr("data-patient-slug", patientSlug)
+            var notification_element = $('.patient-transaction_list')
+            $.ajax({
+                url: "{% url 'patientPastAnalysis' %}",
+                method: "GET",
+                data: {
+                    "patient_slug": patientSlug,
+                    "lang": window.location.href.includes("/en/") ? "en" : (window.location.href.includes("/uz/") ? "uz" : (window.location.href.includes("/ru/") ? "ru" : (window.location.href.includes("/nl/") ? "nl" : "tr")))
+                },
+                success: function (res) {
+                    notification_element.empty()
+                    image_reports = res["data"]
+                    if(image_reports.length===0){
+                        notification_element.append(`
+                            <li class="past-analysis-item p-0 p-2">{% trans 'You have not started an analysis yet' %}</li>
+                        `);
+                    } else {
+                        notification_element.append(`
+                        `)
+                        for (var i = 0; i < image_reports.length; i++) {
+                            if (image_reports[i]["status"].includes("completed-ok")){
+                                hrefContent = image_reports[i]["url"]
+                            }else{
+                                hrefContent = `#;`
+                            }
+                            let imageUrl = image_reports[i]["image_url"];
+                            if (!imageUrl) {
+                                // Eğer image_url yoksa, addradio resmini kullan
+                                imageUrl = "{% static 'img/addradio_tr.svg' %}";
+                            }
+                            again_or_go_element = `<i class="fa-solid fa-angle-right fs-6"></i>`
+                            if (image_reports[i]['status'] == "fa-bolt completed-no"){
+                                again_or_go_element = `<i class="fa-solid fa-repeat repeat-analysis fs-6" onclick="repeat_analysis('${image_reports[i]['id']}', '${image_reports[i]['name']}', '${image_reports[i]['created_date']}', '${image_reports[i]['patient']}')"></i>`
+                            }
+                            
+                            notification_element.append(
+                                `<li data-pr-id="${image_reports[i]['id']}">
+                                <a class="past-analysis-item p-0 py-2" href="${hrefContent}">
+                                    <div class="d-flex">
+                                        <div style="display: flex; align-items: center;">
+                                            <img src="${imageUrl}" class="img-fluid px-3" style="height:70px;" alt="">
+                                        </div>
+                                        <div class="px-3 d-flex align-items-center">
+                                            <i class="fa-solid patient-past-process-status  ${image_reports[i]['status']} fs-6"></i>
+                                        </div>
+                                        <div class="d-flex" style="flex:1">
+                                            <div>
+                                                <div class="past-analysis-patient" >${image_reports[i]["patient"]}</div>
+                                                <div class="past-analysis-created-date">${image_reports[i]["created_date"]}</div>
+                                                <div class="past-analysis-radiography-tname mt-2" >${image_reports[i]["name"]}</div>
+                                            </div>
+                                            <div class="ms-auto px-3 d-flex align-items-center">
+                                                ${again_or_go_element}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>`
+                            )
+                            // if (image_reports[i]["status"].includes("process")) { // analizi devam eden raporları listeye ekliyoruz (tekrar istek atıp tamamlanma durumunu kontrol etmek için)
+                            //     process_ir_id_list.push(image_reports[i]["id"])
+                                
+                            // }
+                        }
+                    }
+                }
+            });
+        });
+
+        function replacePostAnalysisData(image_report){
+            var element = $(`li[data-pr-id=${image_report['id']}]`);
+            let image_src = element.find('img').attr('src');
+            if (image_report["status"].includes("completed-ok")){
+                hrefContent = image_report["url"]
+            }else{
+                hrefContent = `#;`
+            }
+            element.replaceWith(`<li data-pr-id="${image_report['id']}">
+                <a class="past-analysis-item p-0 py-2" href="${hrefContent}">
+                    <div class="d-flex">
+                        <div style="display: flex; align-items: center;">
+                            <img src="${image_src}" class="img-fluid px-3" style="height:70px;" alt="">
+                        </div>
+                        <div class="px-3 d-flex align-items-center">
+                            <i class="fa-solid patient-past-process-status  ${image_report['status']} fs-6"></i>
+                        </div>
+                        <div class="d-flex" style="flex:1">
+                            <div>
+                                <div class="past-analysis-patient" >${image_report["patient"]}</div>
+                                <div class="past-analysis-created-date">${image_report["created_date"]}</div>
+                                <div class="past-analysis-radiography-tname mt-2" >${image_report["name"]}</div>
+                            </div>
+                            <div class="ms-auto px-3 d-flex align-items-center">
+                                <i class="fa-solid fa-angle-right fs-6 text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            `
+            )
+        }
+    
+    </script>
+    <script>
+        $(document).ready(function() {
+            // patients sayfasında patient silmek için kullanılan fonksiyon
+            $("[data-btn-operation='delete-patient']").click(function (event) {
+                var csrfmiddlewaretoken= $('input[name=csrfmiddlewaretoken]').val()
+                let patientSlug = $(event.target).closest(".modal-container").attr("data-patient-slug")
+                $.ajax({
+                    url: "/api/delete-patient-api",
+                    method: "POST",
+                    headers: { "X-CSRFToken": csrfmiddlewaretoken },
+                    data: {
+                        "patientSlug": patientSlug,
+                    },
+                    success: function (response) {
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '{% trans "Patient deleted successfully." %}',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then(function() {
+                        window.location.reload()
+                    });
+                        
+                    },
+                    error: function (xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText)
+                    }
+                })
+                $(event.target).closest(".modal-container").removeClass("active")
+            })
+        })
+    </script>
+
+    <script>
+        $(".star-icon").click(function () {
+            // favoriye ekleme
+            // patients sayfasındaki yıldız ikonuna tıklayınca işlem yapan fonksiyon
+            var clickedIcon = $(this);
+            console.log(clickedIcon)
+            // data-patient-slug özniteliğine erişin
+            var patientSlug = clickedIcon.data("patient-slug");
+            var csrfmiddlewaretoken= $('input[name=csrfmiddlewaretoken]').val()
+            // değiştirmek için ajax isteği gönderin
+            $.ajax({
+                url: "/api/change_favorite_status",
+                method: "POST",
+                headers: { "X-CSRFToken": csrfmiddlewaretoken },
+                data: {'patient_slug': patientSlug},
+                success: function (res) {
+                    if (res['status'] == true) {
+                        var starSpan = $('span[data-star-span-slug="' + patientSlug + '"]');
+                        // data-patient-slug değeri belirtilen i öğelerini seçin
+                        var patientIList = $('i[data-patient-slug="' + patientSlug + '"]');
+                        // span öğesinin içeriğini değiştirin
+                        var span_value = res['span_value']
+                        // her bir i öğesi için active sınıfını ekle
+                        patientIList.each(function () {
+                            if (span_value == 1) {
+                                $(this).addClass('active');
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: '{% trans "Patient added to favorites" %}',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                            } else {
+                                $(this).removeClass('active');
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: '{% trans "Patient removed from favorites" %}',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                })
+                            }
+                        });
+                        starSpan.text(span_value);
+                    } else {
+                        alert("Unable to add to favourites.")
+                    }
+                }
+            })
+        })
+        function repeat_analysis(id, name, created_date, patient){
+            var element = $(`li[data-pr-id=${id}]`);
+            let image_src = element.find('img').attr('src');
+            var hrefContent = `#;`
+            function replace_error_element(){
+                element.replaceWith(`
+                    <li data-pr-id="${id}">
+                        <a class="past-analysis-item p-0 py-2" href="${hrefContent}">
+                            <div class="d-flex">
+                                <div style="display: flex; align-items: center;">
+                                    <img src="${image_src}" class="img-fluid px-3" style="height:70px;" alt="">
+                                </div>
+                                <div class="px-3 d-flex align-items-center">
+                                    <i class="fa-solid patient-past-process-status fa-spinner process fs-6"></i>
+                                </div>
+                                <div class="d-flex" style="flex:1">
+                                    <div>
+                                        <div class="past-analysis-patient" >${patient}</div>
+                                        <div class="past-analysis-created-date">${created_date}</div>
+                                        <div class="past-analysis-radiography-tname mt-2" >${name}</div>
+                                    </div>
+                                    <div class="ms-auto px-3 d-flex align-items-center">
+                                        <i class="fa-solid fa-angle-right fs-6 text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                `)
+            }
+            replace_error_element()
+            start_failed_analyze(id)
+
+        }
+    </script>
+    <script>
+        function start_failed_analyze(id) {
+        var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+        $.ajax({
+            url: "{% url 'startFailedAnalysis' %}",
+            method: "POST",
+            headers: { 'X-CSRFToken': csrfmiddlewaretoken },
+            data: {"image_report_id": id},
+            success: function (res) {
+                if (res.status === true) {
+                    setTimeout(function () {
+                        $('#bildirim').click()
+                    }, 1000)
+                }
+            },
+            error: function (xhr, status, error) {
+            }
+        });
+    }
+    
+    </script>
+<script>
+    var dropzone_patient_slug
+    var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()
+    function uuidv4() {
+        return ([1e7]+1e3+4e3+8e3+1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
+    
+    var parametre
+    url = "{% url 'dicom_image_upload' %}";
+    Dropzone.autoDiscover = false;
+    var image_response_type = null;
+    var file_url = null;
+    var progress_slug;
+    var check_dicom_uploaded_before = false
+    var u_can_upload = false
+    var file_name = null;
+    var totalAddedFiles = 0;
+    var uploadedTotalFiles = 0;
+    var myDropzone2 = new Dropzone('#dicomDropzone', {
+        autoProcessQueue: false,
+        url: url,
+        maxFiles: 100000000,
+        maxFilesize: 99999,
+        acceptedFiles: '.dcm',
+        timeout: 9999999999,
+        chunking: true,
+        previewsContainer: false,
+        chunkSize: 1000000,
+        clickable: "#dicomDropzone",
+        parallelChunkUploads: false,
+        retryChunks: true,
+        retryChunksLimit: 5,
+        forceChunking: true,
+        init: function() {
+            $('#CBCTUpload').click(function(){
+                parametre = uuidv4()
+                myDropzone2.processQueue();
+                $('#CBCTUpload').hide();
+                $('#progress').show();
+                $('#modal-radyografy-upload div[data-modal-close]').css("pointer-events", "none");
+                $('#modal-radyografy-upload div[data-modal-close]').css("background-color", "grey");
+                $('#open-new-tab').removeClass("d-none");
+                $('#close-upload-modal').addClass("d-none");
+                $('#radiography_types').prop("disabled", true);
+            })
+            
+            this.on("addedfile", function(file) {
+                totalAddedFiles++;
+                console.log("Toplam Eklenen Dosya Sayısı: " + totalAddedFiles);
+                $('#dicomDropzone').removeClass("d-flex");
+                $('#dicomDropzone').hide();
+                $('#cbtcContainer').css("display", "block");
+    
+                totalAddedFiles==1 ? $('#cbtcContainer').text(`${totalAddedFiles} file selected.`) : $('#cbtcContainer').text(`${totalAddedFiles} files selected.`);
+            });
+            this.on("sending", function(file, xhr, formData) {
+                // Gönderilecek diğer parametreleri burada belirtebilirsiniz
+                formData.append('slug', parametre);
+                formData.append('patient_slug', dropzone_patient_slug);
+                if (file.upload.totalChunkCount!=1){
+                    $('#progressBar').css("width", `${file.upload.progress}%`);
+                    $('#progressText').text(`${parseInt(file.upload.progress)}%`);
+                }
+            });
+
+            this.on("success", function(file, response) {
+                // Dosya yükleme başarılı olduğunda yapılacak işlemleri burada tanımlayabilirsiniz
+                uploadedTotalFiles++;
+                console.log("Dosya başarıyla yüklendi:", response);
+                if (uploadedTotalFiles<totalAddedFiles){
+                    myDropzone2.processQueue();
+                    console.log("Process in queue", "Uploaded: ", uploadedTotalFiles, "Total: ", totalAddedFiles);
+                }
+                $('#progressBar').css("width", `${uploadedTotalFiles/totalAddedFiles*100}%`);
+                $('#progressText').text(`${parseInt(uploadedTotalFiles/totalAddedFiles*100)}%`);
+
+            });
+
+            //this.on("error", function(file, errorMessage) {
+                // Dosya yükleme hatası durumunda yapılacak işlemleri burada tanımlayabilirsiniz
+            //    console.error("Dosya yüklenirken hata oluştu:", errorMessage);
+            //});
+    
+            this.on("queuecomplete", function() {
+                // Tüm dosyalar yüklendikten sonra API isteğini burada yapabilirsiniz
+                console.log("Tüm dosyalar yüklendi. API isteği gönderilecek.");
+                let patient_slug = $('#modal-radyografy-upload').data('patient-slug');
+                // Örnek olarak jQuery kullanarak bir POST isteği gönderelim
+                var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+                $.ajax({
+                    // url: "{% url 'convert_niftii_and_panoramic' %}",
+                    url: "{% url 'convertNiftiStartAnalyze' %}",
+                    method: 'POST',
+                    headers: { 'X-CSRFToken': csrfmiddlewaretoken },
+                    data: {
+                        // Burada gerekli verileri ve dosya bilgilerini gönderebilirsiniz
+                        // Ekstra verileri burada ekleyebilirsiniz
+                        slug: parametre,
+                        patient_slug: patient_slug
+                    },
+                    success: function(response) {
+                        totalAddedFiles = 0
+                        uploadedTotalFiles = 0
+                        $('#bildirim').click();
+                        myDropzone2.removeAllFiles();                
+                        $('#modal-radyografy-upload').removeClass("active");
+                        $('#modal-radyografy-upload div[data-modal-close]').css("pointer-events", "auto");
+                        $('#modal-radyografy-upload div[data-modal-close]').css("background-color", "#FF7979");
+                        $('#CBCTUpload').show();
+                        $('#progress').hide();
+                        $('#open-new-tab').removeClass("d-block");
+                        $('#open-new-tab').addClass("d-none");
+                        $('#close-upload-modal').removeClass("d-none");
+                        $('#radiography_types').prop("disabled", false);
+                        $('#dicomDropzone').addClass("d-flex");
+                        $('#dicomDropzone').show();
+                        $('#cbtcContainer').css("display", "none");
+
+                        // API isteği başarılı olduğunda yapılacak işlemleri burada tanımlayabilirsiniz
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("API isteği sırasında hata oluştu:", error);
+                        // API isteği sırasında hata durumunda yapılacak işlemleri burada tanımlayabilirsiniz
+                    }
+                });
+            });
+        }
+    })
+
+    setTimeout(function () {
+    var lang;
+    if (window.location.href.includes("/en/")) {
+        lang = "en";
+    } else {
+        lang = "tr";
+    }
+
+    var dropzoneText;
+    if (lang === "en") {
+        dropzoneText = `
+            <i class="fa-solid fa-upload border" style="border-radius: 50%; padding: 10px;"></i>
+            <p class="m-0 my-2">Drag & Drop or Choose file upload</p>
+            <p class="m-0">JPG, PNG or JPEG</p>
+        `;
+    } else {
+        dropzoneText = `
+            <i class="fa-solid fa-upload border" style="border-radius: 50%; padding: 10px;"></i>
+            <p class="m-0 my-2">Dosyaları sürükleyin ve bırakın veya dosya seçin</p>
+            <p class="m-0">JPG, PNG veya JPEG</p>
+        `;
+    }
+
+    $(".dz-default.dz-message").html(dropzoneText).addClass("text-light");
+    $("form.dropzone").addClass("d-flex flex-column align-items-center");
+}, 1000);
+
+</script>
+<script>
+    var image_report_status = "{{image_report_status}}"
+    console.log("image_report_status", image_report_status, typeof(image_report_status))
+    if (image_report_status == "True"){
+        setTimeout(function () {
+            $('#bildirim').click()
+        }, 1000)
+        
+    }
+</script>
+<script>
+    function filepondInit() {
+    // dropzone alternatifi bir dosya yükleme kütüphanesi
+    // FilePond'u yükle
+    const inputElement      = document.getElementById('filepond');
+    const previewElement    = document.getElementById('previewFilePond');
+    const uploadButton      = document.getElementById('filepondUploadButton');
+
+    const allowedFileTypes  = ['.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.PNG','.JPG','.JPEG','.TIFF','.BMP'];
+    const allowedMimeTypes  = ['image/png', 'image/jpeg', 'image/tiff', 'image/bmp'];
+
+    var fileThatFilepond
+    const pond = FilePond.create(inputElement, {
+        acceptedFileTypes: allowedFileTypes,
+        instantUpload: false,
+        allowMultiple: false,
+        credits: '',
+        dropValidation: true,
+        labelIdle: `
+        <div class="text-light">
+            <i class="fa-solid fa-upload border" style="border-radius: 50%; padding: 10px;"></i>
+            <p class="m-0 my-2">Drag &amp; Drop or Choose file upload</p>
+            <p class="m-0">JPG, PNG, JPEG, TIFF or BMP</p>
+        </div>
+        `,
+        onaddfile: (error, file) => {
+            if (!error) {
+                const fileExtension = file.file.name.split('.').pop();
+                const fileType = file.file.type;
+                fileThatFilepond = file.file;
+
+                if (allowedFileTypes.includes('.' + fileExtension) && allowedMimeTypes.includes(fileType)) {
+                    // Geçerli dosya uzantısı ve MIME türüne sahip dosyayı kabul et
+                    if (fileExtension.toLowerCase() === 'tiff') {
+                        // Eğer dosya uzantısı .tiff ise önizleme mesajını göster
+
+                        // Örnek JavaScript koduyla Django view'ını çağırma
+                        const formData = new FormData();
+                        formData.append('file', fileThatFilepond);
+
+                        $.ajax({
+                            url: "{% url 'convert_tiff_to_png_js'%}",
+                            method: "POST",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            headers: { "X-CSRFToken": csrfmiddlewaretoken },
+                            success: function(data) {
+                                const pngData = data.path;
+
+                                const img = new Image();
+                                img.src = pngData;
+                                previewElement.innerHTML = '';
+                                previewElement.appendChild(img);
+
+                                const fileInfo = document.createElement('div');
+                                fileInfo.innerHTML = `<p>${file.file.name}</p><p>${formatBytes(file.file.size)}</p>`;
+                                previewElement.appendChild(fileInfo);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Hata oluştu:', error);
+                            }
+                        });
+
+                    } else {
+                        // Diğer resim dosyaları için önizlemeyi göster
+                        const img = new Image();
+                        img.src = URL.createObjectURL(file.file);
+                        previewElement.innerHTML = '';
+                        previewElement.appendChild(img);
+
+                        // Dosya adını ve boyutunu görüntüle
+                        const fileInfo = document.createElement('div');
+                        fileInfo.innerHTML = `<p>${file.file.name}</p><p>${formatBytes(file.file.size)}</p>`;
+                        previewElement.appendChild(fileInfo);
+                    }
+                } else {
+                    // Geçerli dosya uzantısı veya MIME türüne sahip değil, dosyayı reddet
+                    pond.removeFile(file.id);
+                    console.log("Lütfen geçerli bir dosya seçiniz: .png, .jpg veya .jpeg");
+                }
+            } else {
+                console.error('Dosya yüklenirken bir hata oluştu:', error);
+            }
+        }
+    });
+    var csrfmiddlewaretoken= $('input[name=csrfmiddlewaretoken]').val()
+// ##############################
+    //data: {
+    //    "patientId": patientId,
+//
+  //  },
+    //###################################
+    // Yükleme butonuna tıklanınca
+    uploadButton.addEventListener('click', () => {
+        console.log("tamamdır",fileThatFilepond)
+        const files = pond.getFiles();
+        const patientSlug = $("#modal-radyografy-upload").attr("data-patient-slug")
+        
+        if( $("#radiography_types").val() === '' ) {
+            // radyografi tipi seçilmemiş
+            swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title:"Select a type of upload file",
+                showConfirmButton: false,
+                timer: 2000,
+            })
+        }
+        else if (files.length > 0) {
+            // Dosyaları sunucuya gönderme
+            const formData = new FormData();
+            var radiographyTypesSelect = document.querySelector("#radiography_types");
+            var selectedRadiographyTypeId = radiographyTypesSelect.value;
+            formData.append("radiography_type", selectedRadiographyTypeId);
+            formData.append('image_report_id', "{{image_report_id}}");
+
+            formData.append('patient_slug', patientSlug);
+            formData.append('file', fileThatFilepond);
+            $("#page-loading").show()
+            // files.forEach(file => {
+            //     formData.append('files', file.file);
+            // });
+
+            fetch("{% url 'upload_radyografi' %}", {
+                method: 'POST',
+                body: formData,
+                headers: { "X-CSRFToken": csrfmiddlewaretoken },
+            })
+            .then(response => response.json())
+            .then(data => {
+                $("#page-loading").hide()
+                if (data["code"] === "image_limit_exceeded"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: data['message'],
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    return false
+                }
+                if (data["code"] === "analyse_limit_exceeded"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: data['message'],
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    return false
+                }
+                if (data["success"]=== false){
+                    alert(data['message'])
+                } else if (patientSlug){
+                    pond.removeFiles();
+                    $('#previewFilePond').html("")
+                    $('#modal-radyografy-upload').removeClass("active")
+                    document.getElementById('bildirim').click()
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+            });
+
+            radiographyTypesSelect.value = '';
+            $('#radiography_types option:first').prop('selected', true);
+        } else {
+            // dosya yüklenmeden butona tıklandı
+            swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title:"Select a file",
+                showConfirmButton: false,
+                timer: 2000,
+            })
+        }
+    });
+
+    // Byte cinsinden dosya boyutunu formatlama işlevi
+    function formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return '0 Bytes';
+
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+
+}
+    
+$(document).ready(function () {
+    filepondInit() // dosya yükleme panoramic bitewing vs için
+});
+
+</script>
+{% endblock %}

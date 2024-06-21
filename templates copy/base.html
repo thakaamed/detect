@@ -1,0 +1,1432 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html lang="tr">
+{% block head %}
+{% endblock %}
+<head>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <script>
+        {% if '/form' and '/web-form' not in request.path %}
+        var userThemeChoices = JSON.parse('{{ user_theme_choices_json|escapejs }}');
+        {% endif %}
+    </script>
+    {% block customCss %}
+    {% endblock %}
+    <style>
+        html {
+            width: 100vw;
+            overflow-x: hidden;
+        }
+        button#bildirim {
+            border-radius: 0;
+            border-top-left-radius: 10px!important;
+            border-top-right-radius: 10px!important;
+        }
+         button#bildirim.show{
+            background-color: white!important;
+        }
+        button#bildirim .dark-logo,
+        button#bildirim.show .light-logo {
+            display: none;
+        }
+        button#bildirim.show .dark-logo {
+            display: block;
+        }
+        button#token {
+            border-radius: 0;
+            border-top-left-radius: 10px!important;
+            border-top-right-radius: 10px!important;
+        }
+         button#token.show{
+            background-color: white!important;
+        }
+        button#token .dark-logo,
+        button#token.show .light-logo {
+            display: none;
+        }
+        button#token.show .dark-logo {
+            display: block;
+        }
+        .modal-box {
+            max-height: 100vh;
+            overflow-y: auto!important;
+        }
+        .modal-header{
+            border: none;
+        }
+        .modal-content span{
+            color: rgba(239, 240, 246, 1);
+            cursor: pointer;
+        }
+        .modal-feedback{
+            left: 0px!important;
+        }
+        @keyframes showAnimation {
+            from {
+                transform: translate3d(calc(-100% + 54px), 200px, 0px);
+                opacity: 0;
+            }
+            to {
+                transform: translate3d(calc(-100% + 54px), 45px, 0px);
+                opacity: 1;
+            }
+        }
+        @keyframes hideAnimation {
+            from {
+                transform: translate3d(calc(-100% + 54px), 45, 0px);
+                opacity: 1;
+            }
+            to {
+                transform: translate3d(calc(-100% + 54px), 200px, 0px);
+                opacity: 0;
+            }
+        }
+        .dropdown-menu.notification {
+            /* transform: translate3d(calc(-100% + 54px), 44px, 0px)!important; */
+            border: 1px solid rgb(255,255,255);
+            border-top-right-radius: 0px!important;
+            animation-name: hideAnimation;
+            animation-duration: 400ms;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+            max-height: calc(100vh - 110px)!important;
+            min-width: 325px!important;
+        }
+
+        .dropdown-menu.notification.show {
+            animation-name: showAnimation;
+            animation-duration: 400ms;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .dropdown-menu.notification::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        .dropdown-menu.notification::-webkit-scrollbar-track {
+            background-color: white;
+        }
+        
+        .dropdown-menu.notification::-webkit-scrollbar-thumb {
+            background: #545c73; 
+            border-radius: 7px;
+        }
+        
+        section#header,
+        section#footer {
+            z-index: 9;
+        }
+        .dropdown-menu.notification.show {
+            inset: none!important;
+            right: 30px!important;
+            top: 10px!important;
+        }
+        
+        .dropdown-menu.token {
+            /* transform: translate3d(calc(-100% + 54px), 44px, 0px)!important; */
+            border: 1px solid rgb(255,255,255);
+            border-top-right-radius: 0px!important;
+            animation-name: hideAnimation;
+            animation-duration: 400ms;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+            max-height: calc(100vh - 110px)!important;
+            min-width: fit-content !important;
+        }
+
+        .dropdown-menu.token.show {
+            animation-name: showAnimation;
+            animation-duration: 400ms;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .dropdown-menu.token::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        .dropdown-menu.token::-webkit-scrollbar-track {
+            background-color: white;
+        }
+        
+        .dropdown-menu.token::-webkit-scrollbar-thumb {
+            background: #545c73; 
+            border-radius: 7px;
+        }
+        
+        section#header,
+        section#footer {
+            z-index: 9;
+        }
+        .dropdown-menu.token.show {
+            inset: none!important;
+            right: 30px!important;
+            top: 10px!important;
+        }
+        
+        .dropdown-item.active, 
+        .dropdown-item:active  {
+            background-color: transparent!important;
+        }
+        .click-tokem-paragraph{
+            color: #1B1B22;
+            font-size: 14px; 
+        }
+        .paragraph-Package{
+            color: #474F5B!important;
+            font-size: 9px;
+        }
+        .paragraph-Package-name{
+            line-height:3px;
+            color: #474F5B!important;
+            font-size: 9px;
+        }
+        .notification {
+            max-height: 300px;
+            overflow-y: auto;
+          }
+          .notification::-webkit-scrollbar {
+            width: 8px;
+          }
+          
+          .notification::-webkit-scrollbar-thumb {
+            background-color: #5071C8;
+            border-radius: 6px;
+          }
+          
+          .notification::-webkit-scrollbar-track {
+            background-color: #F3F3F4;
+            border-radius: 6px;
+          }
+          
+        .button-active {
+            color: #007bff!important;
+            border-bottom: 2px solid #007bff!important;
+        }
+        #notification{
+            position: absolute!important;
+            inset: 0px auto auto 0px!important;
+            margin: 0px!important;
+            transform: translate(-256px, 55px)!important;
+        }
+        .modal-header{
+            border: none;
+        }
+        .modal-content span{
+            color: rgba(239, 240, 246, 1);
+            cursor: pointer;
+        }
+        .modal-feedback{
+            left: 0px!important;
+        }
+        .disabled-button {
+            
+        }
+   </style>
+    {% if specs.theme_css %}
+        <link rel="stylesheet" href="{% static specs.theme_css %}">
+    {% endif %}
+    
+</head>
+<div class="modal modal-feedback fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 520px!important; border-radius: 10px;">
+            <!-- Modal content goes here -->
+            <div class="modal-header">
+                <!-- <h5 class="modal-title" id="feedbackModalLabel">Feedback Modal</h5> -->
+                <button type="button" class="btn-close feedbackModalClose" data-bs-dismiss="modal" aria-label="Close" style="color: white;"></button>
+            </div>
+            <div class="px-3">
+                <h3 style="color: rgba(43, 46, 52, 1); font-weight: 700; font-size: 16px;">{% trans 'How do you rate Craniocatch according to the <br> categories below?' %}</h3>
+                <p style="color: rgba(43, 46, 52, 1); font-weight: 500; font-size: 14px;">{% trans 'Can you rate each one from 1 to 5?' %}</p>
+            </div>
+            <div class="d-flex justify-content-between mt-5 px-3">
+                <p style="color: rgba(43, 46, 52, 1); font-weight: 700; font-size: 15px;">{% trans 'UI Design' %}</p>
+                <div class="start-one-api">
+                    <span onclick="changeColor(0)" id="spn1" class="unlockSubmitButton starts-one fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">1</p></span>
+                    <span onclick="changeColor(1)" id="spn2" class="unlockSubmitButton starts-one fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">2</p></span>
+                    <span onclick="changeColor(2)" id="spn3" class="unlockSubmitButton starts-one fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">3</p></span>
+                    <span onclick="changeColor(3)" id="spn4" class="unlockSubmitButton starts-one fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">4</p></span>
+                    <span onclick="changeColor(4)" id="spn5" class="unlockSubmitButton starts-one-none fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">5</p></span>
+                </div>
+            </div>
+            <div class="px-3 py-3 stars-textarea-one my-3" style="background-color: rgba(247, 249, 254, 1); display: none;">
+                <h3 style="color: rgba(43, 46, 52, 0.8); font-weight: 700; font-size: 15px;">{% trans 'How we can improve?' %}</h3>
+                <textarea class="bg-light rounded-3 w-100 p-3 shadow" style="resize: none; min-height: 130px; overflow-y: auto; border: none;" placeholder="{% trans 'If you have any additional feedback, please type it in here' %}"></textarea>
+            </div>
+            <div class="d-flex justify-content-between px-3">
+                <p style="color: rgba(43, 46, 52, 1); font-weight: 700; font-size: 15px;">{% trans 'BUG' %}</p>
+                <div class="start-two-api">
+                    <span onclick="changeColorTwo(0)" id="spnTwo1" class="unlockSubmitButton starts-two fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">1</p></span>
+                    <span onclick="changeColorTwo(1)" id="spnTwo2" class="unlockSubmitButton starts-two fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">2</p></span>
+                    <span onclick="changeColorTwo(2)" id="spnTwo3" class="unlockSubmitButton starts-two fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">3</p></span>
+                    <span onclick="changeColorTwo(3)" id="spnTwo4" class="unlockSubmitButton starts-two fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">4</p></span>
+                    <span onclick="changeColorTwo(4)" id="spnTwo5" class="unlockSubmitButton starts-two-none fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">5</p></span>
+                </div>
+            </div>
+            <div class="px-3 py-3 stars-textarea-two my-3" style="background-color: rgba(247, 249, 254, 1); display: none;">
+                <h3 style="color: rgba(43, 46, 52, 0.8); font-weight: 700; font-size: 15px;">{% trans 'How we can improve?' %}</h3>
+                <textarea class="bg-light rounded-3 w-100 p-3 shadow" style="resize: none; min-height: 130px; overflow-y: auto; border: none;" placeholder="{% trans 'If you have any additional feedback, please type it in here' %}"></textarea>
+            </div>
+            <div class="d-flex justify-content-between px-3">
+                <p style="color: rgba(43, 46, 52, 1); font-weight: 700; font-size: 15px;">{% trans 'Features' %}</p>
+                <div class="start-tree-api">
+                    <span onclick="changeColorTree(0)" id="spnTree1" class="unlockSubmitButton starts-tree fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">1</p></span>
+                    <span onclick="changeColorTree(1)" id="spnTree2" class="unlockSubmitButton starts-tree fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">2</p></span>
+                    <span onclick="changeColorTree(2)" id="spnTree3" class="unlockSubmitButton starts-tree fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">3</p></span>
+                    <span onclick="changeColorTree(3)" id="spnTree4" class="unlockSubmitButton starts-tree fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">4</p></span>
+                    <span onclick="changeColorTree(4)" id="spnTree5" class="unlockSubmitButton starts-tree-none fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">5</p></span>
+                </div>
+            </div>
+            <div class="px-3 py-3 stars-textarea-tree my-3" style="background-color: rgba(247, 249, 254, 1); display: none;">
+                <h3 style="color: rgba(43, 46, 52, 0.8); font-weight: 700; font-size: 15px;">{% trans 'How we can improve?' %}</h3>
+                <textarea class="bg-light rounded-3 w-100 p-3 shadow" style="resize: none; min-height: 130px; overflow-y: auto; border: none;" placeholder="{% trans 'If you have any additional feedback, please type it in here' %}"></textarea>
+            </div>
+            <div class="d-flex justify-content-between px-3">
+                <p style="color: rgba(43, 46, 52, 1); font-weight: 700; font-size: 15px;">{% trans 'Performance' %}</p>
+                <div class="start-four-api"> 
+                    <span onclick="changeColorFour(0)" id="spnFour1" class="unlockSubmitButton starts-four fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">1</p></span>
+                    <span onclick="changeColorFour(1)" id="spnFour2" class="unlockSubmitButton starts-four fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">2</p></span>
+                    <span onclick="changeColorFour(2)" id="spnFour3" class="unlockSubmitButton starts-four fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">3</p></span>
+                    <span onclick="changeColorFour(3)" id="spnFour4" class="unlockSubmitButton starts-four fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">4</p></span>
+                    <span onclick="changeColorFour(4)" id="spnFour5" class="unlockSubmitButton starts-four-none fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">5</p></span>
+                </div>
+            </div>
+            <div class="px-3 py-3 stars-textarea-four my-3" style="background-color: rgba(247, 249, 254, 1); display: none;">
+                <h3 style="color: rgba(43, 46, 52, 0.8); font-weight: 700; font-size: 15px;">{% trans 'How we can improve?' %}</h3>
+                <textarea class="bg-light rounded-3 w-100 p-3 shadow" style="resize: none; min-height: 130px; overflow-y: auto; border: none;" placeholder="{% trans 'If you have any additional feedback, please type it in here' %}"></textarea>
+            </div>
+            <div class="d-flex justify-content-between px-3">
+                <p style="color: rgba(43, 46, 52, 1); font-weight: 700; font-size: 15px;">{% trans 'Expected outcome achieved?' %}</p>
+                <div class="start-five-api">
+                    <span onclick="changeColorFive(0)" id="spnFive1" class="unlockSubmitButton starts-five fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">1</p></span>
+                    <span onclick="changeColorFive(1)" id="spnFive2" class="unlockSubmitButton starts-five fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">2</p></span>
+                    <span onclick="changeColorFive(2)" id="spnFive3" class="unlockSubmitButton starts-five fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">3</p></span>
+                    <span onclick="changeColorFive(3)" id="spnFive4" class="unlockSubmitButton starts-five fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">4</p></span>
+                    <span onclick="changeColorFive(4)" id="spnFive5" class="unlockSubmitButton starts-five-none fa fa-star fa-2x"><p style="color: transparent; font-size: 1px;">5</p></span>
+                </div>
+            </div>
+            <div class="px-3 py-3 stars-textarea-five my-3" style="background-color: rgba(247, 249, 254, 1); display: none;">
+                <h3 style="color: rgba(43, 46, 52, 0.8); font-weight: 700; font-size: 15px;">{% trans 'How we can improve?' %}</h3>
+                <textarea class="bg-light rounded-3 w-100 p-3 shadow" style="resize: none; min-height: 130px; overflow-y: auto; border: none;" placeholder="{% trans 'If you have any additional feedback, please type it in here' %}"></textarea>
+            </div>
+            <div class="d-flex gap-2 px-3 my-3">
+                <input type="checkbox" id="feedbackBox">
+                <a target="_blank" href="{% static specs.privacy_policy %}">
+                    <label for="" style="color: rgba(111, 108, 144, 1); font-weight: 500; font-size: 12px; text-decoration:underline;">{% trans 'I have read and accept the Privacy Policy.' %}</label>
+                </a>
+            </div>
+            <div class="d-flex justify-content-start px-3 mb-4">
+                <button class="px-4 py-2 startButton button-primary" id="submitFeedback" disabled style=" color: #fff;
+                background-color: #6c757d; border: none; border-radius: 20px;">{% trans 'Submit Feedback' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<body {% if theme == 'dark' %} class="dark"{% else %}{% endif %}>
+    <header>
+        <section id="header" class="d-flex">
+            <div class="container-fluid">
+                {% if 'web-form' in request.path %}
+                    <img src="{{logo_for_form}}" style="max-height: 45px;" alt="">
+                    <h1 class="text-light fs-5 my-0 mx-auto">{% trans 'Health Tourism Form' %}</h1>
+                    {% if specs.language_visibility == True %}
+                        <div class="dropdown">
+                            <button class="btn btn-secondary" type="button" id="dil" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-globe"></i>
+                                <span id="language2">{% if user_theme_choices.language == 'en' %}EN{% else %}TR{% endif %}</span>
+                                <i class="fa-solid fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dil">
+                                {% comment %} <li id="language2_tr" class="" >
+                                    <a style="cursor: default;" class="dropdown-item" onclick="select_language_v2('tr')">
+                                        <img src="{% static 'img/TurkeyFlag.png' %}" height="14" alt="">
+                                        <span>French</span>
+                                    </a>
+                                </li> {% endcomment %}
+                                <li id="language_en" class="">
+                                    <a style="cursor: default;" class="dropdown-item" onclick="select_language_v2('en')">
+                                        <img src="{% static 'img/BritishFlag.png' %}" height="14" alt="">
+                                        <span>English</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% else %}
+                <a {% if 'form/' not in request.path %} href="{% url 'patientsPage' %}" {% endif %}>
+                    <img src="{% static specs.logo %}" class="img-fluid header-logo" alt="">
+                </a>
+                
+                <p class="my-0 ms-5 patient-name d-flex align-items-center">
+                    {% if has_page_name_diagnosis or has_page_name_cephalometric or has_page_name_stl %}
+                    <i class="fa-solid fa-user me-2 text-light"></i>
+                    <div class="fs-6 text-light"> <span>{{patient_full_name}} </span><span>
+                    {% if patient_age is not None %}({{patient_age}}) {% else %} {% endif %}
+                    {% if patient_gender is not None %}({% trans patient_gender %}) {% else %} {% endif %}
+                    </span>
+                        
+                        <span style="padding-left:10px"><img src="{% static 'img/name-icon.svg' %}" class="me-1" width="16" alt="user icon"> {{radiography_create_date}}</span>
+                        <span style="padding-left:10px"><img src="{% static 'img/image_type.svg' %}" class="me-1" width="16" alt="user icon"> {% trans image_type %}</span>
+                        <!-- <span style="padding-left:10px"><i class="fa-solid fa-person-half-dress me-1" width="16" alt="user icon"></i> {% trans image_type %}</span> -->
+
+                    </div>
+                    {% endif %}
+                </p>
+                <!-- d-none diagnosis hariç her sayfada olacak ilk divin classı-->
+                <div class="patient-buttons ms-auto d-flex align-items-center">
+                {% block headerButtons %}
+                {% endblock %}
+                </div>
+                <!-- dropdown classına diagnosis hariç diğer sayfalarda ms-auto gelecek -->
+
+               
+
+                {% if '/form/' not in request.path %}
+                    {% if specs.language_visibility == True %}
+                        <div class="dropdown">
+                            <button class="btn btn-secondary" type="button" id="dil" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-globe"></i>
+                                <span>{% if user_theme_choices.language == 'en' %}EN{% else %}FR{% endif %}</span>
+                                <i class="fa-solid fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dil">
+                                {% comment %} <li id="language_tr" class="{% if user_theme_choices.language == 'tr' %}active{% else %}{% endif %}" >
+                                    <a style="cursor: default;" class="dropdown-item" onclick="select_language('fr')">
+                                        <img src="{% static 'img/france_flag.png' %}" height="14" alt="">
+                                        <span>French</span>
+                                    </a>
+                                </li> {% endcomment %}
+                                <li id="language_en" class="{% if user_theme_choices.language == 'en' %}active{% else %}{% endif %}">
+                                    <a style="cursor: default;" class="dropdown-item" onclick="select_language('en')">
+                                        <img src="{% static 'img/BritishFlag.png' %}" height="14" alt="">
+                                        <span>English</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if '/form/' not in request.path and '/web-form/' not in request.path and '/uploadradiography/' not in request.path %}
+                
+                <div class="dropdown">
+                    <button class="btn btn-secondary btn-danger" type="button" id="bildirim" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="{% static 'img/half-logo-thakaa.svg' %}" width="30" class="img-fluid light-logo" alt="" id="bildirim" style="pointer-events: none">
+                        <img src="{% static 'img/half-logo-dark-thakaa.svg' %}" width="30" class="img-fluid dark-logo" alt="" id="bildirim" style="pointer-events: none;">
+                    </button>
+                    <ul class="dropdown-menu"  id="notification" style="box-shadow:0px 0px 10px gray; width:312px!important;">
+                        <div class="d-flex border-bottom justify-content-center align-items-center gap-3" style=" background-color: #FFFFFF;">
+                            <button id="tokenAnalyse" class="m-0 font-weight-bold fs-6 p-3 button-active ">{% trans 'Analyses' %}</button>
+                            <button id="tokenPackage" class="m-0 font-weight-bold fs-6 p-3">{% trans 'Token' %}</button>
+                        </div>
+                        <div class="notification">
+                            <ul class="dropdown-menu  p-0" aria-labelledby="bildirim">
+                                <li class="dropdown-item p-0 p-2">{% trans 'You have not started an analysis yet' %}</li>
+                            </ul>
+                        </div>
+
+                        <div class="tokenBlock" style="display:none; width:100%!important;">
+                            <li class="dropdown-item p-2 px-3 mt-3 rounded shadow d-flex  gap-2" style="background-color:#FFFFFF;">
+                                <img class="p-2 rounded" src="{% static 'img/clinic-tic-icon.svg' %}" height="50px">
+                                <div>
+                                    <span class="d-block click-tokem-paragraph" style="font-size: 16px;"></span>
+                                    <div>
+                                        <div class="d-flex click-tokem-paragraph mt-2" style="height:13px; justify-content: space-between">
+                                            {% comment %} <p id="package_name" style="color: #0B3777;">Basic</p> {% endcomment %}
+                                            <span class="text-muted d-flex" id="package_usage_limit">65/100</span>
+                                        </div>
+                                        <div class="clinic-token-bar d-flex rounded-3 mt-2" style="background-color:#F3F3F4; width:197px; height:8px;">
+                                            <div id="package_progress" class="clinic-tokem-bar-two rounded-3" style="background-color:#5071C8; height:8px;"></div>
+                                        </div>
+                                        <div class="paragraph-Package-name mt-3">
+                                                {% comment %} <p class="d-block text-muted" style="font-size: 14px">{% trans 'Renewal Date' %}: <span  id="package_renewal" class="text-muted d-flex justify-content-end" style="font-size: 14px"></span></p> {% endcomment %}
+                                                <p class="d-block text-muted" style="font-size: 14px">{% trans 'End Date' %}: <span  id="package_end_date" class="text-muted d-flex justify-content-end" style="font-size: 14px"></span></p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </li>
+
+                            <li id="extra_package_item" class="dropdown-item p-2 px-3 mt-3 rounded shadow d-flex gap-2 d-none" style="background-color:#FFFFFF;">
+                                <img class="p-2 rounded" src="{% static 'img/clinic-icon-two.svg' %}" height="50px">
+                                <div>
+                                    <span class="d-block click-tokem-paragraph" style="font-size: 16px;">{% trans 'Extra Package'%}</span>
+                                    <div>
+                                        <div class="d-flex click-tokem-paragraph mt-2" style="height:13px; justify-content: space-between">
+                                            <p id="extra_package_name" style="color: #0B3777;">Basic</p>
+                                            <span class="d-flex text-muted" id="extra_package_usage_limit">65/100</span>
+                                        </div>
+                                        <div class="clinic-token-bar d-flex rounded-3 mt-2" style="background-color:#F3F3F4; width:197px; height:8px;">
+                                            <div id="extra_package_progress" class="clinic-tokem-bar-two rounded-3" style="background-color:#5071C8; height:8px;"></div>
+                                        </div>
+                                        <div class="paragraph-Package-name mt-3">
+                                            <p class="text-muted d-block" style="font-size: 14px">{% trans 'End Date' %}: <span id="extra_package_end_date" class="text-muted d-flex justify-content-end" style="font-size: 14px"></span></p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </li>
+                            <a href="{% url 'profile_page' %}">
+                                <div class="d-flex align-items-center justify-content-center w-100 py-3 rounded shadow mt-3" style="background-color: #FFFFFF;"> 
+                                    <button class="d-flex align-items-center justify-content-center fs-6">{% trans 'All Uses' %}</button>
+                                </div>
+                            </a>
+                            
+                        </div>                        
+                    </ul>
+    
+                </div>
+                {% endif %}
+                {% if '/form/' not in request.path %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary" type="button" id="user" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div id="profile-icon-area" class="user-circle">
+                            
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu user-menu" aria-labelledby="user">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-end" href="#">
+                                <div class="user-menu-icon">
+                                    <div id="profile-photo-section" class="user-circle">
+                                        
+                                    </div>
+                                </div>
+                                <div id="username" class="username-text bottom-bordered d-flex flex-column w-100 username-area">
+                                    <span>{% trans 'Welcome' %}</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{% url 'profile_page' %}">
+                                <i class="fa-regular fa-circle-user"></i>
+                                <div id="username" class="username-text bottom-bordered w-100">
+                                    <span>{% trans 'Profile' %}</span>
+                                </div>
+                            </a>
+                            {% if request.user.is_superuser %}
+                            <a class="dropdown-item d-flex align-items-center" href="{% url 'company_form_page' %}">
+                                <i class="fa-regular fa-circle-user"></i>
+                                <div id="form" class="username-text bottom-bordered w-100">
+                                    <span>{% trans 'Form' %}</span>
+                                </div>
+                            </a>
+                            {% comment %} <a class="dropdown-item d-flex align-items-center" href="{% url 'treatment_pricing_for_company_page' %}">
+                                <i class="fa-regular fa-hospital"></i>
+                                <div id="form" class="username-text bottom-bordered w-100">
+                                    <span>{% trans 'Treatment Prices' %}</span>
+                                </div>
+                            </a> {% endcomment %}
+                            {% endif %}
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{% url 'logOut' %}">
+                                <i class="fa-regular fa-circle-xmark"></i>
+                                <div class="username-text bottom-bordered w-100">
+                                    <span>{% trans 'Logout' %}</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+                {% if 'form/' in request.path %}
+                    {% if patient_dict.logo %}
+                    <img style="max-height: 45px;" src="{{patient_dict.logo}}" alt="">
+                    {% endif %}
+                {% endif %}
+                {% endif %}
+            </div>
+        </section>
+    </header>
+    {% if '/form/' not in request.path and '/web-form/' not in request.path %}
+    <aside id="main-aside">
+        <a href="{% url 'homepage' %}" class="sidebar-link {% if '/homepage' in request.get_full_path %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'Homepage' %}">
+            <i class="fa-solid fa-gauge-high"></i>
+        </a>
+        <a href="{% url 'patientsPage' %}" class="sidebar-link {% if '/patients' in request.get_full_path %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'Patients' %}">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <a href="{% url 'favourited_patients_page' %}" class="sidebar-link {% if '/favorite-patients' in request.get_full_path %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'Favorite Patient' %}">
+            <i class="fa-solid fa-star"></i>
+        </a>
+
+        <a href="{% url 'addpatientPage' %}" class="sidebar-link {% if '/add-patient' in request.get_full_path %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'Add Patient' %}">
+            <i class="fa-solid fa-hospital-user"></i>
+        </a>
+
+        {% if request.user.is_superuser %}
+        {% endif %}
+        {% if request.user.is_superuser or distributor or is_owner_of_company %}
+            <a href="{% url 'addDoctorOwnCompany' %}" class="sidebar-link {% if '/add-user' in request.get_full_path %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'Create User' %}">
+                <i class="fa-solid fa-user-plus"></i>
+            </a>
+        {% endif %}
+
+        {% if request.user.is_superuser %}
+            <a href="{% url 'list_users' %}" class="sidebar-link {% if '/list-user' in request.get_full_path %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'List Users' %}">
+                <i class="fa-solid fa-users"></i>
+            </a>
+
+            <a href="{% url 'demo_accounts_list_page' %}" class="sidebar-link {% if '/demo-accounts' in request.get_full_path %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'Demo Accounts' %}">
+                <i class="fa-solid fa-user-tag"></i>
+            </a>
+            <a href="{% url 'purchase_list_page' %}" class="sidebar-link {% if '/purchase-list' in request.get_full_path %}active{% endif %}"  data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'Purchase List' %}">
+                <i class="fa-solid fa-credit-card"></i>
+            </a>
+        {% endif %}
+        <a href="{% url 'list_forms' %}" class="sidebar-link {% if '/list-forms' in request.get_full_path or '/patient-form-detail' in request.get_full_path %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'List Forms' %}">
+            <i class="fa-solid fa-list"></i>
+        </a>
+        {% if request.user.is_superuser or distributor %}           
+            <a href="{% url 'analysis_list_page' %}" class="sidebar-link {% if '/anaylsis-list' in request.get_full_path %}active{% endif %}"  data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'Analysis List' %}">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+            </a>
+            <a href="{% url 'user_activities_list_page' %}" class="sidebar-link {% if '/user-activities-list' in request.get_full_path %}active{% endif %}"  data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'User Activities List' %}">
+                <i class="fa-solid fa-person-running"></i>
+            </a>
+            {% comment %} <a href="{% url 'for_admin_active_users_and_count' %}" class="sidebar-link {% if 'dashboard/active-user-count' in request.get_full_path %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="{% trans 'Active Users' %}">
+                <i class="fa-solid fa-user-check"></i>
+            </a> {% endcomment %}
+        {% endif %}
+        <p class="version text-muted mb-0">v 1.5</p>
+    </aside>
+    {% endif %}
+        {% block content %}
+        {% endblock %}
+    <footer id="main-footer">
+        <section id="footer">
+            <div class="container-fluid h-100">
+                {% if 'web-form' in request.path %}
+                    <p>{{ specs.brand }}<span class=""></span></p>
+                    <img id="app-logo" src="{% static specs.logo %}" width="165" class="img-fluid header-logo" alt="">
+                {% else %}
+                <p>{{ specs.brand }} <span class=""></span></p>
+                <div class="footer-links {% if 'form/' in request.path %} ms-auto me-auto {% endif %}">
+                    
+                    <a href="{% static specs.clarification_text %}"
+                        target="_blank">{% trans 'Clarification Text' %}</a>
+                    <a href="{% static specs.cookie_policy %}" target="_blank">{% trans 'Cookie Policy' %}</a>
+                    <a href="{% static specs.privacy_policy %}" target="_blank">{% trans 'Privacy Policy' %}</a>
+                    {% if specs.terms_conditions_policy %}<a href="{% static specs.terms_conditions_policy %}">{% trans 'Terms & Conditions' %}</a> {% endif%}
+                </div>
+                <div {% if 'form/' in request.path %} style="display: none;" {% endif %}  class="theme-change-container">
+                    <div class="d-flex me-3 gap-2" id="feedbackButton">
+                        <img src="{% static 'img/feedback-icon.svg' %}" width="16" alt="">
+                        <p style="font-size: 14px; cursor: pointer;">{% trans 'Send Feedback' %} <span style="font-weight: 600; font-size: 14px;">{% trans '' %}</span></p>
+                    </div>
+                    <label for="theme">{% trans 'Dark Theme' %}</label>
+                    <div class="switch-checkbox">
+                        <input type="checkbox" id="theme" />
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+    </footer>
+<!--Dil değiştirme ve kaydetme-->
+{% if '/form/' not in request.path and '/web-form/' not in request.path %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="{% static 'js/toastify.js' %}"></script>
+<script>
+    // var csrfToken = '{{ csrf_token }}';
+    var lastClickedStarId; // Global değişken olarak tanımlanmalı
+    
+    $(document).ready(function() {
+        var feedbackbutton = $("#submitFeedback")
+        var ui_design_star;
+        $(".unlockSubmitButton").click(function(){
+            feedbackbutton.prop('disabled',false);
+            feedbackbutton.css({
+                'background-color': 'rgba(80, 113, 200, 1)',
+                'opacity': 1,
+                'cursor':'pointer'
+            });
+        })
+        $(".start-one-api span").click(function() {
+            var clickedSpan = $(this);
+            ui_design_star = clickedSpan.find('p').text();
+        });
+        var bug_star;
+        $(".start-two-api span").click(function() {
+            var clickedSpan2 = $(this);
+            bug_star = clickedSpan2.find('p').text();
+        });
+        var features_star;
+        $(".start-tree-api span").click(function() {
+            var clickedSpan3 = $(this);
+            features_star = clickedSpan3.find('p').text();
+        });
+        var performance_star;
+        $(".start-four-api span").click(function() {
+            var clickedSpan4 = $(this);
+            performance_star = clickedSpan4.find('p').text();
+        });
+        var expected_outcome_star;
+        $(".start-five-api span").click(function() {
+            var clickedSpan5 = $(this);
+            expected_outcome_star = clickedSpan5.find('p').text();
+        });
+        function disableButton() {
+            feedbackbutton.prop("disabled", true); // Butonu devre dışı bırak
+            // Arka plan rengini ve yazı rengini değiştir
+            feedbackbutton.css({
+                "background-color": "#cccccc;",
+                "color": "#666666;",
+                "cursor": "not-allowed;"
+            });
+        }
+        function enableButton() {
+            feedbackbutton.prop("disabled",false) // Butonu etkinleştir
+            feedbackbutton.css({
+                "background-color": "rgba(80, 113, 200, 1)",
+                "color": "rgba(255, 255, 255, 1)",
+                "cursor":"allowed;"
+            })
+        }
+        $("#submitFeedback").click(function() {
+            var isCheckboxChecked = $("#feedbackBox").is(":checked");
+            disableButton();
+            if (isCheckboxChecked) {
+                $(".feedbackModalClose").click()
+                var ui_design_comment = $(".stars-textarea-one textarea").val();
+                var bug_comment = $(".stars-textarea-two textarea").val();
+                var features_comment = $(".stars-textarea-tree textarea").val();
+                var performance_comment = $(".stars-textarea-four textarea").val();
+                var expected_outcome_comment = $(".stars-textarea-five textarea").val();
+                
+                var feedbackData = {
+                    'ui_design_star':ui_design_star,
+                    'ui_design_comment': ui_design_comment,
+                    'bug_star':bug_star,
+                    'bug_comment': bug_comment,
+                    'features_star':features_star,
+                    'features_comment': features_comment,
+                    'performance_star':performance_star,
+                    'performance_comment': performance_comment,
+                    'expected_outcome_star':expected_outcome_star,
+                    'expected_outcome_comment': expected_outcome_comment
+                };
+    
+                $(".modal-feedback textarea").each(function() {
+                    var textareaValue = $(this).val();
+                    var textareaClass = $(this).attr('class').split(' ').filter(cls => cls.includes('textarea-'))[0];
+    
+                });
+    
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'feedback' %}",
+                    data: feedbackData,
+                    success: function(response) {
+                        Toastify({
+                        text: "{% trans 'Thank you for your feedback' %}",
+                        duration: 3000,
+                        backgroundColor: "#28a745",
+                    }).showToast();
+                        enableButton()
+                },
+                error:function(error){
+                    Toastify({
+                        text: "{% trans 'There was an error sending feedback, please try again later' %}",
+                        duration: 3000,
+                        backgroundColor: "#d9534f"
+                    }).showToast();
+                    enableButton()
+                }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: "{% trans 'Warning' %}",
+                    text: "{% trans 'You must accept the Privacy Policy.'%}"
+                });
+                enableButton()
+            }
+        });
+    });
+    
+    
+        $(".starts-one").click(function(){
+            $(".stars-textarea-one").addClass("d-block")
+            $(".stars-textarea-two").removeClass("d-block")
+            $(".stars-textarea-tree").removeClass("d-block")
+            $(".stars-textarea-four").removeClass("d-block")
+            $(".stars-textarea-five").removeClass("d-block")
+        })
+    
+        $(".starts-two").click(function(){
+            $(".stars-textarea-two").addClass("d-block")
+            $(".stars-textarea-one").removeClass("d-block")
+            $(".stars-textarea-tree").removeClass("d-block")
+            $(".stars-textarea-four").removeClass("d-block")
+            $(".stars-textarea-four").removeClass("d-block")
+        })
+    
+        $(".starts-tree").click(function(){
+            $(".stars-textarea-tree").addClass("d-block")
+            $(".stars-textarea-one").removeClass("d-block")
+            $(".stars-textarea-two").removeClass("d-block")
+            $(".stars-textarea-four").removeClass("d-block")
+            $(".stars-textarea-four").removeClass("d-block")
+        })
+    
+        $(".starts-four").click(function(){
+            $(".stars-textarea-four").addClass("d-block")
+            $(".stars-textarea-one").removeClass("d-block")
+            $(".stars-textarea-two").removeClass("d-block")
+            $(".stars-textarea-tree").removeClass("d-block")
+            $(".stars-textarea-five").removeClass("d-block")
+        })
+    
+        $(".starts-five").click(function(){
+            $(".stars-textarea-five").addClass("d-block")
+            $(".stars-textarea-one").removeClass("d-block")
+            $(".stars-textarea-two").removeClass("d-block")
+            $(".stars-textarea-tree").removeClass("d-block")
+            $(".stars-textarea-four").removeClass("d-block")
+        })
+    
+        $(".starts-one-none").click(function(){
+            $(".stars-textarea-one").removeClass("d-block")
+        })
+        $(".starts-two-none").click(function(){
+            $(".stars-textarea-two").removeClass("d-block")
+        })
+        $(".starts-tree-none").click(function(){
+            $(".stars-textarea-tree").removeClass("d-block")
+        })
+        $(".starts-four-none").click(function(){
+            $(".stars-textarea-four").removeClass("d-block")
+        })
+        $(".starts-five-none").click(function(){
+            $(".stars-textarea-five").removeClass("d-block")
+        })
+    
+        function changeColor(parametre){
+            var stars = ["spn1","spn2","spn3","spn4","spn5"];
+            for (i = 0; i <= parametre; i++){
+                var element = document.getElementById(stars[i]);
+                element.style.color = "orange";
+            }
+            var k = stars.length - 1;
+            for (k; k > parametre; k--){
+                var element = document.getElementById(stars[k]);
+                element.style.color = "rgba(239, 240, 246, 1)";
+            }
+        }
+        function changeColorTwo(parametre){
+            var stars = ["spnTwo1","spnTwo2","spnTwo3","spnTwo4","spnTwo5"];
+            for (i = 0; i <= parametre; i++){
+                var element = document.getElementById(stars[i]);
+                element.style.color = "orange";
+            }
+            var k = stars.length - 1;
+            for (k; k > parametre; k--){
+                var element = document.getElementById(stars[k]);
+                element.style.color = "rgba(239, 240, 246, 1)";
+            }
+        }
+        function changeColorTree(parametre){
+            var stars = ["spnTree1","spnTree2","spnTree3","spnTree4","spnTree5"];
+            for (i = 0; i <= parametre; i++){
+                var element = document.getElementById(stars[i]);
+                element.style.color = "orange";
+            }
+            var k = stars.length - 1;
+            for (k; k > parametre; k--){
+                var element = document.getElementById(stars[k]);
+                element.style.color = "rgba(239, 240, 246, 1)";
+            }
+        }
+        function changeColorFour(parametre){
+            var stars = ["spnFour1","spnFour2","spnFour3","spnFour4","spnFour5"];
+            for (i = 0; i <= parametre; i++){
+                var element = document.getElementById(stars[i]);
+                element.style.color = "orange";
+            }
+            var k = stars.length - 1;
+            for (k; k > parametre; k--){
+                var element = document.getElementById(stars[k]);
+                element.style.color = "rgba(239, 240, 246, 1)";
+            }
+        }
+        function changeColorFive(parametre){
+            var stars = ["spnFive1","spnFive2","spnFive3","spnFive4","spnFive5"];
+            for (i = 0; i <= parametre; i++){
+                var element = document.getElementById(stars[i]);
+                element.style.color = "orange";
+            }
+            var k = stars.length - 1;
+            for (k; k > parametre; k--){
+                var element = document.getElementById(stars[k]);
+                element.style.color = "rgba(239, 240, 246, 1)";
+            }
+        }
+    // }
+    
+        $(document).ready(function () {
+            $("#feedbackButton").click(function () {
+                // Show the modal
+                $("#feedbackModal").modal('show');
+            });
+        });
+    </script>
+<script>
+    var currentLanguage = ""
+    $(document).ready(function () {
+        function getLanguageFromURL() {
+            var path = window.location.pathname;
+            var language = path.split('/')[1]; // Dil bilgisi /en/ veya /tr/ gibi üçüncü parçada
+            return language;
+        }
+        $.ajax({
+            url: "{% url 'get_current_lang' %}",
+            method: "GET",
+            data: { language: getLanguageFromURL() },
+            success: function (res) {
+                
+                let response_language = '/' + res.language + "/" 
+                currentLanguage = res.language
+                setTimeout(function() {
+                    if (!window.location.href.includes(response_language)) {
+                        select_language(res.language);
+                    }
+                }, 1000); // 1000 milisaniye = 1 saniye
+                let language_dropdown_element = $("#dil")
+                let language_text_element = language_dropdown_element.find("span")
+                let current_language_capitalized = currentLanguage.toUpperCase()
+                language_text_element.html(current_language_capitalized)
+                $("li[id^=language_]").each(function(){
+                    $(this).removeClass("active")
+                })
+                let current_language_li_element = $("#language_" + currentLanguage)
+                current_language_li_element.addClass("active") 
+            }
+        })
+    })
+</script>
+{% endif %}
+<!-- add patient form sayfasında dil değiştirildiğinde urldeki parametreleri korumak için yazıldı -->
+
+<script>
+    $(document).ready(function () {
+      var dropdownOpen = false;
+  
+      $("#token").click(function (event) {
+        event.stopPropagation(); // Dropdown açıldığında sayfa tıklamalarını engeller
+        if (dropdownOpen) {
+          $("#tokenlight").show();
+          $("#tokenIcon").hide();
+        } else {
+          $("#tokenlight").hide();
+          $("#tokenIcon").show();
+        }
+        dropdownOpen = !dropdownOpen;
+      });
+  
+      // Sayfa başka bir yerine tıklandığında
+      $(document).click(function () {
+        if (dropdownOpen) {
+          $("#tokenlight").show();
+          $("#tokenIcon").hide();
+          dropdownOpen = false;
+        }
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+        var lang_code = userThemeChoices.language.toUpperCase()
+        var spanElementForLangCode = $("#dil").find("span")
+        spanElementForLangCode.text = lang_code
+    })
+    var language
+        function select_language(language) {
+            language = language
+
+            $.ajax({
+                url: "{% url 'changelanguageApi' %}",
+                method: "GET",
+                data:{
+                language:language
+                },
+                success:function(response){
+                    var user_language = response.language
+
+                    var currentUrl = window.location.href;
+
+                    // Yeni hedef dil
+                    var targetLanguage = user_language; // Değiştirmek istediğiniz hedef dil
+
+                    // Mevcut dil parametresini almak için bir düzenli ifade kullanalım
+                    var languageRegex = /\/([a-z]{2})\//; // URL'den iki küçük harfli dil kodunu alır
+
+                    // Mevcut dil parametresini bulalım
+                    var currentLanguageMatch = currentUrl.match(languageRegex);
+
+                    if (currentLanguageMatch) {
+                        // Mevcut dil parametresi bulunduğunda
+                        var currentLanguage = currentLanguageMatch[1];
+                        // Yeni URL'yi oluşturalım, mevcut dil parametresini hedef dile değiştirerek
+                        var updatedUrl = currentUrl.replace('/' + currentLanguage + '/', '/' + targetLanguage + '/');
+                    } else {
+                        // Mevcut dil parametresi bulunamadığında, hedef dili varsayılan olarak ekleyelim
+                        var updatedUrl = currentUrl.replace(window.location.host, window.location.host + '/' + targetLanguage);
+                    }
+
+                    // Yeni URL'ye yönlendirme yapalım
+                    window.location.href = updatedUrl;
+
+                },
+                error:function(xhr, status, error){
+
+                }
+            });
+                
+    }
+
+    function select_languageorj(language) {
+        language = language
+            
+    if (language == "tr") {
+        if (window.location.href.includes("/en/")) {
+            $.ajax({
+                 url: "{% url 'changelanguageApi' %}",
+                 method: "GET",
+                 data:{
+                    language:language
+                 },
+                 success:function(response){
+                    
+                 },
+                 error:function(xhr, status, error){
+
+                 }
+             });
+            var newUrl = window.location.href.replace("/en/","/tr/")
+            // window.location.assign("http://" + window.location.hostname + ":" + window.location.port + (window.location.pathname).replace("/en", "/tr"))
+            window.location.assign(newUrl)
+        } else {
+            window.location.assign(window.location.href)
+        }
+    } else {
+        if (window.location.href.includes("/tr/")) {
+            $.ajax({
+                 url: "{% url 'changelanguageApi' %}",
+                 method: "GET",
+                 data:{
+                    language:language
+                 },
+                 success:function(response){
+
+                 },
+                 error:function(xhr, status, error){
+                    
+                 }
+             });
+            var newUrl = window.location.href.replace("/tr/","/en/")
+            window.location.assign(newUrl)
+
+        } else {
+            window.location.assign(window.location.href)
+
+        }
+    }
+}
+</script>
+
+<script>
+    var notification_once = false
+    $(document).ready(function () {
+        let hrefContent
+        var process_ir_id_list = []
+        var process_dr_id_list = []
+        //Devam eden analizlerin tamamlanma durumunu düzenli olarak kontrol eder, tamamlanan analizi günceller
+        function update_process_status() {
+            notification_once = true
+            var lang_ = window.location.href.includes("/en/") ? "en" : (window.location.href.includes("/uz/") ? "uz" : (window.location.href.includes("/ru/")) ? "ru" : "tr");
+            $.ajax({
+                url: `{% url 'processStatusForNotificationApi' %}`,
+                method: "GET",
+                data: {
+                    "process_ir_id_list": JSON.stringify(process_ir_id_list),
+                    "process_dr_id_list": JSON.stringify(process_dr_id_list),
+                    "lang": lang_},
+                success: function (res) {
+                    
+                    image_reports = res["data"]
+                    for (var i = 0; i < image_reports.length; i++) {
+
+                        if (image_reports[i]["status"].includes("completed-ok")){
+                            hrefContent = image_reports[i]["url"]
+                        }else{
+                            hrefContent = `#;`
+                        }
+                        
+                        if (!image_reports[i]["status"].includes("process")) {
+                            var index = process_ir_id_list.indexOf(image_reports[i]["id"]);
+                            var index2 = process_dr_id_list.indexOf(image_reports[i]["id"])
+                            if (index > -1) {
+                                process_ir_id_list.splice(index, 1);
+                            } else if (index2 > -1){
+                                process_dr_id_list.splice(index2, 1);
+                            }
+                            var element = $(`li[data-ir-id=${image_reports[i]['id']}]`);
+                            if (window.location.href.includes("CBCT")){
+                                var dicom_element = $(`a[data-dr-id=${image_reports[i]['id']}]`);
+                                dicom_element.replaceWith(
+                                `<a href="${hrefContent}" data-ir-id="${image_reports[i]['id']}">
+                                    <div class="planning-item">
+                                        <div class="rounded p-3 text-dark my-3 d-flex planning-item-box" style="box-shadow: 0 0 30px rgba(0, 0, 0, .15);">
+                                            <div class="px-3 d-flex align-items-center">
+                                                <i class="fa-solid ${image_reports[i]['status']} fs-6"></i>
+                                            </div>
+                                            <div class="mx-3 d-flex gap-3" style="flex: 1px;">
+                                                <p data-analyze-id="${image_reports[i]['id']}" class="m-0 mb-1" data-pass-two-chapter=""><strong>${image_reports[i]["name"]}</strong></p>
+                                                <p class="m-0 ms-auto">${image_reports[i]["created_date"]}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>`
+                            )
+                            }
+                            element.replaceWith(
+                                `<li data-ir-id="${image_reports[i]['id']}">
+                                    <a class="dropdown-item p-0 py-1" href="${hrefContent}">
+                                        <div class="d-flex">
+                                            <div class="px-3 d-flex align-items-center">
+                                                <i class="fa-solid ${image_reports[i]['status']} fs-6"></i>
+                                            </div>
+                                            <div class="d-flex" style="flex:1">
+                                                <div>
+                                                    <div style="font-size:16px">${image_reports[i]["patient"]}</div>
+                                                    <div style="font-size:14px" class="text-muted">${image_reports[i]["created_date"]}</div>
+                                                    <div class="mt-2">${image_reports[i]["name"]}</div>
+                                                </div>
+                                                <div class="ms-auto px-3 d-flex align-items-center">
+                                                    <i class="fa-solid fa-angle-right fs-6 text-muted"></i>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>`
+                            )
+                            if (window.location.href.includes("patients")){
+                                replacePostAnalysisData(image_reports[i])
+                            }
+                            // Elementi seçmek için id kullanılıyor
+                            const button = document.getElementById("bildirim");
+
+                            // Class listesinde "show" sınıfının olup olmadığını kontrol etmek için contains() yöntemi kullanılıyor
+                            const hasShowClass = button.classList.contains("show");
+
+                            // Sonucu konsola yazdırma
+                            if (!hasShowClass){
+                                document.getElementById("bildirim").click()
+                            }
+                        }
+                    }
+                    //Devam eden analizler bir listede tutulur. Eğer listenin içerisinde hala bir eleman varsa istek atıp atamlanma durumunu kontrol eder
+                    if (process_ir_id_list.length > 0 && process_dr_id_list.length > 0) {
+                        setTimeout(function () {
+                            update_process_status()
+                        }, 2000)
+                    }else if (process_dr_id_list.length > 0) {
+                        setTimeout(function () {
+                            update_process_status()
+                        }, 10000)
+                    }else if(process_ir_id_list.length > 0){
+                        setTimeout(function () {
+                            update_process_status()
+                        }, 2000)
+                    }
+                }
+            });
+        }
+        //Bildirim butonuna tıklandığında veritabanındaki imagereport'ları çekip göster
+        $("#bildirim").click(function () {
+            let button_classList = $(this).attr("class").split(" ")
+            // Butona tıklayıp listeyi kaparken tekrar istek atmamasını sağlama
+            if (!button_classList.includes("show")) {
+                var notification_element = $('.notification')
+                $.ajax({
+                    url: "{% url 'getnotificationsApi' %}",
+                    method: "GET",
+                    data: {
+                        "lang": window.location.href.includes("/en/") ? "en" : (window.location.href.includes("/uz/") ? "uz" : (window.location.href.includes("/ru/") ? "ru" : (window.location.href.includes("/nl/") ? "nl" : "tr")))
+                    },
+                    success: function (res) {
+                        notification_element.empty()
+                        image_reports = res["data"]
+                        if(image_reports.length===0){
+                            notification_element.append(`
+                                <li class="dropdown-item p-0 p-2">{% trans 'You have not started an analysis yet' %}</li>
+                            `);
+                        } else {
+                            notification_element.append(`
+                            `)
+                            for (var i = 0; i < image_reports.length; i++) {
+                                if (image_reports[i]["status"].includes("completed-ok")){
+                                    hrefContent = image_reports[i]["url"]
+                                }else{
+                                    hrefContent = `#;`
+                                }
+                                notification_element.append(
+                                    `<li data-ir-id="${image_reports[i]['id']}">
+                                        <a class="dropdown-item p-0 py-1" href="${hrefContent}">
+                                            <div class="d-flex">
+                                                <div class="px-3 d-flex align-items-center">
+                                                    <i class="fa-solid ${image_reports[i]['status']} fs-6"></i>
+                                                </div>
+                                                <div class="d-flex" style="flex:1">
+                                                    <div>
+                                                        <div style="font-size:16px">${image_reports[i]["patient"]}</div>
+                                                        <div style="font-size:14px" class="text-muted">${image_reports[i]["created_date"]}</div>
+                                                        <div class="mt-2" style="color: #0B3777">${image_reports[i]["name"]}</div>
+                                                    </div>
+                                                    <div class="ms-auto px-3 d-flex align-items-center">
+                                                        <i class="fa-solid fa-angle-right fs-6 text-muted"></i>    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>`
+                                )
+                                if (image_reports[i]["status"].includes("process")) { // analizi devam eden raporları listeye ekliyoruz (tekrar istek atıp tamamlanma durumunu kontrol etmek için)
+                                    if (image_reports[i]["d"] == "2"){
+                                        process_ir_id_list.push(image_reports[i]["id"])
+                                    }
+                                    if (image_reports[i]["d"] == "3"){
+                                        process_dr_id_list.push(image_reports[i]["id"])
+                                    }
+                                }
+                            }
+                        }
+                        update_process_status()
+                    }
+                });
+            }
+
+        });
+        {% block updateDicomProcess %}
+        {% endblock %}
+       
+    });
+
+
+
+</script>
+
+
+    {% block customJs %}
+    {% endblock %}
+
+{% if 'web-form' in request.path %}
+    <script>
+        var language
+        function select_language_v2(language) {
+            language = language
+        if (language == "tr") {
+            if (window.location.href.includes("/en/")) {
+                window.location.assign("http://" + window.location.hostname + ":" + window.location.port + (window.location.pathname).replace("/en", "/tr"))
+            } else {
+                window.location.assign("http://" + window.location.hostname + ":" + window.location.port +  window.location.pathname)
+            }
+        } else {
+            if (window.location.href.includes("/tr/")) {
+                window.location.assign("http://" + window.location.hostname + ":" + window.location.port + (window.location.pathname).replace("/tr", "/en"))
+            } else {
+                window.location.assign("http://" + window.location.hostname + ":" + window.location.port + (window.location.pathname))
+            }
+        }
+    }
+    </script>
+{% endif %}
+
+{% if 'web-form' in request.path %}
+    <script>
+        $(document).ready(function () {
+
+            if (window.location.href.includes("/en/")) {
+                $('#language_en').addClass('active');
+                
+                $('#language_tr').removeClass('active');
+
+                $("#language2").html("EN")
+            }
+            else{
+                $('#language_en').removeClass('active');
+                
+                $('#language_tr').addClass('active');
+                $("#language2").html("TR")
+
+            }
+        })
+    </script>
+{% endif %}
+
+{% if not 'form/' in request.path %}
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "{% url 'get_user_info' %}",
+            method: "GET",
+            success: function (res) {
+                var user_infos = res.data;
+
+                $('.username-area').append(
+                    '<span>' + user_infos[0].full_name + '</span>'
+                )
+                $('#profile-photo-section').append(
+                    '<img src="' + user_infos[0].profile_photo + '" alt="Profile Photo">'
+                )
+                if(user_infos[0].profile_photo !== ""){
+                    $('#profile-icon-area').append(
+                        '<img src="' + user_infos[0].profile_photo + '" alt="Profile Photo" width="30" height="30">'
+                )
+                }
+                else{
+                    $('#profile-icon-area').append(
+                        '<i class="fa-solid fa-user"></i>'
+                    )
+                }
+                {% comment %} let url = `ws://${window.location.host}/ws/socket-server/`
+                const markSocket = new WebSocket(url)
+                markSocket.onopen = function(e){
+                    markSocket.send(JSON.stringify({
+                        'message':'CONNECTED'
+                    }))
+                } {% endcomment %}
+
+            }
+        })
+    })
+</script>
+{% endif %}
+<!--Kullanıcının yaptığı analizleri listeler-->
+
+<script>
+    $("#tokenPackage").click(function(){
+        $(".notification").css("display","none")
+        $(".tokenBlock").css("display","block")
+    })
+    $("#tokenAnalyse").click(function(){
+        $(".tokenBlock").css("display","none")
+        $(".notification").css("display","block")
+    })
+    $(document).ready(function () {
+        function hideDropdown() {
+            $(".notification").removeClass("show");
+        }
+        $("#bildirim").click(function (e) {
+            e.stopPropagation();
+            $(".notification").toggleClass("show");
+        });
+    
+        $("#tokenAnalyse").click(function (e) {
+            e.stopPropagation();
+        });
+    
+        $("#tokenPackage").click(function (e) {
+            e.stopPropagation();
+        });
+    
+        $(document).click(function () {
+            hideDropdown();
+        });
+
+        // Package düğmesine tıklama işlemi
+        $("#tokenPackage").click(function () {
+            $("#tokenAnalyse").removeClass("button-active");
+            $("#tokenPackage").addClass("button-active");
+        });
+
+        $("#tokenAnalyse").click(function () {
+            $("#tokenAnalyse").addClass("button-active");
+            $("#tokenPackage").removeClass("button-active");
+        });
+    
+        
+    });
+
+    
+</script>
+<script>
+    $(document).ready(function () {
+        //Devam eden analizlerin tamamlanma durumunu düzenli olarak kontrol eder, tamamlanan analizi günceller
+        function update_token_informations(res) {
+            const button = document.getElementById("token");
+            
+            // Sonucu konsola yazdırma
+            $('#package_name').text(res.package.name)
+            $('#package_usage_limit').text(res.package.usage_rate)
+            $('#package_renewal').text(res.package.renewal_date)
+            $('#package_end_date').text(res.package.end_date)
+            $('#package_progress').css("width", `${res.package.usage_percent}%`)
+            
+        }
+        //Bildirim butonuna tıklandığında veritabanındaki imagereport'ları çekip göster
+        let csrfToken = $('input[name=csrfmiddlewaretoken]').val()
+        $("#bildirim").click(function () {
+            let button_classList = $(this).attr("class").split(" ")
+            // Butona tıklayıp listeyi kaparken tekrar istek atmamasını sağlama
+            if (!button_classList.includes("show")) {
+                $.ajax({
+                    url: "{% url 'getTokenInfo' %}",
+                    headers: {'X-CSRFToken': csrfToken},
+                    method: "GET",
+                    success: function (res) {
+                        update_token_informations(res.remaining_dict)
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+<script>
+    function whichBrowserControl() {
+        // eğer kullanıcı safariden ilk kez giriyorsa başka tarayıcıya yönlendirmeye çalış
+        var userAgent = navigator.userAgent;
+
+        if (userAgent.indexOf("Chrome") > -1) {
+        // Kullanıcı Chrome tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Firefox") > -1) {
+        // Kullanıcı Firefox tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Safari") > -1) {
+            // Kullanıcı Safari tarayıcısını kullanıyor
+            if(!localStorage.getItem("safari")) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: "{% trans 'Don\'t use safari browser for better experience!' %}",
+                    showConfirmButton: false,
+                    timer: 4000
+                })
+                localStorage.setItem("safari",true)
+            }
+        // Kullanıcı Safari tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Opera") > -1) {
+        // Kullanıcı Opera tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Edge") > -1) {
+        // Kullanıcı Microsoft Edge tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Trident") > -1) {
+        // Kullanıcı Internet Explorer tarayıcısını kullanıyor
+        } else {
+        // Diğer tarayıcılar için varsayılan durum
+        }
+    }
+    whichBrowserControl()
+</script>
+</body>
+</html>
+
+
+
+

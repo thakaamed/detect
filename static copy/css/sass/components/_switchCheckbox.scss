@@ -1,0 +1,53 @@
+@import "../abstracts/variables";
+@import "../abstracts/placeholder";
+
+div.switch-checkbox {
+  $height: calc($switch-width / 2.6);
+  $switch-pointer-transition: left ease-in-out 0.2s;
+  $switch-background-transition: background-color ease-in-out 0.2s;
+  width: $switch-width;
+  height: $height;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  & span:nth-of-type(1) {
+    // switch pointer
+    transition: $switch-pointer-transition;
+    position: absolute;
+    left: 0;
+    @extend %centerAbsoluteVertical;
+    width: calc($switch-width / 1.8);
+    aspect-ratio: 1;
+    background-color: $switch-pointer-color;
+    z-index: 1;
+    border-radius: 50%;
+  }
+  & span:nth-of-type(2) {
+    // switch background
+    position: absolute;
+    inset: 0;
+    background-color: rgba($color: $switch-pointer-color, $alpha: 0.5);
+    z-index: 0;
+    border-radius: $height;
+    transition: $switch-background-transition;
+  }
+  & input[type="checkbox"] {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    &:checked {
+      & + span {
+        // switch pointer
+        left: calc(100% - ($switch-width / 1.8));
+        transition: $switch-pointer-transition;
+        & + span {
+          // switch background
+          background-color: $switch-color;
+          transition: $switch-background-transition;
+        }
+      }
+    }
+  }
+}

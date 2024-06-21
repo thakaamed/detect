@@ -1,0 +1,660 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/diagnosis.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+    <link rel="stylesheet" href="{% static 'css/leaflet-geoman.css' %}"/>
+    <title>{{specs.title}} - Diagnosis</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="{% static 'css/drawing.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/exstra.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/leaflet-geoman.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/leaflet.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/leaflet.draw.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/leaflet-ruler.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/papaya.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/toastify.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/exstra2.css' %}"/>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <style>
+        .process {
+            color: #125cc7;
+            transform: rotate(0deg);
+            animation: spin 1s infinite linear;
+        }
+        .completed-ok {
+            color: #1cf171;
+        }
+        .completed-no {
+            color: #ff2727;
+        }
+    </style>
+{% endblock %}
+{% block headerButtons %}
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<div id="page-loading" class="position-fixed align-items-center justify-content-center" style="inset: 0; z-index: 9999999999;">
+    <i class="fa-solid fa-spinner fs-1"></i>
+</div>
+<div class="map-hover-popup__root"></div>
+<div id="modal-dicom-analysis-types" class="modal-container">
+    <div class="modal-box px-4 d-flex flex-column text-light" style="min-width: 350px; height: auto; max-height: 100vh; max-width: 100vw; background-color: #1A264E;">
+        <div class="modal-box__close">
+            <div class="close-icon" data-modal-close>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <p class="my-2" style="font-size: 22px;">{% trans 'Choose Analysis Type' %}</p>
+        <select name="radiography_types" id="radiography_types">
+            <option value="" selected>{% trans 'Select Analysis Type...' %}</option>
+            {% for type_id, values in analysis_types_section.items %}
+                <option 
+                    id="analysis_type_id_{{type_id}}" 
+                    value="{{values.slug}}" 
+                    {% if type_id == 2 or type_id == 3 or type_id == 5 %} style="background-color: grey; color:white;" disabled {% endif %}> 
+                    {%if 'STL Report' in values.name %}{{values.name}} (BETA){%else%}{{values.name}}{%endif%}
+                </option>
+            {% endfor %}
+        </select>
+        <button id="start_analysis" class="save-treatment custom btn-blue mb-2">{% trans 'Start Analysis' %}</button>
+        <button class="save-treatment custom">{% trans 'Cancel' %}</button>
+    </div>
+</div>
+<main class="d-flex">
+    <div class="container-fluid">
+        <div class="adjustable-content py-1" style="overflow: hidden;">
+            <div class="row h-100 g-0">
+                <div id="parent-back-img-frame" class="d-flex align-items-center" style="flex: 4; overflow: hidden">
+                    <div id="back-img-frame" class="patient-radiography d-flex align-items-start justify-content-center" style="overflow: hidden; transform-origin: 0px 0px; background: transparent;">
+                        {% if "media/dental/radio/" in radiography_section.image_path|safe %}
+                            <img class="mb-2" id="back-img" src="{{radiography_section.image_path}}"
+                                style="width: 100%; z-index: 9;">
+                        {% else %}
+                            <img class="mb-2" id="back-img" src="https://aiv2.craniocatch.com/media/{{radiography_section.image_path}}"
+                                style="width: 100%; z-index: 9;">
+                        {% endif %}
+
+                        <div class="loading d-none d-flex align-items-center justify-content-center position-absolute" style="inset: 0; z-index: 999;">
+                            <i class="fa-solid fa-spinner fs-1"></i>
+                            <div id="continues" class="d-none">
+                                <span style="position: absolute;top: 60%;left: 50%;transform: translate(-50%, -50%);">Analiz Devam Ediyor...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="measurement"></div>
+                </div>
+                <div id="mini-icon-bar">
+                    <div class="icon" id="zoomin-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Zoom In' %}">
+                        <i class="fa-solid fa-magnifying-glass-plus translate" style="font-size: 16px;"></i>
+                    </div>
+                    <div class="icon" id="zoomout-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Zoom Out' %}">
+                        <i class="fa-solid fa-magnifying-glass-minus translate" style="font-size: 16px;"></i>
+                    </div>
+                    <div class="icon" id="reset-btn"  data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Reset' %}">
+                        <i class="fa-solid fa-rotate-right translate" style="font-size: 16px;"></i>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-solid fa-sun translate" style="font-size: 16px;"></i>
+                        <div class="dropdown-section flex-column align-items-stretch justify-content-between">
+                            <div class="d-flex justify-content-between dropdown-section-item">
+                                <span>
+                                    <i class="fa-solid fa-sun" style="font-size: 16px;"></i>
+                                    <span class="text" style="white-space: nowrap;">{% trans 'Brightness Level' %}</span>
+                                </span>
+                                <span class="text" id="brightness-value">+ 100</span>
+                            </div>
+                            <div class="dropdown-section-item range-container brightness">
+                                <input type="range" name="" min="0" max="300" id="brightness-btn" value="100">
+                                <div class="range-bg"></div>
+                                <div class="range-value" style="width: 33.3%;"></div>
+                                <div class="range-marker shadow" style="left: 33.3%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-solid fa-circle-half-stroke translate" style="font-size: 16px;"></i>
+                        <div class="dropdown-section flex-column align-items-stretch justify-content-between">
+                            <div class="d-flex justify-content-between dropdown-section-item">
+                                <span>
+                                    <i class="fa-solid fa-circle-half-stroke" style="font-size: 16px;"></i>
+                                    <span class="text" style="white-space: nowrap;">{% trans 'Contrast Level' %}</span>
+                                </span>
+                                <span class="text" id="contrast-value">+ 100</span>
+                            </div>
+                            <div class="dropdown-section-item range-container contrast">
+                                <input type="range" name="" min="0" max="500" value="100" id="contrast-btn">
+                                <div class="range-bg"></div>
+                                <div class="range-value" style="width: 20%;"></div>
+                                <div class="range-marker shadow" style="left: 20%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icon">
+                        <img src="{% static 'img/implant-img.png' %}" alt="" width="10">
+                        <div class="dropdown-section align-items-stretch justify-content-between">
+                            <div class="draw-icon-item d-flex align-items-center me-2">
+                                <img src="{% static 'img/implant-img.png' %}" height="35" alt="" class="p-2" id="draw-implant" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Add Implant' %}">
+                            </div>
+                            <div class="draw-icon-item d-flex align-items-center">
+                                <img src="{% static 'img/crown-img.png' %}" width="40" alt="" class="p-2" id="draw-crown" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Add Crown' %}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-solid fa-pen translate" style="font-size: 16px;"></i>
+                        <div class="dropdown-section align-items-stretch justify-content-between">
+                            <div class="draw-icon-item d-flex align-items-center me-2">
+                                <img src="{% static 'img/polygon.png' %}" alt="" class="p-2" id="draw-polygon" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Make Markup' %}">
+                            </div>
+                            <div class="draw-icon-item d-flex align-items-center">
+                                <img src="{% static 'img/rectangle.png' %}" alt="" class="p-2" id="draw-rectangle" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Add Diagnosis' %}">
+                            </div>
+                            <div class="draw-icon-item"></div>
+                        </div>
+                    </div>
+                    <div class="icon" id="download-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Download' %}">
+                        <i class="fa-solid fa-download translate" style="font-size: 16px;"></i>
+                    </div>
+                </div>
+                <div class="h-100 teeth-and-treatment-section position-relative active" style="transition: width ease-in-out 500ms;">
+                    <div class="tooth-chart-illnesses-by-tooth px-2 py-3" style="position: relative; opacity: 1;">
+                        <div id="other-plannings" class="treatment-section d-flex flex-column chapter-1 active">
+                            <div class="half d-flex flex-column align-items-center justify-content-center py-4">
+                                <img src="{% static 'img/panel-circle.png' %}" class="img-fluid" alt="">
+                                <p class="m-0 font-weight-bold fs-5 text-light my-2">{% trans '3D ANALYSIS' %}</p>
+                                <p class="m-0 fs-6 text-muted text-center">{% trans 'Here you can choose 3d analysis type and start analysis' %}</p>
+                            </div>
+                            <div class="half d-flex flex-column align-items-center justify-content-center" style="gap: 10px; flex: 1;">
+                                <div class="position-sticky d-flex justify-content-end w-100 top-0" style="background-color: white;">
+                                    <button id="choose_analysis_button" class="custom text-light m-2" style="background: linear-gradient(90deg, #0E2D58 0%, #203F6C 100%);" data-pass-two-chapter>{% trans 'Choose Analysis' %}</button>
+                                </div>
+
+                                <div id="planning-item-container" class="px-3 py-1 w-100" style="flex: 1; overflow-y: auto;">
+                                        {% comment %} <div class="planning-item">
+                                        </div> {% endcomment %}
+                                        {% for id, value in list_dicom_reports_section.items %}
+                                            <a href="{{value.url|safe}}" data-dr-id="{{ id }}">
+                                                <div class="planning-item">
+                                                    <div class="rounded p-3 text-dark my-3 d-flex planning-item-box" style="box-shadow: 0 0 30px rgba(0, 0, 0, .15);">
+                                                        <div class="px-3 d-flex align-items-center">
+                                                            <i class="fa-solid {{value.status}} fs-6"></i>
+                                                        </div>
+                                                        {% comment %} <span style="align-self: center; width: 12px; height: 12px; border-radius: 50%; background-color: lime;"></span> {% endcomment %}
+                                                        <div class="mx-3 d-flex gap-3" style="flex: 1px;">
+                                                            <p data-analyze-id="{{ id }}" class="m-0 mb-1" data-pass-two-chapter=""><strong>{{value.report_type.name}}</strong></p>
+                                                            <p class="m-0 ms-auto">{{ value.created_date }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            
+                                        {% endfor %}
+                                        {% comment %} <div class="planning-item">
+                                            <div class="rounded p-3 text-dark my-3 d-flex planning-item-box" style="box-shadow: 0 0 30px rgba(0, 0, 0, .15);">
+                                                <span style="width: 12px; height: 12px; border-radius: 50%; background-color: lightgray;"></span>
+                                                <div class="mx-3">
+                                                    <p data-treatment-id="{{ item.id }}" class="m-0 mb-1" data-pass-two-chapter=""><strong>Treatments Plan</strong></p>
+                                                    <p class="m-0">{{ item.modified_date }}</p>
+                                                </div>
+                                                <span class="ms-auto d-flex align-items-end">
+                                                    <i data-open-modal-pk="modal-delete-treatment"
+                                                    data-modal-type="treatment-delete" class="fa-solid fa-trash fs-6" style="cursor: pointer;"></i>
+                                                </span>
+                                            </div>
+                                        </div> {% endcomment %}
+                                    <div id="planning-items-list"></div>
+                                </div>
+
+                            </div>
+                            <!--  -->
+                        </div>
+                    </div>
+                    <script>
+                        $(".detected-container-item .detected-container-item_heading").click(function(event) {
+                            let currentContentContainer = $(this).closest(".detected-container-item").find(".detected-container-item_content")
+                            currentContentContainer.slideToggle()
+                            $(this).toggleClass("active")
+                        })
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block customJs %}
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/toastify.js' %}"></script>
+<script src="{% static 'js/leaflet.js' %}"></script>
+<script src="{% static 'js/leaflet.draw.js' %}"></script>
+<script src="{% static 'js/leaflet-geoman.min.js' %}"></script>
+<script src="{% static 'js/leaflet-ruler.js' %}"></script>
+
+<script src="{% static 'js/wheelzoom.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script src="{% static 'js/dragZoom.js' %}"></script>
+<script src="{% static 'js/sweatalert.js' %}"></script>
+<script src="{% static 'js/drawing2.js' %}"></script>
+
+<script>
+    var image_report_id = "{{image_report_id}}"
+    let csrfToken = $('input[name=csrfmiddlewaretoken]').val()
+</script>
+<script>
+    var modalDiv = $('#modal-dicom-analysis-types');
+
+    $('#choose_analysis_button').on("click", function(){
+        // Eğer 'active' sınıfı zaten varsa kaldır, yoksa ekle
+        if (modalDiv.hasClass('active')) {
+            modalDiv.removeClass('active');
+        } else {
+            modalDiv.addClass('active');
+        }
+    })
+
+    $('#start_analysis').on("click", function(){
+        if (modalDiv.hasClass('active')) {
+            modalDiv.removeClass('active');
+        } else {
+            modalDiv.addClass('active');
+        }
+        var radiographyTypesSelect = document.querySelector("#radiography_types");
+        var selectedRadiographyTypeSlug = radiographyTypesSelect.value;
+        if (selectedRadiographyTypeSlug == "l9byk731k2uz46ny66c76ft6fhdttt7u"){
+            window.location.href = "{% url 'ImplantologyPage' image_report_id=image_report_id %}"
+        }else{
+            {% comment %} $.ajax({
+                url:"",
+                method: "POST",
+                headers: { "X-CSRFToken": csrfToken },
+                data: {
+                    'selectedDicomTypeSlug': selectedRadiographyTypeSlug,
+                    'image_report_id': image_report_id,
+                    },
+                success: function (res) {
+                    if (res['status'] == "True") {
+                        $('#planning-item-container').prepend(
+                            `<a href="#;" data-ir-id="${res['id']}">
+                                <div class="planning-item">
+                                    <div class="rounded p-3 text-dark my-3 d-flex planning-item-box" style="box-shadow: 0 0 30px rgba(0, 0, 0, .15);">
+                                        <div class="px-3 d-flex align-items-center">
+                                            <i class="fa-solid fa-spinner process fs-6"></i>
+                                        </div>
+                                        <div class="mx-3 d-flex gap-3" style="flex: 1px;">
+                                            <p data-analyze-id="${res['id']}" class="m-0 mb-1" data-pass-two-chapter=""><strong>${res["report_type_name"]}</strong></p>
+                                            <p class="m-0 ms-auto">${res["created_date"]}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>`
+                        )
+                        $('#bildirim').click()
+                    } else {
+                        alert("Unable to start analysis.")
+                    }
+                }
+            }) {% endcomment %}
+        }
+
+    })
+</script>
+
+<script>
+
+</script>
+<script>
+    $(".draw-icon-item img").click(function() {
+        // toolbardaki kalem ikonun içindeki polygon ve rectangle ikonlarına tıklanınca active class verir
+        $(".draw-icon-item img.active") ? $(".draw-icon-item img.active").removeClass("active") : null
+        $(this).addClass("active")
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        var editableLayers = new L.FeatureGroup();
+        map.addLayer(editableLayers);
+     })
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#page-loading").hide()
+    })
+</script>
+
+<script>
+    // doctor comment alanı
+    $(".doctor-comment i").click(function() {
+        $(".doctor-comment").toggleClass("active")
+        if($(".doctor-comment").hasClass("active")) {
+            // panel açılmak isteniyor o halde aç
+            $("#doctor-comment-area").css({
+                "top" : "0%"
+            })
+        } else {
+            $("#doctor-comment-area").css({
+                "top" : "-100%"
+            })
+        }
+    })
+    $("#doctor-comment-cancel-btn").click(function() {
+        $("#doctor-comment-area").css({
+            "top" : "-100%"
+        })
+    })
+</script>
+
+<script>
+    if(!rectangle_state) {
+        $('#back-img-frame').dragZoom({
+            zoom: 1,
+            onWheelStart: function(event) {
+            },
+        });
+    }
+</script>
+
+<script>
+    function closeModal() {
+        var modal = document.querySelector(".modal-container.active");
+        modal.classList.remove("active");
+        var checkboxesForDiagnosis = document.querySelectorAll('.patient-item input[type="checkbox"]:checked');
+        checkboxesForDiagnosis.forEach(function(checkbox) {
+        checkbox.checked = false;
+    })
+    }
+</script>
+
+<!--ZOOM IN ZOOM OUT MAUSE WHELL-->
+<script>
+    var scale = 1,
+        panning = false,
+        pointX = 0,
+        pointY = 0,
+        start = {x:0, y:0},
+        zoomElement = document.getElementById("back-img-frame"),
+        maxScale = 9, // maksimum yakınlaştırma düzeyi
+        minScale = 1; // minimum yakınlaştırma düzeyi
+
+    function setTransform(){
+        zoomElement.style.transform = "translate("+pointX+"px,"+pointY+"px) scale("+scale+")";
+    }
+
+    zoomElement.onmousedown = function(e){
+        e.preventDefault();
+        start = {x: e.clientX - pointX, y:e.clientY - pointY}
+        // panning = true;
+    }
+
+    zoomElement.onmouseup = function(e) {
+        panning = false;
+    }
+
+    zoomElement.onmousemove = function(e){
+        if(!panning){
+            return;
+        }
+        pointX = (e.clientX - start.x)
+        pointY = (e.clientY - start.y)
+        setTransform()
+    }
+
+    zoomElement.onwheel = function(e) {
+        e.preventDefault();
+
+
+        if($("#drawTeethBoxesDraw").is(":checked")) {
+            // eğer ki diş numaraları açıksa kapat bitince geri açarsın
+            $("#drawTeethBoxesDraw").click()
+        }
+        var xs = (e.clientX - pointX) / scale,
+            ys = (e.clientY - pointY) / scale,
+            delta = (e.wheelDelta ? e.wheelDelta : -e.deltaY),
+            prevScale = scale;
+
+        (delta > 0) ? (scale *= 1.1) : (scale /= 1.1);
+
+        // Yakınlaştırma sınır kontrolü
+        if (scale > maxScale) {
+            scale = maxScale;
+        } else if (scale < minScale) {
+            scale = minScale;
+        }
+
+        pointX = e.clientX - xs * scale;
+        pointY = e.clientY - ys * scale;
+
+        // Yakınlaştırma düzeyi değiştiyse transform işlemini gerçekleştir
+        if (scale !== prevScale) {
+            setTransform();
+        }
+    }
+
+</script>
+
+<script>
+    var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val();
+    var image_report_id = {{image_report_id}}
+</script>
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+
+    try {
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            var target = document.querySelector(tooltipTriggerEl.dataset.bsTarget)
+
+            return new bootstrap.Tooltip(tooltipTriggerEl, {
+                title: target.innerHTML,
+                html: true
+            })
+        })
+    }catch (e) {
+    }
+
+</script>
+
+<script>
+    function toggleDropSection(event) {
+        // aşağıdan açılır menünün açılıp kapanmasını sağlayan fonksiyon
+        let dropSection = $("#bottom-drop-section")
+        let iconSection = $(event.target)
+        dropSection.toggleClass("active")
+        iconSection.toggleClass("active")
+    }
+</script>
+
+
+<script>
+    function tools() {
+        let zoom = 1
+        let map = $('#back-img-frame')
+        let mapImg = $("img#back-img")
+
+        function contrastReset() {
+            mapImg.css("filter", "contrast(100%)")
+            $("#contrast-btn").nextAll('.range-marker').first().css("left", "20%");
+            $("#contrast-btn").nextAll('.range-value').first().css("width", "20%");
+            $("#contrast-value").html("+100");
+        }
+
+        function brightnessReset() {
+            mapImg.css("filter", "brightness(100%)")
+            $("#brightness-btn").nextAll('.range-marker').first().css("left", "33.3%");
+            $("#brightness-btn").nextAll('.range-value').first().css("width", "33.3%");
+            $("#brightness-value").html("+100");
+        }
+
+        // zoom + butonuna tıklayınca zoom işlemi yapar
+        $("#zoomin-btn").click(function() {
+            if(zoom <= 3) {
+                // zoom 3 katı kadar yapsın en fazla
+                zoom += 0.1;
+                map.css('transform', `scale(${zoom})`);
+                if($("#drawTeethBoxesDraw").is(":checked")) {
+                    $("#drawTeethBoxesDraw").click() // eğer ki diş numaraları açıksa kapat
+                }
+            }
+        })
+
+        // zoom - butonuna tıklayınca zoom işlemi yapar
+        $("#zoomout-btn").click(function() {
+            if(zoom >= 0.5) {
+                // zoom yarıya kadar yapsın en fazla
+                zoom -= 0.1;
+                map.css('transform', `scale(${zoom})`);
+                if($("#drawTeethBoxesDraw").is(":checked")) {
+                    $("#drawTeethBoxesDraw").click() // eğer ki diş numaraları açıksa kapat
+                }
+            }
+        })
+
+        // zoom contrast ve parlaklık sıfırla
+        $("#reset-btn").click(function() {
+            zoom = 1
+            map.css('transform', `scale(${zoom})`);
+            contrastReset()
+            brightnessReset()
+        })
+
+
+        // contrast değerini değiştir
+        $("#contrast-btn").on("input", function() {
+            var contrastValue = this.value;
+            var contrastCSS = 'contrast(' + contrastValue + '%)';
+            $("#contrast-value").html(contrastValue != 0 ? `+ ${contrastValue}` : 0);
+            mapImg.css("filter", contrastCSS)
+            $(this).nextAll('.range-marker').first().css("left", `${contrastValue / 5}%`);
+            $(this).nextAll('.range-value').first().css("width", `${contrastValue / 5}%`);
+        })
+
+        // brightness değerini değiştir
+        $("#brightness-btn").on("input", function() {
+            var brightnessValue = this.value;
+            var brightnessCSS = 'brightness(' + brightnessValue + '%)';
+            $("#brightness-value").html(brightnessValue != 0 ? `+ ${brightnessValue}` : 0);
+            mapImg.css("filter", brightnessCSS)
+            $(this).nextAll('.range-marker').first().css("left", `${brightnessValue / 3}%`);
+            $(this).nextAll('.range-value').first().css("width", `${brightnessValue / 3}%`);
+        })
+
+        $("#download-btn").click(function() {
+
+            $.ajax({
+                url: "{% url 'downloadDrawedRadiographyButton' %}", // Post isteği yapılacak URL'yi buraya ekleyin
+                type: 'GET',
+                data: {
+                    csrfmiddlewaretoken: csrfmiddlewaretoken,
+                    image_report_id: image_report_id,
+                }, // Seçilen öğeleri 'selected_items' adıyla gönderin
+                success: function (res) {
+                    if (res["status"] === "True"){
+                        let yol = res["output_path"]
+                        console.log("output", yol)
+                        var link = document.createElement('a');
+                        // let yol = mapImg.attr("src")
+                        link.href = yol; // Resmin URL'sini buraya ekleyin
+                        link.download = yol; // İndirilecek dosya adını buraya ekleyin
+                        link.target = '_blank'; // Yeni sekmede açmak için "_blank" kullanın
+                        link.click();
+                    }
+                    // Başarılı yanıt durumunda yapılacak işlemler
+                },
+                error: function (xhr, status, error) {
+                    // Hata durumunda yapılacak işlemler
+                }
+            });
+        })
+
+    }
+
+    tools()
+</script>
+
+
+{% comment %} <script>
+    $("#treatment-planning").on("submit", function(event) {
+        event.preventDefault()
+        let image_report_id = {{image_report_id}}
+        let data = decodeURIComponent($(event.target).serialize()).replace("ck-editor=", "")
+        let csrfToken = $('input[name=csrfmiddlewaretoken]').val()
+        let id = $("#editor").attr("data-editor-treatment-id")
+        var planningItem = $('#planning-items-list');
+        var firstPlanningItem = $('#first-planning')
+
+        $.ajax({
+            url : "{% url 'add_treatment_planning' %}",
+            type:"POST",
+            headers:{'X-CSRFToken':csrfToken},
+            data:{
+                content:data,
+                image_report_id: image_report_id,
+                treatment_id:id
+            },
+            success:function(response){
+                Toastify({
+                        gravity:"top",
+                        position:"right",
+                        duration:1000,
+                        icon: "<i class='fa-solid fa-check'></i>",
+                        backgroundColor: "green",
+                        text: "{% trans 'Treatment planning successfully saved' %}"
+                    }).showToast()
+
+                if(response.status === "new-treatment") {
+                    // yeni bir treatment eklenmiş ise DOM a ekle
+                    if($("#emptyView").length) {
+                        $("#emptyView p").remove()
+                        $("#planning-item-container").css("flex","1")
+                        $("#emptyView").css("flex","0").addClass("p-2 justify-content-end").removeClass("justify-content-center flex-column")
+                        $("#planning-item-container > :first-child").html("<p class='m-0 my-2 text-dark'><strong>Today</strong></p>")
+                    }
+                    $(`
+                    <div class="planning-item">
+                        <div class="rounded p-3 text-dark my-3 d-flex planning-item-box" style="box-shadow: 0 0 30px rgba(0, 0, 0, .15);">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background-color: lime;"></span>
+                            <div class="mx-3">
+                                <p data-treatment-id="${response.treatment_id}" class="m-0 mb-1" data-pass-two-chapter=""><strong style="pointer-events: none">Treatments Plan </strong></p>
+                                <p class="m-0">${response.modified_date}</p>
+                            </div>
+                            <span class="ms-auto d-flex align-items-end">
+                                <i data-open-modal-pk="modal-delete-treatment" data-modal-type="treatment-delete" class="fa-solid fa-trash fs-6" style="cursor: pointer;"></i>
+                            </span>
+                        </div>
+                    </div>
+                    `).insertAfter("#planning-item-container > :first-child");
+                }
+            },
+
+            error:function(xhr, errmsg, err){
+                // console.log("ckeditörden data gitti geldi ama hata")
+            }
+        })
+    })
+
+</script> {% endcomment %}
+{% endblock %}
+{% block updateDicomProcess %}
+
+    var processIcons = $("i.process");
+    console.log(processIcons)
+    if (processIcons){
+        processIcons.each(function() {
+            var parentDiv = $(this).closest("a[data-dr-id]");
+            process_dr_id_list.push(parseInt(parentDiv.attr("data-dr-id")))
+        });
+        update_process_status()
+        console.log("ifte")
+    }
+    
+{% endblock %}

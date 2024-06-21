@@ -1,0 +1,1202 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-12 11:39+0000\n"
+"PO-Revision-Date: 2023-08-18 17:08+0156\n"
+"Last-Translator: ahmet resul kuru <ahmetresul159@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: Server/urls.py:44
+msgid "jsi18n/"
+msgstr ""
+
+#: templates/add-patient.html:30
+msgid ""
+"You can add or update your patient by filling out the information below."
+msgstr ""
+"Aşağıdaki bilgileri doldurarak hastanızı ekleyebilir veya "
+"güncelleyebilirsiniz."
+
+msgid "Bjork-Jarabak Analysis"
+msgstr "Bjork-Jarabak Analizi"
+
+msgid "View Detail"
+msgstr "Detayı Görüntüle"
+
+msgid "Detail"
+msgstr "Detay"
+
+msgid "Illnesses"
+msgstr "Hastalıklar"
+
+msgid "Anatomy"
+msgstr "Anatomi"
+
+msgid "Teeth"
+msgstr "Diş"
+
+msgid "Other"
+msgstr "Diğer"
+
+msgid "Date"
+msgstr "Tarih"
+
+msgid "Patient Radiography"
+msgstr "Hasta Radyografisi"
+
+msgid "Create as Patient"
+msgstr "Hasta Olarak Kaydet"
+
+msgid "Skeletal Factors - Anterior/Posterior Analysis"
+msgstr "Skeletal Factors - Anterior/Posterior Analizi"
+
+msgid "Wits Analysis"
+msgstr "Wits Analizi"
+
+msgid "Analyses"
+msgstr "Analizler"
+
+msgid "Include analysis information in the report"
+msgstr "Analiz bilgilerini rapora dahil edin"
+
+msgid "Update Patient"
+msgstr "Hasta Güncelle"
+
+msgid "Add Patient"
+msgstr "Hasta Ekle"
+
+msgid "Add"
+msgstr "Ekle"
+
+msgid "Update"
+msgstr "Güncelle"
+
+msgid "Patient ID"
+msgstr "Hasta ID"
+
+msgid "Gender"
+msgstr "Cinsiyet"
+
+msgid "Select Gender"
+msgstr "Cinsiyet Seçin"
+
+msgid "Female"
+msgstr "Kadın"
+
+msgid "Male"
+msgstr "Erkek"
+
+msgid "Patient Email"
+msgstr "Hasta Email"
+
+msgid "Doctor Name"
+msgstr "Doktor Adı"
+
+msgid "Patient Full Name"
+msgstr "Hasta Adı Soyadı"
+
+msgid "Date of Birth"
+msgstr "Doğum Tarihi"
+
+msgid "Patient Phone"
+msgstr "Hasta Telefonu"
+
+msgid "File No (Optional)"
+msgstr "Dosya No (Opsiyonel)"
+
+msgid "You can optionally enter the file number."
+msgstr "İsteğe bağlı olarak dosya numarasını girebilirsiniz."
+
+msgid "Write patient full name..."
+msgstr "Hastanın tam adını yazınız..."
+
+msgid "Write doctor name..."
+msgstr "Doktor ismi yazınız..."
+
+msgid "Write Patient Email"
+msgstr "Hasta E-postası Yazınız"
+
+msgid "Patient ID will be generated automatically"
+msgstr "Hasta Kimliği otomatik olarak oluşturulacaktır"
+
+msgid "You can enter the patient name and surname."
+msgstr "Hasta adı ve soyadını girebilirsiniz."
+
+msgid "Logout"
+msgstr "Çıkış Yap"
+
+msgid "Clarification Text"
+msgstr "Aydınlatma Metni"
+
+msgid "Cookie Policy"
+msgstr "Çerez Politikası"
+
+msgid "Privacy Policy"
+msgstr "Gizlilik Politikası"
+
+msgid "Dark Theme"
+msgstr "Koyu Tema"
+
+msgid "Please enter a valid e-mail address"
+msgstr "Lütfen geçerli bir e-mail adresi giriniz"
+
+msgid "The patient is successfully added."
+msgstr "Hasta başarılı bir şekilde eklendi."
+
+msgid "January"
+msgstr "Ocak"
+
+msgid "February"
+msgstr "Şubat"
+
+msgid "March"
+msgstr "Mart"
+
+msgid "April"
+msgstr "Nisan"
+
+msgid "May"
+msgstr "Mayıs"
+
+msgid "June"
+msgstr "Haziran"
+
+msgid "July"
+msgstr "Temmuz"
+
+msgid "August"
+msgstr "Ağustos"
+
+msgid "September"
+msgstr "Eylül"
+
+msgid "October"
+msgstr "Ekim"
+
+msgid "November"
+msgstr "Kasım"
+
+msgid "December"
+msgstr "Aralık"
+
+msgid "Login Page"
+msgstr "Giriş"
+
+msgid "Login"
+msgstr "Giriş Yap"
+
+msgid "Username"
+msgstr "Kullanıcı Adı"
+
+msgid "Username or Password Incorrect"
+msgstr "Kullanıcı Adı veya Parola Hatalı"
+
+msgid "Username or Phone Number"
+msgstr "Kullanıcı Adı veya Telefon Numarası"
+
+msgid "Password"
+msgstr "Şifre"
+
+msgid "I have read and understood the"
+msgstr ""
+"Craniocatch Medikal ve Dental Bilişim Teknolojileri Anonim Şirketi "
+"tarafından hazırlanmış olan"
+
+msgid ""
+"Policy prepared by Craniocatch Medikal ve Dental Bilişim Teknolojileri "
+"Anonim Şirketi."
+msgstr "okudum ve onaylıyorum"
+
+msgid "Clarification text"
+msgstr "Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metni"
+
+msgid "on the Processing of Personal Data and the"
+msgstr "ve"
+
+msgid "Personal Data Protection Policy"
+msgstr "Kişisel Verilerin Korunması Politikası'nı"
+
+msgid "Personal Data Protection"
+msgstr "Kişisel Verilerin Korunması Politikası'nı"
+
+msgid ""
+"prepared by Craniocatch Medikal ve Dental Bilişim Teknolojileri Anonim "
+"Şirketi."
+msgstr "okudum ve anladım."
+
+msgid "I have read and accept the Portal Terms of Use."
+msgstr "Portal Kullanım Koşullarını okudum ve kabul ediyorum."
+
+msgid "Sign In"
+msgstr "Giriş Yap"
+
+msgid "Forgot Password"
+msgstr "Şifremi Unuttum"
+
+msgid "Send"
+msgstr "Gönder"
+
+msgid "Radiology Upload"
+msgstr "Radyografi Yükle"
+
+msgid ""
+"You can start the analysis by uploading the Radiography image, view the "
+"images you have uploaded and add multiple images"
+msgstr "Radyografi görüntüsü yükleyerek analizinizi başlatabilirsiniz."
+
+msgid ""
+"Welcome patient_dict.full_name, you can start the analysis by uploading the "
+"Radiography image, view the images you have uploaded and add multiple images"
+msgstr ""
+"Hoşgeldiniz patient_dict.full_name, radyografi görüntüsü yükleyerek "
+"analizinizi başlatabilirsiniz."
+
+msgid "Hello"
+msgstr "Merhaba"
+
+msgid "Please upload a radiography"
+msgstr "Lütfen bir radyografi yükleyiniz"
+
+msgid "Please select radiography type"
+msgstr "Lütfen radyografi tipini seçiniz"
+
+msgid "Accept the Terms of Use!"
+msgstr "Portal Kullanım Şartını Onaylayınız!"
+
+msgid "Wrong username or password!"
+msgstr "Hatalı kullanıcı adı veya şifre"
+
+msgid "Successfully logged in!"
+msgstr "Başarıyla giriş yapıldı!"
+
+msgid "Forgot Password"
+msgstr "Şifremi Unuttum"
+
+msgid "Phone Number"
+msgstr "Telefon Numarası"
+
+msgid "Phone Number"
+msgstr "Telefon Numarası"
+
+msgid "The passwords you entered do not match"
+msgstr "Girdiğiniz parolalar uyuşmuyor"
+
+msgid "Your password has been reset!"
+msgstr "Şifreniz sıfırlandı!"
+
+msgid "Your reset code is wrong."
+msgstr "Sıfırlama kodunuz yanlış."
+
+msgid "No user found for this mail"
+msgstr "Bu mail için kullanıcı bulunamadı"
+
+msgid "Mail Sent"
+msgstr "Mail Gönderildi"
+
+msgid "Patients"
+msgstr "Hastalar"
+
+msgid "Are you sure you want to delete the patient?"
+msgstr "Hastayı silmek istediğinizden emin misiniz?"
+
+msgid "Yes"
+msgstr "Evet"
+
+msgid "No"
+msgstr "Hayır"
+
+msgid "Favoried"
+msgstr "Favori"
+
+msgid "Patient ID"
+msgstr "Hasta ID"
+
+msgid "Patient Name"
+msgstr "Hasta Adı"
+
+msgid "Image"
+msgstr "Görüntü"
+
+msgid "Date of Birth"
+msgstr "Doğum Tarihi"
+
+msgid "Created Date"
+msgstr "Oluşturulma Tarihi"
+
+msgid "Last Process"
+msgstr "Son İşlem"
+
+msgid "Last Name"
+msgstr "Soyisim"
+
+msgid "X-Ray Types"
+msgstr "Röntgen Türleri"
+
+msgid "Operation"
+msgstr "Operasyon"
+
+msgid "Patient deleted successfully."
+msgstr "Hasta Başarıyla Silindi."
+
+msgid ""
+"You can get a password reset code by entering your registered email address."
+msgstr ""
+"Kayıtlı olan email adresinizi girerek şifre sıfırlama kodu alabilirsiniz."
+
+msgid "Your Mail"
+msgstr "Mail adresiniz"
+
+msgid "Send Mail"
+msgstr "Mail Gönder"
+
+msgid "Reset Password"
+msgstr "Şifreyi Sıfırla"
+
+msgid "Your reset code"
+msgstr "Sıfırlama kodunuz"
+
+msgid "New Password"
+msgstr "Yeni Şifreniz"
+
+msgid "New Password Again"
+msgstr "Yeni Şifreniz Tekrar"
+
+msgid "Please enter patient name"
+msgstr "Lütfen hasta adını giriniz"
+
+msgid "Please select patients gender"
+msgstr "Lütfen hastanın cinsiyetini seçin"
+
+msgid "Patient saved successfully."
+msgstr "Hasta başarıyla kaydedildi."
+
+msgid "Please enter your name"
+msgstr "Lütfen adınızı giriniz"
+
+msgid "Please enter your surname"
+msgstr "Lütfen soyadınızı giriniz"
+
+msgid "Please enter your phone number"
+msgstr "Lütfen telefon numaranızı giriniz."
+
+msgid "Patient saved successfully."
+msgstr "Hasta başarıyla kaydedildi."
+
+msgid "Update Profile"
+msgstr "Profili Güncelle"
+
+msgid "Surname"
+msgstr "Soyad"
+
+msgid "Name"
+msgstr "Ad"
+
+msgid "Member since:"
+msgstr "Üyelik Tarihi:"
+
+msgid "Maximum upload size is:"
+msgstr "Maximum yükleme boyutu:"
+
+msgid "Upload new avatar."
+msgstr "Yeni avatar yükleyebilirsiniz."
+
+msgid "Upload New Photo"
+msgstr "Yeni Fotoğraf Yükle"
+
+msgid "Update Profile"
+msgstr "Profili Güncelle"
+
+msgid "Profile Information"
+msgstr "Profil bilgileri"
+
+msgid "You can view and update your profile information."
+msgstr "Profil bilgilerinizi görüntüleyebilir ve güncelleyebilirsiniz."
+
+msgid "Your Password"
+msgstr "Şifreniz"
+
+msgid "Your profile photo has been updated"
+msgstr "Profil fotoğrafınız güncellendi"
+
+msgid "An error occured while updating your profile photo"
+msgstr "Profil fotoğrafınız güncellenirken bir hata oluştu"
+
+msgid "Old Password"
+msgstr "Eski Şifreniz"
+
+msgid "New Password Again"
+msgstr "Yeni Şifreniz Tekrar"
+
+msgid "Invalid password"
+msgstr "Geçersiz şifre"
+
+msgid "Passwords do not match"
+msgstr "Girdiğiniz şifreler uyuşmuyor"
+
+msgid "Your password updated successfully"
+msgstr "Parolanız başarıyla güncellendi"
+
+msgid "Please do not leave the password fields blank"
+msgstr "Lütfen şifre alanlarını boş bırakmayınız"
+
+msgid "You can view your profile and package information."
+msgstr "Profil ve paket bilgilerinizi görüntüleyebilirsiniz."
+
+msgid "Patients"
+msgstr "Hastalar"
+
+msgid "Favorite Patient"
+msgstr "Favori Hastalar"
+
+msgid "Add Patient"
+msgstr "Hasta Ekleme"
+
+msgid "Your patient limit has been reached."
+msgstr "Hasta ekleme limitiniz doldu."
+
+msgid "View Patient"
+msgstr "Hastayı Görüntüle"
+
+msgid "Delete Patient"
+msgstr "Hastayı Sil"
+
+msgid "Your analyse limit has been exceeded"
+msgstr "Analiz limitiniz doldu"
+
+msgid "Your package has expired, please renew"
+msgstr "Paket kullanım süreniz bitti lütfen yenileyin"
+
+msgid "Hi"
+msgstr "Merhaba"
+
+msgid "Welcome"
+msgstr "Hoşgeldiniz"
+
+msgid ""
+"you can continue by starting to <strong>Add Favorite Patients!</strong>"
+msgstr "<strong>Favori Hasta Ekleyerek</strong>Devam edebilirsiniz!"
+
+msgid "Let's Go!"
+msgstr "Devam Et"
+
+msgid "Patient added to favorites"
+msgstr "Hasta favorilere eklendi"
+
+msgid "Patient removed from favorites"
+msgstr "Hasta favorilerden kaldırıldı"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "View Radiography"
+msgstr "Radyografi Görüntüle"
+
+msgid "Treatment planning successfully deleted"
+msgstr "Tedavi planlaması başarıyla silindi"
+
+msgid "Treatment Planning"
+msgstr "Tedavi Planlaması"
+
+msgid "You can add or update treatment planning"
+msgstr "Tedavi planlaması ekleyebilir veya güncelleyebilirsiniz"
+
+msgid "Diagnosis added successfully"
+msgstr "Teşhis başarıyla eklendi"
+
+msgid "you can continue by starting to"
+msgstr "Hasta Ekleyerek"
+
+msgid "you can continue by starting to"
+msgstr "Hasta Ekleyerek"
+
+msgid "You can create your form by"
+msgstr "Butona tıklayarak"
+
+msgid "Clicking the button"
+msgstr "Formuzunu oluşturabilirsiniz."
+
+msgid "Add Patients!"
+msgstr "Devam Edebilirsiniz!"
+
+msgid "Write File No"
+msgstr "Dosya Numarası Yazınız"
+
+msgid "Upload Radiography"
+msgstr "Radyografi Yükle"
+
+msgid "Send Mail"
+msgstr "Mail Gönder"
+
+msgid "Treatment Planning"
+msgstr "Tedavi Planlaması"
+
+msgid "Complete"
+msgstr "Ekle"
+
+msgid "Add Diagnosis"
+msgstr "Teşhis Ekle"
+
+msgid "Add Treatment"
+msgstr "Tedavi Ekle"
+
+msgid "Add Treatments"
+msgstr "Tedavi Ekle"
+
+msgid "Close"
+msgstr "Kapat"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "Disease removed from tooth"
+msgstr "Hastalık dişten kaldırıldı"
+
+msgid "Export Default"
+msgstr "Rapor Oluştur"
+
+msgid "Weak"
+msgstr "Zayıf"
+
+msgid "Medium"
+msgstr "Orta"
+
+msgid "Strong"
+msgstr "Güçlü"
+
+msgid "Dentist"
+msgstr "Hekim"
+
+msgid "Brightness Level"
+msgstr "Parlaklık Seviyesi"
+
+msgid "Contrast Level"
+msgstr "Kontrast Seviyesi"
+
+msgid "Are you sure you want to delete illness from tooth?"
+msgstr "Hastalığı dişten silmek istediğinize emin misiniz?"
+
+msgid "Diagnosis"
+msgstr "Teşhisler"
+
+msgid "Patient Limit"
+msgstr "Hasta Limiti"
+
+msgid "Radiography Limit"
+msgstr "Radyografi Limiti"
+
+msgid "Analyse Limit"
+msgstr "Analiz Limiti"
+
+msgid "Update Package"
+msgstr "Paketi Güncelle"
+
+msgid "Search"
+msgstr "Ara"
+
+msgid "Tooth Chart"
+msgstr "Diş Tablosu"
+
+msgid "Tooth"
+msgstr "Diş"
+
+msgid "Write doctor name..."
+msgstr "Doktor adı yazınız..."
+
+msgid "Add Radiography"
+msgstr "Radyografi Ekle"
+
+msgid "Select Radiography Type..."
+msgstr "Radyografi Tipi Seçiniz..."
+
+msgid "Start Upload"
+msgstr "Yükle"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "You can enter a  description here..."
+msgstr "Buraya bir açıklama girebilirsiniz..."
+
+msgid "Here you can add and view treatment planning"
+msgstr "Buradan  tedavi planlaması ekleyebilir ve görüntüleyebilirsiniz"
+
+msgid "Treatment Planning"
+msgstr "Tedavi Planlaması"
+
+msgid "Start Planning"
+msgstr "Planlamaya Başla"
+
+msgid "Are you sure you want to delete treatment?"
+msgstr "Tedavi planını silmek istediğinizden emin misiniz?"
+
+msgid "Upload Signature"
+msgstr "İmza Yükle"
+
+msgid "Upload Clinic Logo"
+msgstr "Klinik Logosu Yükle"
+
+msgid "Update Password"
+msgstr "Şifreyi Güncelle"
+
+msgid "Your clinic logo has been updated"
+msgstr "Klinik logonuz güncellendi"
+
+msgid "An error occured while updating your clinic logo"
+msgstr "Klinik logonuz yüklenirken bir hata oluştu"
+
+msgid "Your signature has been updated"
+msgstr "İmzanız güncellendi"
+
+msgid "An error occured while updating your signature"
+msgstr "İmzanız yüklenirken bir hata oluştu"
+
+msgid "Doctor note has been saved"
+msgstr "Doktor notu kaydedildi"
+
+msgid "Save my choices"
+msgstr "Tercihlerimi kaydet"
+
+msgid "Report"
+msgstr "Rapor Oluştur"
+
+msgid "Tooth Based"
+msgstr "Diş Bazlı"
+
+msgid "Choose on what basis your report will be based"
+msgstr "Raporunuzun hangisine göre baz alınacağını seçiniz"
+
+msgid "3. Choose Your Report Filter"
+msgstr "3. Rapor Filtrenizi Seçiniz"
+
+msgid "Include doctor signature in the report"
+msgstr "Doktor imzası rapora dahil edilsin"
+
+msgid "Doctor Signature"
+msgstr "Doktor İmzası"
+
+msgid "Include treatment plannings in the report"
+msgstr "Tedavi planlaması rapora dahil edilsin"
+
+msgid "Treatment Plannigs"
+msgstr "Tedavi Planlamaları"
+
+msgid "Include doctor note in the report"
+msgstr "Doktor notu rapora dahil edilsin"
+
+msgid "Doctor Note"
+msgstr "Doktor Notu"
+
+msgid "Drawed Radiography"
+msgstr "Çizdirilmiş Radyografi"
+
+msgid "Include drawed radiography information in the report"
+msgstr "Çizdirilmiş radyografi detayı rapora dahil edilsin"
+
+msgid "Include radiography information in the report"
+msgstr "Radyografi detayı rapora dahil edilsin"
+
+msgid "Radiography"
+msgstr "Radyografi"
+
+msgid "Include patient information in the report"
+msgstr "Hasta bilgileri rapora dahil edilsin"
+
+msgid "Patient Informations"
+msgstr "Hasta Bilgileri"
+
+msgid "Select the information you want to displayed in the report"
+msgstr "Raporunuzda görüntülenmesini istediğiniz bilgileri seçiniz"
+
+msgid "2. Information to Display"
+msgstr "2. Görüntülenecek Bilgiler"
+
+msgid "Patient Format"
+msgstr "Hasta Formatı"
+
+msgid "Choose in which format you will create the report"
+msgstr "Raporunuzu hangi formatta oluşturacağınızı seçiniz"
+
+msgid "1. Report Format"
+msgstr "1. Rapor Formatı"
+
+msgid "Export Report"
+msgstr "Rapor Oluştur"
+
+msgid "Analyzes"
+msgstr "Analizler"
+
+msgid "Doctor Comment"
+msgstr "Doktor Notu"
+
+msgid "Are you sure you want to delete treatment from tooth?"
+msgstr "Dişten bu tedaviyi silmek istediğinize emin misiniz?"
+
+msgid "Treatment removed from tooth"
+msgstr "Tedavi dişten silindi"
+
+msgid "Treatment is already exists"
+msgstr "Bu tedavi zaten mevcut"
+
+msgid "Treatment has been added successfully"
+msgstr "Tedavi başarıyla eklendi"
+
+msgid "The disease you are trying to add already exists"
+msgstr "Eklemeye çalıştığınız hastalık zaten mevcut"
+
+msgid "1. Mail Information"
+msgstr "1. Mail Bilgisi"
+
+msgid "Dear"
+msgstr "Sayın"
+
+msgid "Thanks!"
+msgstr "Teşekkürler!"
+
+msgid "Your radiography image has been uploaded to our system."
+msgstr "Radyografi görüntünüz sistemimize yüklendi."
+
+msgid "Enter the information of the person you are sending the email to."
+msgstr "Mail göndereceğiniz kişinin bilgilerini yazınız"
+
+msgid "Write name.."
+msgstr "İsim soyisim.."
+
+msgid "Name Surname"
+msgstr "İsim Soyisim"
+
+msgid "Write e-mail"
+msgstr "E-mail"
+
+msgid "2. Report Format"
+msgstr "2. Rapor Formatı"
+
+msgid "3. Information to Display"
+msgstr "3. Görüntülenecek Bilgiler"
+
+msgid "4. Choose Your Report Filter"
+msgstr "4. Rapor Filtrenizi Seçiniz"
+
+msgid "Report sent as e-mail"
+msgstr "Rapor e-posta olarak gönderildi"
+
+msgid "There are not any treatment plans"
+msgstr "Herhangi bir tedavi planı oluşturulmamış"
+
+msgid "Treatments Plans"
+msgstr "Tedavi Planları"
+
+msgid "File No"
+msgstr "Dosya Numarası"
+
+msgid "Notes"
+msgstr "Notları"
+
+msgid "The doctor did not create a note"
+msgstr "Doktor bir not yazmamış"
+
+msgid "All Teeth are present except"
+msgstr "Şu dişler hariç tüm dişler var"
+
+msgid "Package Expiry Date"
+msgstr "Paket Bitiş Tarihi"
+
+msgid "You can update the user by filling out the information below."
+msgstr "Aşağıdaki bilgileri düzenleyerek kullanıcıyı güncelleyebilirsiniz."
+
+msgid "You can add or update user by filling out the information below."
+msgstr "Aşağıdaki bilgileri doldurarak kullanıcı oluşturabilirsiniz."
+
+msgid "Package"
+msgstr "Paket"
+
+msgid "List Users"
+msgstr "Kullanıcıları Listele"
+
+msgid "Zoom In"
+msgstr "Yakınlaştır"
+
+msgid "Zoom Out"
+msgstr "Uzaklaştır"
+
+msgid "Reset"
+msgstr "Sıfırla"
+
+msgid "Treatment planning successfully deleted"
+msgstr "Tedavi planlaması başarıyla silindi"
+
+msgid "Treatment planning successfully saved"
+msgstr "Tedavi planlaması başarıyla kaydedildi"
+
+msgid "Change Size"
+msgstr "Boyut Değiştir"
+
+msgid "Show Teeth Numbering"
+msgstr "Diş Numaralandırmasını Göster"
+
+msgid ""
+"Have you ever been diagnosed with any chronic diseases? If so, please "
+"specify."
+msgstr ""
+"Size hiç kronik hastalık teşhisi kondu mu? Eğer öyleyse, lütfen belirtin."
+
+msgid "If so, please specify."
+msgstr "Eğer öyleyse, lütfen belirtin."
+
+msgid "How would you describe your weekly physical activity?"
+msgstr "Haftalık fiziksel aktivitenizi nasıl tanımlarsınız?"
+
+msgid "Do you currently have dental insurance?"
+msgstr "Şu anda diş sigortanız var mı?"
+
+msgid "What is your annual household income?"
+msgstr "Yıllık hane geliriniz nedir?"
+
+msgid "Do you regularly visit a dentist for check-ups and cleaning?"
+msgstr "Kontrol ve temizlik için düzenli olarak diş hekimine gidiyor musunuz?"
+
+msgid "Are you currently taking any medication? If yes, please specify."
+msgstr ""
+"Şu anda herhangi bir ilaç kullanıyor musunuz? Evet ise lütfen belirtiniz."
+
+msgid "Are you currently taking any medication?"
+msgstr "Şu anda herhangi bir ilaç kullanıyor musunuz?"
+
+msgid "What is your age?"
+msgstr "Yaş aralığınız nedir?"
+
+msgid "Please list any known allergies"
+msgstr "Lütfen bilinen alerjilerinizi listeleyin"
+
+msgid "(drug, food, environmental)"
+msgstr "(ilaç, gıda, çevre)"
+
+msgid "Do you smoke?"
+msgstr "Sigara kullanıyor musunuz?"
+
+msgid "Do you drink alcohol?"
+msgstr "Alkol kullanıyor musunuz?"
+
+msgid "What is your employment status?"
+msgstr "İş durumunuz nedir?"
+
+msgid ""
+"Have you ever had any dental surgery or procedure done in the past? If yes, "
+"please specify."
+msgstr ""
+"Geçmişte herhangi bir diş ameliyatı veya işlemi yaptırdınız mı? Evet ise "
+"lütfen belirtiniz."
+
+msgid "Have you ever had any dental surgery or procedure done in the past?"
+msgstr "Geçmişte herhangi bir diş ameliyatı veya işlemi yaptırdınız mı?"
+
+msgid "What is your dietary preference?"
+msgstr "Diyet tercihiniz nedir?"
+
+msgid ""
+"Have you ever experienced any adverse or allergic reactions to dental "
+"treatments?"
+msgstr ""
+"Hiç diş tedavilerine karşı herhangi bir olumsuz veya alerjik reaksiyon "
+"yaşadınız mı?"
+
+msgid "Please upload a radiography"
+msgstr "Lütfen bir radyografi yükleyiniz"
+
+msgid "Your form has been sent"
+msgstr "Formunuz gönderildi"
+
+msgid "Please select a radiography type"
+msgstr "Lütfen bir radyografi tipi seçiniz"
+
+msgid "Download"
+msgstr "İndir"
+
+msgid "Radiography Upload"
+msgstr "Radyografi Yükle"
+
+msgid "Measure"
+msgstr "Ölçü Al"
+
+msgid "Create User"
+msgstr "Kullanıcı Oluştur"
+
+msgid "Clinic Name"
+msgstr "Klinik Adı"
+
+msgid "Your radiography upload limit has been exceeded"
+msgstr "Radyografi yükleme limitiniz doldu"
+
+msgid "Draw the Diseases I chose"
+msgstr "Seçilen hastalıkları çiz"
+
+msgid "Draw all Diseases"
+msgstr "Tüm hastalıkları çiz"
+
+msgid "Show Tooth Numbers"
+msgstr "Diş Numaralarını Göster"
+
+msgid "You have not started an analysis yet"
+msgstr "Henüz bir analiz başlatmadınız"
+
+msgid "Send form to patient"
+msgstr "Hastaya form gönder"
+
+msgid "Dentition"
+msgstr "Diş Yapısı"
+
+msgid "Your form choices has been saved"
+msgstr "Form tercihleriniz kaydedildi"
+
+msgid "You have not created a treatment plan."
+msgstr "Bir tedavi planı oluşturmadınız."
+
+msgid "Dear Patient,"
+msgstr "Merhaba,"
+
+msgid "Choose your answer"
+msgstr "Cevabınızı seçiniz"
+
+msgid ""
+"To enhance your personalized care, we request you to upload your dental "
+"X-rays and fill out this short questionnaire. This information, kept "
+"confidential, allows us to accurately assess your oral health and tailor "
+"your dental care based on your health history, lifestyle, and financial "
+"situation. Your cooperation aids in early disease detection, prevention, and"
+" improves your overall wellbeing."
+msgstr ""
+"Kişiselleştirilmiş tedavinizi geliştirmek için diş röntgenlerinizi "
+"yüklemenizi ve bu kısa anketi doldurmanızı rica ediyoruz. Gizli tutulan bu "
+"bilgiler, ağız sağlığınızı doğru bir şekilde değerlendirmemize ve diş "
+"bakımınızı sağlık geçmişinize, yaşam tarzınıza ve mali durumunuza göre "
+"uyarlamamıza olanak tanır. İşbirliğiniz, hastalıkların erken teşhisine, "
+"önlenmesine yardımcı olur ve genel sağlığınızı iyileştirir."
+
+msgid ""
+"You can update or create your form questions by filling out the information "
+"below."
+msgstr ""
+"Aşağıdaki bilgileri doldurarak form sorularınızı güncelleyebilir veya "
+"oluşturabilirsiniz."
+
+msgid "Your form url:"
+msgstr "Form url'niz:"
+
+msgid "You are redirecting to add patient page."
+msgstr "Hasta ekleme sayfasına yönlendiriliyorsunuz."
+
+msgid "Your form has been saved"
+msgstr "Formunuz kaydedildi"
+
+msgid "In the form below"
+msgstr "Aşağıdaki formda"
+
+msgid "Company Name"
+msgstr "Şirket İsmi"
+
+msgid "First Name"
+msgstr "İsim"
+
+msgid ""
+"You can see the information that the patient has filled in, and if you want,"
+" you can register this person as your patient."
+msgstr ""
+"Hastanın doldurmuş olduğu bilgileri görebilir ve eğer isterseniz bu kişiyi "
+"hastanız olarak kayıt edebilirsiniz."
+
+msgid "If so, please specify."
+msgstr "Eğer öyleyse, lütfen belirtin."
+
+msgid ""
+"Have you ever had any dental surgery or procedure done in the past? If yes, "
+"please specify."
+msgstr ""
+"Geçmişte herhangi bir diş ameliyatı veya işlemi yaptırdınız mı? Evet ise "
+"lütfen belirtiniz."
+
+msgid "Health Tourism Form"
+msgstr "Sağlık Turizmi Formu"
+
+msgid "Required"
+msgstr "Zorunlu"
+
+msgid "Show"
+msgstr "Göster"
+
+msgid "Panaromic"
+msgstr "Panaromik"
+
+msgid "Your package has been expired."
+msgstr "Paket süreniz doldu."
+
+msgid "User deleted successfully."
+msgstr "Kullanıcı başarıyla silindi."
+
+msgid "Something went wrong."
+msgstr "Bir hata oluştu"
+
+msgid "List Forms"
+msgstr "Formları Listele"
+
+msgid "Favorite"
+msgstr "Favoriler"
+
+msgid "Write your Email"
+msgstr "E-Mail adresinizi yazınız"
+
+msgid ""
+"Do you have any family history of dental issues? (e.g., gum disease, tooth "
+"decay)"
+msgstr ""
+"Aile geçmişinizde diş sorunları var mıydı? (örneğin, diş eti hastalığı, diş "
+"çürüğü)"
+
+msgid "Add Crown"
+msgstr "Crown Ekle"
+
+msgid "Add Implant"
+msgstr "İmplant Ekle"
+
+msgid "Make Markup"
+msgstr "İşaretleme Ekle"
+
+msgid "Add Diagnosis"
+msgstr "Teşhis Ekle"
+
+msgid "This E-Mail already exists"
+msgstr "Bu E-Mail zaten mevcut"
+
+msgid "Please fill all fields"
+msgstr "Lütfen tüm alanları doldurunuz"
+
+msgid "Please specify."
+msgstr "Lütfen belirtiniz."
+
+msgid "Edit Radiography"
+msgstr "Radyografiyi Düzenle"
+
+msgid "Grayscale"
+msgstr "Gri Tonlama"
+
+msgid "Sepia"
+msgstr "Sepya"
+
+msgid "Blur"
+msgstr "Bulanıklık"
+
+msgid "Invert"
+msgstr "Ters çevir"
+
+msgid "Brightness Level"
+msgstr "Parlaklık Seviyesi"
+
+msgid "Contrast Level"
+msgstr "Kontrast Seviyesi"
+
+msgid "Flip Horizontal"
+msgstr "Yatay Çevirme"
+
+msgid "Flip Vertical"
+msgstr "Dikey Çevirme"
+
+msgid "Range Input"
+msgstr "Aralık Girişi"
+
+msgid "Rotate Left 90°"
+msgstr "Sola 90° Döndür"
+
+msgid "Rotate Right 90°"
+msgstr "Sağa 90° Döndür"
+
+msgid "Straight Line"
+msgstr "Düz Çizgi"
+
+msgid "Free Drawing"
+msgstr "Serbest Çizim"
+
+msgid "Arrow"
+msgstr "Ok"
+
+msgid "Draw Line"
+msgstr "Çizgi Çiz"
+
+msgid "Fonts"
+msgstr "Fontlar"
+
+msgid "Font Size"
+msgstr "Font Büyüklüğü"
+
+msgid "Rectangular"
+msgstr "Dikdörtgen"
+
+msgid "Circle"
+msgstr "Daire"
+
+msgid "Triangle"
+msgstr "Üçgen"
+
+msgid "Stroke Width"
+msgstr "Strok Genişliği"
+
+msgid "Edit Mode"
+msgstr "Düzenleme Modu"
+
+msgid "Edit Radyography"
+msgstr "Radyografiyi Düzenle"
+
+msgid "Brightness"
+msgstr "Parlaklık"
+
+msgid "Contrast"
+msgstr "Kontrast"
+
+msgid "Filter"
+msgstr "Filtre"
+
+msgid "Flip"
+msgstr "Çevir"
+
+msgid "Crop"
+msgstr "Kırp"
+
+msgid "Rotate"
+msgstr "Döndür"
+
+msgid "Draw"
+msgstr "Çiz"
+
+msgid "Shape"
+msgstr "Şekil"
+
+msgid "Descriptor"
+msgstr "Tanımlayıcı"
+
+msgid "Meas"
+msgstr "Ölçüm"
+
+msgid "Type"
+msgstr "Tip"
+
+msgid "Mean"
+msgstr "Ortalama"
+
+msgid "Sd"
+msgstr "Sd"
+
+msgid "Patient"
+msgstr "Hasta"
+
+msgid "Fill out the form below to send the form to your patient!"
+msgstr "Formu hastanıza göndermek için aşağıdaki formu doldurun!"

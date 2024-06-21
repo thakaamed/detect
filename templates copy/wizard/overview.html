@@ -1,0 +1,263 @@
+{% extends 'wizard/base_for_wizard.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+<link rel="stylesheet" href="{% static 'css/diagnosis.css' %}">
+<link rel="stylesheet" href="{% static 'css/overview.css' %}">
+<title>{{specs.title}} - Documents</title>
+
+<link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+<link rel="stylesheet" href="{% static 'css/diagno-new.css' %}" />
+<link rel="stylesheet" href="{% static 'css/documents.css' %}" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="{% static 'css/rte_theme_default.css' %}" />
+<!-- <script type="text/javascript" src="{% static 'js/rte.js' %}"></script> -->
+<script type="text/javascript" src="{% static 'js/tinymce.min.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'js/all_plugins.js' %}"></script> -->
+<style>
+  .mce-content-body {
+    font-size: 12px !important;
+  }
+
+  body {
+    max-height: none;
+    overflow: none;
+  }
+
+  p img {
+    width: 100%;
+  }
+
+  .pdf-append div {
+    background-color: #fff !important;
+    color: #000 !important;
+  }
+  .table-container {
+    width: 100%;
+    text-align: right; /* Tabloyu sağa hizala */
+}
+
+/* Tablo stil ayarları */
+table {
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin-left: auto; /* Sol kenara göre sağa hizalama */
+    margin-right: 0; /* Sağ kenara göre sağa hizalama */
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: right; /* Hücre içeriğini sağa hizala */
+}
+</style>
+{% endblock %}
+{% block headerButtons %}
+<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">
+  <img src="{% static 'img/upload-rg-icon.svg' %}" class="" height="12" alt="">
+  <span style="pointer-events: none;">{% trans 'Upload Radiography' %}</span>
+</button>
+<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-report">
+  <img src="{% static 'img/export-report-icon.svg' %}" class="" height="12" alt="">
+  <span style="pointer-events: none;">{% trans 'Export Report' %}</span>
+</button>
+<button class="custom transparent blue-hover text-light" data-open-modal-pk="modalReportForMail">
+  <img src="{% static 'img/send-mail-icon.svg' %}" class="" height="10" alt="">
+  <span style="pointer-events: none;">{% trans 'Send Mail' %}</span>
+</button>
+<button class="custom transparent blue-hover text-light" data-open-treatment>
+  <img src="{% static 'img/treatment-planning-icon.svg' %}" class="" height="14" alt="">
+  <span>{% trans 'Treatment Planning' %}</span>
+</button>
+{% endblock %}
+{% block content %}
+
+<!-- ANA BÖLME -->
+<div class="row d-flex gap-4 page-one" style="margin-top: 120px; overflow-y: auto; justify-content: center;">
+  <div class="append-html" style=" width: 50%; max-height: 81vh; overflow-y: auto;">
+    <img src="{{cover_image}}" style="width: 100%; margin-bottom: 10px;" alt="">
+    <div class="rounded pdf-image col-md-11" style="background-color: transparent; color: black; width: 100%;"></div>
+    <div>
+      <div class="container" id="diagnosis"
+        style="background-color: #fff; color: black; width: 100%; padding: 20px 40px;">
+        <div class="row">
+          <div class="col-md">
+            <div class="upperJaw">
+              <h1>Upper Jaw</h1>
+              {% for key,value in diagnosis_datas.items %}
+              {% if forloop.counter < 17 %} <div id={{key}}>
+                <span class="toothNum">
+                  {{key}} -
+                </span>
+                <span class="toothNum">
+                  {%for illness in value.illnesses%}
+                  {{illness.name}}
+                  {% endfor %}
+                </span>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="lowerJaw">
+            <h1>Lower Jaw</h1>
+            {% for key,value in diagnosis_datas.items %}
+            {% if forloop.counter > 16 %}
+            <div id={{key}}>
+              <span class="toothNum">
+                {{key}} -
+              </span>
+              <span class="toothNum">
+                {%for illness in value.illnesses%}
+                {{illness.name}}
+                {% endfor %}
+              </span>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="container" id="diagnosis"
+      style="background-color: #fff; color: black; width: 100%; padding: 20px 40px;">
+      <div id="mergedDataa" style="display: flex; margin-top: 100px;">
+        <div class="upperJaw">
+          <table style="width:100%">
+            <tr>
+                <td><strong>{% trans 'Treatment Method' %}</strong></td>
+                <td><strong>{% trans 'Teeth' %}</strong></td>
+                <td><strong>{% trans 'Amount' %}</strong></td>
+                <td><strong>{% trans 'Unit Price' %}</strong></td>
+                <td><strong>{% trans 'Total Price' %}</strong></td>
+            </tr>
+            {% for key, value in grouped_treatments.items %}
+                <tr>
+                    <td>{{value.treatment_method}}</td>
+                    <td>
+                        {% for teeth in value.teeth %}
+                        {{teeth.tooth_id}}
+                        {% endfor %}
+                    </td>
+                    <td>{{value.amount}}x</td>
+                    <td>{{value.unit_price}} <i class="fa-solid fa-dollar-sign"></i></td>
+                    <td>{{value.total_price}} <i class="fa-solid fa-dollar-sign"></i></td>
+                </tr>
+            {% endfor %}
+              <tr>
+                  <td><strong>{% trans 'Total Price' %}</strong></td>
+                  <td colspan="4">{{total_price}} <i class="fa-solid fa-dollar-sign"></i></td> 
+              </tr>
+              
+          </table>
+      </div> 
+    </div>
+  </div>
+  </div>
+  <div class="rounded pdf-appendd col-md-11" style="background-color: transparent; color: black; width: 100%;"></div>
+  <img src="{{end_cover_image}}" style="width: 100%; margin-bottom: 10px;" alt="">
+
+
+</div>
+<div class="col-md-1">
+  <button onclick="download_pdf()" class="py-2 px-3 rounded gap-2 w-100"
+    style="border: none; background-color:#272727;"><i style="color:#fff" class="fas fa-download"></i> <span
+      style="color:#fff">{% trans 'Download' %}</span></button>
+</div>
+</div>
+{% csrf_token %}
+
+{% endblock %}
+{% block customJs %}
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dropzone@5.9.2/dist/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script>
+  // document.addEventListener('DOMContentLoaded', function() {
+  //     const downloadButton = document.getElementById('downloadButton');
+  //     downloadButton.addEventListener('click', function() {
+  //         const contentToCapture = document.querySelector('.append-html');
+  //         html2canvas(contentToCapture, {
+  //             onrendered: function(canvas) {
+  //                 const image = canvas.toDataURL('image/png');
+  //                 const link = document.createElement('a');
+  //                 link.href = image;
+  //                 link.download = 'treatment_plan.png';
+  //                 link.click();
+  //             }
+  //         });
+  //     });
+  // });
+
+  var contents = {{ template_contents| safe }};
+  var radioImg = "{{ containing_radiography }}";
+  console.log(radioImg);
+  var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+  var plan_id = "{{ plan_id }}";
+  console.log(contents);
+
+  for (const [key, value] of Object.entries(contents)) {
+    console.log("key", key)
+    console.log("value", value)
+    if (value.containing_radiography == true) {
+      $('.pdf-image').append(`
+            <img width="100%" src="${value.content}">
+        `);
+    } else {
+      $('.pdf-appendd').append(`
+            <div class=" pdf-append col-md-10" style="background-color: #fff; color: black; width: 100%; padding: 20px 40px;">${value.content}</div> 
+        `);
+    }
+  }
+
+
+
+
+
+
+  function download_pdf() { //pdf indirme fonksiyonu
+    $.ajax({
+      url: "{% url 'download-pdf' %}",
+      method: "POST",
+      headers: { 'X-CSRFToken': csrf_token },
+      data: {
+        "plan_id": plan_id
+      },
+      success: function (response) {
+        if (response.success) {
+          var pdfPath = response.pdf_path; // API'den gelen PDF dosyasının URL'si
+          if (pdfPath) {
+            // PDF dosyasını indirmek için bir bağlantı oluşturun
+            var link = document.createElement('a');
+            link.href = pdfPath;
+            link.download = response.file_name; // İndirilen dosyanın adı
+            link.click();
+          } else {
+            console.error('PDF dosyası bulunamadı.');
+          }
+        } else {
+          console.error('İstek başarısız oldu.');
+        }
+      },
+      error: function (error) {
+        Toastify({
+          text: "{% trans 'An error occurred while downloading pdf.' %}",
+          duration: 3000,
+          backgroundColor: "#d9534f"
+        }).showToast();
+      }
+    })
+  }
+</script>
+{% endblock %}

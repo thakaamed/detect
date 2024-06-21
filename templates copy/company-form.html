@@ -1,0 +1,784 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/addpatient.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>{{specs.title}} - Form</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css" integrity="sha512-7uSoC3grlnRktCWoO4LjHMjotq8gf9XDFQerPuaph+cqR7JC9XKGdvN+UwZMC14aAaBDItdRj3DcSDs4kMWUgg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+
+{% endblock %}
+{% block headerButtons %}
+<!--<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">-->
+<!--    <i class="fa-solid fa-upload" style="pointer-events: none;"></i>-->
+<!--    <span style="pointer-events: none;">Upload Radiograpfy</span>-->
+<!--</button>-->
+{% endblock %}
+
+{% block content %}
+<main class="align-items-center position-relative" style="height: calc(100vh - 110px);">
+    
+    <div class="container text-center my-4">
+        <h1 id="companyFormHeading">{% trans 'Health Tourism Form' %}</h1>
+        <p class="m-0">{% trans 'Fill out the form below to send the form to your patient!' %}</p>
+    </div>
+    <section id="hero">
+        <div class="container shadow px-0">
+            <div class="row gx-0">
+                <div class="col-md-5 position-relative" style="z-index: 3;">
+                    <div class="content-text">
+                        <h2>{% trans 'Send a Pre-Assessment Form to Your Patient for Their Preliminary Evaluation' %}</h2>
+                        <p class="sub-title">{% trans 'You can specify the questions you want to ask your patients by selecting what should be included in the form in the form below, and save their mandatory answers by marking the fields you want. After filling out the form, you can reach the link you will send to the patient by clicking the save button.' %}</p>
+                        <p class="url">
+                            <span class="d-block">Form Url:</span>
+                            <a href="#;" target="_blank" id="form-url">{{patient_form_link}}{{slug}}</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-7 position-relative">
+                    <img src="{% static 'img/company-form-hero-img.png' %}" class="position-absolute hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container p-3 shadow my-4 {% if not is_form_exists %} d-none {% endif %}" style="border-radius: 15px;">
+        <div class="row text-dark">
+            <form action="" id="patientForm"></form>
+                <div class="col-md-6">
+                    <div for="patientFullName" class="d-flex justify-content-between">
+                        <label for="patientFullName">
+                            <span>{% trans 'Patient Full Name' %}</span>
+                        </label>
+                        <div class="d-flex align-items-center">
+                            <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Patient Full Name" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-patientFullName" {% for question in questions %}{% if question.question == "Patient Full Name" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}  form="patientForm">
+                            <label for="required-patientFullName" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %}</label>
+                            <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Patient Full Name" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-patientFullName" form="patientForm" {% for question in questions %}{% if question.question == "Patient Full Name" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                            <label for="show-patientFullName" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                        </div>
+                    </div>
+                    <input type="text" id="patientFullName" value="">
+                    
+                    <div for="email" class="d-flex justify-content-between">
+                        <label for="email">{% trans 'Email' %}</label>
+                        <div class="d-flex align-items-center">
+                            <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "E-Mail" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-email" form="patientForm" {% for question in questions %}{% if question.question == "E-Mail" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                            <label for="required-email" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                            <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "E-Mail" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-email" form="patientForm" {% for question in questions %}{% if question.question == "E-Mail" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                            <label for="show-email" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                        </div>
+                    </div>
+                    <input type="text" id="email" placeholder="{% trans 'Write your Email' %}" >
+
+                    <div for="gender" class="d-flex justify-content-between">
+                    <label for="gender">
+                        <span>{% trans 'Gender' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your gender?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-gender" form="patientForm" {% for question in questions %}{% if question.question == "What is your gender?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-gender" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your gender?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-gender" form="patientForm" {% for question in questions %}{% if question.question == "What is your gender?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-gender" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="gender" required>
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+
+                        {% for question in questions %}
+                            {% if question.question == "What is your gender?" %}
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    <div for="diagnosed" class="d-flex justify-content-between">
+                    <label for="diagnosed">
+                        <span>{% trans 'Have you ever been diagnosed with any chronic diseases? If so, please specify.' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Have you ever been diagnosed with any chronic diseases? If so, please specify." and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-diagnosed" form="patientForm" {% for question in questions %}{% if question.question == "Have you ever been diagnosed with any chronic diseases? If so, please specify." %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-diagnosed" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Have you ever been diagnosed with any chronic diseases? If so, please specify." and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-diagnosed" form="patientForm" {% for question in questions %}{% if question.question == "Have you ever been diagnosed with any chronic diseases? If so, please specify." %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-diagnosed" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="chronicDiseases" id="chronicDiseases" class="form-control" multiple="" data-is-required-specify="" style="height: 70px;">
+                        {% for question in questions %}
+                            {% if question.question == "Have you ever been diagnosed with any chronic diseases? If so, please specify." %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                    <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="chronicDiseasesSpecify" class="bg-light" placeholder="{% trans 'If so, please specify.' %}" data-operation="specify">
+
+                    <div for="activity" class="d-flex justify-content-between">
+                    <label for="activity">
+                        <span>{% trans 'How would you describe your weekly physical activity?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "How would you describe your weekly physical activity?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-activity" {% for question in questions %}{% if question.question == "How would you describe your weekly physical activity?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-activity" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "How would you describe your weekly physical activity?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-activity" {% for question in questions %}{% if question.question == "How would you describe your weekly physical activity?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-activity" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="activity">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "How would you describe your weekly physical activity?" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                    <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    <div for="insurance" class="d-flex justify-content-between">
+                    <label for="insurance">
+                        <span>{% trans 'Do you currently have dental insurance?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you currently have dental insurance?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-insurance" {% for question in questions %}{% if question.question == "Do you currently have dental insurance?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-insurance" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you currently have dental insurance?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-insurance" {% for question in questions %}{% if question.question == "Do you currently have dental insurance?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-insurance" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="insurance">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "Do you currently have dental insurance?" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    <div for="income" class="d-flex justify-content-between">
+                    <label for="income">
+                        <span>{% trans 'What is your annual household income?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your annual household income?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-income" {% for question in questions %}{% if question.question == "What is your annual household income?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-income" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your annual household income?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-income" {% for question in questions %}{% if question.question == "What is your annual household income?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-income" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="income">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "What is your annual household income?" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    
+                    <div for="check-ups" class="d-flex justify-content-between">
+                    <label for="check-ups">
+                        <span>{% trans 'Do you regularly visit a dentist for check-ups and cleaning?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you regularly visit a dentist for check-ups and cleaning?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-check-ups" {% for question in questions %}{% if question.question == "Do you regularly visit a dentist for check-ups and cleaning?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-check-ups" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you regularly visit a dentist for check-ups and cleaning?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-check-ups" {% for question in questions %}{% if question.question == "Do you regularly visit a dentist for check-ups and cleaning?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-check-ups" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="check-ups">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "Do you regularly visit a dentist for check-ups and cleaning?" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    <div for="takingAnyMedication" class="d-flex justify-content-between">
+                    <label style="font-size:12px!important" for="takingAnyMedication" class="fs-6">{% trans 'Are you currently taking any medication? If yes, please specify.' %}</label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Are you currently taking any medication? If yes, please specify." and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-takingAnyMedication" {% for question in questions %}{% if question.question == "Are you currently taking any medication? If yes, please specify." %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-takingAnyMedication" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Are you currently taking any medication? If yes, please specify." and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-takingAnyMedication" {% for question in questions %}{% if question.question == "Are you currently taking any medication? If yes, please specify." %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-takingAnyMedication" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <textarea name="takingAnyMedication" id="takingAnyMedication" class="form-control shadow" placeholder="{% trans 'Are you currently taking any medication?' %}" style="font-size: 12px;"></textarea>
+
+                    <div for="issues" class="d-flex justify-content-between">
+                    <label for="issues">
+                        <span>{% trans 'Do you have any family history of dental issues? (e.g., gum disease, tooth decay)' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you have any family history of dental issues? (e.g., gum disease, tooth decay)" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-issues" {% for question in questions %}{% if question.question == "Do you have any family history of dental issues? (e.g., gum disease, tooth decay)" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-issues" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you have any family history of dental issues? (e.g., gum disease, tooth decay)" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-issues" {% for question in questions %}{% if question.question == "Do you have any family history of dental issues? (e.g., gum disease, tooth decay)" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-issues" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="issues">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "Do you have any family history of dental issues? (e.g., gum disease, tooth decay)" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div for="patientAge" class="d-flex justify-content-between">
+                    <label for="patientAge">
+                        <span>{% trans 'What is your age?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your age?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-patientAge" {% for question in questions %}{% if question.question == "What is your age?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-patientAge" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your age?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-patientAge" {% for question in questions %}{% if question.question == "What is your age?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-patientAge" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="patientAge" required>
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "What is your age?" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {%else%}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    
+                    <div for="patientphone" class="d-flex justify-content-between">
+                    <label for="patientphone">
+                        <span class="text-danger"></span>
+                        <span>{% trans 'Phone Number' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Phone" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-patientphone" {% for question in questions %}{% if question.question == "Phone" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-patientphone" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Phone" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-patientphone" {% for question in questions %}{% if question.question == "Phone" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-patientphone" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <input type="text" id="patientphone" placeholder="+90 555 555 55 55">
+
+                    <div for="allergies" class="d-flex justify-content-between">
+                    <label for="allergies">
+                        <span>{% trans 'Please list any known allergies' %} </span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Please list any known allergies" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-allergies" {% for question in questions %}{% if question.question == "Please list any known allergies" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-allergies" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Please list any known allergies" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-allergies" {% for question in questions %}{% if question.question == "Please list any known allergies" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-allergies" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <input type="text" id="allergies" value="" placeholder="{% trans '(drug, food, environmental)' %}">
+
+                    <div for="smoke" class="d-flex justify-content-between">
+                    <label for="smoke">
+                        <span>{% trans 'Do you smoke?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you smoke?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-smoke" {% for question in questions %}{% if question.question == "Do you smoke?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-smoke" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you smoke?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-smoke" {% for question in questions %}{% if question.question == "Do you smoke?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-smoke" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="smoke" id="smoke">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "Do you smoke?" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    <div for="alcohol" class="d-flex justify-content-between">
+                    <label for="alcohol">
+                        <span>{% trans 'Do you drink alcohol?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you drink alcohol?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-alcohol" {% for question in questions %}{% if question.question == "Do you drink alcohol?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-alcohol" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Do you drink alcohol?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-alcohol" {% for question in questions %}{% if question.question == "Do you drink alcohol?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-alcohol" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="alcohol">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "Do you drink alcohol?" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    <div for="employment" class="d-flex justify-content-between">
+                    <label for="employment">
+                        <span>{% trans 'What is your employment status?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your employment status?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-employment" {% for question in questions %}{% if question.question == "What is your employment status?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-employment" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your employment status?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-employment" {% for question in questions %}{% if question.question == "What is your employment status?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-employment" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="employment">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "What is your employment status?" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    <div for="surgeryHistory" class="d-flex justify-content-between">
+                    <label style="font-size: 12px!important;" for="surgeryHistory" class="fs-6">{% trans 'Have you ever had any dental surgery or procedure done in the past? If yes, please specify.' %}</label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Have you ever had any dental surgery or procedure done in the past? If yes, please specify." and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-surgeryHistory" {% for question in questions %}{% if question.question == "Have you ever had any dental surgery or procedure done in the past? If yes, please specify." %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-surgeryHistory" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Have you ever had any dental surgery or procedure done in the past? If yes, please specify." and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-surgeryHistory" {% for question in questions %}{% if question.question == "Have you ever had any dental surgery or procedure done in the past? If yes, please specify." %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-surgeryHistory" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <textarea name="surgeryHistory" id="surgeryHistory" class="form-control shadow" placeholder="{% trans 'Have you ever had any dental surgery or procedure done in the past?' %}" style="font-size: 12px;"></textarea>
+                    
+                    <div for="dietary" class="d-flex justify-content-between">
+                    <label for="dietary">
+                        <span>{% trans 'What is your dietary preference?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your dietary preference?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-dietary" {% for question in questions %}{% if question.question == "What is your dietary preference?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-dietary" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "What is your dietary preference?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-dietary" {% for question in questions %}{% if question.question == "What is your dietary preference?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-dietary" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="dietary">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "What is your dietary preference?" %}  
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                        <input type="text" name="dietaryPreferenceSpecify" class="bg-light d-none" placeholder="Please specify" {% if request.LANGUAGE_CODE == "en" %} data-operation="Other (please specify)" {% else %} data-operation="Diğer (lütfen belirtin)" {% endif %}>
+                    <div for="allergic" class="d-flex justify-content-between">
+                    <label for="allergic">
+                        <span>{% trans 'Have you ever experienced any adverse or allergic reactions to dental treatments?' %}</span>
+                    </label>
+                    <div class="d-flex align-items-center">
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Have you ever experienced any adverse or allergic reactions to dental treatments?" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-allergic" {% for question in questions %}{% if question.question == "Have you ever experienced any adverse or allergic reactions to dental treatments?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="required-allergic" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                        <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Have you ever experienced any adverse or allergic reactions to dental treatments?" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-allergic" {% for question in questions %}{% if question.question == "Have you ever experienced any adverse or allergic reactions to dental treatments?" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                        <label for="show-allergic" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                    </div>
+                    </div>
+                    <select name="" id="allergic">
+                        <option value="0" disabled="" selected="">{% trans 'Choose your answer' %}</option>
+                        {% for question in questions %}
+                            {% if question.question == "Have you ever experienced any adverse or allergic reactions to dental treatments?" %} 
+                                {% if request.LANGUAGE_CODE == "en" %}
+                                    {% for key, value in question.answers.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in question.answers_tr.items %}  
+                                        <option value="{{ key }}">{{ value }}</option>  
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% csrf_token %}
+                </div>
+        </div>
+        <p class="fs-6 m-0 mt-4">{% trans 'Radiography Upload' %}</p>
+            <div for="radiography" class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Radiology Upload" and form_with_company.required %} checked {% endif %}{% endfor %} name="required" type="checkbox" id="required-radiography" {% for question in questions %}{% if question.question == "Radiology Upload" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                    <label for="required-radiography" id="" class="my-0 ms-1 me-2" style="user-select: none;">{% trans 'Required' %} </label>
+                    <input {% for form_with_company in is_form_exists %}{% if form_with_company.question.question == "Radiology Upload" and form_with_company.is_active %} checked {% endif %}{% endfor %} name="show" type="checkbox" id="show-radiography" {% for question in questions %}{% if question.question == "Radiology Upload" %} data-question-id ="{{question.id}}" {%endif%}{% endfor %}>
+                    <label for="show-radiography" id="" class="my-0 ms-1" style="user-select: none;">{% trans 'Show' %} </label>
+                </div>
+                </div>
+            <div id="fileUploadContainer" class="mb-4">
+                <div class="row p-1">
+                    <div class="col-md-6 p-3">
+                        <div id="dropZone">
+                            <form action="{% url 'upload_radyografi' %}" class="dropzone" id="my-great-dropzone"></form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 p-3">
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="d-flex justify-content-center my-2">
+                <button id="submit-button" form="patientForm" type="submit" class="custom btn-blue py-2 w-50">{% trans 'Save' %}</button>
+            </div>
+        </div>
+        
+    </div>
+    <div class="no-data-container h-100 d-flex align-items-center justify-content-center {% if is_form_exists %}d-none{% endif %}">
+        <div id="no-data" class="shadow text-center p-5">
+            <img src="{% static 'img/nodata.png' %}" class="img-fluid" alt="">
+            <h3>{% trans 'Welcome'%}, {{full_name}}!</h3>
+            <h4>{% trans 'Hi' %} {{first_name}}, {% trans 'You can create your form by' %} <span style="font-weight:bold; font-size: 14px;">{% trans 'Clicking the button' %}</span></h4>
+            <a href="">
+                <button id="view-form" class="custom blue">{% trans "Let's Go!" %}</button>
+            </a>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+{% block customJs %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.js" integrity="sha512-9e9rr82F9BPzG81+6UrwWLFj8ZLf59jnuIA/tIf8dEGoQVu7l5qvr02G/BiAabsFOYrIUTMslVN+iDYuszftVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+
+    <script src="https://unpkg.com/imask"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/add_patient.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.js" integrity="sha512-9e9rr82F9BPzG81+6UrwWLFj8ZLf59jnuIA/tIf8dEGoQVu7l5qvr02G/BiAabsFOYrIUTMslVN+iDYuszftVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        // HTML elementini seçin
+let formUrlElement = document.getElementById("form-url");
+
+// Elemente tıklanıldığında çalışacak işlevi tanımla
+formUrlElement.addEventListener("click", function(event) {
+    event.preventDefault()
+    // URL'yi seçin
+    let formUrl = formUrlElement.innerText;
+    
+    // Geçici bir input elementi oluştur
+    let tempInput = document.createElement("input");
+    
+    // Input elementine URL'yi ata
+    tempInput.value = formUrl;
+    
+    // Input elementini sayfaya ekle
+    document.body.appendChild(tempInput);
+    
+    // Input elementini seçin ve içeriğini seç
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999); // Mobil cihazlar için gerekli
+    
+    // Kopyala komutunu çalıştırın
+    document.execCommand("copy");
+    
+    // Geçici input elementini sayfadan kaldır
+    document.body.removeChild(tempInput);
+    
+    // Kopyalandı bildirimi gösterin (isteğe bağlı)
+    swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: "{% trans 'URL copied to clipboard' %}",
+        showConfirmButton: false,
+        timer: 2000
+    })
+});
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#view-form').click(function(event){
+                event.preventDefault();
+                $('.no-data-container').addClass('d-none');
+                $('.container').removeClass('d-none');
+
+            })
+        })
+    </script>
+    <script>
+       $(document).ready(function() {
+    $('#submit-button').click(function(event) {
+        event.preventDefault();
+
+        var formData = [];
+        $('input[type="checkbox"]').each(function() {
+            var questionId = $(this).data('question-id');
+            var isChecked = $(this).is(':checked');
+            var name = $(this).attr('name');
+            if (name){
+                formData.push({
+                name: $(this).attr('name'),
+                value: isChecked ? 'on' : 'off',
+                questionId: questionId
+                });
+            }
+            
+        });
+        console.log("formdata",formData)
+
+        var csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'formCreateUpdateForCompany' %}",
+            headers: {'X-CSRFToken': csrfToken},
+            data: {formData: JSON.stringify(formData)},
+            dataType: 'json',
+            encode: true,
+            success: function(response) {
+                swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title:"{% trans 'Your form choices has been saved' %}",
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(function(){
+                    window.location.reload()
+                })
+            },
+            error: function(xhr, status, error) {
+            }
+        });
+    });
+});
+    </script>
+    <!-- <script>
+        var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()
+        // dosya yükleme ayarları
+        var myDropzone = Dropzone.options.myGreatDropzone = {
+            autoProcessQueue: false,
+            paramName: "file",
+            maxFilesize: 2,
+            clickable: "#dropZone", // the ID of our parent wrapper div
+            maxFiles: 1 // Sadece 1 dosya seçimine izin ver
+        };
+        setTimeout(function () {
+            $(".dz-default.dz-message").html(`
+            <i class="fa-solid fa-upload border" style="border-radius: 50%; padding: 10px;"></i>
+            <p class="m-0 my-2">Drag & Drop or Choose file upload</p>
+            <p class="m-0">JPG, PNG, DCM or JPEG</p>
+        `)
+            $("form.dropzone").addClass("d-flex flex-column align-items-center")
+        }, 1000)
+    
+        // Form submit olayını engelleyin ve dosyaları AJAX ile gönderin
+        document.querySelector("#upload-form").addEventListener("click", function (event) {
+            event.preventDefault();
+            patientDict = {{patient_dict|safe}}
+            console.log("patientDict",patientDict)
+            console.log("patient_slug",patientDict.slug)
+            var myDropzone = Dropzone.forElement("#my-great-dropzone");
+            var radiographyTypesSelect = document.querySelector("#radiography_types");
+            var selectedRadiographyTypeId = radiographyTypesSelect.value;
+            console.log("selectedRadiographyTypeId",selectedRadiographyTypeId)
+            patient_slug = patientDict.slug
+            doctor_id = patientDict.doctor_id 
+            if(!selectedRadiographyTypeId){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: "{% trans 'Please select radiography type' %}",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                return false;
+            }
+            if (!document.querySelector("#portalTerms").checked) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: "{% trans 'Accept the Terms of Use!' %}",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                return false;
+            }
+            if (myDropzone.files.length > 0) {
+                // Dosyaları AJAX ile göndermek için FormData oluşturun
+                
+                var formData = new FormData();
+                for (var i = 0; i < myDropzone.files.length; i++) {
+                    formData.append("file", myDropzone.files[i]);
+                }
+                formData.append("radiography_type", selectedRadiographyTypeId);
+                formData.append('image_report_id', "{{image_report_id}}");
+                formData.append('patient_slug', patient_slug);
+                formData.append('doctor_id', doctor_id);
+                // AJAX isteği gönder
+                fetch("{% url 'upload_radyografi' %}", {
+                    method: "POST",
+                    body: formData,
+                    headers: { 'X-CSRFToken': csrfmiddlewaretoken },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data["code"] === "image_limit_exceeded"){
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: data['message'],
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                            return false
+                        }
+                        if (data["code"] === "analyse_limit_exceeded"){
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: data['message'],
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                            return false
+                        }
+                        if (data["success"]=== false){
+                            alert(data['message'])
+                        } else if (patient_slug){
+                            myDropzone.removeAllFiles();
+                            // $('#modal-radyografy-upload').removeClass("active")
+                            document.getElementById('bildirim').click()
+                        }
+                        // İşlem tamamlandığında yapılacak işlemleri buraya ekleyebilirsiniz
+                    })
+                    .catch(error => {
+                        console.error("Hata oluştu:", error);
+                        // Hata durumunda yapılacak işlemleri buraya ekleyebilirsiniz
+                    });
+                    $('#thanksDiv').html("")
+                    $('#thanksDiv').append(`
+                    <h2 class="text-center">{% trans 'Thanks!' %}</h2>
+                    <p class="text-center">{% trans 'Your radiography image has been uploaded to our system.' %}</p>
+                    `)
+    
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: "{% trans 'Please upload a radiography' %}",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                return false;
+            }
+            // İşlem tamamlandığında yapılacak işlemleri buraya ekleyebilirsiniz
+            // Dropzone içeriğini temizlem
+            // Select'i güncelleme
+            radiographyTypesSelect.value = '';
+            $('#radiography_types option:first').prop('selected', true);
+        });
+    </script> -->
+{% endblock %}
+

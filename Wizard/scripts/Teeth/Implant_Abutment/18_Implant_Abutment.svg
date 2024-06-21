@@ -1,0 +1,19 @@
+<svg width="6" height="21" viewBox="0 0 6 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.35812 0.549805H2.95813C2.29813 0.549805 1.73813 0.899804 1.68813 1.3598L0.578125 16.0398H5.73813L4.62813 1.3598C4.57813 0.899804 4.01812 0.549805 3.35812 0.549805Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<mask id="mask0_226_626" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="6" height="17">
+<path d="M3.35812 0.549805H2.95813C2.29813 0.549805 1.73813 0.899804 1.68813 1.3598L0.578125 16.0398H5.73813L4.62813 1.3598C4.57813 0.899804 4.01812 0.549805 3.35812 0.549805Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_226_626)">
+<path d="M6.1297 15.6006L0.179688 13.3506" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.1297 13.9504L0.179688 11.6904" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.1297 12.3L0.179688 10.04" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.1297 10.6396L0.179688 8.38965" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.1297 8.99047L0.179688 6.73047" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.1297 7.34008L0.179688 5.08008" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.1297 5.67969L0.179688 3.42969" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.1297 4.03051L0.179688 1.77051" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.1297 2.38012L0.179688 0.120117" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+</g>
+<path d="M4.45078 20.64H1.87077C1.66077 20.64 1.48078 20.45 1.46078 20.21C1.42078 19.85 1.37077 19.28 1.29077 18.66C1.13077 17.4 0.800781 15.96 0.800781 15.96H5.52078C5.52078 15.96 5.19078 17.4 5.03078 18.66C4.95078 19.28 4.90078 19.85 4.86078 20.21C4.84078 20.45 4.66078 20.64 4.45078 20.64Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<path d="M5.8193 16.1698H0.479286C0.379286 16.1698 0.339284 15.7198 0.399284 15.1798C0.449284 14.6598 0.569288 14.2598 0.669288 14.2598H5.62929C5.72929 14.2598 5.84928 14.6598 5.89928 15.1798C5.95928 15.7198 5.9193 16.1698 5.8193 16.1698Z" fill="#757577" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+</svg>

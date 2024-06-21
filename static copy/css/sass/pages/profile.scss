@@ -1,0 +1,94 @@
+@import "../layout/form";
+@import "../abstracts/variables";
+@import "../abstracts/placeholder";
+@import "../abstracts/typography";
+@import "../layout/header";
+@import "../layout/footer";
+@import "../layout/sidebar";
+@import "../base/reset";
+@import "../main";
+@import "../components/button";
+@import "../components/userbar";
+
+.user-bar {
+    background-color: white;
+    color: $bg-dark-1!important;
+  & .profile-img {
+    width: 150px;
+    position: relative;
+    & .change-icon {
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      text-align: center;
+      margin-left: auto;
+      color: white;
+    }
+    & .avatar {
+      aspect-ratio: 1;
+      width: 150px;
+      overflow: hidden;
+      border-radius: 50%;
+      position: relative;
+      & img {
+        position: absolute;
+        @extend %centerAbsoluteBoth;
+        min-width: 150px;
+        min-height: 150px;
+        max-width:250px;
+      }
+    }
+  }
+  & .section {
+    & p:nth-child(1) {
+        color: #A0A0A0;
+        font-size: 16px;
+    }
+    & p:nth-child(2) {
+        color: #111;
+        font-size: 18px;
+    }
+  }
+}
+
+.user-info {
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    color: #111;
+    & h2.user-info {
+        font-size: 22px;
+    }
+    & button.custom.btn-blue {
+        white-space: nowrap;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        align-self: flex-start;
+    }
+    & .line-progress {
+        & .progress-container {
+            background-color: #F0F0F0;
+            height: 8px;
+            border-radius: 8px;
+            & .progress-stick {
+                height: 100%;
+                border-radius: 8px;
+                transition: width ease-in-out 300ms;
+                &.purple {
+                    background-image: linear-gradient(to right, #4D52DA, #6065E3);
+                }
+                &.turquoise {
+                    background-image: linear-gradient(to right, #3EA7C5, #68CEEB);
+                }
+                &.blue {
+                    background-image: linear-gradient(to right, #2F9DEF, #62AFE8);
+                }
+            }
+        }
+        & p {
+            font-size: 15px;
+        }
+    }
+}

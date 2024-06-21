@@ -1,0 +1,30 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image" multiple>
+    <input type="submit" value="Yükle">
+  </form>
+  
+
+<script>
+  $('form').on('submit', function(e) {
+  e.preventDefault();
+  
+  var formData = new FormData(this);
+
+  $.ajax({
+    url: "{% url 'testftp' %}",  // Göndermek istediğiniz Django görünümünün URL'sini buraya yazın
+    type: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(response) {
+      // Yükleme işlemi başarıyla tamamlandığında yapılacak işlemler
+    },
+    error: function(xhr, status, error) {
+      console.error('Hata:', error);
+    }
+  });
+});
+</script>

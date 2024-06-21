@@ -1,0 +1,153 @@
+{% extends 'dashboard/index.html' %}
+{% load static %}
+{% load i18n %}
+{%block head%}
+{%endblock%}
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Widgets</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Widgets</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <h5 class="mb-2">Info Box</h5>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">{% trans 'Total Patients' %}</span>
+                            <span class="info-box-number">{{total_patient_count}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">{% trans 'Total Uploaded Radiographs' %}</span>
+                            <span class="info-box-number">{{total_image_count}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">{% trans 'Total Analyse' %}</span>
+                            <span class="info-box-number">{{total_analyse_count}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">{% trans 'Total Created Reports' %}</span>
+                            <span class="info-box-number">{{total_created_report_count}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">{% trans 'View & Update User Infos' %}</h3>
+                        </div>
+                        <form id="userForm">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="firstName">{% trans 'First Name' %}</label>
+                                    <input type="text" class="form-control" id="firstName"
+                                        placeholder="" value="{{user.first_name}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">{% trans 'Last Name' %}</label>
+                                    <input type="text" class="form-control" id="lastName"
+                                        placeholder="" value="{{user.last_name}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">{% trans 'E-Mail' %}</label>
+                                    <input type="email" class="form-control" id="email"
+                                        placeholder="" value="{{user.email}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">{% trans 'Phone' %}</label>
+                                    <input type="text" class="form-control" id="phone"
+                                        placeholder="" value="{{user_profile.phone}}">
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button id="saveUserInfos" type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+{% block customJs %}
+<script>
+      const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    var csrfmiddlewaretoken= $('input[name=csrfmiddlewaretoken]').val()
+    $("#saveUserInfos").click(function(event){
+        event.preventDefault();
+        var user_id = "{{user.id}}"
+        var formData = {
+            'first_name': $('#firstName').val(),
+            'last_name': $('#lastName').val(),
+            'phone': $('#phone').val(),
+            'email': $('#email').val(),
+            'user_id':user_id,
+        };
+        console.log("formdata",formData)
+        $.ajax({
+        type: 'POST',
+        url: "{% url 'dashboard_update_user_infos' %}",  
+        data: formData,
+        headers: { "X-CSRFToken": csrfmiddlewaretoken },
+        dataType: 'json',
+        success: function (data,statusText,xhr) {
+            if (xhr.status === 200){
+                Toast.fire({
+                    icon: 'success',
+                    title: data.message,
+                })
+            } else {
+                console.log('İstek başarıyla tamamlandı ancak beklenmeyen bir status kodu alındı.');
+            }
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+<svg width="6" height="17" viewBox="0 0 6 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.52109 0.25H3.17109C2.60109 0.25 2.12109 0.55 2.08109 0.95L1.12109 12.74H5.57109L4.61109 0.95C4.57109 0.55 4.08109 0.25 3.52109 0.25Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<mask id="mask0_226_1194" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="1" y="0" width="5" height="13">
+<path d="M3.52109 0.25H3.17109C2.60109 0.25 2.12109 0.55 2.08109 0.95L1.12109 12.74H5.57109L4.61109 0.95C4.57109 0.55 4.08109 0.25 3.52109 0.25Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_226_1194)">
+<path d="M6.27016 9.74023L0.410156 11.9602" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.14125 8.10059L0.28125 10.3206" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M6.00063 6.45996L0.140625 8.67996" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M5.86 4.82031L0 7.04031" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M5.72109 3.18066L-0.128906 5.40066" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M5.59047 1.54004L-0.269531 3.76004" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+<path d="M5.44984 -0.0996094L-0.410156 2.13039" stroke="#5E5E5A" stroke-width="0.3" stroke-miterlimit="10"/>
+</g>
+<path d="M4.45859 16.7099H2.22859C2.04859 16.7099 1.89859 16.5499 1.87859 16.3399C1.84859 16.0299 1.79859 15.5399 1.72859 14.9999C1.58859 13.9199 1.30859 12.6699 1.30859 12.6699H5.37859C5.37859 12.6699 5.09859 13.9199 4.95859 14.9999C4.88859 15.5399 4.83859 16.0199 4.80859 16.3399C4.78859 16.5499 4.62859 16.7099 4.45859 16.7099Z" fill="#DDDDDD" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+<path d="M5.6394 12.8504H1.0394C0.949399 12.8504 0.919399 12.4604 0.969399 11.9904C1.0194 11.5404 1.1194 11.1904 1.1994 11.1904H5.4794C5.5594 11.1904 5.6694 11.5404 5.7094 11.9904C5.7594 12.4504 5.7294 12.8504 5.6394 12.8504Z" fill="#757577" stroke="#5E5E5A" stroke-width="0.15" stroke-miterlimit="10"/>
+</svg>

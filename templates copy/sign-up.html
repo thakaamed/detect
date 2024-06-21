@@ -1,0 +1,261 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/full-dark-theme.css' %}">
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <title>{{title}} - {% trans 'Login Page' %}</title>
+    {% if specs.theme_css %}
+        <link rel="stylesheet" href="{% static specs.theme_css %}">
+    {% endif %}
+</head>
+
+<body>
+    <section id="login">
+        <div class="container-fluid p-0 h-100">
+            <div class="row g-0 h-100">
+                <div class="col-md-6 d-flex flex-column align-items-center justify-content-center p-3">
+                    <div class="p-5">
+                        <img src="{% static specs.login_page_logo %}" class="login-logo logo img-fluid" alt="" style="width: 300px;">
+                    </div>
+                    <div class="form-container" style="max-width: 100%">
+                        <div class="left-area d-flex flex-column justify-content-center">
+                            <h1>{% trans 'Sign Up' %}</h1>
+                            <!-- <p class="handleError text-light my-1 p-1 rounded bg-danger" style="opacity: 0;">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                {% trans 'Username or Password Incorrect' %}</p> -->
+                            <form id="loginform" action="" class="bg-dansger" onsubmit="handleLogin(event)">
+                                {% csrf_token %}
+                                <label for="name">
+                                    <span class="text-danger">*</span>
+                                    <span>{% trans 'Company Name' %}</span>
+                                </label>
+                                <input id="name" name="name" type="text" placeholder="{% trans 'Company Name' %}" required>
+
+                                <label for="firstname">
+                                    <span class="text-danger">*</span>
+                                    <span>{% trans 'First Name' %}</span>
+                                </label>
+                                <input id="firstname" name="firstname" type="text" placeholder="{% trans 'First Name' %}" required>
+
+                                <label for="lastname">
+                                    <span class="text-danger">*</span>
+                                    <span>{% trans 'Last Name' %}</span>
+                                </label>
+                                <input id="lastname" name="lastname" type="text" placeholder="{% trans 'Last Name' %}" required>
+
+                                {% comment %} <label for="package">
+                                    <span class="text-danger">*</span>
+                                    <span>{% trans 'Package' %}</span>
+                                </label>
+                                <select name="package" id="package" required>
+                                    {% for package in packages %}
+                                        {% if package.slug == "demo_token" %}
+                                            <option value="{{ package.slug }}">(Token: {{ package.token }})</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select> {% endcomment %}
+
+                                <label for="email">
+                                    <span class="text-danger">*</span>
+                                    <span>{% trans 'E-mail' %}</span>
+                                </label>
+                                <input id="email" name="email" type="text" placeholder="{% trans 'E-mail' %}" required>
+
+                                <label for="password">
+                                    <span class="text-danger">*</span>
+                                    <span>{% trans 'Password' %}</span>
+                                </label>
+                                <input id="password" name="password" type="password" placeholder="{% trans 'Password' %}" required>
+
+                                <label for="repassword">
+                                    <span class="text-danger">*</span>
+                                    <span>{% trans 'Password' %}</span>
+                                </label>
+                                <input id="repassword" name="repassword" type="password" placeholder="{% trans 'RePassword' %}" required>
+
+                                <p class="higlight-text">
+                                    {% trans 'I have read and understood the' %} <a href="{% static specs.clarification_text %}" target="_blank"><u>{% trans 'Clarification text' %}</u></a> {% trans  'on the Processing of Personal Data and the' %} <a href="{% static specs.privacy_policy %}" target="_blank"><u>{% trans 'Personal Data Protection Policy' %}</u></a> 
+                                    {{specs.login_page_content}}
+                                </p>
+                                <div class="accept-portal-term">
+                                    <input type="checkbox" name="" id="accept-term" required>
+                                    <label for="accept-term">{% trans 'I have read and accept the Portal Terms of Use.' %}</label>
+                                </div>
+                                <a href="">
+                                    <button id="submit-button" class="btn text-light w-100">{% trans 'Sign Up' %}</button>
+                                </a>
+                                <a href="{% url 'loginPage' %}" class="forgot-password">{% trans 'Sign In' %}</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-none d-md-block position-fixed top-0" style="right: 0;">
+                    <div class="right-area h-100">
+                        <img src="{% static specs.banner %}" class="img-fluid login-img" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="{% static 'js/app.js' %}"></script> -->
+    <script src="{% static 'js/login.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- IP Adresini viewde alma senaryosu -->
+<script>
+    document.querySelector("#submit-button").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Input değerlerini al
+        var name = document.querySelector("#name").value;
+        var lastname = document.querySelector("#lastname").value;
+        var email = document.querySelector("#email").value;
+        var firstname = document.querySelector("#firstname").value;
+        var password = document.querySelector("#password").value;
+        var repassword = document.querySelector("#repassword").value;
+
+        var csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+        // Check if any field is empty
+        if (name === '' || lastname === '' || email === '' || firstname === '' || password === '' || repassword === '') {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: "{% trans 'Please fill all fields' %}",
+                showConfirmButton: false,
+                timer: 3000
+            });
+            return false; // Prevent form submission
+        }
+        if (password != repassword){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: "{% trans 'Passwords do not match.' %}",
+                showConfirmButton: false,
+                timer: 3000
+            });
+            return false; // Prevent form submission
+        }
+        $.ajax({
+            url: "{% url 'addDemoUserApi' %}",
+            type: "POST",
+            dataType: "json",
+            data: {
+                company_name: name,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                password: password,
+                csrfmiddlewaretoken: csrfToken,
+            },
+            success: function(data) {
+                if (data.success == "reached_add_limit") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: data.message,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }else if (data.success == "password_error") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: data.message,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }else if (data.success == "user_exists") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: data.message,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: "Successfully Added",
+                        showConfirmButton: false,
+                        timer: 3000
+                        }).then(function() {
+                            window.location.reload()
+                    });
+                }
+                
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: "{% trans 'Error at during process' %}",
+                showConfirmButton: false,
+                timer: 3000
+                })
+                return false
+            }
+        });
+    })
+</script>
+<script>
+    $("#emailInput").click(function() {
+        $(this).css("border", ""); // Çerçeveyi kaldırmak için border stili boş bir değer olarak ayarlanıyor.
+    });
+</script>
+<script>
+    function whichBrowserControl() {
+        // eğer kullanıcı safariden ilk kez giriyorsa başka tarayıcıya yönlendirmeye çalış
+        var userAgent = navigator.userAgent;
+
+        if (userAgent.indexOf("Chrome") > -1) {
+        // Kullanıcı Chrome tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Firefox") > -1) {
+        // Kullanıcı Firefox tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Safari") > -1) {
+            // Kullanıcı Safari tarayıcısını kullanıyor
+            console.log("safariden giriş yapıldı")
+            if(!localStorage.getItem("safari")) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: "{% trans 'Don\'t use safari browser for better experience!' %}",
+                    showConfirmButton: false,
+                    timer: 4000
+                })
+                localStorage.setItem("safari",true)
+            }
+        // Kullanıcı Safari tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Opera") > -1) {
+        // Kullanıcı Opera tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Edge") > -1) {
+        // Kullanıcı Microsoft Edge tarayıcısını kullanıyor
+        } else if (userAgent.indexOf("Trident") > -1) {
+        // Kullanıcı Internet Explorer tarayıcısını kullanıyor
+        } else {
+        // Diğer tarayıcılar için varsayılan durum
+        }
+    }
+    whichBrowserControl()
+</script>
+</body>
+</html>

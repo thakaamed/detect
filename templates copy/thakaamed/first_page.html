@@ -1,0 +1,331 @@
+{% load static %}
+{% load i18n %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/thakaa.css' %}">
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <title>{{title}} - {% trans 'Login Page' %}</title>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-2">
+                <div class="logo">
+                    <a>
+                        <img src="{% static specs.login_page_logo %}" alt="" class="logo">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-7 d-flex" style="gap: 4rem !important;">
+                
+                <div class="header-buttons">
+                    <a href="/">Home</a>
+                </div>
+                <div class="header-buttons">
+                    <a href="{% url 'loginPage' %}">How It Works?</a>
+                </div>
+                <div class="header-buttons">
+                    <a href="{% url 'loginPage' %}">About</a>
+                </div>
+                <div class="header-buttons">
+                    <a href="{% url 'loginPage' %}">Pricing</a>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex justify-content-end">
+                <div class="sign-in">
+                    <a href="{% url 'loginPage' %}">Sign In</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</header>
+
+
+<main>
+    <section id="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex flex-column justify-content-center py-5">
+                    <h1 class="main-heading">
+                        <span class="colored-purple">Ready</span> to get started?
+                    </h1>
+                    <p class="sub-heading w-75">To login or register, you can continue by clicking the login button. If you don't have an account, here are our plans.</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="{% static 'img/first_page_tanitim.png' %}" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricePlan">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            <div class="starter">
+                                <p class="table-starter-p">Start (Solo Practice):</p>
+                                <p class="table-sub-starter">Embark on your AI journey with our Start package. Perfect for solo practitioners, it’s your personal assistant for precise diagnostics and efficient practice.</p>
+                                <p class="table-price-starter"><span>187.5</span><span class="currency"> SAR/</span> 80 Tokens</p>
+                                <a href="/payment/860e882ab37d44028db099fb458f2b2d" class="get-demo">Buy</a>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="starter">
+                                <p class="table-starter-p">Discovery (Up to 3 Dentists/Users):</p>
+                                <p class="table-sub-starter">Unleash the power of collaborative AI with our Discovery package. Ideal for small teams, it’s the key to unlocking shared insights and elevating patient care.</p>
+                                <p class="table-price-starter"><span>375</span><span class="currency"> SAR/</span> 240 Tokens</p>
+                                <a href="/payment/2c53ae5d6bc945b8861f9df561332c10" class="get-demo">Buy</a>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="starter anakin-skywalker">
+                                <div class="star">
+                                    <img src="{% static 'img/stars.png' %}" alt="">
+                                </div>
+                                <p class="table-starter-p">Advanced (Max 6 Users):</p>
+                                <p class="table-sub-starter">Take your practice to new heights with our Advanced package. Designed for larger teams, it’s your pathway to superior productivity and enhanced patient relationships.</p>
+                                <p class="table-price-starter"><span>562.5</span><span class="currency"> SAR/</span> 480 Tokens</p>
+                                <a href="/payment/6758207a1e56418d9cf7803ee508bef7" class="get-demo">Buy</a>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Target Group</td>
+                        <td>Solo Practice</td>
+                        <td>3 Chairs</td>
+                        <td>6 Chairs</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Subscription Fee</td>
+                        <td>187.5 SAR</td>
+                        <td>375 SAR</td>
+                        <td>562.5 SAR</td>
+                    </tr>
+                    <tr>
+                        <td>Diagnostic Tokens</td>
+                        <td>80</td>
+                        <td>240</td>
+                        <td>480</td>
+                    </tr>
+                    <tr>
+                        <td>Participating Dentists</td>
+                        <td>1 User</td>
+                        <td>3 Users</td>
+                        <td>6 Users</td>
+                    </tr>
+                    <tr>
+                        <td>Price Per Token</td>
+                        <td>2.34</td>
+                        <td>1.56</td>
+                        <td>1.17</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="luke-skywalker">
+                            <a href="{% url 'signupPage' %}" class="get-demo">Sign Up / Free Trial</a>
+                            <div></div>
+                        </td>
+                        <td class="luke-skywalker">
+                            <a href="{% url 'signupPage' %}" class="get-demo">Sign Up / Free Trial</a>
+                            <div></div>
+                        </td>
+                        <td class="luke-skywalker">
+                            <a href="{% url 'signupPage' %}" class="get-demo">Sign Up / Free Trial</a>
+                            <div></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="token-packages">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="colored-purple">Token Packages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Tokens</td>
+                    <td>800</td>
+                    <td>4000</td>
+                    <td>8000</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>746.25 SAR</td>
+                    <td>2812.5 SAR</td>
+                    <td>3750 SAR</td>
+                </tr>
+                <tr>
+                    <td>Price Per Token</td>
+                    <td>0.9328</td>
+                    <td>0.7031</td>
+                    <td>0.4687</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+<style>
+    .ust-bolme {
+        width               : 100%; /* Üst bölmenin genişliği */
+        display             : flex;
+        justify-content     : space-between; /* İçerikleri sağa ve sola hizalar */
+        margin-bottom       : 50px;
+    }
+    .footer-logo {
+    }
+
+    .footer-links {
+    }
+
+    .footer-logo-img {
+        padding-right       : 33px;
+        height              : 55px;
+    }
+    .sol-ust {
+    }
+
+    .sag-ust {
+    }
+
+    .alt-bolme {
+        width               : 100%; /* Alt bölmenin genişliği */
+        display             : flex;
+        flex-wrap           : wrap;
+        justify-content     : space-between; /* İçerikleri sağa ve sola hizalar */
+        margin-top          : 20px; /* Üst ve alt bölmeler arasında bir boşluk bırakır */
+        border-top          : 1px solid #5C4585;
+        padding-top         : 40px;
+    }
+    .policys {
+        gap                 : 4rem !important; 
+        color               : #CCD0D4;
+        font-size           : 14px;
+    }
+
+    .axcb {
+        gap                     : 3rem !important; 
+        font-size               : 16px; 
+        font-weight             : 300;
+    }
+    
+    .header-buttons {
+
+    }
+
+    .footer-border {
+        border                  : 1px solid #CCD0D4;
+    }
+
+</style>
+<footer>
+        <div class="container">
+            <div class="ust-bolme">
+                <div class="sol-ust col-md-6">
+                    <div class="footer-logo">
+                        <div class="footer-logo-div">
+                            <a>
+                                <img src="{% static specs.logo %}" alt="" class="footer-logo-img">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-links mt-5">
+                        <div class="d-flex axcb" style="">
+                
+                            <div class="header-buttons">
+                                <a href="/">Home</a>
+                            </div>
+                            <div class="header-buttons">
+                                <a href="{% url 'loginPage' %}">How It Works?</a>
+                            </div>
+                            <div class="header-buttons">
+                                <a href="{% url 'loginPage' %}">About</a>
+                            </div>
+                            <div class="header-buttons">
+                                <a href="{% url 'loginPage' %}">Pricing</a>
+                            </div>
+                            <div class="header-buttons">
+                                <a href="{% url 'loginPage' %}">Sign In</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sag-ust col-md-6">
+                    İçerik burada...
+                </div>
+            </div>
+            <div class="alt-bolme">
+                <div class="col-md-8 d-flex policys">
+                    
+                    <div class="header-buttons">
+                        <a href="/">Terms & Conditions</a>
+                    </div>
+                    <div class="footer-border">
+                    </div>
+                    <div class="header-buttons">
+                        <a href="{% url 'loginPage' %}">Privacy Policy</a>
+                    </div>
+                    <div class="footer-border">
+                    </div>
+                    <div class="header-buttons">
+                        <a href="{% url 'loginPage' %}">Accessibility</a>
+                    </div>
+                    <div class="footer-border">
+                    </div>
+                    <div class="header-buttons">
+                        <a href="{% url 'loginPage' %}">Legal</a>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex justify-content-end policys">
+                    <div class="sign-in">
+                        <a href="{% url 'loginPage' %}">© Thakaamed 2023. All right reserved</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+    {% comment %} <div class="container">
+        <div class="copyright">{{ specs.brand }}</div>
+        <div class="links">
+            <a href="{% static specs.clarification_text %}" target="_blank">{% trans 'Clarification Text' %}</a>
+            <a href="{% static specs.cookie_policy %}" target="_blank">{% trans 'Cookie Policy' %}</a>
+            <a href="{% static specs.privacy_policy %}" target="_blank">{% trans 'Privacy Policy' %}</a>
+            {% if specs.terms_conditions_policy %}<a href="{% static specs.terms_conditions_policy %}">{% trans 'Terms & Conditions' %}</a> {% endif%}
+        </div>
+    </div> {% endcomment %}
+</footer>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<script src="{% static 'js/thakaa.js' %}"></script>
+
+</body>
+</html>

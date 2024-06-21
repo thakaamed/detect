@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block customCss %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patients_exstra.css' %}">
+    <link rel="stylesheet" href="{% static 'css/datatable.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <title>{{specs.title}} - {% trans 'Kullanıcılar' %}</title>
+    <link rel="icon" type="image/png" href="{% static specs.favicon %}" />
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}">
+    <style>
+        .treatment-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .treatment-item {
+            width: 30%;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+
+{% endblock %}
+{% block headerButtons %}
+<!--<button class="custom transparent blue-hover text-light" data-open-modal-pk="modal-radyografy-upload">-->
+<!--    <i class="fa-solid fa-upload" style="pointer-events: none;"></i>-->
+<!--    <span style="pointer-events: none;">Upload Radiograpfy</span>-->
+<!--</button>-->
+{% endblock %}
+
+{% block content %}
+<main class="d-flex align-items-center position-relative" style="height: calc(100vh - 110px);">
+    <div class="container p-3 rounded shadow-lg my-4">
+        <h1>Treatment Pricings for Company</h1>
+        <div class="treatment-list text-center">
+            {% for treatment_name, treatment_data in treatment_dict.items %}
+                <div class="treatment-item">
+                    <p>{{ treatment_name }} - Price:</p>
+                    <input type="number" name="treatment_{{ forloop.counter }}_price" min="0" step="0.01" value="{{ treatment_data.price }}">
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+                    <br>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block customJs %}
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/datatable.js' %}"></script>
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <script src="{% static 'js/dropzone.js' %}"></script>
+    <script src="{% static 'js/sweatalert.js' %}"></script>
+    <script src="{% static 'js/patients.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script>
+        var csrfmiddlewaretoken = $('input[name=csrfmiddlewaretoken]').val()
+    </script>
+    
+    
+
+{% endblock %}
